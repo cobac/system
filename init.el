@@ -552,9 +552,6 @@
   (coba-leader-def
     "g" '(lambda() (interactive)(coba-magit-status))
     )
-  ;;(magit-add-section-hook 'magit-status-sections-hook
-  ;;'magit-insert-untracked-files
-  ;;)
   )
 
 (defun coba-magit-status ()

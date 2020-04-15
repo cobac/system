@@ -464,7 +464,7 @@
   (global-company-mode)
 
   (setq company-idle-delay 0
-        company-minimum-prefix-length 1
+        company-minimum-prefix-length 2
         company-selection-wrap-around t
         )
 
@@ -473,15 +473,19 @@
     "C-k" 'company-select-previous
     "C-s" 'company-search-candidates
     )
-  (use-package company-quickhelp
-    :straight t
-    :config
-    (company-quickhelp-mode))
-  (use-package company-prescient
-    :straight t
-    :config
-    (company-prescient-mode)
-    )
+  )
+
+(use-package company-quickhelp
+  :straight t
+  :after company
+  :config
+  (company-quickhelp-mode))
+
+(use-package company-prescient
+  :straight t
+  :after company
+  :config
+  (company-prescient-mode)
   )
 
 ;; Indent 
@@ -572,7 +576,8 @@
 (use-package yasnippet
   :straight t
   :config
-  (yas-global-mode))
+  (yas-global-mode 1)
+  )
 
 ;; TODO: Pamparam repetition
 
@@ -600,7 +605,7 @@
 
 ;; Lisp
 (coba-local-leader-def
-  :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map )
+  :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
   "r" 'eval-region
   "b" 'eval-buffer)
 

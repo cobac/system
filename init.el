@@ -467,7 +467,16 @@
         company-minimum-prefix-length 2
         company-selection-wrap-around t
         )
-
+  (setq default-company-backends '(company-semantic
+                                   company-gtags
+                                   company-files
+                                   company-keywords
+                                   company-capf
+                                   company-yasnippet
+                                   company-abbrev
+                                   company-dabbrev
+                                   company-dabbrev-code)
+        company-backends (list default-company-backends))
   (general-def 'company-active-map
     "C-j" 'company-select-next
     "C-k" 'company-select-previous

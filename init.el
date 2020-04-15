@@ -325,7 +325,7 @@
       calendar-week-start-day 1
       org-default-notes-file "~/Nextcloud/Org/refile.org"
       org-capture-templates '(
-                              ("t" "Todo" ent/ry (file "~/Nextcloud/Org/refile.org")
+                              ("t" "Todo" entry (file "~/Nextcloud/Org/refile.org")
                                "* TODO %?"
                                :empty-lines 1)
                               ("l" "Link" entry (file "~/Nextcloud/Org/refile.org")

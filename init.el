@@ -577,6 +577,7 @@
   :straight t
   :config
   (yas-global-mode 1)
+  (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
   )
 
 ;; TODO: Pamparam repetition

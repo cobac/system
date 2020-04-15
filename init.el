@@ -649,6 +649,37 @@
     "b" 'ess-eval-buffer
     )
   )
+(use-package stan-mode
+  :straight t 
+  :after company
+  :mode ("\\.stan\\'" . stan-mode)
+  :hook (stan-mode . stan-mode-setup)
+  :config
+  (setq stan-indentation-offset 2)
+  )
+(use-package company-stan
+  :straight t 
+  :after stan-mode
+  :hook (stan-mode . company-stan-setup)
+  )
+(use-package eldoc-stan
+  :straight t 
+  :after stan-mode
+  :hook (stan-mode . eldoc-stan-setup)
+  )
+(use-package flycheck-stan
+  :straight t 
+  :after stan-mode
+  :hook ((stan-mode . flycheck-stan-stanc2-setup)
+         (stan-mode . flycheck-stan-stanc3-setup))
+  :config
+  (setq flycheck-stanc-executable nil
+        flycheck-stanc3-executable nil)
+  )
+(use-package stan-snippets
+  :straight t 
+  :after stan-mode
+  )
 
 ;; Markdown
 

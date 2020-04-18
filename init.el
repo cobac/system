@@ -711,4 +711,36 @@
 ;; Latex
 (use-package tex
   :straight auctex
+  :config
+  (TeX-global-PDF-mode t)
+  (setq TeX-source-correlate-mode t
+        TeX-source-correlate-start-server t
+        TeX-view-program-selection '((output-pdf "Zathura"))
+        LaTeX-command "xelatex --synctex=1" 
+        pdf-latex-command "XeLaTeX")
+
+  (add-hook 'LaTeX-mode-hook
+            (lambda ()
+              (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex --synctex=1%(mode)%' %t" TeX-run-TeX nil t))
+              (setq TeX-command-extra-options "-file-line-error -shell-escape"
+                    TeX-command-default "XeLaTeX"
+                    TeX-auto-untabify t
+                    TeX-engine 'xetex
+                    TeX-show-compilation t)
+              (TeX-global-PDF-mode t)
+              (setq TeX-save-query nil)))
+
+  (coba-local-leader-def
+    :keymaps 'LaTeX-mode-map
+    "s" 'LaTeX-section
+    "e" 'LaTeX-environment
+    "m" 'TeX-insert-macro
+    "p" 'preview-buffer
+    )
+  (general-def
+    :states '(normal visual insert motion emacs)
+    :keymaps 'LaTeX-mode-map
+    "C-f" 'TeX-font
+    "C-c C-c" 'TeX-command-run-all
+    )
   )

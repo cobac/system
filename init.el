@@ -370,7 +370,8 @@
             '(and (tags "track") (or (todo "TODO") (todo "WAITING")))
             :title "Projects"
             :sort '(date priority todo)
-            :super-groups '((:auto-property "Project"))))
+            :super-groups '((:auto-property "Project")))
+          (delete-other-windows))
   )
 
 (defun coba-org-agenda-weekly ()

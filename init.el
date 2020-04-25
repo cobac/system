@@ -376,9 +376,8 @@
   )
 
 (defun coba-org-agenda-weekly ()
-(org-agenda nil "w")
-(delete-other-windows)
-)
+  (org-agenda nil "w")
+  (delete-other-windows))
 
 (defun coba-org-create-project (project)
   (interactive "sProject name: ")

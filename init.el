@@ -413,6 +413,11 @@
   "C-H" 'org-shiftmetaleft
   "C-L" 'org-shiftmetaright
   )
+(coba-local-leader-def
+  :states '(normal motion)
+  :keymaps 'org-mode-map
+  "p" 'org-latex-preview
+  )
 
 (general-def
   :states '(normal motion)

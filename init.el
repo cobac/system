@@ -538,6 +538,7 @@
         org-ref-pdf-directory "~/Documentos/Psicología/bib/pdf"
         org-ref-open-pdf-function (lambda (fpath)
                                     (call-process "zathura" nil 0 nil fpath))
+        (find-file "~/Documentos/Psicología/bib/bib.bib")
         )
   (use-package doi-utils
     :config

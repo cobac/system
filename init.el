@@ -616,6 +616,11 @@
 ;; TODO: Email
 
 ;; TODO: IRC
+
+;; Dired
+
+(setq dired-guess-shell-alist-user '(("\\.pdf\\'" "zathura")))
+
                                         ; Languages
 (use-package systemd
   :straight t)

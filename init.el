@@ -205,6 +205,7 @@
       "SPC" 'counsel-switch-buffer
       "x" 'counsel-M-x
       "/" 'counsel-ag
+      "T" 'counsel-load-theme
       )
     (general-def 'counsel-find-file-map
       "C-h" 'counsel-up-directory

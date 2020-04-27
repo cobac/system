@@ -396,6 +396,7 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys)
   )
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 1.85))
 
 (general-def
   :states '(normal motion)

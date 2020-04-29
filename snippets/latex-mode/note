@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: note
-# key: no
+# key: nnote
 # --
 \note{$0}

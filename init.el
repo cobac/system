@@ -413,11 +413,7 @@
   "C-K" 'org-shiftmetaup
   "C-H" 'org-shiftmetaleft
   "C-L" 'org-shiftmetaright
-  )
-(coba-local-leader-def
-  :states '(normal motion)
-  :keymaps 'org-mode-map
-  "p" 'org-latex-preview
+  "C-P" 'org-latex-preview
   )
 
 (general-def
@@ -439,10 +435,11 @@
 
 (coba-local-leader-def
   :keymaps 'org-mode-map
+  :states '(normal motion)
   "s" 'org-schedule
   "d" 'org-deadline        
   "t" 'counsel-org-tag
-  "p" 'coba-org-create-project
+  "P" 'coba-org-create-project
   )
 
 (use-package org-superstar
@@ -450,6 +447,10 @@
   :config
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
   )
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            visual-line-mode))
 
 ;; Babel
 

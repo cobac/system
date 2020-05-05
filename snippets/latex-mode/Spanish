@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Spanish
+# key: ,sp
+# --
+
+\usepackage{polyglossia}
+\setmainlanguage{spanish}
+\gappto\captionsspanish{\renewcommand{\tablename}{Tabla}}

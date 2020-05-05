@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: subsec
-# key: sub
+# key: ,ss
 # --
 \subsection{${1:name}}
 \label{subsec:${2:label}}

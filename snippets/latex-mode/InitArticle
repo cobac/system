@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: InitArticle
+# key: ,inita
+# --
+
+\documentclass[12pt]{article}
+\linespread{1.5}
+\author{${1:David Coba}}
+
+\date{}
+\usepackage[a4paper,bindingoffset=0.2in,%
+            left=0.75in,right=0.75in,top=1in,bottom=1in,%
+            footskip=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{color}
+\usepackage{subfig}
+\usepackage[numberedbib]{apacite}
+
+
+\title{%
+  $2\\
+  \large{$3}
+}
+
+\begin{document}
+\maketitle
+
+$0
+
+\end{document}

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Misc
+# key: ,misc
+# --
+
+@misc{$2,
+  DATE_ADDED =   {`(current-time-string)`},
+  author =       {$3},
+  doi =          {},
+  title =        {$4},
+  url =          {$1},
+  year =         $5,
+}
+
+$0
+

@@ -742,7 +742,7 @@
                     TeX-command-default "XeLaTeX"
                     TeX-auto-untabify t
                     TeX-engine 'xetex
-                    TeX-show-compilation t)
+                    TeX-show-compilation nil)
               (TeX-global-PDF-mode t)
               (setq TeX-save-query nil)))
 

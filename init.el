@@ -544,8 +544,10 @@
         org-ref-pdf-directory "~/Documentos/Psicología/bib/pdf"
         org-ref-open-pdf-function (lambda (fpath)
                                     (call-process "zathura" nil 0 nil fpath))
-        (find-file "~/Documentos/Psicología/bib/bib.bib")
         )
+
+  (find-file "~/Documentos/Psicología/bib/bib.bib")
+  (switch-to-buffer "*scratch*")
   (use-package doi-utils
     :config
     (setq bibtex-autokey-year-length 4

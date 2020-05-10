@@ -731,6 +731,8 @@
   (TeX-global-PDF-mode t)
   (setq TeX-source-correlate-mode t
         TeX-source-correlate-start-server t
+        TeX-parse-self t
+        TeX-auto-save t
         TeX-view-program-selection '((output-pdf "Zathura"))
         LaTeX-command "xelatex --synctex=1" 
         pdf-latex-command "XeLaTeX")
@@ -758,5 +760,6 @@
     :keymaps 'LaTeX-mode-map
     "C-f" 'TeX-font
     "C-c C-c" 'TeX-command-run-all
+    "C-c C-a" 'TeX-command-master
     )
   )

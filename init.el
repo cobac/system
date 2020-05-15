@@ -754,6 +754,7 @@
     "e" 'LaTeX-environment
     "m" 'TeX-insert-macro
     "p" 'preview-buffer
+    "c" 'coba-texcount
     )
   (general-def
     :states '(normal visual insert motion emacs)
@@ -761,5 +762,11 @@
     "C-f" 'TeX-font
     "C-c C-c" 'TeX-command-run-all
     "C-c C-a" 'TeX-command-master
+    )
+
+  (defun coba-texcount ()
+    "Print number of output words from the current buffer. It invoques texcount."
+    (interactive)
+    (shell-command (concat "texcount " (buffer-name)))
     )
   )

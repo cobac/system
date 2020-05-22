@@ -319,6 +319,7 @@
       org-archive-location "~/Nextcloud/Org/archive.org::* From ??"
       org-deadline-warning-days 14
       org-refile-use-outline-path t
+      org-extend-today-until 4
       org-use-property-inheritance t
       calendar-date-style 'european
       org-agenda-start-on-weekday nil

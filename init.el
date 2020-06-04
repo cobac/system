@@ -566,6 +566,19 @@
   (use-package org-ref-pdf)
   )
 
+(use-package dumb-jump
+  :straight t
+  :config
+  (setq dumb-jump-prefer-searcher 'rg
+        dumb-jump-selector 'ivy)
+  :general
+  (coba-leader-def
+    "G" '(:ignore t :which-key "dumb jump")
+    "GG" 'dumb-jump-go
+    "GS" 'dumb-jump-go-other-window
+    "GF" 'dumb-jump-back)
+  )
+
 ;; TODO : pdf
 
 ;; TODO: Magit - Magit-todos

@@ -204,7 +204,7 @@
       "ff" 'counsel-find-file
       "SPC" 'counsel-switch-buffer
       "x" 'counsel-M-x
-      "/" 'counsel-ag
+      "/" 'counsel-rg
       "T" 'counsel-load-theme
       )
     (general-def 'counsel-find-file-map

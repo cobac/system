@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: textcite
+# key: ,t
+# --
+
+\textcite{$0}

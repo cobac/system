@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: parencite
+# key: ,p
+# --
+
+\parencite{$0}

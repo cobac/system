@@ -639,6 +639,14 @@
 
 (setq dired-guess-shell-alist-user '(("\\.pdf\\'" "zathura")))
 
+;; Olivetti
+(use-package olivetti
+  :straight t
+  :config
+  (coba-leader-def
+    "W" 'olivetti-mode)
+  )
+
                                         ; Languages
 (use-package systemd
   :straight t)
@@ -781,6 +789,7 @@
   (defun coba-texcount ()
     "Print number of output words from the current buffer. It invoques texcount."
     (interactive)
+    (save-buffer)
     (shell-command (concat "texcount " (buffer-name)))
     )
   )

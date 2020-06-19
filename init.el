@@ -230,15 +230,21 @@
 (use-package hydra
   :straight t)
 
-(defhydra coba-hydra-switch-windows ()
+(defhydra coba-hydra-windows ()
   "Manage window movement with evil-window funcions." 
   ("h" evil-window-left) 
   ("j" evil-window-down)
   ("k" evil-window-up)
   ("l" evil-window-right)
+  ("C-h" shrink-window-horizontally) 
+  ("C-j" shrik-window)
+  ("C-k" enlarge-window)
+  ("C-l" enlarge-window-horizontally)
+  ("s" split-window-horizontally)
+  ("d" delete-window)
   )
 (coba-leader-def
-  "w" 'coba-hydra-switch-windows/body
+  "w" 'coba-hydra-windows/body
   "dd" 'evil-delete-buffer
   "s" '(:ignore t :which-key "Split")
   "sd" 'delete-other-windows

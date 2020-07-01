@@ -237,7 +237,7 @@
   ("k" evil-window-up)
   ("l" evil-window-right)
   ("C-h" shrink-window-horizontally) 
-  ("C-j" shrik-window)
+  ("C-j" shrink-window)
   ("C-k" enlarge-window)
   ("C-l" enlarge-window-horizontally)
   ("s" split-window-horizontally)

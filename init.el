@@ -809,3 +809,22 @@
     (shell-command (concat "texcount " (buffer-name)))
     )
   )
+
+;; Haskell
+
+(use-package haskell-mode
+  :straight t
+  )
+
+;;(usepackage hindent
+;;            :straight t
+;;            :after haskellmode
+;;            :hook (haskellmodehook . hindentmode)
+;;            :general
+;;            (cobalocalleaderdef
+;;             :keymaps 'haskellmode
+;;             :states '(normal motion)
+;;             "f" 'hindentreformatregion
+;;             "F" 'hindentreformatbuffer
+;;             )
+;;            )

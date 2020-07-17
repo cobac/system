@@ -678,6 +678,7 @@
 (use-package ess
   :straight t
   :config
+  (require 'ess-site)
   (setq
    ess-ask-for-ess-directory nil
    comint-move-point-for-output 'others

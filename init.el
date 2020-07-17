@@ -704,6 +704,8 @@
     "b" 'ess-eval-buffer
     )
   )
+
+;;  Stan
 (use-package stan-mode
   :straight t 
   :after company

@@ -25,6 +25,7 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(recentf-mode 1)
 
 ;; Remove startup screen
 (setq inhibit-splash-screen t
@@ -128,6 +129,7 @@
   (coba-leader-def
     "f" '(:ignore t :which-key "Files")
     "fi" '(lambda() (interactive)(find-file "~/.emacs.d/init.el")))
+
   )
 
 ;; Evil
@@ -202,6 +204,7 @@
       "C-d" 'ivy-switch-buffer-kill)
     (coba-leader-def
       "ff" 'counsel-find-file
+      "fr" 'counsel-recentf
       "SPC" 'counsel-switch-buffer
       "x" 'counsel-M-x
       "/" 'counsel-rg

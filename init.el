@@ -318,14 +318,14 @@
 (use-package org-ql
   :straight (:host github :repo "alphapapa/org-ql"))
 
-(setq org-agenda-files '("~/Nextcloud/Org")
+(setq org-agenda-files '("~/Sync/Org")
       org-enforce-todo-dependencies t
       org-enforce-todo-checkbox-dependencies t
       org-log-done (quote time)
       org-log-readline (quote time)
       org-log-reschedule (quote time)
       org-refile-allow-creating-parent-nodes 'confirm
-      org-archive-location "~/Nextcloud/Org/archive.org::* From ??"
+      org-archive-location "~/Sync/Org/archive.org::* From ??"
       org-deadline-warning-days 14
       org-refile-use-outline-path t
       org-extend-today-until 4
@@ -334,24 +334,24 @@
       org-agenda-start-on-weekday nil
       org-outline-path-complete-in-steps nil
       calendar-week-start-day 1
-      org-default-notes-file "~/Nextcloud/Org/refile.org"
+      org-default-notes-file "~/Sync/Org/refile.org"
       org-capture-templates '(
-                              ("t" "Todo" entry (file "~/Nextcloud/Org/refile.org")
+                              ("t" "Todo" entry (file "~/Sync/Org/refile.org")
                                "* TODO %?"
                                :empty-lines 1)
-                              ("l" "Link" entry (file "~/Nextcloud/Org/refile.org")
+                              ("l" "Link" entry (file "~/Sync/Org/refile.org")
                                "* TODO [%?[]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
                                :empty-lines 1)
-                              ("c" "Check Computer" entry (file+olp "~/Nextcloud/Org/todo.org" "Computer" "Check")
+                              ("c" "Check Computer" entry (file+olp "~/Sync/Org/todo.org" "Computer" "Check")
                                "* TODO [%?[]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
                                :empty-lines 1)
-                              ("p" "Check Psychology" entry (file+olp "~/Nextcloud/Org/todo.org" "Psychology" "Check")
+                              ("p" "Check Psychology" entry (file+olp "~/Sync/Org/todo.org" "Psychology" "Check")
                                "* TODO [%?[]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
                                :empty-lines 1)
                               )
       org-refile-targets (quote(
-                                ("~/Nextcloud/Org/todo.org" :maxlevel . 10)
-                                ("~/Nextcloud/Org/annuals.org" :maxlevel . 10)
+                                ("~/Sync/Org/todo.org" :maxlevel . 10)
+                                ("~/Sync/Org/annuals.org" :maxlevel . 10)
                                 ))
       org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE" "CANCELED"))
       org-agenda-custom-commands '(("w" "Weekly view" (
@@ -371,10 +371,10 @@
   "c"  'org-capture
   "a"  '(:ignore t :which-key "Org-Agenda")
   "aa" '(lambda() (interactive)(coba-org-agenda-weekly))
-  "o"  '(lambda() (interactive)(find-file "~/Nextcloud/Org/todo.org"))
-  "n"  '(lambda() (interactive)(find-file "~/Nextcloud/Org/notas.org"))
-  "r"  '(lambda() (interactive)(find-file "~/Nextcloud/Org/refile.org"))
-  "ad" '(lambda ()(interactive)(org-ql-search "~/Nextcloud/Org/todo.org"
+  "o"  '(lambda() (interactive)(find-file "~/Sync/Org/todo.org"))
+  "n"  '(lambda() (interactive)(find-file "~/Sync/Org/notas.org"))
+  "r"  '(lambda() (interactive)(find-file "~/Sync/Org/refile.org"))
+  "ad" '(lambda ()(interactive)(org-ql-search "~/Sync/Org/todo.org"
                                  '(done) :sort '(date priority todo)))
   "ap" '(lambda()(interactive)
           (org-ql-search (org-agenda-files)

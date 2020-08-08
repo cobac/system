@@ -357,6 +357,11 @@
       org-agenda-custom-commands '(("w" "Weekly view" (
                                                        (org-ql-block '(and (todo "WAITING")))
                                                        (agenda))))
+      org-icalendar-combined-agenda-file "~/Sync/Org/calendar.ics"
+      org-icalendar-include-todo t
+      org-icalendar-include-body 1000
+      org-icalendar-use-scheduled '(event-if-todo event-if-not-todo todo-start)
+      org-icalendar-use-deadline  '(event-if-todo event-if-not-todo todo-start)
       )
 (general-define-key
  :keymaps 'org-capture-mode-map
@@ -394,6 +399,14 @@
   (org-toggle-tag "track")
   (org-set-property "Project" project)
   )
+
+(defun coba-org-icalendar-combine-agenda-files-hook ()
+  "Create a .ics file from agenda files asynchronously when an org-mode file is saved."
+  (org-icalendar-combine-agenda-files t)
+  )
+(add-hook 'org-mode-hook 
+          (lambda () 
+            (add-hook 'after-save-hook 'coba-org-icalendar-combine-agenda-files-hook nil 'make-it-local)))
 
 (use-package evil-org
   :straight t

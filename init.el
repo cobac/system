@@ -833,7 +833,9 @@
 
 (use-package haskell-mode
   :straight t
-  )
+  :config 
+  (general-def 'haskell-mode-map
+    "C-ñ" '(lambda () (interactive) (insert "-> "))))
 
 ;;(usepackage hindent
 ;;            :straight t

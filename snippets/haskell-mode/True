@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: True
+# key: ,t 
+# --
+
+True $0

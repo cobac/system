@@ -708,7 +708,7 @@
     "C-k" 'comint-previous-input
     "C-j" 'comint-next-input
     "C-h" 'comint-previous-matching-input-from-input
-    "C-," 'ess-insert-assign)
+    "C-ñ" 'ess-insert-assign)
 
   (general-def
     :states '(insert)

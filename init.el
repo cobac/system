@@ -603,7 +603,6 @@
 
 ;; TODO : pdf
 
-;; TODO: Magit - Magit-todos
 
 (use-package magit
   :straight t
@@ -624,8 +623,12 @@
   :after magit)
 
 (use-package forge
+(use-package magit-todos
   :straight t
-  :after magit)
+  :config
+  (global-hl-todo-mode 1)
+  (magit-todos-mode 1)
+  )
 
 ;; Yasnippets
 

@@ -718,6 +718,7 @@
     :keymaps 'ess-mode-map
     "C-," 'ess-insert-assign
     )
+
   (coba-local-leader-def
     :keymaps 'ess-mode-map
     "b" 'ess-eval-buffer
@@ -838,7 +839,9 @@
   :straight t
   :config 
   (general-def 'haskell-mode-map
-    "C-ñ" '(lambda () (interactive) (insert "-> "))))
+    "C-ñ" '(lambda () (interactive) (insert "-> "))
+    "C-Ñ" '(lambda () (interactive) (insert "<- "))
+    ))
 
 ;;(usepackage hindent
 ;;            :straight t

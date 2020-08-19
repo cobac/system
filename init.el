@@ -623,7 +623,10 @@
   :straight t
   :after magit)
 
-(use-package forge
+;; TODO: Check forge
+;;(use-package forge
+;;  :straight t)
+
 (use-package magit-todos
   :straight t
   :config

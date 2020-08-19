@@ -155,6 +155,7 @@
     ;;(evil-collection-init 'mu4e)
     (evil-collection-init 'dired)
     (evil-collection-init 'ediff)
+    (evil-collection-init 'magit-todos)
     ;;(evil-collection-init 'calendar)
     ;;(evil-collection-init 'magit)
     )

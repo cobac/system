@@ -624,9 +624,8 @@
   :straight t
   :after magit)
 
-;; TODO: Check forge
-;;(use-package forge
-;;  :straight t)
+(use-package forge
+  :straight t)
 
 (use-package magit-todos
   :straight t

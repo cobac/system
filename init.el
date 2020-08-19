@@ -665,16 +665,6 @@
 
 (setq dired-guess-shell-alist-user '(("\\.pdf\\'" "zathura")))
 
-(use-package ranger
-  :straight t
-  :config 
-  (ranger-override-dired-mode t)
-  :general
-  (coba-leader-def
-    "R" 'ranger
-    )
-  )
-
 ;; Olivetti
 (use-package olivetti
   :straight t

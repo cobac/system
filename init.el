@@ -666,7 +666,12 @@
 
 ;; Dired
 
-(setq dired-guess-shell-alist-user '(("\\.pdf\\'" "zathura")))
+(use-package dired
+  :config 
+  (general-def 
+    :keymaps '(dired-mode-map)
+    "f" 'coba-open-in-external-app
+    ))
 
 ;; Olivetti
 (use-package olivetti

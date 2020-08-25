@@ -681,6 +681,16 @@
     "W" 'olivetti-mode)
   )
 
+;; Libvterm
+(use-package vterm
+  :straight t
+  :general
+  (coba-leader-def
+    "RET" 'vterm)
+  :config
+  (evil-set-initial-state 'vterm-mode 'insert)
+  )
+
                                         ; Languages
 (use-package systemd
   :straight t)

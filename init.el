@@ -634,6 +634,17 @@
   (magit-todos-mode 1)
   )
 
+(use-package git-timemachine
+  :straight t
+  :config
+  ;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
+  ;; Unavailable link
+  (with-eval-after-load 'git-timemachine
+    (evil-make-overriding-map git-timemachine-mode-map 'normal)
+    ;; force update evil keymaps after git-timemachine-mode loaded
+    (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps))
+  )
+
 ;; Yasnippets
 
 (use-package yasnippet

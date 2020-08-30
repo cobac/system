@@ -342,13 +342,13 @@
                                "* TODO %?"
                                :empty-lines 1)
                               ("l" "Link" entry (file "~/Sync/Org/refile.org")
-                               "* TODO [%?[]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+                               "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
                                :empty-lines 1)
                               ("c" "Check Computer" entry (file+olp "~/Sync/Org/todo.org" "Computer" "Check")
-                               "* TODO [%?[]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+                               "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
                                :empty-lines 1)
                               ("p" "Check Psychology" entry (file+olp "~/Sync/Org/todo.org" "Psychology" "Check")
-                               "* TODO [%?[]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+                               "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
                                :empty-lines 1)
                               )
       org-refile-targets (quote(

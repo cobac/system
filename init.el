@@ -613,6 +613,11 @@
   (coba-leader-def
     "g" '(lambda() (interactive)(coba-magit-status))
     )
+  (general-def
+    :keymaps 'git-rebase-mode-map
+    "C-j" 'git-rebase-move-line-down
+    "C-k" 'git-rebase-move-line-up
+    )
   )
 
 (defun coba-magit-status ()

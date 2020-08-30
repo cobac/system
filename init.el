@@ -489,6 +489,30 @@
                                         ;(setf
                                         ; org-babel-default-header-args:R '((:output . "results"))
                                         ; )  
+
+(use-package org-roam
+  :straight t
+  :general
+  (coba-leader-def
+    "R" 'org-roam-find-file)
+  :config
+  (setq org-roam-directory "~/org-roam")
+  (org-roam-mode 1)
+  )
+
+;; TODO: Check that company works with roam
+(use-package company-org-roam
+  :straight (:host github :repo "org-roam/company-org-roam")
+  :after company
+  :config
+  (push 'company-org-roam company-backends))
+
+(use-package org-roam-bibtex
+   :straight t
+   :after org-roam
+   :hook (org-roam-mode . org-roam-bibtex-mode)
+   )
+
 ;; Company
 
 (use-package company

@@ -568,18 +568,19 @@
   :straight t
   :config
   (setq
-   bibtex-completion-bibliography "~/Documentos/Psicología/bib/bib.bib"
-   bibtex-completion-library-path "~/Documentos/Psicología/bib/pdf"
-   bibtex-completion-notes-path   "~/Documentos/Psicología/bib/bibnotes.org"
+   bibtex-completion-bibliography "~/Brain/bib.bib"
+   bibtex-completion-library-path "~/Brain/pdf"
+   bibtex-completion-notes-path   "~/Brain/";;"bibnotes.org"
    bibtex-completion-pdf-open-function (lambda (fpath)
                                          (call-process "zathura" nil 0 nil fpath))
+   bibtex-completion-notes-template-multiple-files "#+TITLE: {author-or-editor} (${year}): ${title} " 
    )
   :general
   (coba-leader-def
     "pp" 'ivy-bibtex
     "pd" 'doi-add-bibtex-entry
-    "pf" '(lambda() (interactive)(find-file "~/Documentos/Psicología/bib/bib.bib"))
-    "pn" '(lambda() (interactive)(find-file "~/Documentos/Psicología/bib/bibnotes.org"))
+    "pf" '(lambda() (interactive)(find-file "~/Brain/bib.bib"))
+    "pn" '(lambda() (interactive)(find-file "~/Brain/bibnotes.org"))
     )
   )
 
@@ -588,14 +589,14 @@
   :init
   (setq org-ref-completion-library 'org-ref-ivy-cite)
   :config
-  (setq reftex-default-bibliography "~/Documentos/Psicología/bib/bib.bib"
-        org-ref-bibliography-notes "~/Documentos/Psicología/bib/bibnotes.org"
-        org-ref-pdf-directory "~/Documentos/Psicología/bib/pdf"
+  (setq reftex-default-bibliography "~/Brain/bib.bib"
+        org-ref-bibliography-notes "~/Brain/";;"bibnotes.org"
+        org-ref-pdf-directory "~/Brain/pdf"
         org-ref-open-pdf-function (lambda (fpath)
                                     (call-process "zathura" nil 0 nil fpath))
         )
 
-  (find-file "~/Documentos/Psicología/bib/bib.bib")
+  (find-file "~/Brain/bib.bib")
   (switch-to-buffer "*scratch*")
   (use-package doi-utils
     :config

@@ -496,22 +496,37 @@
   (coba-leader-def
     "R" 'org-roam-find-file)
   :config
-  (setq org-roam-directory "~/org-roam")
+  (setq org-roam-directory "~/Brain"
+        org-roam-index-file "README.org")
   (org-roam-mode 1)
   )
 
-;; TODO: Check that company works with roam
 (use-package company-org-roam
   :straight (:host github :repo "org-roam/company-org-roam")
   :after company
   :config
   (push 'company-org-roam company-backends))
 
+(use-package org-roam-server
+  :straight t
+  :config
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 8080
+        org-roam-server-authenticate nil
+        org-roam-server-export-inline-images t
+        org-roam-server-serve-files nil
+        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+        org-roam-server-network-poll t
+        org-roam-server-network-arrows nil
+        org-roam-server-network-label-truncate t
+        org-roam-server-network-label-truncate-length 60
+        org-roam-server-network-label-wrap-length 20))
+
 (use-package org-roam-bibtex
-   :straight t
-   :after org-roam
-   :hook (org-roam-mode . org-roam-bibtex-mode)
-   )
+  :straight t
+  :after org-roam
+  :hook (org-roam-mode . org-roam-bibtex-mode)
+  )
 
 ;; Company
 

@@ -393,13 +393,15 @@
   )
 
 (defun coba-org-agenda-weekly ()
+  "Helper to open Agenda in weekly view by default."
   (org-agenda nil "w")
   (delete-other-windows))
 
-(defun coba-org-create-project (project)
+(defun coba-org-create-project (PROJECT)
+  "Create an 'org-mode' PROJECT for querying with org-ql."
   (interactive "sProject name: ")
   (org-toggle-tag "track")
-  (org-set-property "Project" project)
+  (org-set-property "Project" PROJECT)
   )
 
 (defun coba-org-icalendar-combine-agenda-files-hook ()
@@ -645,7 +647,7 @@
 
 ;; TODO : pdf
 
-
+;; Git
 (use-package magit
   :straight t
   :after evil
@@ -661,6 +663,7 @@
   )
 
 (defun coba-magit-status ()
+  "Open magit-status in full screen."
   (magit-status)
   (delete-other-windows)
   )

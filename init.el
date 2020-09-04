@@ -97,7 +97,6 @@
   :after all-the-icons
   :hook (after-init . doom-modeline-mode)
   :config 
-  (fset 'battery-update #'ignore)
   (setq doom-modeline-modal-icon nil
         doom-modeline-enable-word-count t)
   )

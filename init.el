@@ -196,6 +196,7 @@
     "C-j" 'ivy-next-line
     "C-k" 'ivy-previous-line
     "C-l" 'ivy-dispatching-done
+    "C-]" 'ivy-immediate-done
     )
   (use-package counsel
     :straight t

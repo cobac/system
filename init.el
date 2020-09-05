@@ -495,10 +495,25 @@
   :straight t
   :general
   (coba-leader-def
-    "R" 'org-roam-find-file)
+    "r" 'org-roam-find-file)
+  (general-def
+    :keymaps 'org-roam-mode-map
+    "C-i" 'org-roam-insert)
+  (coba-local-leader-def
+    :keymaps 'org-roam-mode-map
+    "," 'org-roam
+    )
   :config
   (setq org-roam-directory "~/Brain"
         org-roam-index-file "README.org")
+
+  (setq org-roam-capture-templates '(("d" "default" plain (function org-roam-capture--get-point)
+                                      "- tags :: %?\n\n"
+                                      :file-name "${slug}"
+                                      :head "#+TITLE: ${title}\n\n"
+                                      :unnarrowed t))
+        )
+
   (org-roam-mode 1)
   )
 
@@ -521,12 +536,20 @@
         org-roam-server-network-arrows nil
         org-roam-server-network-label-truncate t
         org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20))
+        org-roam-server-network-label-wrap-length 20)
+  (org-roam-server-mode)
+  )
 
+;; TODO: Migrar bibnotes a individual ones (copia pega)
 (use-package org-roam-bibtex
   :straight t
   :after org-roam
-  :hook (org-roam-mode . org-roam-bibtex-mode)
+  :config 
+  (add-hook 'after-init-hook #'org-roam-bibtex-mode)
+  (setq orb-templates '(("d" "default" plain (function org-roam-capture--get-point) "- tags :: %?\n\n" :file-name "${citekey}"
+                         :head "#+TITLE: ${citekey}\n#+roam_alias: \"${author-abbrev}: ${title}\"\n#+ROAM_KEY: ${ref}\n\n"
+                         :unnarrowed t))
+        )
   )
 
 ;; Company

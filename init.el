@@ -102,7 +102,6 @@
   )
 
 ;; General - which-key
-
 (use-package which-key
   :straight t
   :config
@@ -132,7 +131,6 @@
   )
 
 ;; Evil
-
 (use-package evil
   :straight t
   :hook (after-init . evil-mode)
@@ -781,6 +779,7 @@
   )
 
                                         ; Languages
+;; Systemd
 (use-package systemd
   :straight t)
 
@@ -791,7 +790,6 @@
   "b" 'eval-buffer)
 
 ;; ESS
-
 (use-package ess
   :straight t
   :config
@@ -857,7 +855,6 @@
   )
 
 ;; Markdown
-
 (use-package markdown-mode
   :straight t
   :mode
@@ -869,7 +866,6 @@
   )
 
 ;; Polymode
-
 (use-package polymode
   :straight t)
 
@@ -932,7 +928,6 @@
   )
 
 ;; Haskell
-
 (use-package haskell-mode
   :straight t
   :config 

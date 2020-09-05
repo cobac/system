@@ -916,16 +916,19 @@
     "C-ñ" '(lambda () (interactive) (insert "-> "))
     "C-Ñ" '(lambda () (interactive) (insert "<- "))
     ))
+(use-package flycheck-haskell
+  :straight t
+  )
 
-;;(usepackage hindent
-;;            :straight t
-;;            :after haskellmode
-;;            :hook (haskellmodehook . hindentmode)
-;;            :general
-;;            (cobalocalleaderdef
-;;             :keymaps 'haskellmode
-;;             :states '(normal motion)
-;;             "f" 'hindentreformatregion
-;;             "F" 'hindentreformatbuffer
-;;             )
-;;            )
+;;(use-package hindent
+;;  :straight t
+;;  :after haskellmode
+;;  :hook (haskellmodehook . hindentmode)
+;;  :general
+;;  (coba-local-leaderdef
+;;   :keymaps 'haskellmode
+;;   :states '(normal motion)
+;;   "f" 'hindentreformatregion
+;;   "F" 'hindentreformatbuffer
+;;   )
+;;  )

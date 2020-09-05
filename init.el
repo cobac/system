@@ -938,7 +938,9 @@
   (general-def 'haskell-mode-map
     "C-ñ" '(lambda () (interactive) (insert "-> "))
     "C-Ñ" '(lambda () (interactive) (insert "<- "))
-    ))
+    )
+  (setq haskell-process-path-ghci "/home/coba/.nix-profile/bin/ghci"))
+
 (use-package flycheck-haskell
   :straight t
   )

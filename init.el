@@ -692,6 +692,13 @@
     (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps))
   )
 
+;; Flyckeck
+(use-package flycheck
+  :straight t
+  :config
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  )
+
 ;; Yasnippets
 
 (use-package yasnippet

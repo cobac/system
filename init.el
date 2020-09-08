@@ -812,7 +812,7 @@
   (general-def
     :states '(insert)
     :keymaps 'ess-mode-map
-    "C-," 'ess-insert-assign
+    "C-ñ" 'ess-insert-assign
     )
 
   (coba-local-leader-def

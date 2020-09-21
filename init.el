@@ -782,6 +782,8 @@
   (evil-set-initial-state 'vterm-mode 'insert)
   )
 
+;; TODO: lsp
+
                                         ; Languages
 ;; Systemd
 (use-package systemd

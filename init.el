@@ -512,7 +512,7 @@
   (setq org-roam-capture-templates '(("d" "default" plain (function org-roam-capture--get-point)
                                       "- tags :: %?\n\n"
                                       :file-name "${slug}"
-                                      :head "#+STARTUP: latexpreview\n#+TITLE: ${title}\n\n"
+                                      :head "#+STARTUP: latexpreview\n#+TITLE: ${title}\n#+roam_alias:\n\n"
                                       :unnarrowed t))
         )
 

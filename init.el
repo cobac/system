@@ -733,7 +733,8 @@
   (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
   )
 
-;; TODO: Pamparam repetition
+;; TODO: Pamparam repetition, or anki-el, or org-drill
+
 
 ;; Spellchecking
 

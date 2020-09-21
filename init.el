@@ -403,12 +403,15 @@
   )
 
 (defun coba-org-icalendar-combine-agenda-files-hook ()
-  "Create a .ics file from agenda files asynchronously when an org-mode file is saved."
-  (org-icalendar-combine-agenda-files t)
+  "Create a .ics file from agenda files asynchronously when an `org-mode` file is saved."
+  (interactive)
+  (when (eq (buffer-name) "todo.org")
+    (org-icalendar-combine-agenda-files t)
+    )
   )
-(add-hook 'org-mode-hook 
-          (lambda () 
-            (add-hook 'after-save-hook 'coba-org-icalendar-combine-agenda-files-hook nil 'make-it-local)))
+;;(add-hook 'org-mode-hook 
+;;          (lambda () 
+;;            (add-hook 'after-save-hook 'coba-org-icalendar-combine-agenda-files-hook nil 'make-it-local)))
 
 (use-package evil-org
   :straight t

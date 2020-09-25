@@ -205,6 +205,7 @@
     (coba-leader-def
       "ff" 'counsel-find-file
       "fr" 'counsel-recentf
+      "FF" 'counsel-fzf
       "SPC" 'counsel-switch-buffer
       "x" 'counsel-M-x
       "/" 'counsel-rg

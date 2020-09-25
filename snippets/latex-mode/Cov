@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Cov
+# key: \cov
+# --
+
+\text{Cov}( $1 ) $0

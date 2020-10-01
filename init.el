@@ -377,7 +377,6 @@
   "a"  '(:ignore t :which-key "Org-Agenda")
   "aa" '(lambda() (interactive)(coba-org-agenda-weekly))
   "o"  '(lambda() (interactive)(find-file "~/Sync/Org/todo.org"))
-  "n"  '(lambda() (interactive)(find-file "~/Sync/Org/notas.org"))
   "R"  '(lambda() (interactive)(find-file "~/Sync/Org/refile.org"))
   "ad" '(lambda ()(interactive)(org-ql-search "~/Sync/Org/todo.org"
                                  '(done) :sort '(date priority todo)))

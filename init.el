@@ -273,7 +273,6 @@
   (setq org-super-agenda-groups
         '(
           (:discard(:and(:category "Annuals" :scheduled past)))
-          (:discard(:file-path "archive.org"))
           (:name "Today's deadlines"
                  :deadline today
                  :order 1)
@@ -319,7 +318,7 @@
 (use-package org-ql
   :straight (:host github :repo "alphapapa/org-ql"))
 
-(setq org-agenda-files '("~/Sync/Org")
+(setq org-agenda-files '("~/Sync/Org/todo.org" "~/Sync/Org/refile.org" "~/Sync/Org/annuals.org")
       org-enforce-todo-dependencies t
       org-enforce-todo-checkbox-dependencies t
       org-log-done (quote time)

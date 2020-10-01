@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Complex
+# key: \C
+# --
+
+\mathbb{C} $0

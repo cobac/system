@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Inf
+# key: inf
+# --
+\infty $0

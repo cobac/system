@@ -39,7 +39,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Font
-(setq default-frame-alist 
+(setq default-frame-alist
       (add-to-list 'default-frame-alist '(font . "ibm plex mono-14")))
 
 
@@ -48,7 +48,7 @@
 (setq scroll-step 1
       scroll-conservatively 10000)
 
-                                        ;; Keep init.el clean
+;; Keep init.el clean
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
@@ -96,7 +96,7 @@
   :straight t
   :after all-the-icons
   :hook (after-init . doom-modeline-mode)
-  :config 
+  :config
   (setq doom-modeline-modal-icon nil
         doom-modeline-enable-word-count t)
   )
@@ -235,12 +235,12 @@
   :straight t)
 
 (defhydra coba-hydra-windows ()
-  "Manage window movement with evil-window funcions." 
-  ("h" evil-window-left) 
+  "Manage window movement with evil-window funcions."
+  ("h" evil-window-left)
   ("j" evil-window-down)
   ("k" evil-window-up)
   ("l" evil-window-right)
-  ("C-h" shrink-window-horizontally) 
+  ("C-h" shrink-window-horizontally)
   ("C-j" shrink-window)
   ("C-k" enlarge-window)
   ("C-l" enlarge-window-horizontally)
@@ -408,8 +408,8 @@
     (org-icalendar-combine-agenda-files t)
     )
   )
-;;(add-hook 'org-mode-hook 
-;;          (lambda () 
+;;(add-hook 'org-mode-hook
+;;          (lambda ()
 ;;            (add-hook 'after-save-hook 'coba-org-icalendar-combine-agenda-files-hook nil 'make-it-local)))
 
 (use-package evil-org
@@ -432,7 +432,8 @@
     "t" 'org-pomodoro)
   :config
   (setq org-pomodoro-keep-killed-pomodoro-time t
-        org-pomodoro-manual-break t)
+        org-pomodoro-manual-break t
+        org-pomodoro-play-sounds nil)
   )
 
 (general-def
@@ -462,7 +463,7 @@
 (coba-local-leader-def
   :keymaps 'org-agenda-mode-map
   "s" 'org-agenda-schedule
-  "d" 'org-agenda-deadline        
+  "d" 'org-agenda-deadline
   )
 (general-def
   :states '(normal motion)
@@ -474,7 +475,7 @@
   :keymaps 'org-mode-map
   :states '(normal motion)
   "s" 'org-schedule
-  "d" 'org-deadline        
+  "d" 'org-deadline
   "t" 'counsel-org-tag
   "P" 'coba-org-create-project
   )
@@ -500,7 +501,7 @@
                                         ; )
                                         ;(setf
                                         ; org-babel-default-header-args:R '((:output . "results"))
-                                        ; )  
+                                        ; )
 
 (use-package org-roam
   :straight t
@@ -555,7 +556,7 @@
 (use-package org-roam-bibtex
   :straight t
   :after org-roam
-  :config 
+  :config
   (add-hook 'after-init-hook #'org-roam-bibtex-mode)
   (setq orb-templates '(("d" "default" plain (function org-roam-capture--get-point) "- tags :: %?\n\n" :file-name "${citekey}"
                          :head "#+STARTUP: latexpreview\n#+TITLE: ${citekey}\n#+roam_alias: \"${author-abbrev}: ${title}\"\n#+ROAM_KEY: ${ref}\n\n"
@@ -604,7 +605,7 @@
   (company-prescient-mode)
   )
 
-;; Indent 
+;; Indent
 (use-package aggressive-indent
   :straight t
   :config
@@ -623,7 +624,7 @@
    bibtex-completion-notes-path   "~/Brain/";;"bibnotes.org"
    bibtex-completion-pdf-open-function (lambda (fpath)
                                          (call-process "zathura" nil 0 nil fpath))
-   bibtex-completion-notes-template-multiple-files "#+TITLE: {author-or-editor} (${year}): ${title} " 
+   bibtex-completion-notes-template-multiple-files "#+TITLE: {author-or-editor} (${year}): ${title} "
    )
   :general
   (coba-leader-def
@@ -733,6 +734,13 @@
   (add-hook 'after-init-hook #'global-flycheck-mode)
   )
 
+;;;; format-all
+;;(use-package format-all
+;;  :straight t
+;;  :config
+;;  (format-all-mode)
+;;  )
+
 ;; Yasnippets
 
 (use-package yasnippet
@@ -767,8 +775,8 @@
 ;; Dired
 
 (use-package dired
-  :config 
-  (general-def 
+  :config
+  (general-def
     :keymaps '(dired-mode-map)
     "f" 'coba-open-in-external-app
     ))
@@ -838,7 +846,7 @@
 
 ;;  Stan
 (use-package stan-mode
-  :straight t 
+  :straight t
   :after company
   :mode ("\\.stan\\'" . stan-mode)
   :hook (stan-mode . stan-mode-setup)
@@ -846,17 +854,17 @@
   (setq stan-indentation-offset 2)
   )
 (use-package company-stan
-  :straight t 
+  :straight t
   :after stan-mode
   :hook (stan-mode . company-stan-setup)
   )
 (use-package eldoc-stan
-  :straight t 
+  :straight t
   :after stan-mode
   :hook (stan-mode . eldoc-stan-setup)
   )
 (use-package flycheck-stan
-  :straight t 
+  :straight t
   :after stan-mode
   :hook ((stan-mode . flycheck-stan-stanc2-setup)
          (stan-mode . flycheck-stan-stanc3-setup))
@@ -865,7 +873,7 @@
         flycheck-stanc3-executable nil)
   )
 (use-package stan-snippets
-  :straight t 
+  :straight t
   :after stan-mode
   )
 
@@ -904,7 +912,7 @@
         TeX-parse-self t
         TeX-auto-save t
         TeX-view-program-selection '((output-pdf "Zathura"))
-        LaTeX-command "xelatex --synctex=1" 
+        LaTeX-command "xelatex --synctex=1"
         pdf-latex-command "XeLaTeX")
 
   (add-hook 'LaTeX-mode-hook
@@ -945,7 +953,7 @@
 ;; Haskell
 (use-package haskell-mode
   :straight t
-  :config 
+  :config
   (general-def 'haskell-mode-map
     "C-ñ" '(lambda () (interactive) (insert "-> "))
     "C-Ñ" '(lambda () (interactive) (insert "<- "))

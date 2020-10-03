@@ -425,6 +425,16 @@
   )
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.85))
 
+(use-package org-pomodoro
+  :straight t
+  :general
+  (coba-leader-def
+    "t" 'org-pomodoro)
+  :config
+  (setq org-pomodoro-keep-killed-pomodoro-time t
+        org-pomodoro-manual-break t)
+  )
+
 (general-def
   :states '(normal motion)
   :keymaps 'org-mode-map

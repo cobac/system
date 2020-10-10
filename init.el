@@ -247,6 +247,7 @@
   ("s" split-window-horizontally)
   ("d" delete-window)
   )
+
 (coba-leader-def
   "w" 'coba-hydra-windows/body
   "dd" 'evil-delete-buffer
@@ -257,6 +258,31 @@
   "sr" 'evil-window-rotate-downwards
   "l" 'evil-window-next
   "bs" 'save-some-buffers
+  )
+
+;; Openwith
+
+(use-package openwith
+  :straight t
+  :config
+  (setq openwith-associations
+        (list
+         (list (openwith-make-extension-regexp
+                '("mpg" "mpeg" "mp3" "mp4"
+                  "avi" "wmv" "wav" "mov" "flv"
+                  "ogm" "ogg" "mkv"))
+               "vlc"
+               '(file))
+         (list (openwith-make-extension-regexp
+                '("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
+               "libreoffice"
+               '(file))
+         (list (openwith-make-extension-regexp
+                '("pdf" "ps" "ps.gz" "dvi"))
+               "zathura"
+               '(file))
+         ))
+  (openwith-mode 1)
   )
 
 ;; Org
@@ -392,7 +418,8 @@
 (defun coba-org-agenda-weekly ()
   "Helper to open Agenda in weekly view by default."
   (org-agenda nil "w")
-  (delete-other-windows))
+  (delete-other-windows)
+  )
 
 (defun coba-org-create-project (PROJECT)
   "Create an 'org-mode' PROJECT for querying with org-ql."

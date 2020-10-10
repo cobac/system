@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Overline
+# key: ol 
+# --
+\overline $0

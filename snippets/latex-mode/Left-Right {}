@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Left-Right {}
+# key: lr}
+# --
+
+\left\{ $1 \right\} $0

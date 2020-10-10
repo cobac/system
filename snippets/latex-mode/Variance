@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Variance
+# key: Var
+# --
+
+\text{Var}($1) $0

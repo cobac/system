@@ -285,6 +285,35 @@
   (openwith-mode 1)
   )
 
+;; Numbers stuff
+(use-package speeddating
+  :straight t
+  )
+(use-package evil-numbers
+  :straight t
+  :after speeddating
+  :config
+  (defun coba-increase-at-pt nil
+    "Increment number or date (speeddating) at point.
+From Issue 14 of evil-numbers"
+    (interactive)
+    (condition-case nil
+        (speeddating-increase 1)
+      (error (evil-numbers/inc-at-pt 1))))
+  (defun coba-decrease-at-pt nil
+    "Decrease number or date (speeddating) at point
+From Issue 14 of evil-numbers"
+    (interactive)
+    (condition-case nil
+        (speeddating-decrease 1)
+      (error (evil-numbers/dec-at-pt 1))))
+  :general
+  (general-def :states '(normal motion)
+    "C-a" 'coba-increase-at-pt
+    "C-x" 'coba-decrease-at-pt)
+  )
+
+
 ;; Org
 
 (use-package org-super-agenda

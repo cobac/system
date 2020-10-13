@@ -287,7 +287,7 @@
 
 ;; Numbers stuff
 (use-package evil-numbers
-  :straight t
+  :straight (:type git :host github :repo "janpath/evil-numbers" :branch "retain-selection")
   :after speeddating
   :general
   (general-def :states '(normal motion visual )

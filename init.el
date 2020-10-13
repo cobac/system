@@ -730,8 +730,18 @@
   (general-def
     :keymaps 'git-rebase-mode-map
     "C-j" 'git-rebase-move-line-down
-    "C-k" 'git-rebase-move-line-up
+    "C-k" 'git-rebase-move-line-up)
+  (defun coba-magit-push-all ()
+    "Push to all remotes.
+From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?utm_medium=android_app&utm_source=share"
+    (interactive)
+    (mapcar (lambda(remote)  ;; Loops through the remotes returned by magit-list-remotes
+              (magit-run-git-async "push" "-v" remote (magit-get-current-branch))) ;; Simply run git push -v {{remote}} {{current-branch}}
+            (magit-list-remotes)) ;; Returns all remotes configured
     )
+
+  (transient-append-suffix 'magit-push "e"  ;; Puts the following command after the 'e' option on the magit-push menu
+    '("a" "Push all" coba-magit-push-all))  ;; Configures the my/magit-push-all method to be callable with "a" while on the magit-push menu. It's description will read "Push All"
   )
 
 (defun coba-magit-status ()

@@ -2,13 +2,14 @@
 ;;; Snippet definitions:
 ;;;
 (yas-define-snippets 'latex-mode
-                     '(("vmatrix" "\\begin{vmatrix}\n$0\n\\end{vmatrix}" "vmatrix" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/vmatrix" nil nil)
+                     '(("what" "\\widehat {${1}} $0" "widehat" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/widehat" nil nil)
+                       ("vmatrix" "\\begin{vmatrix}\n$0\n\\end{vmatrix}" "vmatrix" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/vmatrix" nil nil)
                        ("\\ve" "\\varepsilon $0" "varepsilon" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/varepsilon" nil nil)
                        ("usep" "\\usepackage{$0}" "usepackage" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/usepackage" nil nil)
                        ("\\t" "\\theta $0" "theta" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/theta" nil nil)
                        (",t" "\\textcite{$0}" "textcite" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/textcite" nil nil)
                        (",b" "\\textbf{$1}$0" "textbf" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/textbf" nil nil)
-                       (",sum" "\\sum_{$1}^{$2}$0" "sum" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/sum" nil nil)
+                       (",sum" "\\sum_{${1:i=1}}^{${2:n}} $0" "sum" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/sum" nil nil)
                        (",sss" "\\subsubsection{${1:name}}\n\\label{subsubsec:${2:label}}" "subsubsec" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/subsubsec" nil nil)
                        (",ss" "\\subsection{${1:name}}\n\\label{subsec:${2:label}}\n\n$0" "subsec" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/subsec" nil nil)
                        (",subfig" "\\begin{figure}[ht]\n  \\centering\n  \\subfigure[$1]\n  {\\label{fig:${2:label}}\n    \\includegraphics[width=.${3:5}\\textwidth]{${4:path}}}\n\n  \\caption{${5:caption}}\n\\label{fig:${6:label}}\n\\end{figure}\n" "subfigure" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/subfigure" nil nil)
@@ -19,7 +20,7 @@
                        (",s" "\\section{${1:name}}\n\\label{sec:${2:label}}\n\n$0" "section" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/section" nil nil)
                        ("q" "\\question{$0}" "question" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/question" nil nil)
                        ("py" "\\lstset{language=python}\n\\begin[language=python]{lstlisting}\n$0\n\\end{lstlisting}" "python" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/python" nil nil)
-                       ("prod" "\\prod_{$1}^{$2}$0" "prod" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/prod" nil nil)
+                       ("prod" "\\prod_{${1:i=1}}^{${2:n}}$0" "prod" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/prod" nil nil)
                        ("pmatrix" "\\begin{pmatrix}\n$0\n\\end{pmatrix}" "pmatrix" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/pmatrix" nil nil)
                        (",p" "\\parencite{$0}" "parencite" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/parencite" nil nil)
                        ("nnote" "\\note{$0}\n" "note" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/note" nil nil)
@@ -80,10 +81,13 @@
                        ("\\ro" "\\rho $0" "Rho" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Rho" nil nil)
                        ("\\R" "\\mathbb{R}$0" "Real numbers" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Real numbers" nil nil)
                        ("pi" "\\pi $0" "Pi" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Pi" nil nil)
+                       ("olX" "\\overline X $0" "Overline X" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Overline X" nil nil)
                        ("ol" "\\overline $0" "Overline" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Overline" nil nil)
                        (",newp" "\\newpage \n\n$0" "Newpage" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Newpage" nil nil)
                        ("\\N" "\\mathbb{N}$0" "Natural numbers" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Natural numbers" nil nil)
+                       ("lnl" "\\ln\\mathcal{L}(${1:\\theta | X}) $0" "Log-likelihood function" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Log-likelihood function" nil nil)
                        (",lim" "\\lim_{$1} $0" "Limit" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Limit" nil nil)
+                       ("\\L" "\\mathcal{L}(${1:\\theta | X}) $0\n" "Likelihood function" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Likelihood function" nil nil)
                        ("lr]" "\\left[ $1 \\right] $0" "Left-right []" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Left-right []" nil nil)
                        ("lr)" "\\left( $1 \\right) $0" "Left-right ()" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Left-right ()" nil nil)
                        ("lr}" "\\left\\{ $1 \\right\\} $0" "Left-Right {}" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Left-Right {}" nil nil)
@@ -91,7 +95,8 @@
                        ("inf" "\\infty $0" "Inf" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Inf" nil nil)
                        ("\\cov" "\\text{Cov}( $1 ) $0" "Cov" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Cov" nil nil)
                        ("\\C" "\\mathbb{C} $0" "Complex" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Complex" nil nil)
+                       ("olx" "\\bar x $0" "Bar x" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Bar x" nil nil)
                        ("-inf" "-\\infty $0" "-Inf" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/-Inf" nil nil)))
 
 
-;;; Do not edit! File generated at Thu Oct  8 19:45:40 2020
+;;; Do not edit! File generated at Wed Oct 14 22:18:28 2020

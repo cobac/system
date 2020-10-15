@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Log-likelihood function
+# key: lnl
+# --
+\ln\mathcal{L}(${1:\theta | X}) $0

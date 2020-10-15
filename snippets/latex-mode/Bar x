@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name:  Bar x
+# key:  olx
+# --
+\bar x $0

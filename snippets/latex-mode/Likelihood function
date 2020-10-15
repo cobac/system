@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Likelihood function
+# key: \L
+# --
+\mathcal{L}(${1:\theta | X}) $0

@@ -6,4 +6,4 @@
                        (",f" "False $0" "False" nil nil nil "/home/coba/.emacs.d/snippets/haskell-mode/False" nil nil)))
 
 
-;;; Do not edit! File generated at Thu Oct  8 19:45:39 2020
+;;; Do not edit! File generated at Wed Oct 14 22:18:28 2020

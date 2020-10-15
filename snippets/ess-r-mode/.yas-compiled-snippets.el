@@ -5,4 +5,4 @@
                      '(("%%" "%>% $0" "Pipe" nil nil nil "/home/coba/.emacs.d/snippets/ess-r-mode/rpipe" nil nil)))
 
 
-;;; Do not edit! File generated at Thu Oct  8 19:45:39 2020
+;;; Do not edit! File generated at Wed Oct 14 22:18:28 2020

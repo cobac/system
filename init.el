@@ -476,7 +476,7 @@
 (general-def
   :states '(normal motion)
   :keymaps 'org-mode-map
-  "t" 'org-todo
+  "C-t" 'org-todo
   "ga" 'org-archive-subtree-default
   "gr" 'org-refile
   "gR" 'org-refile-goto-last-stored

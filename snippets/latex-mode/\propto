@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: \propto 
+# key:  \prop
+# --
+
+\propto $0

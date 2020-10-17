@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: widehat
-# key: what
+# key: ,hat
 # --
 
-\widehat {${1}} $0
+\widehat {$1} $0

@@ -141,8 +141,8 @@
   (general-def
     :states '(normal motion)
     "ñ" 'counsel-yank-pop
+    "gt" 'undo-tree-visualize
     )
-
   :config
   (use-package evil-anzu
     :straight t)

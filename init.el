@@ -126,8 +126,8 @@
 
   (coba-leader-def
     "f" '(:ignore t :which-key "Files")
-    "fi" '(lambda() (interactive)(find-file "~/.emacs.d/init.el")))
-
+    "fi" '(lambda() (interactive)(find-file "~/.emacs.d/init.el"))
+    "fp" '(lambda() (interactive)(counsel-find-file "~/Documentos/Psicología")))
   )
 
 ;; Evil
@@ -174,7 +174,6 @@
     :after evil
     :config (global-evil-surround-mode))
   )
-
 
 ;; Ivy - Counsel - Prescient
 

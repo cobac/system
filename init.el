@@ -780,6 +780,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (add-hook 'after-init-hook #'global-flycheck-mode)
   )
 
+;; TODO: Format-all or apheleia
 ;;;; format-all
 ;;(use-package format-all
 ;;  :straight t

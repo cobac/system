@@ -123,11 +123,6 @@
   (general-create-definer coba-local-leader-def
     :states '(normal visual motion)
     :prefix ",")
-
-  (coba-leader-def
-    "f" '(:ignore t :which-key "Files")
-    "fi" '(lambda() (interactive)(find-file "~/.emacs.d/init.el"))
-    "fp" '(lambda() (interactive)(counsel-find-file "~/Documentos/Psicología")))
   )
 
 ;; Evil
@@ -192,41 +187,43 @@
     "<escape>" 'minibuffer-keyboard-quit
     "C-j" 'ivy-next-line
     "C-k" 'ivy-previous-line
-    "C-l" 'ivy-dispatching-done
-    "C-]" 'ivy-immediate-done
-    )
-  (use-package counsel
-    :straight t
-    :config
-    (general-def 'ivy-switch-buffer-map
-      "C-k" 'ivy-previous-line
-      "C-d" 'ivy-switch-buffer-kill)
-    (coba-leader-def
-      "ff" 'counsel-find-file
-      "fr" 'counsel-recentf
-      "FF" 'counsel-fzf
-      "SPC" 'counsel-switch-buffer
-      "x" 'counsel-M-x
-      "/" 'counsel-rg
-      "T" 'counsel-load-theme
-      )
-    (general-def 'counsel-find-file-map
-      "C-h" 'counsel-up-directory
-      "C-l" 'ivy-alt-done
-      )
-    )
+    "C-m" 'ivy-dispatching-done
+    "C-]" 'ivy-immediate-done)
+  )
 
-  (use-package prescient
-    :straight t
-    :config
-    (use-package ivy-prescient
-      :straight t
-      :after counsel
-      :config
-      (prescient-persist-mode)
-      (ivy-prescient-mode)
-      )
+(use-package counsel
+  :straight t
+  :config
+  (general-def 'ivy-switch-buffer-map
+    "C-k" 'ivy-previous-line
+    "C-d" 'ivy-switch-buffer-kill)
+  (coba-leader-def
+    "f" '(:ignore t :which-key "Files")
+    "fi" '(lambda() (interactive)(find-file "~/.emacs.d/init.el"))
+    "fp" '(lambda() (interactive)(counsel-find-file "~/Documentos/Psicología"))
+    "ff" 'counsel-find-file
+    "fr" 'counsel-recentf
+    "FF" 'counsel-fzf
+    "SPC" 'counsel-switch-buffer
+    "x" 'counsel-M-x
+    "/" 'counsel-rg
+    "T" 'counsel-load-theme
     )
+  (general-def 'counsel-find-file-map
+    "C-h" 'counsel-up-directory
+    "C-l" 'ivy-alt-done
+    )
+  )
+
+(use-package prescient
+  :straight t
+  )
+(use-package ivy-prescient
+  :straight t
+  :after counsel
+  :config
+  (prescient-persist-mode)
+  (ivy-prescient-mode)
   )
 
 ;; Hydra

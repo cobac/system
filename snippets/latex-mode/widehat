@@ -3,4 +3,4 @@
 # key: ,hat
 # --
 
-\widehat {$1} $0
+\widehat $0

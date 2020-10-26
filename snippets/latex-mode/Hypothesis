@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Hypothesis
+# key: \hy
+# --
+
+\mathcal{H}_ $0

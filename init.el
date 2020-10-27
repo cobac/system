@@ -1043,7 +1043,6 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
     "C-ñ" '(lambda () (interactive) (insert "-> "))
     "C-Ñ" '(lambda () (interactive) (insert "<- "))
     )
-  (setq haskell-process-path-ghci "/home/coba/.nix-profile/bin/ghci"))
 
 (use-package flycheck-haskell
   :straight t

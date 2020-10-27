@@ -1043,6 +1043,9 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 
 (use-package flycheck-haskell
   :straight t
+  :config
+  (add-hook 'haskell-mode-hook #'flycheck-haskell-setup)
+  (setq-default flycheck-disabled-checkers '(haskell-ghc haskell-stack-ghc))
   )
 
 ;;(use-package hindent

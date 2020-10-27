@@ -1052,6 +1052,8 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (setq-default flycheck-disabled-checkers '(haskell-ghc haskell-stack-ghc))
   )
 
+;; TODO: check haskell. maybe lsp?
+
 ;;(use-package hindent
 ;;  :straight t
 ;;  :after haskellmode

@@ -798,6 +798,8 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
     "v" 'flycheck-verify-setup
     "C-f" 'flycheck-list-errors
     )
+  :config
+  (add-hook 'after-init-hook #'global-flycheck-mode)
   )
 
 ;; formatters

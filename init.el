@@ -299,14 +299,14 @@
   (openwith-mode 1)
   )
 
-;; Numbers stuff
+;; Numbers stuff TODO: check visual selection
 (use-package evil-numbers
-  :straight (:type git :host github :repo "janpath/evil-numbers" :branch "retain-selection")
-  :general
-  (general-def :states '(normal motion visual )
+  :straight (:type git :host github :repo "janpath/evil-numbers");:branch "retain-selection")
+  :config
+  (general-def
+    :states '(normal motion visual)
     "C-a" 'evil-numbers/inc-at-pt
-    "C-x" 'evil-numbers/dec-at-pt
-    )
+    "C-x" 'evil-numbers/dec-at-pt)
   )
 
 ;; Org

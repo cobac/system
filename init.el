@@ -1050,7 +1050,9 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (general-def 'haskell-mode-map
     "C-ñ" '(lambda () (interactive) (insert "-> "))
     "C-Ñ" '(lambda () (interactive) (insert "<- "))
+    "C-c C-c" 'haskell-process-load-file
     )
+  )
 
 (use-package flycheck-haskell
   :straight t

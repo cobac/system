@@ -1052,12 +1052,17 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 ;; Haskell
 (use-package haskell-mode
   :straight t
-  :config
+  :general
   (general-def 'haskell-mode-map
     "C-ñ" '(lambda () (interactive) (insert "-> "))
     "C-Ñ" '(lambda () (interactive) (insert "<- "))
     "C-c C-c" 'haskell-process-load-file
-    )
+    ) 
+  (general-def 'haskell-interactive-mode-map
+    :states '(normal motion)
+    ; TODO: por qué no funciona c-k?
+    "C-k" 'haskell-interactive-mode-history-previous
+    "C-j" 'haskell-interactive-mode-history-next)
   )
 
 (use-package flycheck-haskell

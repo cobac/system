@@ -73,6 +73,14 @@
 (put #'narrow-to-region 'disabled nil)
 
                                         ; Packages
+
+;; Get correct path
+(use-package exec-path-from-shell
+  :straight t
+  :config
+  (when (daemonp)
+    (exec-path-from-shell-initialize)))
+
 ;; Load upstream org
 (straight-use-package
  '(org :host github :repo "emacs-straight/org-mode" :local-repo "org"))

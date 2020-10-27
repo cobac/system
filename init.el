@@ -1052,15 +1052,6 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
     "C-Ñ" '(lambda () (interactive) (insert "<- "))
     )
 
-  (defun coba-run-haskell ()
-    (interactive)
-    (make-frame-command)
-    (other-frame 1)
-    (sleep-for 0.01)
-    (run-haskell)
-    )
-  )
-
 (use-package flycheck-haskell
   :straight t
   :config

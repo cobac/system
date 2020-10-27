@@ -792,8 +792,12 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 ;; Flyckeck
 (use-package flycheck
   :straight t
-  :config
-  (add-hook 'after-init-hook #'global-flycheck-mode)
+  :general
+  (general-def
+    :prefix "C-S-f"
+    "v" 'flycheck-verify-setup
+    "C-f" 'flycheck-list-errors
+    )
   )
 
 ;; formatters

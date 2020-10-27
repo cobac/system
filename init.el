@@ -188,7 +188,9 @@
     "C-j" 'ivy-next-line
     "C-k" 'ivy-previous-line
     "C-m" 'ivy-dispatching-done
-    "C-]" 'ivy-immediate-done)
+    "RET" 'ivy-done ;idk why it's needed when binding 'ivy-dispatching-done
+    "C-]" 'ivy-immediate-done
+    )
   )
 
 (use-package counsel

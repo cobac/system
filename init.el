@@ -788,13 +788,39 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (add-hook 'after-init-hook #'global-flycheck-mode)
   )
 
-;; TODO: Format-all or apheleia
-;;;; format-all
-;;(use-package format-all
-;;  :straight t
-;;  :config
-;;  (format-all-mode)
-;;  )
+;; formatters
+(use-package format-all
+  :straight t
+  :after apheleia
+  :general
+  (general-def 'ess-r-mode-map
+    :states '(normal motion)
+    "gf" 'format-all-buffer)
+  )
+
+(use-package apheleia
+  :straight (:host github :repo "raxod502/apheleia")
+  :general
+  (general-def
+    :states '(normal motion)
+    "gf" 'apheleia-format-buffer)
+  ;;  :config
+  ;;  (push '(ess-r-mode . styler)
+  ;;        apheleia-mode-alist)
+  ;;
+  ;;  (push '(styler . ((concat
+  ;;                     "Rscript -e"
+  ;;                     "library(styler)"
+  ;;                                        ;  "options(styler.colored_print.vertical=FALSE);"
+  ;;                     " con <-"
+  ;;                     file
+  ;;                     ";"
+  ;;                     " out <- styler::style_text(readLines(con));"
+  ;;                     " close(con);"
+  ;;                     " out")))
+  ;;        apheleia-formatters)
+  )
+
 
 ;; Yasnippets
 

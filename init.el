@@ -958,6 +958,10 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   :after stan-mode
   )
 
+;; TODO: Check julia. Maybe julia-mode and julia-repl instead of ess
+;; Ess does not support pkg interface
+;; But ess has the help files, although with -repl the help is printed on the term which ins nice.
+
 ;; Markdown
 (use-package markdown-mode
   :straight t

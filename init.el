@@ -483,9 +483,9 @@
   :states '(normal motion)
   :keymaps 'org-mode-map
   "C-t" 'org-todo
-  "ga" 'org-archive-subtree-default
-  "gr" 'org-refile
-  "gR" 'org-refile-goto-last-stored
+  "ga"  'org-archive-subtree-default
+  "gr"  'org-refile
+  "gR"  'org-refile-goto-last-stored
   "C-j" 'org-metadown
   "C-k" 'org-metaup
   "C-h" 'org-metaleft
@@ -495,6 +495,7 @@
   "C-H" 'org-shiftmetaleft
   "C-L" 'org-shiftmetaright
   "C-P" 'org-latex-preview
+  "gg"  'counsel-outline
   )
 
 (general-def

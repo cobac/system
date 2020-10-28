@@ -1059,7 +1059,8 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
     "C-c C-c" 'haskell-process-load-file
     )
   (coba-local-leader-def 'haskell-mode-map
-    "r" 'hlint-refactor-refactor-at-point)
+    "r" 'hlint-refactor-refactor-at-point
+    "h" 'hoogle)
   )
 
 (use-package flycheck-haskell

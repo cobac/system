@@ -1074,16 +1074,3 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   )
 
 ;; TODO: check haskell. maybe lsp?
-
-;;(use-package hindent
-;;  :straight t
-;;  :after haskellmode
-;;  :hook (haskellmodehook . hindentmode)
-;;  :general
-;;  (coba-local-leaderdef
-;;   :keymaps 'haskellmode
-;;   :states '(normal motion)
-;;   "f" 'hindentreformatregion
-;;   "F" 'hindentreformatbuffer
-;;   )
-;;  )

@@ -1057,7 +1057,9 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
     "C-ñ" '(lambda () (interactive) (insert "-> "))
     "C-Ñ" '(lambda () (interactive) (insert "<- "))
     "C-c C-c" 'haskell-process-load-file
-    ) 
+    )
+  (coba-local-leader-def 'haskell-mode-map
+    "r" 'hlint-refactor-refactor-at-point)
   )
 
 (use-package flycheck-haskell
@@ -1065,6 +1067,10 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   :config
   (add-hook 'haskell-mode-hook #'flycheck-haskell-setup)
   (setq-default flycheck-disabled-checkers '(haskell-ghc haskell-stack-ghc))
+  )
+
+(use-package hlint-refactor
+  :straight t
   )
 
 ;; TODO: check haskell. maybe lsp?

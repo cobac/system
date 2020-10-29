@@ -699,9 +699,10 @@
   :init
   (setq org-ref-completion-library 'org-ref-ivy-cite)
   :config
-  (setq reftex-default-bibliography "~/Brain/bib.bib"
-        org-ref-bibliography-notes "~/Brain/"
-        org-ref-pdf-directory "~/Brain/pdf"
+  (setq reftex-default-bibliography  '("~/Brain/bib.bib")
+        org-ref-default-bibliography '("~/Brain/bib.bib")
+        org-ref-bibliography-notes   "~/Brain/"
+        org-ref-pdf-directory        "~/Brain/pdf"
         org-ref-open-pdf-function (lambda (fpath)
                                     (call-process "zathura" nil 0 nil fpath))
         )

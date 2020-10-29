@@ -1006,6 +1006,9 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
   (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown+r-mode)))
 
+(use-package poly-org
+  :straight t
+  )
 
 ;; Latex
 (use-package tex

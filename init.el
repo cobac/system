@@ -205,7 +205,7 @@
     "C-j" 'ivy-next-line
     "C-k" 'ivy-previous-line
     "C-u" 'ivy-dispatching-done
-    "C-]" 'ivy-immediate-done
+    "C-)" 'ivy-immediate-done
     )
   )
 

@@ -679,6 +679,12 @@
                                          (call-process "zathura" nil 0 nil fpath))
    bibtex-completion-notes-template-multiple-files "#+TITLE: {author-or-editor} (${year}): ${title} "
    )
+  ;; So that org-ref inherits ivy-bibtex format
+  ;; From: https://github.com/jkitchin/org-ref/issues/717#issuecomment-633788035
+  (ivy-set-display-transformer
+   'org-ref-ivy-insert-cite-link
+   'ivy-bibtex-display-transformer)
+
   :general
   (coba-leader-def
     "pp" 'ivy-bibtex

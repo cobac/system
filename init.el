@@ -509,6 +509,7 @@
   :states '(normal motion)
   :keymaps 'org-agenda-mode-map
   "ga" 'org-agenda-archive
+  "C-t" 'org-agenda-todo
   )
 
 (coba-local-leader-def

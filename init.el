@@ -164,6 +164,7 @@
     (evil-collection-init 'dired)
     (evil-collection-init 'ediff)
     (evil-collection-init 'magit-todos)
+    (evil-collection-init 'info)
     ;;(evil-collection-init 'calendar)
     ;;(evil-collection-init 'magit)
     )
@@ -217,7 +218,7 @@
   (coba-leader-def
     "f" '(:ignore t :which-key "Files")
     "fi" '(lambda() (interactive)(find-file "~/.emacs.d/init.el"))
-    "fp" '(lambda() (interactive)(counsel-find-file "~/Documentos/Psicología"))
+    "fp" '(lambda() (interactive)(counsel-find-file "~/Documentos/Psicología/resma"))
     "ff" 'counsel-find-file
     "fr" 'counsel-recentf
     "FF" 'counsel-fzf

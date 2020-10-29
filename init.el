@@ -203,8 +203,7 @@
     "<escape>" 'minibuffer-keyboard-quit
     "C-j" 'ivy-next-line
     "C-k" 'ivy-previous-line
-    "C-m" 'ivy-dispatching-done
-    "RET" 'ivy-done ;idk why it's needed when binding 'ivy-dispatching-done
+    "C-u" 'ivy-dispatching-done
     "C-]" 'ivy-immediate-done
     )
   )

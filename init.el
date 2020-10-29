@@ -707,8 +707,6 @@
                                     (call-process "zathura" nil 0 nil fpath))
         )
 
-  (find-file "~/Brain/bib.bib")
-  (switch-to-buffer "*scratch*")
   (use-package doi-utils
     :config
     (setq bibtex-autokey-year-length 4

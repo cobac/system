@@ -81,14 +81,6 @@
   (when (daemonp)
     (exec-path-from-shell-initialize)))
 
-;;
-
-(use-package frames-only-mode
-  :straight t
-  :config
-  (frames-only-mode)
-  )
-
 ;; Load upstream org
 (straight-use-package
  '(org :host github :repo "emacs-straight/org-mode" :local-repo "org"))

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: latex source block
+# key: ,sl
+# --
+
+#+BEGIN_SRC latex
+$1
+#+END_SRC
+$0

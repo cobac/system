@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: R code block
+# key: ,r
+# --
+
+#+label: 
+#+caption: 
+#+BEGIN_SRC R :eval :results output :exports both
+$1
+#+END_SRC
+$0

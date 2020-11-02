@@ -537,16 +537,16 @@
 
 ;; Babel
 
-                                        ;(org-babel-do-load-languages
-                                        ; 'org-babel-load-languages
-                                        ; '((R . t)
-                                        ;   ))
-                                        ;(setq
-                                        ; org-confirm-babel-evaluate nil
-                                        ; )
-                                        ;(setf
-                                        ; org-babel-default-header-args:R '((:output . "results"))
-                                        ; )
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((R . t)
+   ))
+(setq
+ org-confirm-babel-evaluate nil
+ )
+(setf
+ org-babel-default-header-args:R '((:output . "results"))
+ )
 
 (use-package org-roam
   :straight t

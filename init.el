@@ -698,6 +698,99 @@
         org-ref-open-pdf-function (lambda (fpath)
                                     (call-process "zathura" nil 0 nil fpath))
         )
+  (setq ;These are normal org variables
+   org-latex-compiler "xelatex"
+   org-latex-bib-compiler "bibtex"
+                                        ;org-export-in-background t
+   org-latex-default-class "coba-report"
+   org-latex-hyperref-template nil
+   org-latex-prefer-user-labels t
+   org-latex-listings t
+   org-latex-listings-options '(
+                                ("basicstyle" "\\ttfamily\\color{code-fg}")
+                                ("stringstyle" "\\ttfamily\\color{code-string}")
+                                ("commentstyle" "\\color{code-comment}")
+                                ("keywordstyle" "\\color{code-keyword}")
+                                ("upquote" "true")
+                                ("backgroundcolor" "\\color{code-bg}")
+                                ("frame" "single")
+                                ("framesep" "5pt")
+                                ("rulecolor" "\\color{code-comment}")
+                                ("framerule" "1pt")
+                                )
+   org-latex-pdf-process
+   '("ln -s ~/Brain/bib.bib bib.bib"
+     "latexmk -pdflatex='xelatex -interaction nonstopmode' -pdf -bibtex -f %f")
+   )
+
+  (add-to-list 'org-latex-classes
+               '("coba-report"
+                 "
+\\documentclass{article} 
+
+[NO-DEFAULT-PACKAGES]
+\\usepackage{plex-serif}
+\\usepackage{plex-mono}
+\\usepackage{plex-sans}
+\\usepackage{float}
+\\usepackage{graphicx}
+\\graphicspath{ {./figures/} }
+\\usepackage{hyperref}
+
+\\usepackage[style=apa, sortcites=true, sorting=nyt]{biblatex}
+\\DeclareLanguageMapping{american}{american-apa}
+\\addbibresource{bib.bib}
+\\defbibheading{bibliography}[References]{%
+  \\section{#1}%
+  \\markboth{#1}{#1}}
+\\defbibheading{shorthands}[References]{%
+  \\subsection{#1}%
+  \\markboth{#1}{#1}}
+
+% Spanish for biblatex
+%\\DefineBibliographyStrings{spanish}{andothers={et al.}}
+
+\\usepackage{listings}
+\\usepackage{textcomp}
+\\renewcommand{\\lstlistingname}{Code block}
+\\usepackage{xcolor}
+\\definecolor{code-fg}{RGB}{77 77 76}
+\\definecolor{code-string}{RGB}{113 140 0}
+\\definecolor{code-comment}{RGB}{165 164 165}
+\\definecolor{code-keyword}{RGB}{137 89 168}
+\\definecolor{code-bg}{RGB}{255 255 255}
+
+[PACKAGES]
+[EXTRA]
+"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+  (add-to-list 'org-latex-classes
+               '("apa-article"
+                 "
+\\documentclass{article} 
+[NO-DEFAULT-PACKAGES]
+\\usepackage{plex-serif}
+\\usepackage{hyperref}
+\\usepackage[style=apa,sortcites=true,sorting=nyt]{biblatex}
+\\DeclareLanguageMapping{american}{american-apa}
+\\addbibresource{bib.bib}
+
+% Spanish for biblatex
+%\\DefineBibliographyStrings{spanish}{andothers={et al.}}
+
+[PACKAGES]
+[EXTRA]
+"
+                 ("\\section*{%s}" . "\\section*{%s}")
+                 ("\\subsection*{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection*{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph*{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph*{%s}" . "\\subparagraph*{%s}")))
 
   (use-package doi-utils
     :config

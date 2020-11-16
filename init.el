@@ -1177,3 +1177,11 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   )
 
 ;; TODO: check haskell. maybe lsp?
+
+(add-hook 'makefile-gmake-mode-hook
+					'(lambda ()
+						 (add-hook 'before-save-hook
+											 (lambda ()
+												 (tabify (point-min) (point-max))))))
+
+

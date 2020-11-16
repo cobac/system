@@ -29,24 +29,26 @@
 
 ;; Remove startup screen
 (setq inhibit-splash-screen t
-      inhibit-startup-message t
-      inhibit-startup-echo-area-message t)
+			inhibit-startup-message t
+			inhibit-startup-echo-area-message t)
 ;; Show matching paranthesis
 (show-paren-mode 1)
 (electric-pair-mode)
 
 ;; Always indent with spaces
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil
+							tab-width 2)
+
 
 ;; Font
 (setq default-frame-alist
-      (add-to-list 'default-frame-alist '(font . "ibm plex mono-14")))
+			(add-to-list 'default-frame-alist '(font . "ibm plex mono-14")))
 
 
 (setq-default line-spacing 0.15)
 ;; Not-crazy scroll
 (setq scroll-step 1
-      scroll-conservatively 10000)
+			scroll-conservatively 10000)
 
 ;; Keep init.el clean
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))

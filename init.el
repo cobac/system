@@ -591,7 +591,9 @@
 	:after general
 	:config
 	(coba-local-leader-def 'org-mode-map
-		"p" 'org-download-clipboard))
+		"p" 'org-download-clipboard)
+  (setq-default org-download-image-dir "~/Brain/pictures"
+                org-download-heading-lvl nil))
 
 (use-package org-roam
 	:straight t

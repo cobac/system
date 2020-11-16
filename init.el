@@ -87,6 +87,12 @@
 (straight-use-package
  '(org :host github :repo "emacs-straight/org-mode" :local-repo "org"))
 
+(use-package org-download
+	:straight t
+	:after general
+	:config
+	(coba-local-leader-def 'org-mode-map
+		"p" 'org-download-clipboard))
 ;; Visual
 (use-package doom-themes
   :straight t

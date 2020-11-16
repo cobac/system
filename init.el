@@ -135,12 +135,19 @@
 		:prefix ",")
 	)
 
+(use-package undo-tree
+  :straight t
+  :config
+  (global-undo-tree-mode 1)
+  )
+
 ;; Evil
 (use-package evil
 	:straight t
 	:hook (after-init . evil-mode)
 	:init
 	(setq evil-want-keybinding nil) ;for evil-collection
+  (setq evil-undo-system 'undo-tree)
 
 	:general
 	(general-def

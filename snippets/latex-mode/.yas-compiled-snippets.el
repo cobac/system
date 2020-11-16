@@ -2,7 +2,7 @@
 ;;; Snippet definitions:
 ;;;
 (yas-define-snippets 'latex-mode
-                     '(("what" "\\widehat {${1}} $0" "widehat" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/widehat" nil nil)
+                     '((",hat" "\\widehat $0" "widehat" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/widehat" nil nil)
                        ("vmatrix" "\\begin{vmatrix}\n$0\n\\end{vmatrix}" "vmatrix" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/vmatrix" nil nil)
                        ("\\ve" "\\varepsilon $0" "varepsilon" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/varepsilon" nil nil)
                        ("usep" "\\usepackage{$0}" "usepackage" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/usepackage" nil nil)
@@ -27,7 +27,7 @@
                        ("gl" "\\newglossaryentry{${1:AC}}{name=${2:Andrea Crotti}${3:, description=${4:description}}}" "newglossaryentry" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/newglossaryentry" nil nil)
                        ("cmd" "\\newcommand{\\\\${1:name}}${2:[${3:0}]}{$0}" "newcommand" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/newcommand" nil nil)
                        ("mu" "\\mu $0" "mu" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/mu" nil nil)
-                       ("movie" "\\begin{center}\n\\includemovie[\n  label=test,\n  controls=false,\n  text={\\includegraphics[width=4in]{${1:image.pdf}}}\n]{4in}{4in}{${2:video file}}\n\n\\movieref[rate=3]{test}{Play Fast}\n\\movieref[rate=1]{test}{Play Normal Speed}\n\\movieref[rate=0.2]{test}{Play Slow}\n\\movieref[resume]{test}{Pause/Resume}\n" "movie" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/movie" nil nil)
+                       (",movie" "\\begin{center}\n\\includemovie[\n  label=test,\n  controls=false,\n  text={\\includegraphics[width=4in]{${1:image.pdf}}}\n]{4in}{4in}{${2:video file}}\n\n\\movieref[rate=3]{test}{Play Fast}\n\\movieref[rate=1]{test}{Play Normal Speed}\n\\movieref[rate=0.2]{test}{Play Slow}\n\\movieref[resume]{test}{Pause/Resume}\n" "movie" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/movie" nil nil)
                        ("cvitem" "\\cvlistitem{${1:item}}\n$0\n" "moderncv-cvlistitem" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/moderncv-cvlistitem" nil nil)
                        ("cvditem" "\\cvlistdoubleitem{${1:item}}{${2:item}}\n$0\n" "moderncv-cvlistdoubleitem" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/moderncv-cvlistdoubleitem" nil nil)
                        ("cvline" "\\cvline{${1:hobby}}{${2:Description}}\n$0\n" "moderncv-cvline" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/moderncv-cvline" nil nil)
@@ -39,7 +39,7 @@
                        ("lr" "\\left( $0 \\right)" "left and right" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/left-right" nil nil)
                        ("\\l" "\\lambda $0" "lambda" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/lambda" nil nil)
                        ("lref" "\\labelcref{$0}" "labelcref" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/labelcref" nil nil)
-                       ("lab" "\\label{$0}" "label" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/label" nil nil)
+                       (",lab" "\\label{$0}" "label" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/label" nil nil)
                        (",list" "\\begin{itemize}\n\\item $0\n\\end{itemize}" "itemize" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/itemize" nil nil)
                        (",i" "\\item $0" "item" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/item" nil nil)
                        ("int" "\\int_{$1}^{$2}$0" "int" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/int" nil nil)
@@ -76,6 +76,7 @@
                        ("alg" "\\begin{algorithmic}\n$0\n\\end{algorithmic}\n" "alg" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/alg" nil nil)
                        (",alert" "\\begin{alertblock}{$2}\n        $0\n\\end{alertblock}" "alertblock" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/alertblock" nil nil)
                        ("ac" "\\newacronym{${1:label}}{${1:$(upcase yas-text)}}{${2:Name}}" "acronym" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/acronym" nil nil)
+                       ("\\prop" "\\propto $0" "\\propto" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/\\propto" nil nil)
                        ("Var" "\\text{Var}($1) $0" "Variance" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Variance" nil nil)
                        (",sp" "\\usepackage{polyglossia}\n\\setmainlanguage{spanish}\n\\gappto\\captionsspanish{\\renewcommand{\\tablename}{Tabla}}\n" "Spanish" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Spanish" nil nil)
                        ("\\ro" "\\rho $0" "Rho" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Rho" nil nil)
@@ -83,6 +84,7 @@
                        ("pi" "\\pi $0" "Pi" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Pi" nil nil)
                        ("olX" "\\overline X $0" "Overline X" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Overline X" nil nil)
                        ("ol" "\\overline $0" "Overline" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Overline" nil nil)
+                       ("\\nperp" "\\not\\Perp $0" "No Perp" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/No Perp" nil nil)
                        (",newp" "\\newpage \n\n$0" "Newpage" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Newpage" nil nil)
                        ("\\N" "\\mathbb{N}$0" "Natural numbers" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Natural numbers" nil nil)
                        ("lnl" "\\ln\\mathcal{L}(${1:\\theta | X}) $0" "Log-likelihood function" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Log-likelihood function" nil nil)
@@ -93,10 +95,12 @@
                        ("lr}" "\\left\\{ $1 \\right\\} $0" "Left-Right {}" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Left-Right {}" nil nil)
                        (",inita" "\\documentclass[12pt]{article}\n\\linespread{1.5}\n\\author{${1:David Coba}}\n\n\\date{}\n\\usepackage[a4paper,bindingoffset=0.2in,%\n            left=0.75in,right=0.75in,top=1in,bottom=1in,%\n            footskip=.5in]{geometry}\n\\usepackage{graphicx}\n\\usepackage{float}\n\\usepackage{array}\n\\usepackage{tabularx}\n\\usepackage{color}\n\\usepackage{subfig}\n\\usepackage[numberedbib]{apacite}\n\n\n\\title{%\n  $2\\\\\n  \\large{$3}\n}\n\n\\begin{document}\n\\maketitle\n\n$0\n\n\\end{document}" "InitArticle" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/InitArticle" nil nil)
                        ("inf" "\\infty $0" "Inf" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Inf" nil nil)
+                       ("\\hy" "\\mathcal{H}_ $0" "Hypothesis" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Hypothesis" nil nil)
+                       ("\\do" "\\text{Do}($1) $0" "Do" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Do" nil nil)
                        ("\\cov" "\\text{Cov}( $1 ) $0" "Cov" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Cov" nil nil)
                        ("\\C" "\\mathbb{C} $0" "Complex" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Complex" nil nil)
                        ("olx" "\\bar x $0" "Bar x" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/Bar x" nil nil)
                        ("-inf" "-\\infty $0" "-Inf" nil nil nil "/home/coba/.emacs.d/snippets/latex-mode/-Inf" nil nil)))
 
 
-;;; Do not edit! File generated at Wed Oct 14 22:18:28 2020
+;;; Do not edit! File generated at Sat Nov 14 16:12:34 2020

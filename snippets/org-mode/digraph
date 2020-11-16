@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Digraph
+# key: ,dg
+# --
+
+#+BEGIN_SRC dot :file $1.pdf :cmdline -Kdot -Tpdf
+  digraph {
+        rankdir=LR;
+        $2
+  }
+#+END_SRC
+
+#+label: fig:$1
+#+ATTR_LATEX: :width 7cm :placement [H]
+#+caption:
+#+RESULTS:
+[[file:$1.pdf]]
+
+$0

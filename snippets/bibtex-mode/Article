@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Article
+# key: ,article
+# --
+
+@article{$1,
+  author =       {$2},
+  title =        {$3},
+  journal =      {$4},
+  volume =       $5,
+  number =       $6,
+  pages =        {$7},
+  year =         $8,
+  doi =          {$9},
+  url = {$10},
+  DATE_ADDED =   {`(current-time-string)`},
+}
+$0

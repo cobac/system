@@ -1,8 +1,11 @@
 # -*- mode: snippet -*-
-# name: elisp source block
-# key: ,elisp
+# name: R source block
+# key: ,r
 # --
 
-#+begin_src emacs-lisp
+#+label: 
+#+caption: 
+#+BEGIN_SRC R :eval :session :results output :exports both
+$1
+#+END_SRC
 $0
-#+end_src

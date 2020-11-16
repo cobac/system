@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: No Perp
+# key: \nperp
+# --
+
+\not\Perp $0

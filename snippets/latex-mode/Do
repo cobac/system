@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Do
+# key: \do
+# --
+\text{Do}($1) $0

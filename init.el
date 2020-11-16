@@ -1,25 +1,25 @@
-                                        ; Straight.el config
+																				; Straight.el config
 
 (setq straight-recipes-gnu-elpa-use-mirror t)
 
 ;; Bootstrap
 (defvar bootstrap-version)
 (let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'ihibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+			 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+			(bootstrap-version 5))
+	(unless (file-exists-p bootstrap-file)
+		(with-current-buffer
+				(url-retrieve-synchronously
+				 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+				 'silent 'ihibit-cookies)
+			(goto-char (point-max))
+			(eval-print-last-sexp)))
+	(load bootstrap-file nil 'nomessage))
 
 ;; use-package
 (straight-use-package 'use-package)
 
-                                        ; Built-in setup
+																				; Built-in setup
 
 ;; Remove scroll, tool and menu bars
 (scroll-bar-mode -1)
@@ -59,9 +59,9 @@
 (setq version-control t )		;; use version control
 (setq vc-make-backup-files t )		;; make backups file even when in version controlled dir
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")) ) ;; which directory to put backups file
-(setq vc-follow-symlinks t )	        ;; don't ask for confirmation when opening symlinked file
+(setq vc-follow-symlinks t )					;; don't ask for confirmation when opening symlinked file
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
-(setq inhibit-startup-screen t)	        ;; inhibit useless and old-school startup screen
+(setq inhibit-startup-screen t)					;; inhibit useless and old-school startup screen
 (setq ring-bell-function 'ignore )	;; silent bell when you make a mistake
 (setq coding-system-for-read 'utf-8 )	;; use utf-8 by default
 (setq coding-system-for-write 'utf-8 )
@@ -74,14 +74,14 @@
 (put #'upcase-region 'disabled nil)
 (put #'narrow-to-region 'disabled nil)
 
-                                        ; Packages
+																				; Packages
 
 ;; Get correct path
 (use-package exec-path-from-shell
-  :straight t
-  :config
-  (when (daemonp)
-    (exec-path-from-shell-initialize)))
+	:straight t
+	:config
+	(when (daemonp)
+		(exec-path-from-shell-initialize)))
 
 ;; Load upstream org
 (straight-use-package
@@ -93,462 +93,490 @@
 	:config
 	(coba-local-leader-def 'org-mode-map
 		"p" 'org-download-clipboard))
+
 ;; Visual
 (use-package doom-themes
-  :straight t
-  :config
-  (doom-themes-org-config)
-  (load-theme 'doom-gruvbox t)
-  )
+	:straight t
+	:config
+	(doom-themes-org-config)
+	(load-theme 'doom-gruvbox t)
+	)
 
 (use-package memoize
-  :straight t)
+	:straight t)
 
 (use-package all-the-icons
-  :straight t
-  :after memoize)
+	:straight t
+	:after memoize)
 
 (use-package doom-modeline
-  :straight t
-  :after all-the-icons
-  :hook (after-init . doom-modeline-mode)
-  :config
-  (setq doom-modeline-modal-icon nil
-        doom-modeline-enable-word-count t)
-  )
+	:straight t
+	:after all-the-icons
+	:hook (after-init . doom-modeline-mode)
+	:config
+	(setq doom-modeline-modal-icon nil
+				doom-modeline-enable-word-count t)
+	)
 
 ;; General - which-key
 (use-package which-key
-  :straight t
-  :config
-  (which-key-mode 1)
-  )
+	:straight t
+	:config
+	(which-key-mode 1)
+	)
 
 (use-package general
-  :after which-key
-  :straight t
-  :config
-  (setq general-override-states '(insert emacs hybrid normal visual motion operator replace))
+	:after which-key
+	:straight t
+	:config
+	(setq general-override-states '(insert emacs hybrid normal visual motion operator replace))
 
-  (general-create-definer coba-leader-def
-    :states '(normal visual insert motion emacs)
-    :keymaps 'override
-    :prefix "SPC"
-    :non-normal-prefix "C-SPC")
+	(general-create-definer coba-leader-def
+		:states '(normal visual insert motion emacs)
+		:keymaps 'override
+		:prefix "SPC"
+		:non-normal-prefix "C-SPC")
 
-  (general-create-definer coba-local-leader-def
-    :states '(normal visual motion)
-    :prefix ",")
-  )
+	(general-create-definer coba-local-leader-def
+		:states '(normal visual motion)
+		:prefix ",")
+	)
 
 ;; Evil
 (use-package evil
-  :straight t
-  :hook (after-init . evil-mode)
-  :init
-  (setq evil-want-keybinding nil) ;for evil-collection
+	:straight t
+	:hook (after-init . evil-mode)
+	:init
+	(setq evil-want-keybinding nil) ;for evil-collection
 
-  :general
-  (general-def
-    :states '(normal motion)
-    "ñ" 'counsel-yank-pop
-    "gt" 'undo-tree-visualize
-    )
-  :config
-  (use-package evil-anzu
-    :straight t)
-  (use-package evil-collection
-    :straight t
-    :config
-    ;;(evil-collection-init 'mu4e)
-    (evil-collection-init 'dired)
-    (evil-collection-init 'ediff)
-    (evil-collection-init 'magit-todos)
-    (evil-collection-init 'info)
-    ;;(evil-collection-init 'calendar)
-    ;;(evil-collection-init 'magit)
-    )
-  (use-package evil-snipe
-    :straight t
-    :config
-    (evil-snipe-mode 1)
-    (evil-snipe-override-mode 1)
-    (setq
-     evil-snipe-smart-case t
-     evil-snipe-show-prompt nil
-     evil-snipe-auto-scroll nil
-     evil-snipe-scope 'whole-buffer
-     evil-snipe-repeat-scope 'whole-buffer)
-    (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
-    )
-  (use-package evil-surround
-    :straight t
-    :after evil
-    :config (global-evil-surround-mode))
-  )
+	:general
+	(general-def
+		:states '(normal motion)
+		"ñ" 'counsel-yank-pop
+		"gt" 'undo-tree-visualize
+		)
+	:config
+	(use-package evil-anzu
+		:straight t)
+	(use-package evil-collection
+		:straight t
+		:config
+		;;(evil-collection-init 'mu4e)
+		(evil-collection-init 'dired)
+		(evil-collection-init 'ediff)
+		(evil-collection-init 'magit-todos)
+		(evil-collection-init 'info)
+		;;(evil-collection-init 'calendar)
+		;;(evil-collection-init 'magit)
+		)
+	(use-package evil-snipe
+		:straight t
+		:config
+		(evil-snipe-mode 1)
+		(evil-snipe-override-mode 1)
+		(setq
+		 evil-snipe-smart-case t
+		 evil-snipe-show-prompt nil
+		 evil-snipe-auto-scroll nil
+		 evil-snipe-scope 'whole-buffer
+		 evil-snipe-repeat-scope 'whole-buffer)
+		(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+		)
+	(use-package evil-surround
+		:straight t
+		:after evil
+		:config (global-evil-surround-mode))
+	(use-package evil-exchange
+		:straight t
+		)
+	)
+(use-package better-jumper
+	:straight t
+	:config
+	(better-jumper-mode +1)
+	(general-def :states 'motion
+		"C-o" 'better-jumper-jump-backward
+		"C-i" 'better-jumper-jump-forward)
+	)
 
 ;; Ivy - Counsel - Prescient
 
 (use-package ivy
-  :straight t
-  :after general
-  :config
-  (ivy-mode 1)
-  (setq ivy-count-format ""
-        ivy-wrap t
-        ivy-height 25)
-  (setq ivy-re-builders-alist
-        '((t . ivy--regex-ignore-order)))
+	:straight t
+	:after general
+	:config
+	(ivy-mode 1)
+	(setq ivy-count-format ""
+				ivy-wrap t
+				ivy-height 25)
+	(setq ivy-re-builders-alist
+				'((t . ivy--regex-ignore-order)))
 
-  (general-def 'ivy-minibuffer-map
-    "<escape>" 'minibuffer-keyboard-quit
-    "C-j" 'ivy-next-line
-    "C-k" 'ivy-previous-line
-    "C-u" 'ivy-dispatching-done
-    "C-)" 'ivy-immediate-done
-    )
-  )
+	(general-def 'ivy-minibuffer-map
+		"<escape>" 'minibuffer-keyboard-quit
+		"C-j" 'ivy-next-line
+		"C-k" 'ivy-previous-line
+		"C-u" 'ivy-dispatching-done
+		"C-)" 'ivy-immediate-done
+		)
+	)
 
 (use-package counsel
-  :straight t
-  :config
-  (general-def 'ivy-switch-buffer-map
-    "C-k" 'ivy-previous-line
-    "C-d" 'ivy-switch-buffer-kill)
-  (coba-leader-def
-    "f" '(:ignore t :which-key "Files")
-    "fi" '(lambda() (interactive)(find-file "~/.emacs.d/init.el"))
-    "fp" '(lambda() (interactive)(counsel-find-file "~/Documentos/Psicología/resma"))
-    "ff" 'counsel-find-file
-    "fr" 'counsel-recentf
-    "FF" 'counsel-fzf
-    "SPC" 'counsel-switch-buffer
-    "x" 'counsel-M-x
-    "/" 'counsel-rg
-    "T" 'counsel-load-theme
-    )
-  (general-def 'counsel-find-file-map
-    "C-h" 'counsel-up-directory
-    "C-l" 'ivy-alt-done
-    )
-  )
+	:straight t
+	:config
+	(general-def 'ivy-switch-buffer-map
+		"C-k" 'ivy-previous-line
+		"C-d" 'ivy-switch-buffer-kill)
+	(coba-leader-def
+		"f" '(:ignore t :which-key "Files")
+		"fi" '(lambda() (interactive)(find-file "~/.emacs.d/init.el"))
+		"fp" '(lambda() (interactive)(counsel-find-file "~/Documentos/Psicología/resma"))
+		"ff" 'counsel-find-file
+		"fr" 'counsel-recentf
+		"FF" 'counsel-fzf
+		"SPC" 'counsel-switch-buffer
+		"x" 'counsel-M-x
+		"/" 'counsel-rg
+		"T" 'counsel-load-theme
+		)
+	(general-def 'counsel-find-file-map
+		"C-h" 'counsel-up-directory
+		"C-l" 'ivy-alt-done
+		)
+	)
 
 (use-package prescient
-  :straight t
-  )
+	:straight t
+	)
 (use-package ivy-prescient
-  :straight t
-  :after counsel
-  :config
-  (prescient-persist-mode)
-  (ivy-prescient-mode)
-  )
+	:straight t
+	:after counsel
+	:config
+	(prescient-persist-mode)
+	(ivy-prescient-mode)
+	)
 
 ;; Hydra
 (use-package hydra
-  :straight t)
+	:straight t)
 
 (defhydra coba-hydra-windows ()
-  "Manage window movement with evil-window funcions."
-  ("h" evil-window-left)
-  ("j" evil-window-down)
-  ("k" evil-window-up)
-  ("l" evil-window-right)
-  ("C-h" shrink-window-horizontally)
-  ("C-j" shrink-window)
-  ("C-k" enlarge-window)
-  ("C-l" enlarge-window-horizontally)
-  ("s" split-window-horizontally)
-  ("d" delete-window)
-  )
+	"Manage window movement with evil-window funcions."
+	("h" evil-window-left)
+	("j" evil-window-down)
+	("k" evil-window-up)
+	("l" evil-window-right)
+	("C-h" shrink-window-horizontally)
+	("C-j" shrink-window)
+	("C-k" enlarge-window)
+	("C-l" enlarge-window-horizontally)
+	("s" split-window-horizontally)
+	("d" delete-window)
+	)
 
 (coba-leader-def
-  "w" 'coba-hydra-windows/body
-  "dd" 'evil-delete-buffer
-  "s" '(:ignore t :which-key "Split")
-  "sd" 'delete-other-windows
-  "sh" 'split-window-below
-  "ss" 'split-window-horizontally
-  "sr" 'evil-window-rotate-downwards
-  "l" 'evil-window-next
-  "bs" 'save-some-buffers
-  )
+	"w" 'coba-hydra-windows/body
+	"dd" 'evil-delete-buffer
+	"s" '(:ignore t :which-key "Split")
+	"sd" 'delete-other-windows
+	"sh" 'split-window-below
+	"ss" 'split-window-horizontally
+	"sr" 'evil-window-rotate-downwards
+	"l" 'evil-window-next
+	"bs" 'save-some-buffers
+	)
 
 ;; Openwith
 
 (use-package openwith
-  :straight t
-  :config
-  (setq openwith-associations
-        (list
-         (list (openwith-make-extension-regexp
-                '("mpg" "mpeg" "mp3" "mp4"
-                  "avi" "wmv" "wav" "mov" "flv"
-                  "ogm" "ogg" "mkv"))
-               "vlc"
-               '(file))
-         (list (openwith-make-extension-regexp
-                '("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
-               "libreoffice"
-               '(file))
-         (list (openwith-make-extension-regexp
-                '("pdf" "ps" "ps.gz" "dvi"))
-               "zathura"
-               '(file))
-         ))
-  (openwith-mode 1)
-  )
+	:straight t
+	:config
+	(setq openwith-associations
+				(list
+				 (list (openwith-make-extension-regexp
+								'("mpg" "mpeg" "mp3" "mp4"
+									"avi" "wmv" "wav" "mov" "flv"
+									"ogm" "ogg" "mkv"))
+							 "vlc"
+							 '(file))
+				 (list (openwith-make-extension-regexp
+								'("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
+							 "libreoffice"
+							 '(file))
+				 (list (openwith-make-extension-regexp
+								'("pdf" "ps" "ps.gz" "dvi"))
+							 "zathura"
+							 '(file))
+				 ))
+	(openwith-mode 1)
+	)
 
 ;; Numbers stuff TODO: check visual selection
 (use-package evil-numbers
-  :straight (:type git :host github :repo "janpath/evil-numbers");:branch "retain-selection")
-  :config
-  (general-def
-    :states '(normal motion visual)
-    "C-a" 'evil-numbers/inc-at-pt
-    "C-x" 'evil-numbers/dec-at-pt)
-  )
+	:straight (:type git :host github :repo "janpath/evil-numbers");:branch "retain-selection")
+	:config
+	(general-def
+		:states '(normal motion visual)
+		"C-a" 'evil-numbers/inc-at-pt
+		"C-x" 'evil-numbers/dec-at-pt)
+	)
 
 ;; Org
 
 (use-package org-super-agenda
-  :straight (:host github :repo "alphapapa/org-super-agenda")
-  :after org
-  :general
-  (general-def 'org-super-agenda-header-map
-    "j" 'org-agenda-next-item
-    "k" 'org-agenda-previous-item
-    )
-  :config
-  (setq org-super-agenda-groups
-        '(
-          (:discard(:and(:category "Annuals" :scheduled past)))
-          (:name "Today's deadlines"
-                 :deadline today
-                 :order 1)
-          (:name "Overdue"
-                 :deadline past
-                 :order 0)
-          (:name "Habits"
-                 :habit t
-                 :order 30)
-          (:name "Today's Annuals"
-                 :and(
-                      :category "Annuals"
-                      :scheduled today)
-                 :order 3)
-          (:name "Annuals"
-                 :and(
-                      :category "Annuals"
-                      :scheduled future)
-                 :order 80)
-          (:name "Schedule"
-                 :time-grid t
-                 :order 2)
-          (:name "Scheduled"
-                 :scheduled today
-                 :order 4)
-          (:name "University Deadlines"
-                 :and(
-                      :deadline future
-                      :tag "uni")
-                 :order 10)
-          (:name "Other Deadlines"
-                 :deadline future
-                 :order 11)
-          (:name "Refile"
-                 :scheduled past
-                 :order 99)
-          ))
-  )
+	:straight (:host github :repo "alphapapa/org-super-agenda")
+	:after org
+	:general
+	(general-def 'org-super-agenda-header-map
+		"j" 'org-agenda-next-item
+		"k" 'org-agenda-previous-item
+		)
+	:config
+	(setq org-super-agenda-groups
+				'(
+					(:discard(:and(:category "Annuals" :scheduled past)))
+					(:name "Today's deadlines"
+								 :deadline today
+								 :order 1)
+					(:name "Overdue"
+								 :deadline past
+								 :order 0)
+					(:name "Habits"
+								 :habit t
+								 :order 30)
+					(:name "Today's Annuals"
+								 :and(
+											:category "Annuals"
+											:scheduled today)
+								 :order 3)
+					(:name "Annuals"
+								 :and(
+											:category "Annuals"
+											:scheduled future)
+								 :order 80)
+					(:name "Schedule"
+								 :time-grid t
+								 :order 2)
+					(:name "Scheduled"
+								 :scheduled today
+								 :order 4)
+					(:name "University Deadlines"
+								 :and(
+											:deadline future
+											:tag "uni")
+								 :order 10)
+					(:name "Other Deadlines"
+								 :deadline future
+								 :order 11)
+					(:name "Refile"
+								 :scheduled past
+								 :order 99)
+					))
+	)
 
 (org-super-agenda-mode)
 (use-package transient
-  :straight t)
+	:straight t)
 (use-package org-ql
-  :straight (:host github :repo "alphapapa/org-ql"))
+	:straight (:host github :repo "alphapapa/org-ql"))
 
 (setq org-agenda-files '("~/Sync/Org/todo.org" "~/Sync/Org/refile.org" "~/Sync/Org/annuals.org")
-      org-enforce-todo-dependencies t
-      org-enforce-todo-checkbox-dependencies t
-      org-log-done (quote time)
-      org-log-readline (quote time)
-      org-log-reschedule (quote time)
-      org-refile-allow-creating-parent-nodes 'confirm
-      org-archive-location "~/Sync/Org/archive.org::* From ??"
-      org-deadline-warning-days 14
-      org-refile-use-outline-path t
-      org-extend-today-until 4
-      org-use-property-inheritance t
-      calendar-date-style 'european
-      org-agenda-start-on-weekday nil
-      org-outline-path-complete-in-steps nil
-      calendar-week-start-day 1
-      org-default-notes-file "~/Sync/Org/refile.org"
-      org-capture-templates '(
-                              ("t" "Todo" entry (file "~/Sync/Org/refile.org")
-                               "* TODO %?"
-                               :empty-lines 1)
-                              ("l" "Link" entry (file "~/Sync/Org/refile.org")
-                               "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
-                               :empty-lines 1)
-                              ("c" "Check Computer" entry (file+olp "~/Sync/Org/todo.org" "Computer" "Check")
-                               "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
-                               :empty-lines 1)
-                              ("p" "Check Psychology" entry (file+olp "~/Sync/Org/todo.org" "Psychology" "Check")
-                               "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
-                               :empty-lines 1)
-                              )
-      org-refile-targets (quote(
-                                ("~/Sync/Org/todo.org" :maxlevel . 10)
-                                ("~/Sync/Org/annuals.org" :maxlevel . 10)
-                                ))
-      org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE" "CANCELED"))
-      org-agenda-custom-commands '(("w" "Weekly view" (
-                                                       (org-ql-block '(and (todo "WAITING")))
-                                                       (agenda))))
-      org-icalendar-combined-agenda-file "~/Sync/Org/calendar.ics"
-      org-icalendar-include-todo t
-      org-icalendar-include-body 1000
-      org-icalendar-use-scheduled '(event-if-todo event-if-not-todo todo-start)
-      org-icalendar-use-deadline  '(event-if-todo event-if-not-todo todo-start)
-      )
+			org-enforce-todo-dependencies t
+			org-enforce-todo-checkbox-dependencies t
+			org-log-done (quote time)
+			org-log-readline (quote time)
+			org-log-reschedule (quote time)
+			org-refile-allow-creating-parent-nodes 'confirm
+			org-archive-location "~/Sync/Org/archive.org::* From ??"
+			org-deadline-warning-days 14
+			org-refile-use-outline-path t
+			org-extend-today-until 4
+			org-use-property-inheritance t
+			calendar-date-style 'european
+			org-agenda-start-on-weekday nil
+			org-outline-path-complete-in-steps nil
+			calendar-week-start-day 1
+			org-default-notes-file "~/Sync/Org/refile.org"
+			org-capture-templates '(
+															("t" "Todo" entry (file "~/Sync/Org/refile.org")
+															 "* TODO %?"
+															 :empty-lines 1)
+															("l" "Link" entry (file "~/Sync/Org/refile.org")
+															 "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+															 :empty-lines 1)
+															("c" "Check Computer" entry (file+olp "~/Sync/Org/todo.org" "Computer" "Check")
+															 "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+															 :empty-lines 1)
+															("p" "Check Psychology" entry (file+olp "~/Sync/Org/todo.org" "Psychology" "Check")
+															 "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+															 :empty-lines 1)
+															("m" "Movies" entry (file+olp "~/Sync/Org/todo.org" "Leisure" "Movies")
+															 "* TODO %?"
+															 :empty-lines 1)
+															("n" "Movies waiting" entry (file+olp "~/Sync/Org/todo.org" "Leisure" "Movies" "Waiting")
+															 "* TODO %?"
+															 :empty-lines 1)
+															("s" "Series" entry (file+olp "~/Sync/Org/todo.org" "Leisure" "Series")
+															 "* TODO %?"
+															 :empty-lines 1)
+															("w" "Series waiting" entry (file+olp "~/Sync/Org/todo.org" "Leisure" "Series" "Waiting")
+															 "* TODO %?"
+															 :empty-lines 1)
+															("b" "Books" entry (file+olp "~/Sync/Org/todo.org" "Leisure" "Books")
+															 "* TODO %?"
+															 :empty-lines 1)
+															)
+			org-refile-targets (quote(
+																("~/Sync/Org/todo.org" :maxlevel . 10)
+																("~/Sync/Org/annuals.org" :maxlevel . 10)
+																))
+			org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE" "CANCELED"))
+			org-agenda-custom-commands '(("w" "Weekly view" (
+																											 (org-ql-block '(and (todo "WAITING")))
+																											 (agenda))))
+			org-icalendar-combined-agenda-file "~/Sync/Org/calendar.ics"
+			org-icalendar-include-todo t
+			org-icalendar-include-body 1000
+			org-icalendar-use-scheduled '(event-if-todo event-if-not-todo todo-start)
+			org-icalendar-use-deadline	'(event-if-todo event-if-not-todo todo-start)
+			)
 (general-define-key
  :keymaps 'org-capture-mode-map
- [remap evil-save-and-close]          'org-capture-finalize
+ [remap evil-save-and-close]					'org-capture-finalize
  [remap evil-save-modified-and-close] 'org-capture-finalize
- [remap evil-quit]                    'org-capture-kill)
+ [remap evil-quit]										'org-capture-kill)
 
 (setq-default org-display-custom-times t)
 (setq org-time-stamp-custom-formats '("<%e-%m-%Y, %a>" . "<%e-%m-%Y, %a %H:%M>"))
 
 (coba-leader-def
-  "c"  'org-capture
-  "a"  '(:ignore t :which-key "Org-Agenda")
-  "aa" '(lambda() (interactive)(coba-org-agenda-weekly))
-  "o"  '(lambda() (interactive)(find-file "~/Sync/Org/todo.org"))
-  "R"  '(lambda() (interactive)(find-file "~/Sync/Org/refile.org"))
-  "ad" '(lambda ()(interactive)(org-ql-search "~/Sync/Org/todo.org"
-                                 '(done) :sort '(date priority todo)))
-  "ap" '(lambda()(interactive)
-          (org-ql-search (org-agenda-files)
-            '(and (tags "track") (or (todo "TODO") (todo "WAITING")))
-            :title "Projects"
-            :sort '(date priority todo)
-            :super-groups '((:auto-property "Project")))
-          (delete-other-windows))
-  )
+	"c"	 'org-capture
+	"a"	 '(:ignore t :which-key "Org-Agenda")
+	"aa" '(lambda() (interactive)(coba-org-agenda-weekly))
+	"o"	 '(lambda() (interactive)(find-file "~/Sync/Org/todo.org"))
+	"R"	 '(lambda() (interactive)(find-file "~/Sync/Org/refile.org"))
+	"ad" '(lambda ()(interactive)(org-ql-search "~/Sync/Org/todo.org"
+																 '(done) :sort '(date priority todo)))
+	"ap" '(lambda()(interactive)
+					(org-ql-search (org-agenda-files)
+						'(and (tags "track") (or (todo "TODO") (todo "WAITING")))
+						:title "Projects"
+						:sort '(date priority todo)
+						:super-groups '((:auto-property "Project")))
+					(delete-other-windows))
+	)
 
 (defun coba-org-agenda-weekly ()
-  "Helper to open Agenda in weekly view by default."
-  (org-agenda nil "w")
-  (delete-other-windows)
-  )
+	"Helper to open Agenda in weekly view by default."
+	(org-agenda nil "w")
+	(delete-other-windows)
+	)
 
 (defun coba-org-create-project (PROJECT)
-  "Create an 'org-mode' PROJECT for querying with org-ql."
-  (interactive "sProject name: ")
-  (org-toggle-tag "track")
-  (org-set-property "Project" PROJECT)
-  )
+	"Create an 'org-mode' PROJECT for querying with org-ql."
+	(interactive "sProject name: ")
+	(org-toggle-tag "track")
+	(org-set-property "Project" PROJECT)
+	)
 
 (defun coba-org-icalendar-combine-agenda-files-hook ()
-  "Create a .ics file from agenda files asynchronously when an `org-mode` file is saved."
-  (interactive)
-  (when (eq (buffer-name) "todo.org")
-    (org-icalendar-combine-agenda-files t)
-    )
-  )
+	"Create a .ics file from agenda files asynchronously when an `org-mode` file is saved."
+	(interactive)
+	(when (eq (buffer-name) "todo.org")
+		(org-icalendar-combine-agenda-files t)
+		)
+	)
 ;;(add-hook 'org-mode-hook
-;;          (lambda ()
-;;            (add-hook 'after-save-hook 'coba-org-icalendar-combine-agenda-files-hook nil 'make-it-local)))
+;;					(lambda ()
+;;						(add-hook 'after-save-hook 'coba-org-icalendar-combine-agenda-files-hook nil 'make-it-local)))
 
 (use-package evil-org
-  :straight t
-  :after org
-  :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-            (lambda ()
-              (evil-org-set-key-theme)))
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys)
-  )
+	:straight t
+	:after org
+	:config
+	(add-hook 'org-mode-hook 'evil-org-mode)
+	(add-hook 'evil-org-mode-hook
+						(lambda ()
+							(evil-org-set-key-theme)))
+	(require 'evil-org-agenda)
+	(evil-org-agenda-set-keys)
+	)
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.85))
 
 (use-package org-pomodoro
-  :straight t
-  :general
-  (coba-leader-def
-    "t" 'org-pomodoro)
-  :config
-  (setq org-pomodoro-keep-killed-pomodoro-time t
-        org-pomodoro-manual-break t
-        org-pomodoro-play-sounds nil)
-  )
+	:straight t
+	:general
+	(coba-leader-def
+		"t" 'org-pomodoro)
+	:config
+	(setq org-pomodoro-keep-killed-pomodoro-time t
+				org-pomodoro-manual-break t
+				org-pomodoro-play-sounds nil)
+	)
 
 (general-def
-  :states '(normal motion)
-  :keymaps 'org-mode-map
-  "C-t" 'org-todo
-  "ga"  'org-archive-subtree-default
-  "gr"  'org-refile
-  "gR"  'org-refile-goto-last-stored
-  "C-j" 'org-metadown
-  "C-k" 'org-metaup
-  "C-h" 'org-metaleft
-  "C-l" 'org-metaright
-  "C-J" 'org-shiftmetadown
-  "C-K" 'org-shiftmetaup
-  "C-H" 'org-shiftmetaleft
-  "C-L" 'org-shiftmetaright
-  "C-P" 'org-latex-preview
-  "gg"  'counsel-outline
-  )
+	:states '(normal motion)
+	:keymaps 'org-mode-map
+	"C-t" 'org-todo
+	"ga"	'org-archive-subtree-default
+	"gr"	'org-refile
+	"gR"	'org-refile-goto-last-stored
+	"C-j" 'org-metadown
+	"C-k" 'org-metaup
+	"C-h" 'org-metaleft
+	"C-l" 'org-metaright
+	"C-J" 'org-shiftmetadown
+	"C-K" 'org-shiftmetaup
+	"C-H" 'org-shiftmetaleft
+	"C-L" 'org-shiftmetaright
+	"C-P" 'org-latex-preview
+	"gG"	'counsel-outline
+	)
 
 (general-def
-  :states '(normal motion)
-  :keymaps 'org-agenda-mode-map
-  "ga" 'org-agenda-archive
-  "C-t" 'org-agenda-todo
-  )
+	:states '(normal motion)
+	:keymaps 'org-agenda-mode-map
+	"ga" 'org-agenda-archive
+	"C-t" 'org-agenda-todo
+	)
 
 (coba-local-leader-def
-  :keymaps 'org-agenda-mode-map
-  "s" 'org-agenda-schedule
-  "d" 'org-agenda-deadline
-  )
+	:keymaps 'org-agenda-mode-map
+	"s" 'org-agenda-schedule
+	"d" 'org-agenda-deadline
+	)
 (general-def
-  :states '(normal motion)
-  :keymaps 'org-ql-view-map
-  "ga" 'org-agenda-archive
-  )
+	:states '(normal motion)
+	:keymaps 'org-ql-view-map
+	"ga" 'org-agenda-archive
+	)
 
 (coba-local-leader-def
-  :keymaps 'org-mode-map
-  :states '(normal motion)
-  "s" 'org-schedule
-  "d" 'org-deadline
-  "t" 'counsel-org-tag
-  "P" 'coba-org-create-project
-  )
+	:keymaps 'org-mode-map
+	:states '(normal motion)
+	"s" 'org-schedule
+	"d" 'org-deadline
+	"t" 'counsel-org-tag
+	"P" 'coba-org-create-project
+	)
 
 (use-package org-superstar
-  :straight t
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-  )
+	:straight t
+	:config
+	(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+	)
 
 (add-hook 'org-mode-hook
-          (lambda ()
-            visual-line-mode))
+					(lambda ()
+						visual-line-mode))
+(add-hook 'org-mode-hook 'org-indent-mode)
 
 ;; Babel
-
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((R . t)
-   ))
+	 (dot . t)
+	 ))
 (setq
  org-confirm-babel-evaluate nil
  )
@@ -557,191 +585,204 @@
  )
 
 (use-package org-roam
-  :straight t
-  :general
-  (coba-leader-def
-    "r" 'org-roam-find-file)
-  (general-def
-    :keymaps 'org-roam-mode-map
-    "C-i" 'org-roam-insert)
-  (coba-local-leader-def
-    :keymaps 'org-roam-mode-map
-    "," 'org-roam
-    )
-  :config
-  (setq org-roam-directory "~/Brain"
-        org-roam-index-file "README.org")
+	:straight t
+	:general
+	(coba-leader-def
+		"r" 'org-roam-find-file)
+	(general-def
+		:keymaps 'org-roam-mode-map
+		"C-i" 'org-roam-insert)
+	(coba-local-leader-def
+		:keymaps 'org-roam-mode-map
+		"," 'org-roam
+		)
+	:config
+	(setq org-roam-directory "~/Brain"
+				org-roam-index-file "README.org")
 
-  (setq org-roam-capture-templates '(("d" "default" plain (function org-roam-capture--get-point)
-                                      "- tags :: %?\n\n"
-                                      :file-name "${slug}"
-                                      :head "#+STARTUP: latexpreview\n#+TITLE: ${title}\n#+roam_tags:\n#+roam_alias:\n\n"
-                                      :unnarrowed t))
-        )
+	(setq org-roam-capture-templates '(("d" "default" plain (function org-roam-capture--get-point)
+																			"- tags :: %?\n\n"
+																			:file-name "${slug}"
+																			:head "#+STARTUP: latexpreview\n#+TITLE: ${title}\n#+roam_tags:\n#+roam_alias:\n\n"
+																			:unnarrowed t))
+				)
 
-  (org-roam-mode 1)
-  )
+	(org-roam-mode 1)
+	)
 
 (use-package company-org-roam
-  :straight (:host github :repo "org-roam/company-org-roam")
-  :after company
-  :config
-  (push 'company-org-roam company-backends))
+	:straight (:host github :repo "org-roam/company-org-roam")
+	:after company
+	:config
+	(push 'company-org-roam company-backends))
 
 (use-package org-roam-server
-  :straight t
-  :config
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8080
-        org-roam-server-authenticate nil
-        org-roam-server-export-inline-images t
-        org-roam-server-serve-files nil
-        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-        org-roam-server-network-poll t
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20)
-  (org-roam-server-mode)
-  )
+	:straight t
+	:config
+	(setq org-roam-server-host "127.0.0.1"
+				org-roam-server-port 8080
+				org-roam-server-authenticate nil
+				org-roam-server-export-inline-images t
+				org-roam-server-serve-files nil
+				org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+				org-roam-server-network-poll t
+				org-roam-server-network-arrows nil
+				org-roam-server-network-label-truncate t
+				org-roam-server-network-label-truncate-length 60
+				org-roam-server-network-label-wrap-length 20)
+	(org-roam-server-mode)
+	)
 
 ;; TODO: Migrar bibnotes a individual ones (copia pega)
 (use-package org-roam-bibtex
-  :straight t
-  :after org-roam
-  :config
-  (add-hook 'after-init-hook #'org-roam-bibtex-mode)
-  (setq orb-templates '(("d" "default" plain (function org-roam-capture--get-point) "- tags :: %?\n\n" :file-name "${citekey}"
-                         :head "#+STARTUP: latexpreview\n#+TITLE: ${citekey}\n#+roam_alias: \"${author-abbrev}: ${title}\"\n#+ROAM_KEY: ${ref}\n\n"
-                         :unnarrowed t))
-        )
-  )
+	:straight t
+	:after org-roam
+	:config
+	(add-hook 'after-init-hook #'org-roam-bibtex-mode)
+	(setq orb-templates '(("d" "default" plain (function org-roam-capture--get-point) "- tags :: %?\n\n" :file-name "${citekey}"
+												 :head "#+STARTUP: latexpreview\n#+TITLE: ${citekey}\n#+roam_alias: \"${author-abbrev}: ${title}\"\n#+ROAM_KEY: ${ref}\n\n"
+												 :unnarrowed t))
+				)
+	)
 
 ;; Company
 
 (use-package company
-  :straight t
-  :config
-  (global-company-mode)
+	:straight t
+	:config
+	(global-company-mode)
 
-  (setq company-idle-delay 0
-        company-minimum-prefix-length 2
-        company-selection-wrap-around t
-        )
-  (setq default-company-backends '(company-semantic
-                                   company-gtags
-                                   company-files
-                                   company-keywords
-                                   company-capf
-                                   company-yasnippet
-                                   company-abbrev
-                                   company-dabbrev
-                                   company-dabbrev-code)
-        company-backends (list default-company-backends))
-  (general-def 'company-active-map
-    "C-j" 'company-select-next
-    "C-k" 'company-select-previous
-    "C-s" 'company-search-candidates
-    )
-  )
+	(setq company-idle-delay 0
+				company-minimum-prefix-length 2
+				company-selection-wrap-around t
+				)
+	(setq default-company-backends '(company-semantic
+																	 company-gtags
+																	 company-files
+																	 company-keywords
+																	 company-capf
+																	 company-yasnippet
+																	 company-abbrev
+																	 company-dabbrev
+																	 company-dabbrev-code)
+				company-backends (list default-company-backends))
+	(general-def 'company-active-map
+		"C-j" 'company-select-next
+		"C-k" 'company-select-previous
+		"C-s" 'company-search-candidates
+		)
+	)
 
 (use-package company-quickhelp
-  :straight t
-  :after company
-  :config
-  (company-quickhelp-mode))
+	:straight t
+	:after company
+	:config
+	(company-quickhelp-mode))
 
 (use-package company-prescient
-  :straight t
-  :after company
-  :config
-  (company-prescient-mode)
-  )
+	:straight t
+	:after company
+	:config
+	(company-prescient-mode)
+	)
 
 ;; Indent
 (use-package aggressive-indent
-  :straight t
-  :config
-  (global-aggressive-indent-mode 1)
-  (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-  )
+	:straight t
+	:config
+	(global-aggressive-indent-mode 1)
+	(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+	)
 
 ;; Reference management
 
 (use-package ivy-bibtex
-  :straight t
-  :config
-  (setq
-   bibtex-completion-bibliography "~/Brain/bib.bib"
-   bibtex-completion-library-path "~/Brain/pdf"
-   bibtex-completion-notes-path   "~/Brain/";;"bibnotes.org"
-   bibtex-completion-pdf-open-function (lambda (fpath)
-                                         (call-process "zathura" nil 0 nil fpath))
-   bibtex-completion-notes-template-multiple-files "#+TITLE: {author-or-editor} (${year}): ${title} "
-   )
-  ;; So that org-ref inherits ivy-bibtex format
-  ;; From: https://github.com/jkitchin/org-ref/issues/717#issuecomment-633788035
-  (ivy-set-display-transformer
-   'org-ref-ivy-insert-cite-link
-   'ivy-bibtex-display-transformer)
+	:straight t
+	:config
+	(setq
+	 bibtex-completion-bibliography "~/Brain/bib.bib"
+	 bibtex-completion-library-path "~/Brain/pdf"
+	 bibtex-completion-notes-path		"~/Brain/";;"bibnotes.org"
+	 bibtex-completion-pdf-open-function (lambda (fpath)
+																				 (call-process "zathura" nil 0 nil fpath))
+	 bibtex-completion-notes-template-multiple-files "#+TITLE: {author-or-editor} (${year}): ${title} "
+	 )
+	;; So that org-ref inherits ivy-bibtex format
+	;; From: https://github.com/jkitchin/org-ref/issues/717#issuecomment-633788035
+	(ivy-set-display-transformer
+	 'org-ref-ivy-insert-cite-link
+	 'ivy-bibtex-display-transformer)
 
-  :general
-  (coba-leader-def
-    "pp" 'ivy-bibtex
-    "pd" 'doi-add-bibtex-entry
-    "pf" '(lambda() (interactive)(find-file "~/Brain/bib.bib"))
-    "pn" '(lambda() (interactive)(find-file "~/Brain/bibnotes.org"))
-    )
-  )
+	:general
+	(coba-leader-def
+		"pp" 'ivy-bibtex
+		"pd" 'doi-add-bibtex-entry
+		"pf" '(lambda() (interactive)(find-file "~/Brain/bib.bib"))
+		"pn" '(lambda() (interactive)(find-file "~/Brain/bibnotes.org"))
+		)
+	)
 
 (use-package org-ref
-  :straight t
-  :init
-  (setq org-ref-completion-library 'org-ref-ivy-cite)
-  :config
-  (setq reftex-default-bibliography  '("~/Brain/bib.bib")
-        org-ref-default-bibliography '("~/Brain/bib.bib")
-        org-ref-bibliography-notes   "~/Brain/"
-        org-ref-pdf-directory        "~/Brain/pdf"
-        org-ref-open-pdf-function (lambda (fpath)
-                                    (call-process "zathura" nil 0 nil fpath))
-        )
-  (setq ;These are normal org variables
-   org-latex-compiler "xelatex"
-   org-latex-bib-compiler "bibtex"
-                                        ;org-export-in-background t
-   org-latex-default-class "coba-report"
-   org-latex-hyperref-template nil
-   org-latex-prefer-user-labels t
-   org-latex-listings t
-   org-latex-listings-options '(
-                                ("basicstyle" "\\ttfamily\\color{code-fg}")
-                                ("stringstyle" "\\ttfamily\\color{code-string}")
-                                ("commentstyle" "\\color{code-comment}")
-                                ("keywordstyle" "\\color{code-keyword}")
-                                ("upquote" "true")
-                                ("backgroundcolor" "\\color{code-bg}")
-                                ("frame" "single")
-                                ("framesep" "5pt")
-                                ("rulecolor" "\\color{code-comment}")
-                                ("framerule" "1pt")
-                                )
-   org-latex-pdf-process
-   '("ln -s ~/Brain/bib.bib bib.bib"
-     "latexmk -pdflatex='xelatex -interaction nonstopmode' -pdf -bibtex -f %f")
-   )
+	:straight t
+	:init
+	(setq org-ref-completion-library 'org-ref-ivy-cite)
+	:config
+	(setq reftex-default-bibliography	 '("~/Brain/bib.bib")
+				org-ref-default-bibliography '("~/Brain/bib.bib")
+				org-ref-bibliography-notes	 "~/Brain/"
+				org-ref-pdf-directory				 "~/Brain/pdf"
+				org-ref-open-pdf-function (lambda (fpath)
+																		(call-process "zathura" nil 0 nil fpath))
+				)
+	(setq ;These are normal org variables
+	 org-startup-with-inline-images t
+	 org-latex-compiler "xelatex"
+	 org-latex-bib-compiler "bibtex"
+																				;org-export-in-background t
+	 org-latex-default-class "coba-report"
+	 org-latex-hyperref-template nil
+	 org-latex-prefer-user-labels t
+	 org-export-with-toc nil
+	 org-latex-listings t
+	 org-latex-listings-options '(
+																("basicstyle" "\\ttfamily\\color{code-fg}")
+																("stringstyle" "\\ttfamily\\color{code-string}")
+																("commentstyle" "\\color{code-comment}")
+																("keywordstyle" "\\color{code-keyword}")
+																("upquote" "true")
+																("backgroundcolor" "\\color{code-bg}")
+																("frame" "single")
+																("framesep" "5pt")
+																("rulecolor" "\\color{code-comment}")
+																("framerule" "1pt")
+																)
+	 org-latex-pdf-process
+	 '("ln -s ~/Brain/bib.bib bib.bib"
+		 "latexmk -pdflatex='xelatex -interaction nonstopmode' -shell-escape -pdf -bibtex -f %f")
+	 )
 
-  (add-to-list 'org-latex-classes
-               '("coba-report"
-                 "
+	(add-to-list 'org-latex-default-packages-alist '("" "txfonts" t))
+	(add-to-list 'org-latex-default-packages-alist '("" "graphviz" t))
+
+
+	(add-to-list 'org-latex-classes
+							 '("coba-report"
+								 "
 \\documentclass{article} 
 
 [NO-DEFAULT-PACKAGES]
+\\usepackage[a4paper,bindingoffset=0.2in,%
+						left=0.75in,right=0.75in,top=.5in,bottom=1in,%
+						footskip=.5in]{geometry}
+\\linespread{1.5}
+\\usepackage{txfonts}
+\\usepackage{amsmath}
 \\usepackage{plex-serif}
 \\usepackage{plex-mono}
 \\usepackage{plex-sans}
 \\usepackage{float}
-\\usepackage{graphicx}
+\\usepackage[pdftex]{graphicx}
+\\usepackage[pdf]{graphviz}
 \\graphicspath{ {./figures/} }
 \\usepackage{hyperref}
 
@@ -749,11 +790,11 @@
 \\DeclareLanguageMapping{american}{american-apa}
 \\addbibresource{bib.bib}
 \\defbibheading{bibliography}[References]{%
-  \\section{#1}%
-  \\markboth{#1}{#1}}
+	\\section*{#1}}
+	%\\markboth*{#1}{#1}}
 \\defbibheading{shorthands}[References]{%
-  \\subsection{#1}%
-  \\markboth{#1}{#1}}
+	\\subsection*{#1}}
+	%\\markboth*{#1}{#1}}
 
 % Spanish for biblatex
 %\\DefineBibliographyStrings{spanish}{andothers={et al.}}
@@ -767,19 +808,18 @@
 \\definecolor{code-comment}{RGB}{165 164 165}
 \\definecolor{code-keyword}{RGB}{137 89 168}
 \\definecolor{code-bg}{RGB}{255 255 255}
-
 [PACKAGES]
 [EXTRA]
 "
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+								 ("\\section*{%s}" . "\\section*{%s}")
+								 ("\\subsection*{%s}" . "\\subsection*{%s}")
+								 ("\\subsubsection*{%s}" . "\\subsubsection*{%s}")
+								 ("\\paragraph*{%s}" . "\\paragraph*{%s}")
+								 ("\\subparagraph*{%s}" . "\\subparagraph*{%s}")))
 
-  (add-to-list 'org-latex-classes
-               '("apa-article"
-                 "
+	(add-to-list 'org-latex-classes
+							 '("apa-article"
+								 "
 \\documentclass{article} 
 [NO-DEFAULT-PACKAGES]
 \\usepackage{plex-serif}
@@ -794,155 +834,162 @@
 [PACKAGES]
 [EXTRA]
 "
-                 ("\\section*{%s}" . "\\section*{%s}")
-                 ("\\subsection*{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection*{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph*{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph*{%s}" . "\\subparagraph*{%s}")))
+								 ("\\section*{%s}" . "\\section*{%s}")
+								 ("\\subsection*{%s}" . "\\subsection*{%s}")
+								 ("\\subsubsection*{%s}" . "\\subsubsection*{%s}")
+								 ("\\paragraph*{%s}" . "\\paragraph*{%s}")
+								 ("\\subparagraph*{%s}" . "\\subparagraph*{%s}")))
 
-  (use-package doi-utils
-    :config
-    (setq bibtex-autokey-year-length 4
-          bibtex-autokey-name-year-separator ""
-          bibtex-autokey-year-title-separator ""
-          bibtex-autokey-titleword-separator ""
-          bibtex-autokey-titlewords 2
-          bibtex-autokey-titlewords-stretch 1
-          bibtex-autokey-titleword-length 5)
-    )
-  (use-package org-ref-isbn)
-  (use-package org-ref-sci-id)
-  (use-package org-ref-url-utils)
-  (use-package org-ref-latex)
-  (use-package org-ref-pdf)
-  )
+	(use-package doi-utils
+		:config
+		(setq bibtex-autokey-year-length 4
+					bibtex-autokey-name-year-separator ""
+					bibtex-autokey-year-title-separator ""
+					bibtex-autokey-titleword-separator ""
+					bibtex-autokey-titlewords 2
+					bibtex-autokey-titlewords-stretch 1
+					bibtex-autokey-titleword-length 5)
+		)
+	(use-package org-ref-isbn)
+	(use-package org-ref-sci-id)
+	(use-package org-ref-url-utils)
+	(use-package org-ref-latex)
+	(use-package org-ref-pdf)
+	)
+
+(use-package graphviz-dot-mode
+	:straight t
+	:config
+	(setq graphviz-dot-indent-width 4)
+	(use-package company-graphviz-dot)
+	)
 
 (use-package dumb-jump
-  :straight t
-  :config
-  (setq dumb-jump-prefer-searcher 'rg
-        dumb-jump-selector 'ivy)
-  :general
-  (coba-leader-def
-    "G" '(:ignore t :which-key "dumb jump")
-    "GG" 'dumb-jump-go
-    "GS" 'dumb-jump-go-other-window
-    "GF" 'dumb-jump-back)
-  )
+	:straight t
+	:config
+	(setq dumb-jump-prefer-searcher 'rg
+				dumb-jump-selector 'ivy)
+	:general
+	(coba-leader-def
+		"G" '(:ignore t :which-key "dumb jump")
+		"GG" 'dumb-jump-go
+		"GS" 'dumb-jump-go-other-window
+		"GF" 'dumb-jump-back)
+	)
 
 ;; TODO : pdf
 
 ;; Git
 (use-package magit
-  :straight t
-  :after evil
-  :config
-  (coba-leader-def
-    "g" '(lambda() (interactive)(coba-magit-status))
-    )
-  (general-def
-    :keymaps 'git-rebase-mode-map
-    "C-j" 'git-rebase-move-line-down
-    "C-k" 'git-rebase-move-line-up)
-  (defun coba-magit-push-all ()
-    "Push to all remotes.
+	:straight t
+	:after evil
+	:config
+	(coba-leader-def
+		"g" '(lambda() (interactive)(coba-magit-status))
+		)
+	(general-def
+		:keymaps 'git-rebase-mode-map
+		"C-j" 'git-rebase-move-line-down
+		"C-k" 'git-rebase-move-line-up)
+	(defun coba-magit-push-all ()
+		"Push to all remotes.
 From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?utm_medium=android_app&utm_source=share"
-    (interactive)
-    (mapcar (lambda(remote)  ;; Loops through the remotes returned by magit-list-remotes
-              (magit-run-git-async "push" "-v" remote (magit-get-current-branch))) ;; Simply run git push -v {{remote}} {{current-branch}}
-            (magit-list-remotes)) ;; Returns all remotes configured
-    )
+		(interactive)
+		(mapcar (lambda(remote)	 ;; Loops through the remotes returned by magit-list-remotes
+							(magit-run-git-async "push" "-v" remote (magit-get-current-branch))) ;; Simply run git push -v {{remote}} {{current-branch}}
+						(magit-list-remotes)) ;; Returns all remotes configured
+		)
 
-  (transient-append-suffix 'magit-push "e"  ;; Puts the following command after the 'e' option on the magit-push menu
-    '("a" "Push all" coba-magit-push-all))  ;; Configures the my/magit-push-all method to be callable with "a" while on the magit-push menu. It's description will read "Push All"
-  )
+	(transient-append-suffix 'magit-push "e"	;; Puts the following command after the 'e' option on the magit-push menu
+		'("a" "Push all" coba-magit-push-all))	;; Configures the my/magit-push-all method to be callable with "a" while on the magit-push menu. It's description will read "Push All"
+	)
 
 (defun coba-magit-status ()
-  "Open magit-status in full screen."
-  (magit-status)
-  (delete-other-windows)
-  )
+	"Open magit-status in full screen."
+	(magit-status)
+	(delete-other-windows)
+	)
 
 (use-package evil-magit
-  :straight t
-  :after magit)
+	:straight t
+	:after magit)
 
 (use-package forge
-  :straight t)
+	:straight t)
 
 (use-package magit-todos
-  :straight t
-  :config
-  (global-hl-todo-mode 1)
-  (magit-todos-mode 1)
-  )
+	:straight t
+	:config
+	(global-hl-todo-mode 1)
+	(magit-todos-mode 1)
+	)
 
 (use-package git-timemachine
-  :straight t
-  :config
-  ;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
-  ;; Unavailable link
-  (with-eval-after-load 'git-timemachine
-    (evil-make-overriding-map git-timemachine-mode-map 'normal)
-    ;; force update evil keymaps after git-timemachine-mode loaded
-    (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps))
-  )
+	:straight t
+	:config
+	;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
+	;; Unavailable link
+	(with-eval-after-load 'git-timemachine
+		(evil-make-overriding-map git-timemachine-mode-map 'normal)
+		;; force update evil keymaps after git-timemachine-mode loaded
+		(add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps))
+	)
 
 ;; Flyckeck
 (use-package flycheck
-  :straight t
-  :general
-  (general-def
-    :prefix "C-S-f"
-    "v" 'flycheck-verify-setup
-    "C-f" 'flycheck-list-errors
-    )
-  :config
-  (add-hook 'after-init-hook #'global-flycheck-mode)
-  )
+	:straight t
+	:general
+	(general-def
+		:prefix "C-S-f"
+		"v" 'flycheck-verify-setup
+		"C-f" 'flycheck-list-errors
+		)
+	:config
+	(add-hook 'after-init-hook #'global-flycheck-mode)
+	)
 
 ;; formatters
 (use-package format-all
-  :straight t
-  :after apheleia
-  :general
-  (general-def 'ess-r-mode-map
-    :states '(normal motion)
-    "gf" 'format-all-buffer)
-  )
+	:straight t
+	:after apheleia
+	:general
+	(general-def 'ess-r-mode-map
+		:states '(normal motion)
+		"gf" 'format-all-buffer)
+	)
 
 (use-package apheleia
-  :straight (:host github :repo "raxod502/apheleia")
-  :general
-  (general-def
-    :states '(normal motion)
-    "gf" 'apheleia-format-buffer)
-  ;;  :config
-  ;;  (push '(ess-r-mode . styler)
-  ;;        apheleia-mode-alist)
-  ;;
-  ;;  (push '(styler . ((concat
-  ;;                     "Rscript -e"
-  ;;                     "library(styler)"
-  ;;                                        ;  "options(styler.colored_print.vertical=FALSE);"
-  ;;                     " con <-"
-  ;;                     file
-  ;;                     ";"
-  ;;                     " out <- styler::style_text(readLines(con));"
-  ;;                     " close(con);"
-  ;;                     " out")))
-  ;;        apheleia-formatters)
-  )
+	:straight (:host github :repo "raxod502/apheleia")
+	:general
+	(general-def
+		:states '(normal motion)
+		"gf" 'apheleia-format-buffer)
+	;;	:config
+	;;	(push '(ess-r-mode . styler)
+	;;				apheleia-mode-alist)
+	;;
+	;;	(push '(styler . ((concat
+	;;										 "Rscript -e"
+	;;										 "library(styler)"
+	;;																				;	 "options(styler.colored_print.vertical=FALSE);"
+	;;										 " con <-"
+	;;										 file
+	;;										 ";"
+	;;										 " out <- styler::style_text(readLines(con));"
+	;;										 " close(con);"
+	;;										 " out")))
+	;;				apheleia-formatters)
+	)
 
 
 ;; Yasnippets
 
 (use-package yasnippet
-  :straight t
-  :config
-  (yas-global-mode 1)
-  (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
-  )
+	:straight t
+	:config
+	(yas-global-mode 1)
+	(define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
+	)
 
 ;; TODO: Pamparam repetition, or anki-el, or org-drill
 
@@ -950,18 +997,18 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 ;; Spellchecking
 
 (setq ispell-program-name "aspell"
-      ispell-extra-args '("--sug-mode=ultra"))
+			ispell-extra-args '("--sug-mode=ultra"))
 
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 (use-package auto-dictionary
-  :straight t
-  :config
-  (add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
-  (coba-leader-def
-    "zz" 'adict-change-dictionary)
-  )
+	:straight t
+	:config
+	(add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
+	(coba-leader-def
+		"zz" 'adict-change-dictionary)
+	)
 ;; TODO: Email
 
 ;; TODO: IRC
@@ -969,107 +1016,107 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 ;; Dired
 
 (use-package dired
-  :config
-  (general-def
-    :keymaps '(dired-mode-map)
-    "f" 'coba-open-in-external-app
-    ))
+	:config
+	(general-def
+		:keymaps '(dired-mode-map)
+		"f" 'coba-open-in-external-app
+		))
 
 ;; Olivetti
 (use-package olivetti
-  :straight t
-  :config
-  (coba-leader-def
-    "W" 'olivetti-mode)
-  )
+	:straight t
+	:config
+	(coba-leader-def
+		"W" 'olivetti-mode)
+	)
 
 ;; Libvterm
 (use-package vterm
-  :straight t
-  :general
-  (coba-leader-def
-    "RET" 'vterm)
-  :config
-  (evil-set-initial-state 'vterm-mode 'insert)
-  )
+	:straight t
+	:general
+	(coba-leader-def
+		"RET" 'vterm)
+	:config
+	(evil-set-initial-state 'vterm-mode 'insert)
+	)
 
 ;; TODO: lsp
 
-                                        ; Languages
+																				; Languages
 ;; Systemd
 (use-package systemd
-  :straight t)
+	:straight t)
 
 ;; Lisp
 (coba-local-leader-def
-  :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
-  "r" 'eval-region
-  "b" 'eval-buffer)
+	:keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
+	"r" 'eval-region
+	"b" 'eval-buffer)
 
 ;; ESS
 (use-package ess
-  :straight t
-  :config
-  (require 'ess-site)
-  (setq
-   ess-ask-for-ess-directory nil
-   comint-move-point-for-output 'others
-   comint-scroll-to-bottom-on-input 'this
-   ess-eval-visibly 'nowait
-   ess-style 'RStudio
-   )
+	:straight t
+	:config
+	(require 'ess-site)
+	(setq
+	 ess-ask-for-ess-directory nil
+	 comint-move-point-for-output 'others
+	 comint-scroll-to-bottom-on-input 'this
+	 ess-eval-visibly 'nowait
+	 ess-style 'RStudio
+	 )
 
-  (general-def
-    :keymaps '(comint-mode-map)
-    "C-k" 'comint-previous-input
-    "C-j" 'comint-next-input
-    "C-h" 'comint-previous-matching-input-from-input
-    "C-ñ" 'ess-insert-assign)
+	(general-def
+		:keymaps '(comint-mode-map)
+		"C-k" 'comint-previous-input
+		"C-j" 'comint-next-input
+		"C-h" 'comint-previous-matching-input-from-input
+		"C-ñ" 'ess-insert-assign)
 
-  (general-def
-    :states '(insert)
-    :keymaps 'ess-mode-map
-    "C-ñ" 'ess-insert-assign
-    )
+	(general-def
+		:states '(insert)
+		:keymaps 'ess-mode-map
+		"C-ñ" 'ess-insert-assign
+		)
 
-  (coba-local-leader-def
-    :keymaps 'ess-mode-map
-    "b" 'ess-eval-buffer
-    )
-  )
+	(coba-local-leader-def
+		:keymaps 'ess-mode-map
+		"b" 'ess-eval-buffer
+		)
+	)
 
-;;  Stan
+;;	Stan
 (use-package stan-mode
-  :straight t
-  :after company
-  :mode ("\\.stan\\'" . stan-mode)
-  :hook (stan-mode . stan-mode-setup)
-  :config
-  (setq stan-indentation-offset 2)
-  )
+	:straight t
+	:after company
+	:mode ("\\.stan\\'" . stan-mode)
+	:hook (stan-mode . stan-mode-setup)
+	:config
+	(setq stan-indentation-offset 2)
+	)
 (use-package company-stan
-  :straight t
-  :after stan-mode
-  :hook (stan-mode . company-stan-setup)
-  )
+	:straight t
+	:after stan-mode
+	:hook (stan-mode . company-stan-setup)
+	)
 (use-package eldoc-stan
-  :straight t
-  :after stan-mode
-  :hook (stan-mode . eldoc-stan-setup)
-  )
+	:straight t
+	:after stan-mode
+	:hook (stan-mode . eldoc-stan-setup)
+	)
 (use-package flycheck-stan
-  :straight t
-  :after stan-mode
-  :hook ((stan-mode . flycheck-stan-stanc2-setup)
-         (stan-mode . flycheck-stan-stanc3-setup))
-  :config
-  (setq flycheck-stanc-executable nil
-        flycheck-stanc3-executable nil)
-  )
+	:straight t
+	:after stan-mode
+	:hook ((stan-mode . flycheck-stan-stanc2-setup)
+				 (stan-mode . flycheck-stan-stanc3-setup))
+	:config
+	(setq flycheck-stanc-executable nil
+				flycheck-stanc3-executable nil)
+	)
 (use-package stan-snippets
-  :straight t
-  :after stan-mode
-  )
+	:straight t
+	:after stan-mode
+	)
 
 ;; TODO: Check julia. Maybe julia-mode and julia-repl instead of ess
 ;; Ess does not support pkg interface
@@ -1077,104 +1124,104 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 
 ;; Markdown
 (use-package markdown-mode
-  :straight t
-  :mode
-  (("README\\.md\\'" . gfm-mode)
-   ("\\.md\\'" . markdown-mode)
-                                        ;("\\.Rmd\\'" . markdown-mode)
-   ("\\.markdown\\'" . markdown-mode)
-   )
-  )
+	:straight t
+	:mode
+	(("README\\.md\\'" . gfm-mode)
+	 ("\\.md\\'" . markdown-mode)
+																				;("\\.Rmd\\'" . markdown-mode)
+	 ("\\.markdown\\'" . markdown-mode)
+	 )
+	)
 
 ;; Polymode
 (use-package polymode
-  :straight t)
+	:straight t)
 
 (use-package poly-R
-  :straight t)
+	:straight t)
 
 (use-package poly-markdown
-  :straight t
-  :config
-  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
-  (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown+r-mode)))
+	:straight t
+	:config
+	(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+	(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown+r-mode)))
 
 (use-package poly-org
-  :straight t
-  )
+	:straight t
+	)
 
 ;; Latex
 (use-package tex
-  :straight auctex
-  :config
-  (TeX-global-PDF-mode t)
-  (setq TeX-source-correlate-mode t
-        TeX-source-correlate-start-server t
-        TeX-parse-self t
-        TeX-auto-save t
-        TeX-view-program-selection '((output-pdf "Zathura"))
-        LaTeX-command "xelatex --synctex=1"
-        pdf-latex-command "XeLaTeX")
+	:straight auctex
+	:config
+	(TeX-global-PDF-mode t)
+	(setq TeX-source-correlate-mode t
+				TeX-source-correlate-start-server t
+				TeX-parse-self t
+				TeX-auto-save t
+				TeX-view-program-selection '((output-pdf "Zathura"))
+				LaTeX-command "xelatex --synctex=1"
+				pdf-latex-command "XeLaTeX")
 
-  (add-hook 'LaTeX-mode-hook
-            (lambda ()
-              (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex --synctex=1%(mode)%' %t" TeX-run-TeX nil t))
-              (setq TeX-command-extra-options "-file-line-error -shell-escape"
-                    TeX-command-default "XeLaTeX"
-                    TeX-auto-untabify t
-                    TeX-engine 'xetex
-                    TeX-show-compilation nil)
-              (TeX-global-PDF-mode t)
-              (setq TeX-save-query nil)))
+	(add-hook 'LaTeX-mode-hook
+						(lambda ()
+							(add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex --synctex=1%(mode)%' %t" TeX-run-TeX nil t))
+							(setq TeX-command-extra-options "-file-line-error -shell-escape"
+										TeX-command-default "XeLaTeX"
+										TeX-auto-untabify t
+										TeX-engine 'xetex
+										TeX-show-compilation nil)
+							(TeX-global-PDF-mode t)
+							(setq TeX-save-query nil)))
 
-  (coba-local-leader-def
-    :keymaps 'LaTeX-mode-map
-    "s" 'LaTeX-section
-    "e" 'LaTeX-environment
-    "m" 'TeX-insert-macro
-    "p" 'preview-buffer
-    "c" 'coba-texcount
-    )
-  (general-def
-    :states '(normal visual insert motion emacs)
-    :keymaps 'LaTeX-mode-map
-    "C-f" 'TeX-font
-    "C-c C-c" 'TeX-command-run-all
-    "C-c C-a" 'TeX-command-master
-    )
+	(coba-local-leader-def
+		:keymaps 'LaTeX-mode-map
+		"s" 'LaTeX-section
+		"e" 'LaTeX-environment
+		"m" 'TeX-insert-macro
+		"p" 'preview-buffer
+		"c" 'coba-texcount
+		)
+	(general-def
+		:states '(normal visual insert motion emacs)
+		:keymaps 'LaTeX-mode-map
+		"C-f" 'TeX-font
+		"C-c C-c" 'TeX-command-run-all
+		"C-c C-a" 'TeX-command-master
+		)
 
-  (defun coba-texcount ()
-    "Print number of output words from the current buffer. It invoques texcount."
-    (interactive)
-    (save-buffer)
-    (shell-command (concat "texcount " (buffer-name)))
-    )
-  )
+	(defun coba-texcount ()
+		"Print number of output words from the current buffer. It invoques texcount."
+		(interactive)
+		(save-buffer)
+		(shell-command (concat "texcount " (buffer-name)))
+		)
+	)
 
 ;; Haskell
 (use-package haskell-mode
-  :straight t
-  :general
-  (general-def 'haskell-mode-map
-    "C-ñ" '(lambda () (interactive) (insert "-> "))
-    "C-Ñ" '(lambda () (interactive) (insert "<- "))
-    "C-c C-c" 'haskell-process-load-file
-    )
-  (coba-local-leader-def 'haskell-mode-map
-    "r" 'hlint-refactor-refactor-at-point
-    "h" 'hoogle)
-  )
+	:straight t
+	:general
+	(general-def 'haskell-mode-map
+		"C-ñ" '(lambda () (interactive) (insert "-> "))
+		"C-Ñ" '(lambda () (interactive) (insert "<- "))
+		"C-c C-c" 'haskell-process-load-file
+		)
+	(coba-local-leader-def 'haskell-mode-map
+		"r" 'hlint-refactor-refactor-at-point
+		"h" 'hoogle)
+	)
 
 (use-package flycheck-haskell
-  :straight t
-  :config
-  (add-hook 'haskell-mode-hook #'flycheck-haskell-setup)
-  (setq-default flycheck-disabled-checkers '(haskell-ghc haskell-stack-ghc))
-  )
+	:straight t
+	:config
+	(add-hook 'haskell-mode-hook #'flycheck-haskell-setup)
+	(setq-default flycheck-disabled-checkers '(haskell-ghc haskell-stack-ghc))
+	)
 
 (use-package hlint-refactor
-  :straight t
-  )
+	:straight t
+	)
 
 ;; TODO: check haskell. maybe lsp?
 
@@ -1183,5 +1230,3 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 						 (add-hook 'before-save-hook
 											 (lambda ()
 												 (tabify (point-min) (point-max))))))
-
-

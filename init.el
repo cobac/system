@@ -190,8 +190,10 @@
 		:straight t
 		)
 	)
+
 (use-package better-jumper
 	:straight t
+  :after evil
 	:config
 	(better-jumper-mode +1)
 	(general-def :states 'motion

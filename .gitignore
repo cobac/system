@@ -1,0 +1,5 @@
+/*
+!init.el
+!snippets/
+!.gitignore
+/snippets/**/.yas-compiled-snippets.el

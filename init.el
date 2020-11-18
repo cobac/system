@@ -147,8 +147,6 @@
 	:hook (after-init . evil-mode)
 	:init
 	(setq evil-want-keybinding nil) ;for evil-collection
-  (setq evil-undo-system 'undo-tree)
-
 	:general
 	(general-def
 		:states '(normal motion)
@@ -156,6 +154,7 @@
 		"gt" 'undo-tree-visualize
 		)
 	:config
+  (setq evil-undo-system 'undo-tree)
 	(use-package evil-anzu
 		:straight t)
 	(use-package evil-collection

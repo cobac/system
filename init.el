@@ -574,6 +574,7 @@
 					(lambda ()
 						visual-line-mode))
 (add-hook 'org-mode-hook 'org-indent-mode)
+(add-hook 'org-mode-hook (lambda () (electric-indent-local-mode -1)))
 
 ;; Babel
 (org-babel-do-load-languages

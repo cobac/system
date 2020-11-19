@@ -1081,6 +1081,8 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	 ess-style 'RStudio
 	 )
 
+  (evil-set-initial-state 'ess-r-help-mode 'normal)
+
 	(general-def
 		:keymaps '(comint-mode-map)
 		"C-k" 'comint-previous-input

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: org-mode figure
+# key: ,f
+# --
+
+#+label: fig:$1
+#+ATTR_LATEX: :width 7cm :placement [H]
+#+caption:
+#+RESULTS:
+[[file:$1.pdf]]
+
+$0

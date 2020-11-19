@@ -165,6 +165,7 @@
 		(evil-collection-init 'ediff)
 		(evil-collection-init 'magit-todos)
 		(evil-collection-init 'info)
+		(evil-collection-init 'help)
 		;;(evil-collection-init 'calendar)
 		;;(evil-collection-init 'magit)
 		)

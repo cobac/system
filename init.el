@@ -1081,6 +1081,8 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	 )
 
   (evil-set-initial-state 'ess-r-help-mode 'motion)
+  (general-def 'ess-r-help-mode-map
+    "q" 'quit-window)
 
 	(general-def
 		:keymaps '(comint-mode-map)

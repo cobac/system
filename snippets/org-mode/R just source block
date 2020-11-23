@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: R just source block
+# key: ,rr
+# --
+
+#+BEGIN_SRC R :eval :session :results silent :tangle yes :exports code
+$1
+#+END_SRC
+$0

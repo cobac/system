@@ -338,7 +338,7 @@
 	:config
 	(setq org-super-agenda-groups
 				'(
-					(:discard(:and(:category "Annuals" :scheduled past)))
+					;;(:discard(:and(:category "Annuals" :scheduled past)))
 					(:name "Today's deadlines"
 								 :deadline today
 								 :order 1)

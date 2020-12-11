@@ -612,7 +612,8 @@
 		)
 	:config
 	(setq org-roam-directory "~/Brain"
-				org-roam-index-file "README.org")
+				org-roam-index-file "README.org"
+        org-roam-db-location "~/Brain/roam.db")
 
 	(setq org-roam-capture-templates '(("d" "default" plain (function org-roam-capture--get-point)
 																			"- tags :: %?\n\n"

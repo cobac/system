@@ -790,6 +790,8 @@
 						left=0.75in,right=0.75in,top=.5in,bottom=1in,%
 						footskip=.5in]{geometry}
 \\linespread{1.5}
+\\setlength{\\parskip}{\\baselineskip}%
+\\setlength{\\parindent}{4pt}
 \\usepackage{txfonts}
 \\usepackage{amsmath}
 \\usepackage{plex-serif}

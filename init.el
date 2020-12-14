@@ -652,7 +652,6 @@
 	(org-roam-server-mode)
 	)
 
-;; TODO: Migrar bibnotes a individual ones (copia pega)
 (use-package org-roam-bibtex
 	:straight t
 	:after org-roam

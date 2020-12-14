@@ -153,6 +153,10 @@
 		"ñ" 'counsel-yank-pop
 		"gt" 'undo-tree-visualize
 		)
+	(general-def
+		:states '(visual)
+    "C-=" 'count-words-region
+		)
 	:config
   (setq evil-undo-system 'undo-tree)
 	(use-package evil-anzu

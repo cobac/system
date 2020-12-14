@@ -135,16 +135,10 @@
 		:prefix ",")
 	)
 
-(use-package undo-tree
-  :straight t
-  :config
-  (global-undo-tree-mode 1)
-  )
 
 ;; Evil
 (use-package evil
 	:straight t
-	:hook (after-init . evil-mode)
 	:init
 	(setq evil-want-keybinding nil) ;for evil-collection
 	:general
@@ -158,7 +152,12 @@
     "C-=" 'count-words-region
 		)
 	:config
-  (setq evil-undo-system 'undo-tree)
+  (use-package undo-tree
+    :straight t
+    )
+  (custom-set-variables '(evil-undo-system 'undo-tree))
+  (evil-mode)
+  (global-undo-tree-mode)
 	(use-package evil-anzu
 		:straight t)
 	(use-package evil-collection

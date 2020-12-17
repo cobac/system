@@ -1217,8 +1217,16 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 		"Print number of output words from the current buffer. It invoques texcount."
 		(interactive)
 		(save-buffer)
-		(shell-command (concat "texcount " (buffer-name)))
-		)
+		(shell-command (concat "texcount " (buffer-name))))
+
+  (defun coba-bibtex-check()
+    "Check the validity of a bibtex file."
+    (interactive)
+    (save-buffer)
+    (shell-command (concat "biber -tool -V " (buffer-name))))
+  (coba-local-leader-def
+    :keymaps 'bibtex-mode-map
+    "c" 'coba-bibtex-check)
 	)
 
 ;; Haskell

@@ -607,10 +607,10 @@
 	(coba-leader-def
 		"r" 'org-roam-find-file)
 	(general-def
-		:keymaps 'org-roam-mode-map
+		:keymaps 'org-mode-map
 		"C-i" 'org-roam-insert)
 	(coba-local-leader-def
-		:keymaps 'org-roam-mode-map
+		:keymaps 'org-mode-map
 		"," 'org-roam
 		)
 	:config

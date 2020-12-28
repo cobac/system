@@ -1236,11 +1236,11 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	(general-def 'haskell-mode-map
 		"C-ñ" '(lambda () (interactive) (insert "-> "))
 		"C-Ñ" '(lambda () (interactive) (insert "<- "))
-		"C-c C-c" 'haskell-process-load-file
-		)
+		"C-c C-c" 'haskell-process-load-file)
 	(coba-local-leader-def 'haskell-mode-map
 		"r" 'hlint-refactor-refactor-at-point
 		"h" 'hoogle)
+	(evil-set-initial-state 'haskell-error-mode 'emacs)
 	)
 
 (use-package flycheck-haskell

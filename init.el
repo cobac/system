@@ -432,6 +432,9 @@
 															("b" "Books" entry (file+olp "~/Sync/Org/todo.org" "Leisure" "Books")
 															 "* TODO %?"
 															 :empty-lines 1)
+															("o" "Otro" entry (file+olp "~/Sync/Org/todo.org" "Other")
+															 "* TODO %?"
+															 :empty-lines 1)
 															)
 			org-refile-targets (quote(
 																("~/Sync/Org/todo.org" :maxlevel . 10)
@@ -447,6 +450,7 @@
 			org-icalendar-use-scheduled '(event-if-todo event-if-not-todo todo-start)
 			org-icalendar-use-deadline	'(event-if-todo event-if-not-todo todo-start)
 			)
+
 (general-define-key
  :keymaps 'org-capture-mode-map
  [remap evil-save-and-close]					'org-capture-finalize

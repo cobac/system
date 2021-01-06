@@ -1048,10 +1048,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 
 (use-package dired
 	:config
-	(general-def
-		:keymaps '(dired-mode-map)
-		"f" 'coba-open-in-external-app
-		))
+	)
 
 ;; Olivetti
 (use-package olivetti

@@ -1153,6 +1153,12 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 
 ;; TODO: lsp
 
+;; gpg passwords
+
+(defun coba-lookup-password (&rest keys)
+  (when-let ((result (apply #'auth-source-search keys)))
+    (funcall (plist-get (car result) :secret))))
+
 																				; Languages
 ;; Systemd
 (use-package systemd

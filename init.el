@@ -163,7 +163,7 @@
 	(use-package evil-collection
 		:straight t
 		:config
-		;;(evil-collection-init 'mu4e)
+    (evil-collection-init 'mu4e)
 		(evil-collection-init 'dired)
 		(evil-collection-init 'ediff)
 		(evil-collection-init 'magit-todos)
@@ -1041,6 +1041,89 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 		"zz" 'adict-change-dictionary)
 	)
 ;; TODO: Email
+
+(use-package mu4e
+  :straight t
+  :general
+  (coba-leader-def
+    "m" 'mu4e)
+  :config
+  (add-hook 'mu4e-compose-mode-hook 'flyspell-mode)
+  (setq mail-user-agent 'mu4e-user-agent
+        mu4e-change-filenames-when-moving t
+        mu4e-get-mail-command "/usr/bin/mbsync -a"
+        mu4e-update-interval 120
+        mu4e-html2text-command "/usr/bin/w3m -T text/html"
+        message-kill-buffer-on-exit t
+        mu4e-index-update-error-warning nil
+        mu4e-view-show-images t
+        mu4e-attachment-dir "~/Downloads"
+        message-send-mail-function 'smtpmail-send-it
+        mu4e-compose-dont-reply-to-self t
+        mu4e-context-policy 'pick-first
+        mu4e-compose-context-policy 'ask
+        )
+  (add-to-list 'mu4e-bookmarks
+               '(:name "Coba Inbox"
+                       :query "maildir:/coba/Inbox"
+                       :key ?j)
+               )
+  (add-to-list 'mu4e-bookmarks
+               '(:name "Cosas Inbox"
+                       :query "maildir:/cosas/Inbox"
+                       :key ?k)
+               )
+  (setq mu4e-contexts
+        (list
+         (make-mu4e-context
+          :name "coba"
+          :match-func (lambda (msg)
+                        (when msg
+                          (string-prefix-p "/coba" (mu4e-message-field msg :maildir))))
+          :vars '((user-full-name        . "Coba")
+                  (user-mail-address     . "coba@cobac.eu")
+                  (mu4e-drafts-folder    . "/coba/Inbox/Drafts")
+                  (mu4e-sent-folder      . "/coba/Inbox/Sent")
+                  (mu4e-refile-folder    . "/coba/Inbox/Archives")
+                  (mu4e-trash-folder     . "/coba/Inbox/Trash")
+                  (smtpmail-smtp-user    . "coba@cobac.eu")
+                  (smtpmail-smtp-server  . "mail.your-server.de")
+                  (smtpmail-stream-type  . ssl)
+                  (smtpmail-smtp-service . 465)))
+         (make-mu4e-context
+          :name "j-cosas"
+          :match-func (lambda (msg)
+                        (when msg
+                          (string-prefix-p "/cosas" (mu4e-message-field msg :maildir))))
+          :vars '((user-full-name        . "David Coba")
+                  (user-mail-address     . "cosas@cobac.eu")
+                  (mu4e-drafts-folder    . "/cosas/Inbox/Drafts")
+                  (mu4e-sent-folder      . "/cosas/Inbox/Sent")
+                  (mu4e-refile-folder    . "/cosas/Inbox/Archives")
+                  (mu4e-trash-folder     . "/cosas/Inbox/Trash")
+                  (smtpmail-smtp-user    . "cosas@cobac.eu")
+                  (smtpmail-smtp-server  . "mail.your-server.de")
+                  (smtpmail-stream-type  . ssl)
+                  (smtpmail-smtp-service . 465)))))
+
+  (setq mu4e-split-view 'horizontal
+        mu4e-view-show-addresses t
+        mu4e-view-show-images t
+        )
+
+  (coba-local-leader-def 'mu4e-view-mode-map
+    "t" '(lambda () (interactive)(org-capture "nil" "f"))
+    )
+  )
+
+(use-package mu4e-alert
+  :straight t
+  :config
+  (mu4e-alert-set-default-style 'libnotify)
+  (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
+  (add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
+  (setq doom-modeline-mu4e t)
+  )
 
 ;; TODO: IRC
 

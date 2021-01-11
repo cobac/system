@@ -1338,7 +1338,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	(coba-local-leader-def 'haskell-mode-map
 		"r" 'hlint-refactor-refactor-at-point
 		"h" 'hoogle)
-	(evil-set-initial-state 'haskell-error-mode 'emacs)
+  (evil-set-initial-state 'haskell-error-mode 'motion)
 	)
 
 (use-package flycheck-haskell

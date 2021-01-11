@@ -943,7 +943,9 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 
 (use-package evil-magit
 	:straight t
-	:after magit)
+	:after magit
+  :config
+  (evil-set-initial-state 'magit-commit-message-section-map 'insert))
 
 (use-package forge
 	:straight t)

@@ -411,6 +411,9 @@
 															("l" "Link" entry (file "~/Sync/Org/refile.org")
 															 "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
 															 :empty-lines 1)
+															("f" "File link" entry (file "~/Sync/Org/refile.org")
+															 "* TODO %A\n:PROPERTIES:\n:CREATED: %U\n:END:"
+															 :empty-lines 1)
 															("c" "Check Computer" entry (file+olp "~/Sync/Org/todo.org" "Computer" "Check")
 															 "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
 															 :empty-lines 1)

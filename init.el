@@ -1045,7 +1045,6 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	(coba-leader-def
 		"zz" 'adict-change-dictionary)
 	)
-;; TODO: Email
 
 (use-package mu4e
   :straight t
@@ -1131,6 +1130,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (setq doom-modeline-mu4e t)
   )
 
+;; TODO: check inline thing
 (use-package org-msg
   :straight t
   :config

@@ -1062,7 +1062,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
         message-kill-buffer-on-exit t
         mu4e-index-update-error-warning nil
         mu4e-view-show-images t
-        mu4e-attachment-dir "~/Downloads"
+        mu4e-attachment-dir "/tmp"
         message-send-mail-function 'smtpmail-send-it
         mu4e-compose-dont-reply-to-self t
         mu4e-context-policy 'pick-first
@@ -1115,6 +1115,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
         mu4e-view-show-addresses t
         mu4e-view-show-images t
         )
+  (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
 
   (coba-local-leader-def 'mu4e-view-mode-map
     "t" '(lambda () (interactive)(org-capture "nil" "f"))
@@ -1129,6 +1130,17 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
   (setq doom-modeline-mu4e t)
   )
+
+(use-package org-msg
+  :straight t
+  :config
+  (setq
+   org-msg-default-alternatives '(html text)
+   org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
+	 org-msg-startup "inlineimages"
+   org-msg-convert-citation t)
+  (setq-default org-html-with-latex 'dvipng)
+  (org-msg-mode))
 
 ;; TODO: IRC
 

@@ -3,7 +3,7 @@
 # key: ,dg
 # --
 
-#+BEGIN_SRC dot :file $1.pdf :cmdline -Kdot -Tpdf
+#+BEGIN_SRC dot :file $1.png :cmdline -Kdot -Tpng
   digraph {
         rankdir=LR;
         $2
@@ -14,6 +14,6 @@
 #+ATTR_LATEX: :width 7cm :placement [H]
 #+caption:
 #+RESULTS:
-[[file:$1.pdf]]
+[[file:$1.png]
 
 $0

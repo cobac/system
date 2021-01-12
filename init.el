@@ -319,15 +319,33 @@
 	)
 
 ;; Numbers stuff TODO: check visual selection
+;; I tried :(
 (use-package evil-numbers
-	:straight (:type git :host github :repo "janpath/evil-numbers");:branch "retain-selection")
-	:config
-	(general-def
-		:states '(normal motion visual)
-		"C-a" 'evil-numbers/inc-at-pt
-		"C-x" 'evil-numbers/dec-at-pt)
-	)
-
+  :straight (:type git :host github :repo "janpath/evil-numbers");:branch "retain-selection")
+  :after evil
+  :config
+  (general-def
+    :states '(normal motion visual)
+    "C-a" 'evil-numbers/inc-at-pt
+    "C-x" 'evil-numbers/dec-at-pt)
+  )
+;; Can't get to work block without incremental
+;;(use-package plus-minus
+;;:straight (:host github :repo "peterwu/plus-minus")
+;;:general
+;;(general-def
+;;  :states '(normal motion)
+;;  "C-a" '+/-:forward+
+;;  "C-x" '+/-:forward-
+;;  )
+;;(general-def
+;;  :states '(visual)
+;;  "C-a" '+/-:region+
+;;  "C-x" '+/-:region-
+;;  "C-A" '+/-:block+
+;;  "C-X" '+/-:block-
+;;  )
+;;)
 ;; Org
 
 (use-package org-super-agenda

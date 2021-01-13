@@ -1132,7 +1132,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
         mu4e-view-show-addresses t
         mu4e-view-show-images t
         )
-  (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+  (add-to-list 'mu4e-view-actions '("browser" . mu4e-action-view-in-browser) t)
 
   (coba-local-leader-def 'mu4e-view-mode-map
     "t" '(lambda () (interactive)(org-capture "nil" "f"))

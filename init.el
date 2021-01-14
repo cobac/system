@@ -550,7 +550,7 @@
 	:states '(normal motion)
 	:keymaps 'org-mode-map
 	"C-t" 'org-todo
-	"C-T" 'coba-org-todo-yesterday-twice
+	"C-S-T" 'coba-org-todo-yesterday-twice
 	"ga"	'org-archive-subtree-default
 	"gr"	'org-refile
 	"gR"	'org-refile-goto-last-stored
@@ -577,7 +577,7 @@
 	:keymaps 'org-agenda-mode-map
 	"ga" 'org-agenda-archive
 	"C-t" 'org-agenda-todo
-	"C-T" 'coba-org-todo-yesterday-twice
+	"C-S-T" 'coba-org-todo-yesterday-twice
 	)
 
 (coba-local-leader-def

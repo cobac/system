@@ -170,7 +170,6 @@
 		(evil-collection-init 'info)
 		;;(evil-collection-init 'calendar)
 		;;(evil-collection-init 'magit)
-    (mu4e)
 		)
 	(use-package evil-snipe
 		:straight t
@@ -1160,6 +1159,9 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
    org-msg-convert-citation t)
   (setq-default org-html-with-latex 'dvipng)
   (org-msg-mode))
+
+
+(mu4e)
 
 ;; TODO: IRC
 

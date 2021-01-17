@@ -170,6 +170,7 @@
 		(evil-collection-init 'info)
 		;;(evil-collection-init 'calendar)
 		;;(evil-collection-init 'magit)
+    (mu4e)
 		)
 	(use-package evil-snipe
 		:straight t

@@ -1376,6 +1376,10 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	(coba-local-leader-def 'haskell-mode-map
 		"r" 'hlint-refactor-refactor-at-point
 		"h" 'hoogle)
+  (general-def 'haskell-interactive-mode-map
+    :states '(insert motion)
+    "C-k" 'haskell-interactive-mode-history-previous
+    "C-j" 'haskell-interactive-mode-history-next)
   :config
   (evil-set-initial-state 'haskell-error-mode 'motion)
 	)

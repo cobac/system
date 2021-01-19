@@ -1369,9 +1369,11 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 (use-package haskell-mode
 	:straight t
 	:general
-	(general-def 'haskell-mode-map 
+
+	(general-def '(haskell-mode-map haskell-interactive-mode-map)
 		"C-ñ" '(lambda () (interactive) (insert "-> "))
-		"C-Ñ" '(lambda () (interactive) (insert "<- "))
+		"C-Ñ" '(lambda () (interactive) (insert "<- ")))
+	(general-def 'haskell-mode-map 
 		"C-c C-c" 'haskell-process-load-file)
 	(coba-local-leader-def 'haskell-mode-map
 		"r" 'hlint-refactor-refactor-at-point

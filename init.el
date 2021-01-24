@@ -1033,6 +1033,8 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	;;										 " close(con);"
 	;;										 " out")))
 	;;				apheleia-formatters)
+  :config
+  (apheleia-global-mode)
 	)
 
 

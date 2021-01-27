@@ -1399,8 +1399,6 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	:straight t
 	)
 
-;; TODO: check haskell. maybe lsp?
-
 (add-hook 'makefile-gmake-mode-hook
 					'(lambda ()
 						 (add-hook 'before-save-hook

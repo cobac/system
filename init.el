@@ -161,12 +161,13 @@
 	(use-package evil-anzu
 		:straight t)
 	(use-package evil-collection
-		:straight t
+    :straight (:type git :host github :repo "emacs-evil/evil-collection");:branch "retain-selection")
 		:config
     (evil-collection-init 'mu4e)
 		(evil-collection-init 'dired)
 		(evil-collection-init 'ediff)
 		(evil-collection-init 'magit-todos)
+    (evil-collection-init 'vterm)
 		(evil-collection-init 'info)
 		;;(evil-collection-init 'calendar)
 		;;(evil-collection-init 'magit)
@@ -1183,13 +1184,54 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 
 ;; Libvterm
 (use-package vterm
-	:straight t
+  :straight (:type git :host github :repo "akermu/emacs-libvterm")
 	:general
 	(coba-leader-def
 		"RET" 'vterm)
-	:config
-	(evil-set-initial-state 'vterm-mode 'insert)
-	)
+  :config
+  ;;(defun vterm-evil-insert ()
+  ;;(interactive)
+  ;;(vterm-goto-char (point))
+  ;;(call-interactively #'evil-insert))
+  ;;
+  ;;(defun vterm-evil-append ()
+  ;;(interactive)
+  ;;(vterm-goto-char (1+ (point)))
+  ;;(call-interactively #'evil-append))
+  ;;
+  ;;(defun vterm-evil-delete ()
+  ;;"Provide similar behavior as `evil-delete'."
+  ;;(interactive)
+  ;;(let ((inhibit-read-only t)
+  ;;)
+  ;;(cl-letf (((symbol-function #'delete-region) #'vterm-delete-region))
+  ;;(call-interactively 'evil-delete))))
+  ;;
+  ;;(defun vterm-evil-change ()
+  ;;"Provide similar behavior as `evil-change'."
+  ;;(interactive)
+  ;;(let ((inhibit-read-only t))
+  ;;(cl-letf (((symbol-function #'delete-region) #'vterm-delete-region))
+  ;;(call-interactively 'evil-change))))
+  ;;
+  ;;(defun vterm-evil-append-line ()
+  ;;"Provide similar behavior as `evil-append-line'."
+  ;;(interactive)
+  ;;(let ((inhibit-read-only t))
+  ;;(vterm-end-of-line)
+  ;;(vterm-evil-append)))
+  ;;
+  ;;(defun my-vterm-hook()
+  ;;(evil-local-mode 1)
+  ;;(evil-define-key 'normal 'local "a" 'vterm-evil-append)
+  ;;(evil-define-key 'normal 'local "A" 'vterm-evil-append-line)
+  ;;(evil-define-key 'normal 'local "d" 'vterm-evil-delete)
+  ;;(evil-define-key 'normal 'local "i" 'vterm-evil-insert)
+  ;;(evil-define-key 'normal 'local "c" 'vterm-evil-change))
+  ;;
+  ;;(add-hook 'vterm-mode-hook 'my-vterm-hook)
+  )
+
 
 ;; TODO: lsp
 

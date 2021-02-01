@@ -1255,6 +1255,9 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 ;; ESS
 (use-package ess
 	:straight t
+                                        ;  :hook
+                                        ;  (ess-r-mode . lsp)
+                                        ;  (inferior-ess-r-mode . lsp)
 	:config
 	(require 'ess-site)
 	(setq

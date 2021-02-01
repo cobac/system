@@ -1441,8 +1441,10 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	:straight t
 	)
 
+;; Make
 (add-hook 'makefile-gmake-mode-hook
 					'(lambda ()
 						 (add-hook 'before-save-hook
 											 (lambda ()
 												 (tabify (point-min) (point-max))))))
+

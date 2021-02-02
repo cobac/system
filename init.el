@@ -1241,6 +1241,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 ;; gpg passwords
 
 (defun coba-lookup-password (&rest keys)
+  "Helper to get KEYS from emacsclient."
   (when-let ((result (apply #'auth-source-search keys)))
     (funcall (plist-get (car result) :secret))))
 

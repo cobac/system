@@ -172,6 +172,8 @@
 		(evil-collection-init 'info)
 		;;(evil-collection-init 'calendar)
 		;;(evil-collection-init 'magit)
+    ;; TODO: Migrate evil magit
+    ;;(evil-collection-init 'magit)
 		)
 	(use-package evil-snipe
 		:straight t

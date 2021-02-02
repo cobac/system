@@ -108,7 +108,8 @@
 	:hook (after-init . doom-modeline-mode)
 	:config
 	(setq doom-modeline-modal-icon nil
-				doom-modeline-enable-word-count t)
+				doom-modeline-enable-word-count t
+        doom-modeline-icon t)
 	)
 
 ;; General - which-key

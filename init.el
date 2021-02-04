@@ -570,24 +570,32 @@
 	"gG"	'counsel-outline
 	)
 
-(defun coba-org-todo-yesterday-twice ()
-	"Call `org-todo-yesterday` twice."
-  (interactive)
-  (org-todo-yesterday)
-  (org-todo-yesterday)
-	)
 (general-def
 	:states '(normal motion)
 	:keymaps 'org-agenda-mode-map
 	"ga" 'org-agenda-archive
 	"C-t" 'org-agenda-todo
-	"C-S-T" 'coba-org-todo-yesterday-twice
+	"C-S-T" 'coba-org-agenda-todo-yesterday-twice
 	)
 
 (coba-local-leader-def
 	:keymaps 'org-agenda-mode-map
 	"s" 'org-agenda-schedule
 	"d" 'org-agenda-deadline
+	)
+
+(defun coba-org-todo-yesterday-twice ()
+	"Call `org-todo-yesterday` twice."
+  (interactive)
+  (org-todo-yesterday)
+  (org-todo-yesterday)
+	)
+
+(defun coba-org-agenda-todo-yesterday-twice ()
+	"Call `org-todo-yesterday` twice."
+  (interactive)
+  (org-agenda-todo-yesterday)
+  (org-agenda-todo-yesterday)
 	)
 (general-def
 	:states '(normal motion)

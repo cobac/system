@@ -171,9 +171,7 @@
     (evil-collection-init 'vterm)
 		(evil-collection-init 'info)
 		;;(evil-collection-init 'calendar)
-		;;(evil-collection-init 'magit)
-    ;; TODO: Migrate evil magit
-    ;;(evil-collection-init 'magit)
+    (evil-collection-init 'magit)
 		)
 	(use-package evil-snipe
 		:straight t
@@ -967,6 +965,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	(transient-append-suffix 'magit-push "e"	;; Puts the following command after the 'e' option on the magit-push menu
 		'("a" "Push all" coba-magit-push-all))	;; Configures the my/magit-push-all method to be callable with "a" while on the magit-push menu. It's description will read "Push All"
 	)
+(evil-set-initial-state 'magit-commit-message-section-map 'insert)
 
 (defun coba-magit-status ()
 	"Open magit-status in full screen."
@@ -974,14 +973,9 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	(delete-other-windows)
 	)
 
-(use-package evil-magit
-	:straight t
-	:after magit
-  :config
-  (evil-set-initial-state 'magit-commit-message-section-map 'insert))
-
 (use-package forge
-	:straight t)
+	:straight t
+  :after magit)
 
 (use-package magit-todos
 	:straight t

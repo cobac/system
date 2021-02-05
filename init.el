@@ -1333,6 +1333,15 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   :straight (:type git :host github :repo "gcv/julia-snail")
   :requires vterm
   :after julia-mode
+  :general
+  (general-def 'julia-snail-mode-map
+    "C-c C-k" 'coba-julia-snail-save-and-send-buffer-file)
+  :config
+  (defun coba-julia-snail-save-and-send-buffer-file()
+    "Save buffer and call julia-snail-send-buffer-file."
+    (interactive)
+    (save-buffer)
+    (julia-snail-send-buffer-file))
   )
 
 ;; Idk why it does not run inside the usepackage macro

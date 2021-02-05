@@ -829,7 +829,7 @@
 	(add-to-list 'org-latex-classes
 							 '("coba-report"
 								 "
-\\documentclass{article} 
+\\documentclass{article}
 
 [NO-DEFAULT-PACKAGES]
 \\usepackage[a4paper,bindingoffset=0.2in,%

@@ -109,8 +109,10 @@
 	:config
 	(setq doom-modeline-modal-icon nil
 				doom-modeline-enable-word-count t
-        doom-modeline-icon t)
-	)
+        doom-modeline-icon t
+        mode-line-format '("%e" (:eval (doom-modeline-format--main)) "   ")
+	      )
+  )
 
 ;; General - which-key
 (use-package which-key

@@ -1323,9 +1323,26 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	:after stan-mode
 	)
 
-;; TODO: Check julia. Maybe julia-mode and julia-repl instead of ess
-;; Ess does not support pkg interface
-;; But ess has the help files, although with -repl the help is printed on the term which ins nice.
+(use-package julia-mode
+  :straight t
+  )
+
+(use-package julia-snail
+  :straight (:type git :host github :repo "gcv/julia-snail")
+  :requires vterm
+  :after julia-mode
+  )
+
+;; Idk why it does not run inside the usepackage macro
+(add-hook 'julia-mode-hook #'julia-snail-mode)
+
+(use-package lsp-julia
+  :straight (:type git :host github :repo "non-Jedi/lsp-julia")
+  :after lsp-mode
+  :config
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
+  (add-hook 'julia-snail-mode-hook #'lsp)
+  )
 
 ;; Markdown
 (use-package markdown-mode

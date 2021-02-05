@@ -1084,7 +1084,8 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
         mu4e-change-filenames-when-moving t
         mu4e-get-mail-command "/usr/bin/mbsync -a"
         mu4e-update-interval 120
-        mu4e-html2text-command "/usr/bin/w3m -T text/html"
+        ;;mu4e-html2text-command "html2text --unicode-snob"
+        ;;shr-color-visible-luminance-min 80
         message-kill-buffer-on-exit t
         mu4e-index-update-error-warning nil
         mu4e-view-show-images t
@@ -1146,6 +1147,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (coba-local-leader-def 'mu4e-view-mode-map
     "t" '(lambda () (interactive)(org-capture "nil" "f"))
     )
+
   )
 
 (use-package mu4e-alert

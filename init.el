@@ -170,6 +170,7 @@
 		(evil-collection-init 'magit-todos)
     (evil-collection-init 'vterm)
 		(evil-collection-init 'info)
+		(evil-collection-init 'lsp-ui-menu)
 		;;(evil-collection-init 'calendar)
     (evil-collection-init 'magit)
 		)
@@ -1193,52 +1194,44 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	:general
 	(coba-leader-def
 		"RET" 'vterm)
-  :config
-  ;;(defun vterm-evil-insert ()
-  ;;(interactive)
-  ;;(vterm-goto-char (point))
-  ;;(call-interactively #'evil-insert))
-  ;;
-  ;;(defun vterm-evil-append ()
-  ;;(interactive)
-  ;;(vterm-goto-char (1+ (point)))
-  ;;(call-interactively #'evil-append))
-  ;;
-  ;;(defun vterm-evil-delete ()
-  ;;"Provide similar behavior as `evil-delete'."
-  ;;(interactive)
-  ;;(let ((inhibit-read-only t)
-  ;;)
-  ;;(cl-letf (((symbol-function #'delete-region) #'vterm-delete-region))
-  ;;(call-interactively 'evil-delete))))
-  ;;
-  ;;(defun vterm-evil-change ()
-  ;;"Provide similar behavior as `evil-change'."
-  ;;(interactive)
-  ;;(let ((inhibit-read-only t))
-  ;;(cl-letf (((symbol-function #'delete-region) #'vterm-delete-region))
-  ;;(call-interactively 'evil-change))))
-  ;;
-  ;;(defun vterm-evil-append-line ()
-  ;;"Provide similar behavior as `evil-append-line'."
-  ;;(interactive)
-  ;;(let ((inhibit-read-only t))
-  ;;(vterm-end-of-line)
-  ;;(vterm-evil-append)))
-  ;;
-  ;;(defun my-vterm-hook()
-  ;;(evil-local-mode 1)
-  ;;(evil-define-key 'normal 'local "a" 'vterm-evil-append)
-  ;;(evil-define-key 'normal 'local "A" 'vterm-evil-append-line)
-  ;;(evil-define-key 'normal 'local "d" 'vterm-evil-delete)
-  ;;(evil-define-key 'normal 'local "i" 'vterm-evil-insert)
-  ;;(evil-define-key 'normal 'local "c" 'vterm-evil-change))
-  ;;
-  ;;(add-hook 'vterm-mode-hook 'my-vterm-hook)
   )
 
 
-;; TODO: lsp
+(use-package lsp-mode
+  :straight t
+  :init
+  (setq lsp-keymap-prefix "C-l")
+  ;; Optimization stuff
+  (setq gc-cons-threshold 100000000
+        read-process-output-max (* 1024 1024)
+        lsp-completion-provider :capf
+        lsp-idle-delay 0.500
+        )
+  :hook ((lsp-mode . lsp-enable-which-key-integration))
+  :general
+  (general-def 'lsp-browser-mode-map
+    "q" 'quit-window)
+  (general-def 'lsp-mode-map
+    "C-l i" 'lsp-ivy-workspace-symbol)
+  :config
+  (evil-set-initial-state 'lsp-browser-mode 'motion)
+  (setq lsp-headerline-breadcrumb-segments '(symbols)
+        lsp-log-io t
+        lsp-print-performance t
+        ) 
+  ) 
+
+(use-package lsp-ui
+  :straight t)
+
+(use-package lsp-ivy
+  :straight t)
+
+;; debugger
+;;(use-package dap-mode
+;;  :straight t)
+;; (use-package dap-LANGUAGE
+;;   :straight t)
 
 ;; gpg passwords
 

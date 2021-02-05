@@ -975,8 +975,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	)
 
 (use-package forge
-	:straight t
-  :after magit)
+	:straight t)
 
 (use-package magit-todos
 	:straight t

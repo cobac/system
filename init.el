@@ -1349,6 +1349,10 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 ;; Idk why it does not run inside the usepackage macro
 (add-hook 'julia-mode-hook #'julia-snail-mode)
 
+(evil-set-initial-state 'ess-julia-help-mode 'motion)
+(general-def 'ess-julia-help-mode-map
+  "q" 'quit-window)
+
 (use-package lsp-julia
   :straight (:type git :host github :repo "non-Jedi/lsp-julia")
   :after lsp-mode

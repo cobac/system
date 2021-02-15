@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: julia only source code block
+# key: ,jj
+# --
+#+BEGIN_SRC julia :eval :session :results silent :exports code
+$0
+
+#+END_SRC

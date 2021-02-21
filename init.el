@@ -885,7 +885,7 @@
 	(add-to-list 'org-latex-classes
 							 '("apa-article"
 								 "
-\\documentclass{article} 
+\\documentclass{article}
 [NO-DEFAULT-PACKAGES]
 \\usepackage{plex-serif}
 \\usepackage{hyperref}

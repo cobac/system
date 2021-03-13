@@ -1,0 +1,16 @@
+
+\documentclass[a4paper, 12pt, doc, floatsintext, babel, spanish]{apa7}
+\linespread{1.5}
+
+\usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
+\DefineBibliographyStrings{spanish}{andothers={et al.}}
+\addbibresource{bib.bib}
+
+% Spanish 
+%\renewcommand{\acksname}{Nota del autor}
+\renewcommand{\keywordname}{Palabras clave}
+\renewcommand{\notesname}{Notas al pie de página}
+
+\usepackage{hyperref}
+\usepackage{csquotes}

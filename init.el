@@ -785,6 +785,107 @@
 		)
 	)
 
+(defun coba-file-content-as-string (filename)
+  "Return the contents of FILENAME as string.
+https://gist.github.com/bigodel/56a4627afdfe9ad28f6dcc68b89a97f8"
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (buffer-string)))
+
+(defvar org-tex-apa-template
+  (coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article.tex"))
+
+(defvar org-tex-apa-es-template
+  (coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article-es.tex"))
+
+(defvar org-tex-report-template
+  (coba-file-content-as-string "~/.emacs.d/ox-templates/report.tex"))
+
+(defvar org-tex-graphix-template
+  (coba-file-content-as-string "~/.emacs.d/ox-templates/graphix.tex"))
+
+(defvar org-tex-footmisc-template
+  (coba-file-content-as-string "~/.emacs.d/ox-templates/footmisc.tex"))
+
+(defvar org-tex-math-template
+  (coba-file-content-as-string "~/.emacs.d/ox-templates/math.tex"))
+
+(defvar custom-tex-template nil
+  "Custom latex preamble for org-export."
+  )
+
+(setq custom-tex-template (mapconcat 'identity (list org-tex-apa-template
+                                                     org-tex-math-template
+                                                     org-tex-graphix-template) "\n"))
+
+(defun coba-define-org-tex-template ()
+  "Define `org-latex-classes' concatenating snippets."
+  (interactive)
+
+  ;; reset the variables values
+  ;; TODO
+
+  (setq org-latex-classes
+        `(("custom" ,(format "%s
+[NO-DEFAULT-PACKAGES]
+[NO-PACKAGES]
+[EXTRA]" custom-tex-template)
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+
+          ("custom-apa" ,(format "%s
+[NO-DEFAULT-PACKAGES]
+[NO-PACKAGES]
+[EXTRA]" custom-tex-template)
+           ("\\section*{%s}" . "\\section*{%s}")
+           ("\\subsection*{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection*{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph*{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph*{%s}" . "\\subparagraph*{%s}"))
+          )))
+
+(coba-define-org-tex-template)
+
+(defun coba-org-latex-remove-title (str)
+  "Remove empty \title{} from STR.
+From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
+  (replace-regexp-in-string "^\\\\title{}$" "" str))
+
+(advice-add 'org-latex-template :filter-return 'coba-org-latex-remove-title)
+
+(setq 
+ org-startup-with-inline-images t
+ org-latex-compiler "xelatex"
+ org-latex-bib-compiler "bibtex"
+																				;org-export-in-background t
+ org-latex-default-class "custom"
+ org-latex-hyperref-template nil
+ org-latex-prefer-user-labels t
+ org-export-with-toc nil
+ org-latex-listings t
+ org-latex-listings-options '(
+															("basicstyle" "\\ttfamily\\color{code-fg}")
+															("stringstyle" "\\ttfamily\\color{code-string}")
+															("commentstyle" "\\color{code-comment}")
+															("keywordstyle" "\\color{code-keyword}")
+															("upquote" "true")
+															("backgroundcolor" "\\color{code-bg}")
+															("frame" "single")
+															("framesep" "5pt")
+															("rulecolor" "\\color{code-comment}")
+															("framerule" "1pt")
+															)
+ org-latex-pdf-process
+ '("ln -s ~/Brain/bib.bib bib.bib"
+	 "latexmk -pdflatex='xelatex -interaction nonstopmode' -shell-escape -pdf -bibtex -f %f")
+ )
+
+(add-to-list 'org-latex-default-packages-alist '("" "txfonts" t))
+(add-to-list 'org-latex-default-packages-alist '("" "graphviz" t))
+
 (use-package org-ref
 	:straight t
 	:init
@@ -797,113 +898,6 @@
 				org-ref-open-pdf-function (lambda (fpath)
 																		(call-process "zathura" nil 0 nil fpath))
 				)
-	(setq ;These are normal org variables
-	 org-startup-with-inline-images t
-	 org-latex-compiler "xelatex"
-	 org-latex-bib-compiler "bibtex"
-																				;org-export-in-background t
-	 org-latex-default-class "coba-report"
-	 org-latex-hyperref-template nil
-	 org-latex-prefer-user-labels t
-	 org-export-with-toc nil
-	 org-latex-listings t
-	 org-latex-listings-options '(
-																("basicstyle" "\\ttfamily\\color{code-fg}")
-																("stringstyle" "\\ttfamily\\color{code-string}")
-																("commentstyle" "\\color{code-comment}")
-																("keywordstyle" "\\color{code-keyword}")
-																("upquote" "true")
-																("backgroundcolor" "\\color{code-bg}")
-																("frame" "single")
-																("framesep" "5pt")
-																("rulecolor" "\\color{code-comment}")
-																("framerule" "1pt")
-																)
-	 org-latex-pdf-process
-	 '("ln -s ~/Brain/bib.bib bib.bib"
-		 "latexmk -pdflatex='xelatex -interaction nonstopmode' -shell-escape -pdf -bibtex -f %f")
-	 )
-
-	(add-to-list 'org-latex-default-packages-alist '("" "txfonts" t))
-	(add-to-list 'org-latex-default-packages-alist '("" "graphviz" t))
-
-
-	(add-to-list 'org-latex-classes
-							 '("coba-report"
-								 "
-\\documentclass{article}
-
-[NO-DEFAULT-PACKAGES]
-\\usepackage[a4paper,bindingoffset=0.2in,%
-						left=0.75in,right=0.75in,top=.5in,bottom=1in,%
-						footskip=.5in]{geometry}
-\\linespread{1.5}
-\\setlength{\\parskip}{\\baselineskip}%
-\\setlength{\\parindent}{4pt}
-\\usepackage{txfonts}
-\\usepackage{amsmath}
-\\usepackage{plex-serif}
-\\usepackage{plex-mono}
-\\usepackage{plex-sans}
-\\usepackage{float}
-\\usepackage[pdftex]{graphicx}
-\\usepackage[pdf]{graphviz}
-\\graphicspath{ {./figures/} }
-\\usepackage{hyperref}
-
-\\usepackage[style=apa, sortcites=true, sorting=nyt]{biblatex}
-\\DeclareLanguageMapping{american}{american-apa}
-\\addbibresource{bib.bib}
-\\defbibheading{bibliography}[References]{%
-	\\section*{#1}}
-	%\\markboth*{#1}{#1}}
-\\defbibheading{shorthands}[References]{%
-	\\subsection*{#1}}
-	%\\markboth*{#1}{#1}}
-
-% Spanish for biblatex
-%\\DefineBibliographyStrings{spanish}{andothers={et al.}}
-
-\\usepackage{listings}
-\\usepackage{textcomp}
-\\renewcommand{\\lstlistingname}{Code block}
-\\usepackage{xcolor}
-\\definecolor{code-fg}{RGB}{77 77 76}
-\\definecolor{code-string}{RGB}{113 140 0}
-\\definecolor{code-comment}{RGB}{165 164 165}
-\\definecolor{code-keyword}{RGB}{137 89 168}
-\\definecolor{code-bg}{RGB}{255 255 255}
-[PACKAGES]
-[EXTRA]
-"
-								 ("\\section*{%s}" . "\\section*{%s}")
-								 ("\\subsection*{%s}" . "\\subsection*{%s}")
-								 ("\\subsubsection*{%s}" . "\\subsubsection*{%s}")
-								 ("\\paragraph*{%s}" . "\\paragraph*{%s}")
-								 ("\\subparagraph*{%s}" . "\\subparagraph*{%s}")))
-
-	(add-to-list 'org-latex-classes
-							 '("apa-article"
-								 "
-\\documentclass{article}
-[NO-DEFAULT-PACKAGES]
-\\usepackage{plex-serif}
-\\usepackage{hyperref}
-\\usepackage[style=apa,sortcites=true,sorting=nyt]{biblatex}
-\\DeclareLanguageMapping{american}{american-apa}
-\\addbibresource{bib.bib}
-
-% Spanish for biblatex
-%\\DefineBibliographyStrings{spanish}{andothers={et al.}}
-
-[PACKAGES]
-[EXTRA]
-"
-								 ("\\section*{%s}" . "\\section*{%s}")
-								 ("\\subsection*{%s}" . "\\subsection*{%s}")
-								 ("\\subsubsection*{%s}" . "\\subsubsection*{%s}")
-								 ("\\paragraph*{%s}" . "\\paragraph*{%s}")
-								 ("\\subparagraph*{%s}" . "\\subparagraph*{%s}")))
 
 	(use-package doi-utils
 		:config

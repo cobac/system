@@ -1,0 +1,17 @@
+# key: ,latex
+# name: Latex to publish
+# --
+#+title: $0
+#+author: David Coba 
+#+date: 
+
+#+BEGIN_SRC elisp :eval :results none :exports results
+(setq custom-tex-template (mapconcat 'identity (list
+                                                org-tex-apa-template
+                                                ) "\n"))
+(coba-define-org-tex-template)
+#+END_SRC
+
+#+LATEX_HEADER:
+
+# \printbibliography

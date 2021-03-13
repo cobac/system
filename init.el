@@ -1297,6 +1297,10 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 		)
 	)
 
+(evil-set-initial-state 'ess-julia-help-mode 'motion)
+(general-def 'ess-julia-help-mode-map
+  "q" 'quit-window)
+
 ;;	Stan
 (use-package stan-mode
 	:straight t
@@ -1330,39 +1334,52 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	:after stan-mode
 	)
 
-(use-package julia-mode
-  :straight t
-  )
-
-(use-package julia-snail
-  :straight (:type git :host github :repo "gcv/julia-snail")
-  :requires vterm
-  :after julia-mode
-  :general
-  (general-def 'julia-snail-mode-map
-    "C-c C-k" 'coba-julia-snail-save-and-send-buffer-file)
-  :config
-  (defun coba-julia-snail-save-and-send-buffer-file()
-    "Save buffer and call julia-snail-send-buffer-file."
-    (interactive)
-    (save-buffer)
-    (julia-snail-send-buffer-file))
-  )
-
-;; Idk why it does not run inside the usepackage macro
-(add-hook 'julia-mode-hook #'julia-snail-mode)
-
-(evil-set-initial-state 'ess-julia-help-mode 'motion)
-(general-def 'ess-julia-help-mode-map
-  "q" 'quit-window)
-
 (use-package lsp-julia
   :straight (:type git :host github :repo "non-Jedi/lsp-julia")
   :after lsp-mode
   :config
   (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
-  (add-hook 'julia-snail-mode-hook #'lsp)
   )
+
+(use-package julia-mode
+  :straight t
+  :config
+  (add-hook 'julia-mode-hook #'lsp)
+  )
+
+;;(use-package julia-snail
+;;  :straight (:type git :host github :repo "gcv/julia-snail")
+;;  ;; :requires vterm
+;;  ;;  :after julia-mode
+;;  :general
+;;  (general-def 'julia-snail-mode-map
+;;    "C-c C-k" 'coba-julia-snail-save-and-send-buffer-file)
+;;  :config
+;;  (defun coba-julia-snail-save-and-send-buffer-file()
+;;    "Save buffer and call julia-snail-send-buffer-file."
+;;    (interactive)
+;;    (save-buffer)
+;;    (julia-snail-send-buffer-file))
+;;  )
+;;
+;;;; Idk why it does not run inside the usepackage macro
+;;(add-hook 'julia-mode-hook #'julia-snail-mode)
+
+(use-package julia-repl
+  :straight t
+  ;;:after julia-mode
+  :config
+  ;; Obsolete but... works
+  (setq display-buffer-reuse-frames t)
+  (add-hook 'julia-mode-hook #'julia-repl-mode)
+  )
+
+(use-package eterm-256color
+  :straight t
+  :config
+  (add-hook 'term-mode-hook #'eterm-256color-mode))
+
+
 
 ;; Markdown
 (use-package markdown-mode
@@ -1373,6 +1390,9 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 																				;("\\.Rmd\\'" . markdown-mode)
 	 ("\\.markdown\\'" . markdown-mode)
 	 )
+  :config
+  (general-def 'markdown-view-mode-map
+    "q" 'quit-window)
 	)
 
 ;; Polymode

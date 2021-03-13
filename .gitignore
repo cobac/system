@@ -1,5 +1,7 @@
 /*
 !init.el
-!snippets/
 !.gitignore
+!snippets/
+!ox-templates
+/ox-templates/auto
 /snippets/**/.yas-compiled-snippets.el

@@ -1171,6 +1171,9 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 	 org-msg-startup "inlineimages"
    org-msg-convert-citation t)
   (setq-default org-html-with-latex 'dvipng)
+  (org-msg-mode)
+  ;; TODO: fix open-with with mu4e attatchments 
+  ;;https://www.reddit.com/r/emacs/comments/m3qlnw/how_do_you_manage_the_attachments_with_mu4e_in/?utm_medium=android_app&utm_source=share
   )
 
 

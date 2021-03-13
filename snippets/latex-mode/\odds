@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: odds
+# key: \odds
+# --
+
+\text{odds}($1) $0

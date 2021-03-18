@@ -901,6 +901,9 @@ From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-exp
 																		(call-process "zathura" nil 0 nil fpath))
 				)
 
+  (coba-leader-def 'org-mode-map
+    "c" 'org-ref-change-cite-type)
+
 	(use-package doi-utils
 		:config
 		(setq bibtex-autokey-year-length 4

@@ -157,6 +157,8 @@
 	:config
   (use-package undo-tree
     :straight t
+    :config
+    (setq undo-tree-visualizer-diff t)
     )
   (custom-set-variables '(evil-undo-system 'undo-tree))
   (evil-mode)

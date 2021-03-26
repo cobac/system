@@ -913,6 +913,8 @@ From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-exp
 				org-ref-open-pdf-function (lambda (fpath)
 																		(call-process "zathura" nil 0 nil fpath))
 				)
+  (general-def 'org-mode-map
+    "C-c ]" 'org-ref-ivy-insert-cite-link)
 
 	(use-package doi-utils
 		:config

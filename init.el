@@ -909,6 +909,7 @@ From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-exp
 				org-ref-default-bibliography '("~/Brain/bib.bib")
 				org-ref-bibliography-notes	 "~/Brain/"
 				org-ref-pdf-directory				 "~/Brain/pdf"
+        org-ref-default-citation-link "parencite"
 				org-ref-open-pdf-function (lambda (fpath)
 																		(call-process "zathura" nil 0 nil fpath))
 				)

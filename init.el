@@ -1160,7 +1160,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (coba-local-leader-def 'mu4e-view-mode-map
     "t" '(lambda () (interactive)(org-capture "nil" "f"))
     )
-
+  (add-to-list 'auto-mode-alist '("\\.eml\\'" . org-mode))
   )
 
 (use-package mu4e-alert

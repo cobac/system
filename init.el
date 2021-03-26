@@ -824,8 +824,20 @@ https://gist.github.com/bigodel/56a4627afdfe9ad28f6dcc68b89a97f8"
   "Define `org-latex-classes' concatenating snippets."
   (interactive)
 
-  ;; reset the variables values
-  ;; TODO
+  (setq org-tex-apa-es-template
+        (coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article-es.tex"))
+
+  (setq org-tex-report-template
+        (coba-file-content-as-string "~/.emacs.d/ox-templates/report.tex"))
+
+  (setq org-tex-graphix-template
+        (coba-file-content-as-string "~/.emacs.d/ox-templates/graphix.tex"))
+
+  (setq org-tex-footmisc-template
+        (coba-file-content-as-string "~/.emacs.d/ox-templates/footmisc.tex"))
+
+  (setq org-tex-math-template
+        (coba-file-content-as-string "~/.emacs.d/ox-templates/math.tex"))
 
   (setq org-latex-classes
         `(("custom" ,(format "%s

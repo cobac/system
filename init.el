@@ -314,7 +314,7 @@
 							 "vlc"
 							 '(file))
 				 (list (openwith-make-extension-regexp
-								'("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
+								'("doc" "docx" "xls" "ppt" "pptx" "odt" "ods" "odg" "odp"))
 							 "libreoffice"
 							 '(file))
 				 (list (openwith-make-extension-regexp

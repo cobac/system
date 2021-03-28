@@ -1348,7 +1348,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   :straight (:type git :host github :repo "non-Jedi/lsp-julia")
   :after lsp-mode
   :config
-  (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.6")
   )
 
 (use-package julia-mode

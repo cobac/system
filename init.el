@@ -321,6 +321,11 @@
 								'("pdf" "ps" "ps.gz" "dvi"))
 							 "zathura"
 							 '(file))
+
+				 (list (openwith-make-extension-regexp
+								'("png" "jpg" "jpeg" ))
+							 "feh"
+							 '(file))
 				 ))
 	(openwith-mode 1)
 	)

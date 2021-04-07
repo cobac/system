@@ -6,6 +6,7 @@
 #+date: 
 
 #+BEGIN_SRC elisp :eval :results none :exports results
+(coba-define-org-tex-template)
 (setq custom-tex-template (mapconcat 'identity (list
                                                 org-tex-apa-template
                                                 ) "\n\n"))

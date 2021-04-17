@@ -177,6 +177,7 @@
 		(evil-collection-init 'lsp-ui-menu)
 		;;(evil-collection-init 'calendar)
     (evil-collection-init 'magit)
+    (evil-collection-init 'xref)
 		)
 	(use-package evil-snipe
 		:straight t

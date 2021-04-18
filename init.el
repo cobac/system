@@ -413,6 +413,7 @@
 	)
 
 (org-super-agenda-mode)
+(set-face-attribute 'org-headline-done nil :strike-through t)
 (use-package transient
 	:straight t)
 (use-package org-ql

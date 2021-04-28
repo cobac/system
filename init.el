@@ -1179,6 +1179,25 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (setq doom-modeline-mu4e t)
   )
 
+;; TODO: Fix mu4e-thread-folding
+;; Error with nano-color-background not defined
+;;(use-package mu4e-thread-folding
+;;  :straight (:type git :host github :repo "rougier/mu4e-thread-folding")
+;;  :config 
+;;  (require 'mu4e-thread-folding)
+;;  (add-to-list 'mu4e-header-info-custom
+;;               '(:empty . (:name "Empty"
+;;                                 :shortname ""
+;;                                 :function (lambda (msg) "  "))))
+;;  (setq mu4e-headers-fields '((:empty         .    2)
+;;                              (:human-date    .   12)
+;;                              (:flags         .    6)
+;;                              (:mailing-list  .   10)
+;;                              (:from          .   22)
+;;                              (:subject       .   nil)))
+;;  (define-key mu4e-headers-mode-map (kbd "<tab>")     'mu4e-headers-toggle-at-point)
+;;  )
+
 ;; TODO: check inline thing
 (use-package org-msg
   :straight t

@@ -175,6 +175,7 @@
     (evil-collection-init 'vterm)
 		(evil-collection-init 'info)
 		(evil-collection-init 'lsp-ui-menu)
+		(evil-collection-init 'docker)
 		;;(evil-collection-init 'calendar)
     (evil-collection-init 'magit)
     (evil-collection-init 'xref)

@@ -1414,6 +1414,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   :config
   ;; Obsolete but... works
   (setq display-buffer-reuse-frames t)
+  (julia-repl-set-terminal-backend 'vterm) 
   (add-hook 'julia-mode-hook #'julia-repl-mode)
   )
 

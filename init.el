@@ -1550,3 +1550,11 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 											 (lambda ()
 												 (tabify (point-min) (point-max))))))
 
+
+(use-package docker
+  :straight t
+  :general
+  (coba-leader-def
+    "D" 'docker)
+  :config
+  (setq docker-run-as-root t))

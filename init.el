@@ -873,6 +873,7 @@ https://gist.github.com/bigodel/56a4627afdfe9ad28f6dcc68b89a97f8"
           )))
 
 (coba-define-org-tex-template)
+;; TODO: Check what's up with codeblocks
 
 (defun coba-org-latex-remove-title (str)
   "Remove empty \title{} from STR.

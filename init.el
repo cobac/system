@@ -832,6 +832,9 @@ https://gist.github.com/bigodel/56a4627afdfe9ad28f6dcc68b89a97f8"
   "Define `org-latex-classes' concatenating snippets."
   (interactive)
 
+  (setq org-tex-apa-template
+        (coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article.tex"))
+
   (setq org-tex-apa-es-template
         (coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article-es.tex"))
 

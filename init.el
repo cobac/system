@@ -1412,14 +1412,28 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 ;;;; Idk why it does not run inside the usepackage macro
 ;;(add-hook 'julia-mode-hook #'julia-snail-mode)
 
-(use-package julia-repl
+;; (use-package julia-repl
+;;   :straight t
+;;   ;;:after julia-mode
+;;   :config
+;;   ;; Obsolete but... works
+;;   (setq display-buffer-reuse-frames t)
+;;   (julia-repl-set-terminal-backend 'vterm) 
+;;   (add-hook 'julia-mode-hook #'julia-repl-mode)
+;;   )
+
+(use-package julia-vterm
   :straight t
-  ;;:after julia-mode
   :config
-  ;; Obsolete but... works
-  (setq display-buffer-reuse-frames t)
-  (julia-repl-set-terminal-backend 'vterm) 
-  (add-hook 'julia-mode-hook #'julia-repl-mode)
+  (add-hook 'julia-mode-hook #'julia-vterm-mode)
+  )
+
+(use-package ob-julia-vterm
+  :straight t
+  :config 
+  (add-to-list 'org-babel-load-languages '(julia-vterm . t))
+  (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+  (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
   )
 
 (use-package eterm-256color
@@ -1554,7 +1568,6 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 						 (add-hook 'before-save-hook
 											 (lambda ()
 												 (tabify (point-min) (point-max))))))
-
 
 (use-package docker
   :straight t

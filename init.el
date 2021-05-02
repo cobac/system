@@ -1427,6 +1427,17 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   :straight t
   :config
   (add-hook 'julia-mode-hook #'julia-vterm-mode)
+  (general-def 
+	  :states '(normal visual insert motion emacs)
+	  :keymaps 'julia-mode-map
+    "C-c C-c" 'julia-vterm-send-region-or-current-line
+    "C-t" 'coba-julia-vterm-define-threads
+    )
+
+  (defun coba-julia-vterm-define-threads ()
+    (interactive)
+    (let ((val (read-from-minibuffer "Number of threads: ")))
+      (setq julia-vterm-repl-program (concat "/path/to/julia -t " val))))
   )
 
 (use-package ob-julia-vterm

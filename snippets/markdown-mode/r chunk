@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: r chunk
+# key: ,r
+# --
+
+```{r}
+$0
+```

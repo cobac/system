@@ -1389,6 +1389,16 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (setq lsp-julia-default-environment "~/.julia/environments/v1.6")
   )
 
+;;(use-package eglot
+;;  :straight t
+;;  :config
+;;  (setq eglot-connect-timeout 99999999)
+;;  )
+;;
+;;(use-package eglot-jl
+;;  :straight t
+;;  )
+
 (use-package julia-mode
   :straight t
   :config

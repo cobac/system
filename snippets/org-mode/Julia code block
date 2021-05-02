@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Julia code block
+# key: ,j
+# --
+
+#+BEGIN_SRC julia :eval :session :results output :tangle yes :exports both
+$1
+#+END_SRC
+$0

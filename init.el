@@ -1214,7 +1214,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
    org-msg-convert-citation t)
   (setq-default org-html-with-latex 'dvipng)
   (org-msg-mode)
-  (add-to-list  'mm-inhibit-file-name-handlers 'openwith-file-handler)
+  (add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
   )
 
 

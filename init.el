@@ -1390,49 +1390,11 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (setq lsp-julia-timeout 99999999)
   )
 
-;;(use-package eglot
-;;  :straight t
-;;  :config
-;;  (setq eglot-connect-timeout 99999999)
-;;  )
-;;
-;;(use-package eglot-jl
-;;  :straight t
-;;  )
-
 (use-package julia-mode
   :straight t
   :config
   (add-hook 'julia-mode-hook #'lsp)
   )
-
-;;(use-package julia-snail
-;;  :straight (:type git :host github :repo "gcv/julia-snail")
-;;  ;; :requires vterm
-;;  ;;  :after julia-mode
-;;  :general
-;;  (general-def 'julia-snail-mode-map
-;;    "C-c C-k" 'coba-julia-snail-save-and-send-buffer-file)
-;;  :config
-;;  (defun coba-julia-snail-save-and-send-buffer-file()
-;;    "Save buffer and call julia-snail-send-buffer-file."
-;;    (interactive)
-;;    (save-buffer)
-;;    (julia-snail-send-buffer-file))
-;;  )
-;;
-;;;; Idk why it does not run inside the usepackage macro
-;;(add-hook 'julia-mode-hook #'julia-snail-mode)
-
-;; (use-package julia-repl
-;;   :straight t
-;;   ;;:after julia-mode
-;;   :config
-;;   ;; Obsolete but... works
-;;   (setq display-buffer-reuse-frames t)
-;;   (julia-repl-set-terminal-backend 'vterm) 
-;;   (add-hook 'julia-mode-hook #'julia-repl-mode)
-;;   )
 
 (use-package julia-vterm
   :straight t
@@ -1463,8 +1425,6 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   :straight t
   :config
   (add-hook 'term-mode-hook #'eterm-256color-mode))
-
-
 
 ;; Markdown
 (use-package markdown-mode

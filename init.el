@@ -1387,6 +1387,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   :after lsp-mode
   :config
   (setq lsp-julia-default-environment "~/.julia/environments/v1.6")
+  (setq lsp-julia-timeout 99999999)
   )
 
 ;;(use-package eglot

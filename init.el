@@ -179,6 +179,7 @@
 		;;(evil-collection-init 'calendar)
     (evil-collection-init 'magit)
     (evil-collection-init 'xref)
+    (evil-collection-init 'nov)
 		)
 	(use-package evil-snipe
 		:straight t
@@ -1559,3 +1560,13 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
     "D" 'docker)
   :config
   (setq docker-run-as-root t))
+
+(use-package nov
+  :straight t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+  (defun coba-nov-font-setup ()
+    (face-remap-add-relative 'variable-pitch :family "ibm plex serif text"
+                             :height 1.0))
+  (add-hook 'nov-mode-hook 'coba-nov-font-setup)
+  )

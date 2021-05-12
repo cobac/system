@@ -273,6 +273,10 @@
 	(ivy-prescient-mode)
 	)
 
+(use-package wgrep
+  :straight t
+  )
+
 ;; Hydra
 (use-package hydra
 	:straight t)

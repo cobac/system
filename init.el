@@ -1416,6 +1416,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
     (interactive)
     (let ((val (read-from-minibuffer "Number of threads: ")))
       (setq julia-vterm-repl-program (concat "/path/to/julia -t " val))))
+  (setq display-buffer-reuse-frames t)
   )
 
 (use-package ob-julia-vterm
@@ -1549,6 +1550,8 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 (use-package hlint-refactor
 	:straight t
 	)
+
+
 
 ;; Make
 (add-hook 'makefile-gmake-mode-hook

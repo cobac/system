@@ -1249,6 +1249,9 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 		"RET" 'vterm)
   )
 
+(use-package project
+  :straight t
+  )
 
 (use-package lsp-mode
   :straight t

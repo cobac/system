@@ -881,11 +881,23 @@ https://gist.github.com/bigodel/56a4627afdfe9ad28f6dcc68b89a97f8"
 ;; TODO: Check what's up with codeblocks
 
 (defun coba-org-latex-remove-title (str)
-  "Remove empty \title{} from STR.
+  "Remove empty \\title{} from STR.
 From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
   (replace-regexp-in-string "^\\\\title{}$" "" str))
 
+(defun coba-org-latex-remove-author (str)
+  "Remove default \\author{Coba} from STR.
+From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
+  (replace-regexp-in-string "^\\\\author{Coba}$" "" str))
+
+(defun coba-org-latex-remove-date (str)
+  "Remove default \\date{\\today} from STR.
+From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
+  (replace-regexp-in-string "^\\\\date{\\\\today}$" "" str))
+
 (advice-add 'org-latex-template :filter-return 'coba-org-latex-remove-title)
+(advice-add 'org-latex-template :filter-return 'coba-org-latex-remove-author)
+(advice-add 'org-latex-template :filter-return 'coba-org-latex-remove-date)
 
 (setq 
  org-startup-with-inline-images t

@@ -66,7 +66,6 @@
 (setq coding-system-for-read 'utf-8 )	;; use utf-8 by default
 (setq coding-system-for-write 'utf-8 )
 (setq sentence-end-double-space nil)	;; sentence SHOULD end with only a point.
-(setq default-fill-column 120)		;; toggle wrapping text at the 80th character
 (setq initial-scratch-message nil) ; print a default message in the empty scratch buffer opened at startup
 (setq delete-by-moving-to-trash t)
 (setq auth-sources '("~/.authinfo.gpg"))

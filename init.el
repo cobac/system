@@ -1429,7 +1429,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (defun coba-julia-vterm-define-threads ()
     (interactive)
     (let ((val (read-from-minibuffer "Number of threads: ")))
-      (setq julia-vterm-repl-program (concat "/path/to/julia -t " val))))
+      (setq julia-vterm-repl-program (concat "/usr/bin/julia -t " val))))
   (setq display-buffer-reuse-frames t)
   )
 

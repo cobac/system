@@ -3,7 +3,7 @@
 # key: ,rr
 # --
 
-#+BEGIN_SRC R :eval :session :results silent :tangle yes :exports code
+#+BEGIN_SRC R :results silent :exports code
 $1
 #+END_SRC
 $0

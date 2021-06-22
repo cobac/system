@@ -457,6 +457,9 @@
 															("p" "Check Psychology" entry (file+olp "~/Sync/Org/todo.org" "Psychology" "Check")
 															 "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
 															 :empty-lines 1)
+															("r" "Resmas" entry (file+olp "~/Sync/Org/todo.org" "Psychology" "Uni" "Resma")
+															 "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+															 :empty-lines 1)
 															("m" "Movies" entry (file+olp "~/Sync/Org/todo.org" "Leisure" "Movies")
 															 "* TODO %?"
 															 :empty-lines 1)
@@ -1260,9 +1263,9 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 		"RET" 'vterm)
   )
 
-(use-package project
-  :straight t
-  )
+;;(use-package project
+;;   :straight t
+;;   )
 
 (use-package lsp-mode
   :straight t

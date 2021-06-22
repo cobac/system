@@ -797,6 +797,7 @@
 	(coba-leader-def
 		"pp" 'ivy-bibtex
 		"pd" 'doi-add-bibtex-entry
+		"pa" 'arxiv-get-pdf-add-bibtex-entry
 		"pf" '(lambda() (interactive)(find-file "~/Brain/bib.bib"))
 		"pn" '(lambda() (interactive)(find-file "~/Brain/bibnotes.org"))
 		)

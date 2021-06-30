@@ -1600,3 +1600,10 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
                              :height 1.0))
   (add-hook 'nov-mode-hook 'coba-nov-font-setup)
   )
+
+(use-package powerthesaurus
+  :straight t
+  :general
+  (coba-leader-def
+    "it" 'powerthesaurus-lookup-word-dwim)
+  )

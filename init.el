@@ -1445,6 +1445,14 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
   )
 
+;; TODO: Julia-formatter
+;; (use-package julia-formatter
+;;   :straight (:type git :repo "https://codeberg.org/FelipeLema/julia-formatter.el"
+;;                    :files ("*.jl" "*.el" "*.toml"))
+;;   :config
+;;   (julia-formatter-setup-aggressive-hooks)
+;;   )
+
 (use-package eterm-256color
   :straight t
   :config

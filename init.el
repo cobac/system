@@ -175,6 +175,7 @@
     (evil-collection-init 'vterm)
 		(evil-collection-init 'info)
 		(evil-collection-init 'lsp-ui-menu)
+		(evil-collection-init 'elfeed)
 		(evil-collection-init 'docker)
 		;;(evil-collection-init 'calendar)
     (evil-collection-init 'magit)
@@ -1239,8 +1240,17 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
   (add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
   )
 
-
 (mu4e)
+
+(use-package elfeed
+  :straight t
+  :general
+  (coba-leader-def
+    "E" '(lambda () (interactive) (elfeed) (elfeed-update)))
+  :config 
+  (setq elfeed-feeds
+        '(("https://archlinux.org/feeds/news/" Arch)))
+  )
 
 ;; TODO: IRC
 

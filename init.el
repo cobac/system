@@ -1247,6 +1247,10 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 (use-package dired
 	:config
 	)
+(use-package dired-subtree
+  :straight t
+  :after dired
+  )
 
 ;; Olivetti
 (use-package olivetti

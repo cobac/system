@@ -1245,6 +1245,7 @@ From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?
 ;; Dired
 
 (use-package dired
+  :hook (dired-mode . dired-hide-details-mode)
 	:config
 	)
 (use-package dired-subtree

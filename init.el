@@ -275,6 +275,7 @@
 
 (use-package wgrep
   :straight t
+  :hook (wgrep-setup . evil-normal-state)
   )
 
 ;; Hydra

@@ -148,6 +148,7 @@
 		:states '(normal motion)
 		"ñ" 'counsel-yank-pop
 		"gt" 'undo-tree-visualize
+    "gA" 'align-regexp
 		)
 	(general-def
 		:states '(visual)

@@ -668,64 +668,96 @@
                 org-download-heading-lvl nil))
 
 (use-package org-roam
-	:straight t
-	:general
-	(coba-leader-def
-		"r" 'org-roam-find-file)
-	(general-def
-		:keymaps 'org-mode-map
-		"C-i" 'org-roam-insert)
-	(coba-local-leader-def
-		:keymaps 'org-mode-map
-		"," 'org-roam
-		)
+  :straight (:host github :repo "org-roam/org-roam" :files (:defaults "extensions/*" "org-roam-pkg.el"))
+  :general
+  (coba-leader-def
+  	"r" 'org-roam-node-find)
+  (general-def
+  	:keymaps 'org-mode-map
+  	"C-i" 'org-roam-node-insert)
+  (coba-local-leader-def
+  	:keymaps 'org-mode-map
+  	"," 'org-roam-buffer-toggle
+    "i" 'org-id-get-create
+  	)
+  (general-unbind
+    :keymaps 'org-roam-mode-map
+    :states '(normal visual motion)
+    "SPC")
+  ;; (coba-local-leader-def
+  ;; :keymaps 'org-roam-mode-map
+	;; :states '(normal visual motion)
+  ;; )
+  (general-def
+    :keymaps 'org-roam-mode-map
+	  :states '(normal visual motion)
+    "q" 'evil-delete-buffer)
+  :init
+  (setq org-roam-v2-ack t)
 	:config
-	(setq org-roam-directory "~/Brain"
-				org-roam-index-file "README.org"
+	(setq org-roam-directory (file-truename "~/Brain")
         org-roam-db-location "~/Brain/roam.db")
+  (evil-set-initial-state 'org-roam-mode 'motion)
+  ;; Show hierarchy of nodes from https://github.com/org-roam/org-roam/issues/1565
+  (cl-defmethod org-roam-node-filetitle ((node org-roam-node))
+    "Return the file TITLE for the node."
+    (org-roam-get-keyword "TITLE" (org-roam-node-file node)))
+  (cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
+    "Return the hierarchy for the node."
+    (let ((title (org-roam-node-title node))
+          (olp (org-roam-node-olp node))
+          (level (org-roam-node-level node))
+          (filetitle (org-roam-node-filetitle node)))
+      (concat
+       (if (> level 0) (concat filetitle " -> "))
+       (if (> level 1) (concat (string-join olp " -> ") " -> "))
+       title))
+    )
+  (setq org-roam-node-display-template "${hierarchy:*} ${tags:20}")
+  (setq org-roam-capture-templates '(("d" "default" plain "%?"
+                                      :target (file+head "${slug}.org"
+                                                         "#+title: ${title}")
+                                      :unnarrowed t)))
 
-	(setq org-roam-capture-templates '(("d" "default" plain (function org-roam-capture--get-point)
-																			"- tags :: %?\n\n"
-																			:file-name "${slug}"
-																			:head "#+STARTUP: latexpreview\n#+TITLE: ${title}\n#+roam_tags:\n#+roam_alias:\n\n"
-																			:unnarrowed t))
-				)
+  ;;(setq org-roam-capture-templates '(
+  ;;                                   ("d" "default" plain "%?"
+  ;;                                    :target (file+head "${slug}.org"
+  ;;                                                       "#+title: ${title}"
+  ;;                                                       ;; Roam alisases??
+  ;;                                                       "#+STARTUP: latexpreview\n#+title: ${title}\n#+filetags:\n\n - tags :: %? \n\n")
+  ;;                                    :unnarrowed t)
+  ;;                                   ("r" "bibliography reference" plain "%?"
+  ;;                                    :target
+  ;;                                    (file+head "references/${citekey}.org" "#+title: ${title}\n")
+  ;;                                    :immediate-finish t
+  ;;                                    :unnarrowed t))
+  ;;      )
 
-	(org-roam-mode 1)
-	)
+  (org-roam-db-autosync-enable)
+  )
 
-(use-package company-org-roam
-	:straight (:host github :repo "org-roam/company-org-roam")
-	:after company
-	:config
-	(push 'company-org-roam company-backends))
-
-(use-package org-roam-server
-	:straight t
-	:config
-	(setq org-roam-server-host "127.0.0.1"
-				org-roam-server-port 8080
-				org-roam-server-authenticate nil
-				org-roam-server-export-inline-images t
-				org-roam-server-serve-files nil
-				org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-				org-roam-server-network-poll t
-				org-roam-server-network-arrows nil
-				org-roam-server-network-label-truncate t
-				org-roam-server-network-label-truncate-length 60
-				org-roam-server-network-label-wrap-length 20)
-	(org-roam-server-mode)
-	)
+;; TODO: 3d broken, delete firefox cache and stuff
+;;(use-package org-roam-ui
+;;  :straight
+;;  (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+;;  :after org-roam
+;;  :hook (after-init . org-roam-ui-mode)
+;;  :config
+;;  (setq org-roam-ui-sync-theme t
+;;        org-roam-ui-follow nil
+;;        org-roam-ui-update-on-save t
+;;        org-roam-ui-open-on-start nil))
 
 (use-package org-roam-bibtex
 	:straight t
-	:after org-roam
+	:after org-ref
 	:config
 	(add-hook 'after-init-hook #'org-roam-bibtex-mode)
-	(setq orb-templates '(("d" "default" plain (function org-roam-capture--get-point) "- tags :: %?\n\n" :file-name "${citekey}"
-												 :head "#+STARTUP: latexpreview\n#+TITLE: ${citekey}\n#+roam_alias: \"${author-abbrev}: ${title}\"\n#+ROAM_KEY: ${ref}\n\n"
-												 :unnarrowed t))
-				)
+  (setq orb-note-actions-interface 'hydra)
+	;;(setq orb-templates '(("d" "default" plain (function org-roam-capture--get-point) "- tags :: %?\n\n" :file-name "${citekey}"
+	;;											 :head "#+STARTUP: latexpreview\n#+TITLE: ${citekey}\n#+roam_alias: \"${author-abbrev}: ${title}\"\n#+ROAM_KEY: ${ref}\n\n"
+	;;											 :unnarrowed t))
+	;;			)
 	)
 
 ;; Company
@@ -808,7 +840,7 @@
 
 (defun coba-file-content-as-string (filename)
   "Return the contents of FILENAME as string.
-https://gist.github.com/bigodel/56a4627afdfe9ad28f6dcc68b89a97f8"
+    https://gist.github.com/bigodel/56a4627afdfe9ad28f6dcc68b89a97f8"
   (with-temp-buffer
     (insert-file-contents filename)
     (buffer-string)))
@@ -863,9 +895,9 @@ https://gist.github.com/bigodel/56a4627afdfe9ad28f6dcc68b89a97f8"
 
   (setq org-latex-classes
         `(("custom" ,(format "%s
-[NO-DEFAULT-PACKAGES]
-[NO-PACKAGES]
-[EXTRA]" custom-tex-template)
+    [NO-DEFAULT-PACKAGES]
+    [NO-PACKAGES]
+    [EXTRA]" custom-tex-template)
            ("\\section{%s}" . "\\section*{%s}")
            ("\\subsection{%s}" . "\\subsection*{%s}")
            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -873,9 +905,9 @@ https://gist.github.com/bigodel/56a4627afdfe9ad28f6dcc68b89a97f8"
            ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
 
           ("custom-apa" ,(format "%s
-[NO-DEFAULT-PACKAGES]
-[NO-PACKAGES]
-[EXTRA]" custom-tex-template)
+    [NO-DEFAULT-PACKAGES]
+    [NO-PACKAGES]
+    [EXTRA]" custom-tex-template)
            ("\\section*{%s}" . "\\section*{%s}")
            ("\\subsection*{%s}" . "\\subsection*{%s}")
            ("\\subsubsection*{%s}" . "\\subsubsection*{%s}")
@@ -888,17 +920,17 @@ https://gist.github.com/bigodel/56a4627afdfe9ad28f6dcc68b89a97f8"
 
 (defun coba-org-latex-remove-title (str)
   "Remove empty \\title{} from STR.
-From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
+    From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
   (replace-regexp-in-string "^\\\\title{}$" "" str))
 
 (defun coba-org-latex-remove-author (str)
   "Remove default \\author{Coba} from STR.
-From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
+    From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
   (replace-regexp-in-string "^\\\\author{Coba}$" "" str))
 
 (defun coba-org-latex-remove-date (str)
   "Remove default \\date{\\today} from STR.
-From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
+    From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
   (replace-regexp-in-string "^\\\\date{\\\\today}$" "" str))
 
 (advice-add 'org-latex-template :filter-return 'coba-org-latex-remove-title)
@@ -1004,7 +1036,7 @@ From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-exp
 		"C-k" 'git-rebase-move-line-up)
 	(defun coba-magit-push-all ()
 		"Push to all remotes.
-From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?utm_medium=android_app&utm_source=share"
+  From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?utm_medium=android_app&utm_source=share"
 		(interactive)
 		(mapcar (lambda(remote)	 ;; Loops through the remotes returned by magit-list-remotes
 							(magit-run-git-async "push" "-v" remote (magit-get-current-branch))) ;; Simply run git push -v {{remote}} {{current-branch}}

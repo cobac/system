@@ -714,25 +714,6 @@
        title))
     )
   (setq org-roam-node-display-template "${hierarchy:*} ${tags:20}")
-  (setq org-roam-capture-templates '(("d" "default" plain "%?"
-                                      :target (file+head "${slug}.org"
-                                                         "#+title: ${title}")
-                                      :unnarrowed t)))
-
-  ;;(setq org-roam-capture-templates '(
-  ;;                                   ("d" "default" plain "%?"
-  ;;                                    :target (file+head "${slug}.org"
-  ;;                                                       "#+title: ${title}"
-  ;;                                                       ;; Roam alisases??
-  ;;                                                       "#+STARTUP: latexpreview\n#+title: ${title}\n#+filetags:\n\n - tags :: %? \n\n")
-  ;;                                    :unnarrowed t)
-  ;;                                   ("r" "bibliography reference" plain "%?"
-  ;;                                    :target
-  ;;                                    (file+head "references/${citekey}.org" "#+title: ${title}\n")
-  ;;                                    :immediate-finish t
-  ;;                                    :unnarrowed t))
-  ;;      )
-
   (org-roam-db-autosync-enable)
   )
 
@@ -749,17 +730,21 @@
 ;;        org-roam-ui-open-on-start nil))
 
 (use-package org-roam-bibtex
-	:straight t
-	:after org-ref
+	:straight (:host github :repo "org-roam/org-roam-bibtex")
+	:after org-roam
 	:config
-	(add-hook 'after-init-hook #'org-roam-bibtex-mode)
-  (setq orb-note-actions-interface 'hydra)
-	;;(setq orb-templates '(("d" "default" plain (function org-roam-capture--get-point) "- tags :: %?\n\n" :file-name "${citekey}"
-	;;											 :head "#+STARTUP: latexpreview\n#+TITLE: ${citekey}\n#+roam_alias: \"${author-abbrev}: ${title}\"\n#+ROAM_KEY: ${ref}\n\n"
-	;;											 :unnarrowed t))
-	;;			)
-	)
-
+  (setq orb-note-actions-interface 'hydra
+        orb-preformat-keywords '("citekey" "year" "author-abbrev")
+        org-roam-capture-templates '(
+                                     ("r" "default" plain "- tags :: %?"
+                                      :target (file+head "${slug}.org"
+                                                         ":PROPERTIES:\n:ROAM_ALIASES:\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${title}\n"))
+                                     ("p" "bib" plain "- tags :: %?"
+                                      :target (file+head "${citekey}.org"
+                                                         ":PROPERTIES:\n:ROAM_ALIASES: \"${author-abbrev}(${year}): ${title}\"\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${citekey}\n")
+                                      :immediate-finish t
+                                      :unnarrowed t)))
+  (org-roam-bibtex-mode t))
 ;; Company
 
 (use-package company
@@ -820,7 +805,7 @@
 	 bibtex-completion-notes-path		"~/Brain/";;"bibnotes.org"
 	 bibtex-completion-pdf-open-function (lambda (fpath)
 																				 (call-process "zathura" nil 0 nil fpath))
-	 bibtex-completion-notes-template-multiple-files "#+TITLE: {author-or-editor} (${year}): ${title} "
+                                        ;bibtex-completion-notes-template-multiple-files "#+TITLE: {author-or-editor} (${year}): ${title} "
 	 )
 	;; So that org-ref inherits ivy-bibtex format
 	;; From: https://github.com/jkitchin/org-ref/issues/717#issuecomment-633788035

@@ -1213,6 +1213,20 @@
     "t" '(lambda () (interactive)(org-capture "nil" "f"))
     )
   (add-to-list 'auto-mode-alist '("\\.eml\\'" . org-mode))
+  (add-to-list 'mu4e-marks
+               '(archive
+                 :char       "A"
+                 :prompt     "Archive"
+                 :dyn-target (lambda (target msg)
+                               (mu4e-get-refile-folder msg))
+                 :show-target (lambda (target) "archive")
+                 :action      (lambda (docid msg target)
+                                (mu4e~proc-move
+                                 docid (mu4e~mark-check-target target) "+S-u-N"))))
+  (mu4e~headers-defun-mark-for archive)
+  (general-def 'mu4e-headers-mode-map
+    :states '(motion visual normal emacs)
+    "A" 'mu4e-headers-mark-for-archive)
   )
 
 (use-package mu4e-alert

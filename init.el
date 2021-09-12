@@ -1399,10 +1399,11 @@
 
 	(general-def
 		:keymaps '(comint-mode-map)
-		"C-k" 'comint-previous-input
-		"C-j" 'comint-next-input
-		"C-h" 'comint-previous-matching-input-from-input
-		"C-ñ" 'ess-insert-assign)
+    :states '(motion normal insert)
+	  "C-S-k" 'comint-previous-input
+	  "C-S-j" 'comint-next-input
+	  "C-h" 'comint-previous-matching-input-from-input
+	  "C-ñ" 'ess-insert-assign)
 
 	(general-def
 		:states '(insert)

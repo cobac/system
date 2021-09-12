@@ -1602,7 +1602,10 @@
 		"C-ñ" '(lambda () (interactive) (insert "-> "))
 		"C-Ñ" '(lambda () (interactive) (insert "<- ")))
 	(general-def 'haskell-mode-map 
-		"C-c C-c" 'haskell-process-load-file)
+    "C-c C-c" '(lambda ()
+                 (interactive)
+                 (save-buffer)
+                 (haskell-process-load-file)))
 	(coba-local-leader-def 'haskell-mode-map
 		"r" 'hlint-refactor-refactor-at-point
 		"h" 'hoogle)

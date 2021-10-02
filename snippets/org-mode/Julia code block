@@ -3,7 +3,7 @@
 # key: ,j
 # --
 
-#+BEGIN_SRC julia :eval :session :results output :tangle yes :exports both
+#+BEGIN_SRC julia :session :tangle yes :exports both
 $1
 #+END_SRC
 $0

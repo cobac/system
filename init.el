@@ -1495,6 +1495,10 @@
   (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
   )
 
+;;(use-package ob-julia
+;;  :straight (:type git :host github :repo "nico202/ob-julia" :files (:defaults))
+;;  )
+
 ;; TODO: Julia-formatter
 ;; (use-package julia-formatter
 ;;   :straight (:type git :repo "https://codeberg.org/FelipeLema/julia-formatter.el"

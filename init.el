@@ -108,10 +108,10 @@
 	:config
 	(setq doom-modeline-modal-icon nil
 				doom-modeline-enable-word-count t
-        doom-modeline-icon t
-        mode-line-format '("%e" (:eval (doom-modeline-format--main)) "   ")
-	      )
-  )
+				doom-modeline-icon t
+				mode-line-format '("%e" (:eval (doom-modeline-format--main)) "	 ")
+				)
+	)
 
 ;; General - which-key
 (use-package which-key
@@ -148,39 +148,39 @@
 		:states '(normal motion)
 		"ñ" 'counsel-yank-pop
 		"gt" 'undo-tree-visualize
-    "gA" 'align-regexp
+		"gA" 'align-regexp
 		)
 	(general-def
 		:states '(visual)
-    "C-=" 'count-words-region
+		"C-=" 'count-words-region
 		)
 	:config
-  (use-package undo-tree
-    :straight t
-    :config
-    (setq undo-tree-visualizer-diff t)
-    )
-  (custom-set-variables '(evil-undo-system 'undo-tree))
-  (evil-mode)
-  (global-undo-tree-mode)
+	(use-package undo-tree
+		:straight t
+		:config
+		(setq undo-tree-visualizer-diff t)
+		)
+	(custom-set-variables '(evil-undo-system 'undo-tree))
+	(evil-mode)
+	(global-undo-tree-mode)
 	(use-package evil-anzu
 		:straight t)
 	(use-package evil-collection
-    :straight (:type git :host github :repo "emacs-evil/evil-collection");:branch "retain-selection")
+		:straight (:type git :host github :repo "emacs-evil/evil-collection");:branch "retain-selection")
 		:config
-    (evil-collection-init 'mu4e)
+		(evil-collection-init 'mu4e)
 		(evil-collection-init 'dired)
 		(evil-collection-init 'ediff)
 		(evil-collection-init 'magit-todos)
-    (evil-collection-init 'vterm)
+		(evil-collection-init 'vterm)
 		(evil-collection-init 'info)
 		(evil-collection-init 'lsp-ui-menu)
 		(evil-collection-init 'elfeed)
 		(evil-collection-init 'docker)
 		;;(evil-collection-init 'calendar)
-    (evil-collection-init 'magit)
-    (evil-collection-init 'xref)
-    (evil-collection-init 'nov)
+		(evil-collection-init 'magit)
+		(evil-collection-init 'xref)
+		(evil-collection-init 'nov)
 		)
 	(use-package evil-snipe
 		:straight t
@@ -205,11 +205,11 @@
 	)
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain
-      ediff-split-window-function 'split-window-horizontally)
+			ediff-split-window-function 'split-window-horizontally)
 
 (use-package better-jumper
 	:straight t
-  :after evil
+	:after evil
 	:config
 	(better-jumper-mode +1)
 	(general-def :states 'motion
@@ -275,9 +275,9 @@
 	)
 
 (use-package wgrep
-  :straight t
-  :hook (wgrep-setup . evil-normal-state)
-  )
+	:straight t
+	:hook (wgrep-setup . evil-normal-state)
+	)
 
 ;; Hydra
 (use-package hydra
@@ -342,32 +342,33 @@
 ;; Numbers stuff TODO: check visual selection
 ;; I tried :(
 (use-package evil-numbers
-  :straight (:type git :host github :repo "janpath/evil-numbers");:branch "retain-selection")
-  :after evil
-  :config
-  (general-def
-    :states '(normal motion visual)
-    "C-a" 'evil-numbers/inc-at-pt
-    "C-x" 'evil-numbers/dec-at-pt)
-  )
+	:straight (:type git :host github :repo "janpath/evil-numbers");:branch "retain-selection")
+	:after evil
+	:config
+	(general-def
+		:states '(normal motion visual)
+		"C-a" 'evil-numbers/inc-at-pt
+		"C-x" 'evil-numbers/dec-at-pt)
+	)
 ;; Can't get to work block without incremental
 ;;(use-package plus-minus
 ;;:straight (:host github :repo "peterwu/plus-minus")
 ;;:general
 ;;(general-def
-;;  :states '(normal motion)
-;;  "C-a" '+/-:forward+
-;;  "C-x" '+/-:forward-
-;;  )
+;;	:states '(normal motion)
+;;	"C-a" '+/-:forward+
+;;	"C-x" '+/-:forward-
+;;	)
 ;;(general-def
-;;  :states '(visual)
-;;  "C-a" '+/-:region+
-;;  "C-x" '+/-:region-
-;;  "C-A" '+/-:block+
-;;  "C-X" '+/-:block-
-;;  )
+;;	:states '(visual)
+;;	"C-a" '+/-:region+
+;;	"C-x" '+/-:region-
+;;	"C-A" '+/-:block+
+;;	"C-X" '+/-:block-
+;;	)
 ;;)
 ;; Org
+
 
 (use-package org-super-agenda
 	:straight (:host github :repo "alphapapa/org-super-agenda")
@@ -607,16 +608,16 @@
 
 (defun coba-org-todo-yesterday-twice ()
 	"Call `org-todo-yesterday` twice."
-  (interactive)
-  (org-todo-yesterday)
-  (org-todo-yesterday)
+	(interactive)
+	(org-todo-yesterday)
+	(org-todo-yesterday)
 	)
 
 (defun coba-org-agenda-todo-yesterday-twice ()
 	"Call `org-todo-yesterday` twice."
-  (interactive)
-  (org-agenda-todo-yesterday)
-  (org-agenda-todo-yesterday)
+	(interactive)
+	(org-agenda-todo-yesterday)
+	(org-agenda-todo-yesterday)
 	)
 (general-def
 	:states '(normal motion)
@@ -664,87 +665,87 @@
 	:config
 	(coba-local-leader-def 'org-mode-map
 		"p" 'org-download-clipboard)
-  (setq-default org-download-image-dir "~/Brain/pictures"
-                org-download-heading-lvl nil))
+	(setq-default org-download-image-dir "~/Brain/pictures"
+								org-download-heading-lvl nil))
 
 (use-package org-roam
-  :straight t
-  :general
-  (coba-leader-def
-  	"r" 'org-roam-node-find)
-  (general-def
-  	:keymaps 'org-mode-map
-  	"C-i" 'org-roam-node-insert)
-  (coba-local-leader-def
-  	:keymaps 'org-mode-map
-  	"," 'org-roam-buffer-toggle
-    "i" 'org-id-get-create
-  	)
-  (general-unbind
-    :keymaps 'org-roam-mode-map
-    :states '(normal visual motion)
-    "SPC")
-  ;; (coba-local-leader-def
-  ;; :keymaps 'org-roam-mode-map
+	:straight t
+	:general
+	(coba-leader-def
+		"r" 'org-roam-node-find)
+	(general-def
+		:keymaps 'org-mode-map
+		"C-i" 'org-roam-node-insert)
+	(coba-local-leader-def
+		:keymaps 'org-mode-map
+		"," 'org-roam-buffer-toggle
+		"i" 'org-id-get-create
+		)
+	(general-unbind
+		:keymaps 'org-roam-mode-map
+		:states '(normal visual motion)
+		"SPC")
+	;; (coba-local-leader-def
+	;; :keymaps 'org-roam-mode-map
 	;; :states '(normal visual motion)
-  ;; )
-  (general-def
-    :keymaps 'org-roam-mode-map
-	  :states '(normal visual motion)
-    "q" 'evil-delete-buffer)
-  :init
-  (setq org-roam-v2-ack t)
+	;; )
+	(general-def
+		:keymaps 'org-roam-mode-map
+		:states '(normal visual motion)
+		"q" 'evil-delete-buffer)
+	:init
+	(setq org-roam-v2-ack t)
 	:config
 	(setq org-roam-directory (file-truename "~/Brain")
-        org-roam-db-location "~/Brain/roam.db")
-  (evil-set-initial-state 'org-roam-mode 'motion)
-  ;; Show hierarchy of nodes from https://github.com/org-roam/org-roam/issues/1565
-  (cl-defmethod org-roam-node-filetitle ((node org-roam-node))
-    "Return the file TITLE for the node."
-    (org-roam-get-keyword "TITLE" (org-roam-node-file node)))
-  (cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
-    "Return the hierarchy for the node."
-    (let ((title (org-roam-node-title node))
-          (olp (org-roam-node-olp node))
-          (level (org-roam-node-level node))
-          (filetitle (org-roam-node-filetitle node)))
-      (concat
-       title
-       (if (> level 0) (concat ", from " filetitle ))
-       (if (> level 1) (concat " -> " (string-join olp " -> ")))
-       ))
-    )
-  (setq org-roam-node-display-template "${hierarchy:*} ${tags:20}")
-  (org-roam-db-autosync-enable)
-  )
+				org-roam-db-location "~/Brain/roam.db")
+	(evil-set-initial-state 'org-roam-mode 'motion)
+	;; Show hierarchy of nodes from https://github.com/org-roam/org-roam/issues/1565
+	(cl-defmethod org-roam-node-filetitle ((node org-roam-node))
+		"Return the file TITLE for the node."
+		(org-roam-get-keyword "TITLE" (org-roam-node-file node)))
+	(cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
+		"Return the hierarchy for the node."
+		(let ((title (org-roam-node-title node))
+					(olp (org-roam-node-olp node))
+					(level (org-roam-node-level node))
+					(filetitle (org-roam-node-filetitle node)))
+			(concat
+			 title
+			 (if (> level 0) (concat ", from " filetitle ))
+			 (if (> level 1) (concat " -> " (string-join olp " -> ")))
+			 ))
+		)
+	(setq org-roam-node-display-template "${hierarchy:*} ${tags:20}")
+	(org-roam-db-autosync-enable)
+	)
 
 (use-package org-roam-ui
-  :straight
-  (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
-  :after org-roam
-  :hook (after-init . org-roam-ui-mode)
-  :config
-  (setq org-roam-ui-sync-theme t
-        org-roam-ui-follow nil
-        org-roam-ui-update-on-save t
-        org-roam-ui-open-on-start nil))
+	:straight
+	(:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+	:after org-roam
+	:hook (after-init . org-roam-ui-mode)
+	:config
+	(setq org-roam-ui-sync-theme t
+				org-roam-ui-follow nil
+				org-roam-ui-update-on-save t
+				org-roam-ui-open-on-start nil))
 
 (use-package org-roam-bibtex
 	:straight (:host github :repo "org-roam/org-roam-bibtex")
 	:after org-roam
 	:config
-  (setq orb-note-actions-interface 'hydra
-        orb-preformat-keywords '("citekey" "year" "author-abbrev")
-        org-roam-capture-templates '(
-                                     ("r" "default" plain "- tags :: %?"
-                                      :target (file+head "${slug}.org"
-                                                         ":PROPERTIES:\n:ROAM_ALIASES:\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${title}\n"))
-                                     ("p" "bib" plain "- tags :: %?"
-                                      :target (file+head "${citekey}.org"
-                                                         ":PROPERTIES:\n:ROAM_ALIASES: \"${author-abbrev}(${year}): ${title}\"\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${citekey}\n")
-                                      :immediate-finish t
-                                      :unnarrowed t)))
-  (org-roam-bibtex-mode t))
+	(setq orb-note-actions-interface 'hydra
+				orb-preformat-keywords '("citekey" "year" "author-abbrev")
+				org-roam-capture-templates '(
+																		 ("r" "default" plain "- tags :: %?"
+																			:target (file+head "${slug}.org"
+																												 ":PROPERTIES:\n:ROAM_ALIASES:\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${title}\n"))
+																		 ("p" "bib" plain "- tags :: %?"
+																			:target (file+head "${citekey}.org"
+																												 ":PROPERTIES:\n:ROAM_ALIASES: \"${author-abbrev}(${year}): ${title}\"\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${citekey}\n")
+																			:immediate-finish t
+																			:unnarrowed t)))
+	(org-roam-bibtex-mode t))
 ;; Company
 
 (use-package company
@@ -805,7 +806,7 @@
 	 bibtex-completion-notes-path		"~/Brain/";;"bibnotes.org"
 	 bibtex-completion-pdf-open-function (lambda (fpath)
 																				 (call-process "zathura" nil 0 nil fpath))
-                                        ;bibtex-completion-notes-template-multiple-files "#+TITLE: {author-or-editor} (${year}): ${title} "
+																				;bibtex-completion-notes-template-multiple-files "#+TITLE: {author-or-editor} (${year}): ${title} "
 	 )
 	;; So that org-ref inherits ivy-bibtex format
 	;; From: https://github.com/jkitchin/org-ref/issues/717#issuecomment-633788035
@@ -824,99 +825,99 @@
 	)
 
 (defun coba-file-content-as-string (filename)
-  "Return the contents of FILENAME as string.
-    https://gist.github.com/bigodel/56a4627afdfe9ad28f6dcc68b89a97f8"
-  (with-temp-buffer
-    (insert-file-contents filename)
-    (buffer-string)))
+	"Return the contents of FILENAME as string.
+		https://gist.github.com/bigodel/56a4627afdfe9ad28f6dcc68b89a97f8"
+	(with-temp-buffer
+		(insert-file-contents filename)
+		(buffer-string)))
 
 (defvar org-tex-apa-template
-  (coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article.tex"))
+	(coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article.tex"))
 
 (defvar org-tex-apa-es-template
-  (coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article-es.tex"))
+	(coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article-es.tex"))
 
 (defvar org-tex-report-template
-  (coba-file-content-as-string "~/.emacs.d/ox-templates/report.tex"))
+	(coba-file-content-as-string "~/.emacs.d/ox-templates/report.tex"))
 
 (defvar org-tex-graphix-template
-  (coba-file-content-as-string "~/.emacs.d/ox-templates/graphix.tex"))
+	(coba-file-content-as-string "~/.emacs.d/ox-templates/graphix.tex"))
 
 (defvar org-tex-footmisc-template
-  (coba-file-content-as-string "~/.emacs.d/ox-templates/footmisc.tex"))
+	(coba-file-content-as-string "~/.emacs.d/ox-templates/footmisc.tex"))
 
 (defvar org-tex-math-template
-  (coba-file-content-as-string "~/.emacs.d/ox-templates/math.tex"))
+	(coba-file-content-as-string "~/.emacs.d/ox-templates/math.tex"))
 
 (defvar custom-tex-template nil
-  "Custom latex preamble for org-export."
-  )
+	"Custom latex preamble for org-export."
+	)
 
 (setq custom-tex-template (mapconcat 'identity (list org-tex-apa-template
-                                                     org-tex-math-template
-                                                     org-tex-graphix-template) "\n"))
+																										 org-tex-math-template
+																										 org-tex-graphix-template) "\n"))
 
 (defun coba-define-org-tex-template ()
-  "Define `org-latex-classes' concatenating snippets."
-  (interactive)
+	"Define `org-latex-classes' concatenating snippets."
+	(interactive)
 
-  (setq org-tex-apa-template
-        (coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article.tex"))
+	(setq org-tex-apa-template
+				(coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article.tex"))
 
-  (setq org-tex-apa-es-template
-        (coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article-es.tex"))
+	(setq org-tex-apa-es-template
+				(coba-file-content-as-string "~/.emacs.d/ox-templates/apa-article-es.tex"))
 
-  (setq org-tex-report-template
-        (coba-file-content-as-string "~/.emacs.d/ox-templates/report.tex"))
+	(setq org-tex-report-template
+				(coba-file-content-as-string "~/.emacs.d/ox-templates/report.tex"))
 
-  (setq org-tex-graphix-template
-        (coba-file-content-as-string "~/.emacs.d/ox-templates/graphix.tex"))
+	(setq org-tex-graphix-template
+				(coba-file-content-as-string "~/.emacs.d/ox-templates/graphix.tex"))
 
-  (setq org-tex-footmisc-template
-        (coba-file-content-as-string "~/.emacs.d/ox-templates/footmisc.tex"))
+	(setq org-tex-footmisc-template
+				(coba-file-content-as-string "~/.emacs.d/ox-templates/footmisc.tex"))
 
-  (setq org-tex-math-template
-        (coba-file-content-as-string "~/.emacs.d/ox-templates/math.tex"))
+	(setq org-tex-math-template
+				(coba-file-content-as-string "~/.emacs.d/ox-templates/math.tex"))
 
-  (setq org-latex-classes
-        `(("custom" ,(format "%s
-    [NO-DEFAULT-PACKAGES]
-    [NO-PACKAGES]
-    [EXTRA]" custom-tex-template)
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-           ("\\paragraph{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+	(setq org-latex-classes
+				`(("custom" ,(format "%s
+		[NO-DEFAULT-PACKAGES]
+		[NO-PACKAGES]
+		[EXTRA]" custom-tex-template)
+					 ("\\section{%s}" . "\\section*{%s}")
+					 ("\\subsection{%s}" . "\\subsection*{%s}")
+					 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+					 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
 
-          ("custom-apa" ,(format "%s
-    [NO-DEFAULT-PACKAGES]
-    [NO-PACKAGES]
-    [EXTRA]" custom-tex-template)
-           ("\\section*{%s}" . "\\section*{%s}")
-           ("\\subsection*{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection*{%s}" . "\\subsubsection*{%s}")
-           ("\\paragraph*{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph*{%s}" . "\\subparagraph*{%s}"))
-          )))
+					("custom-apa" ,(format "%s
+		[NO-DEFAULT-PACKAGES]
+		[NO-PACKAGES]
+		[EXTRA]" custom-tex-template)
+					 ("\\section*{%s}" . "\\section*{%s}")
+					 ("\\subsection*{%s}" . "\\subsection*{%s}")
+					 ("\\subsubsection*{%s}" . "\\subsubsection*{%s}")
+					 ("\\paragraph*{%s}" . "\\paragraph*{%s}")
+					 ("\\subparagraph*{%s}" . "\\subparagraph*{%s}"))
+					)))
 
 (coba-define-org-tex-template)
 ;; TODO: Check what's up with codeblocks
 
 (defun coba-org-latex-remove-title (str)
-  "Remove empty \\title{} from STR.
-    From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
-  (replace-regexp-in-string "^\\\\title{}$" "" str))
+	"Remove empty \\title{} from STR.
+		From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
+	(replace-regexp-in-string "^\\\\title{}$" "" str))
 
 (defun coba-org-latex-remove-author (str)
-  "Remove default \\author{Coba} from STR.
-    From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
-  (replace-regexp-in-string "^\\\\author{Coba}$" "" str))
+	"Remove default \\author{Coba} from STR.
+		From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
+	(replace-regexp-in-string "^\\\\author{Coba}$" "" str))
 
 (defun coba-org-latex-remove-date (str)
-  "Remove default \\date{\\today} from STR.
-    From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
-  (replace-regexp-in-string "^\\\\date{\\\\today}$" "" str))
+	"Remove default \\date{\\today} from STR.
+		From https://stackoverflow.com/questions/57967064/disable-title-in-org-latex-export ."
+	(replace-regexp-in-string "^\\\\date{\\\\today}$" "" str))
 
 (advice-add 'org-latex-template :filter-return 'coba-org-latex-remove-title)
 (advice-add 'org-latex-template :filter-return 'coba-org-latex-remove-author)
@@ -961,12 +962,12 @@
 				org-ref-default-bibliography '("~/Brain/bib.bib")
 				org-ref-bibliography-notes	 "~/Brain/"
 				org-ref-pdf-directory				 "~/Brain/pdf"
-        org-ref-default-citation-link "parencite"
+				org-ref-default-citation-link "parencite"
 				org-ref-open-pdf-function (lambda (fpath)
 																		(call-process "zathura" nil 0 nil fpath))
 				)
-  (general-def 'org-mode-map
-    "C-c ]" 'org-ref-ivy-insert-cite-link)
+	(general-def 'org-mode-map
+		"C-c ]" 'org-ref-ivy-insert-cite-link)
 
 	(use-package doi-utils
 		:config
@@ -1021,7 +1022,7 @@
 		"C-k" 'git-rebase-move-line-up)
 	(defun coba-magit-push-all ()
 		"Push to all remotes.
-  From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?utm_medium=android_app&utm_source=share"
+	From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?utm_medium=android_app&utm_source=share"
 		(interactive)
 		(mapcar (lambda(remote)	 ;; Loops through the remotes returned by magit-list-remotes
 							(magit-run-git-async "push" "-v" remote (magit-get-current-branch))) ;; Simply run git push -v {{remote}} {{current-branch}}
@@ -1041,7 +1042,7 @@
 
 (use-package forge
 	:straight t
-  :after magit)
+	:after magit)
 
 (use-package magit-todos
 	:straight t
@@ -1105,8 +1106,8 @@
 	;;										 " close(con);"
 	;;										 " out")))
 	;;				apheleia-formatters)
-  :config
-  (apheleia-global-mode)
+	:config
+	(apheleia-global-mode)
 	)
 
 
@@ -1139,162 +1140,162 @@
 	)
 
 (use-package mu4e
-  :straight t
-  :general
-  (coba-leader-def
-    "m" 'mu4e)
-  :config
-  (add-hook 'mu4e-compose-mode-hook 'flyspell-mode)
-  (setq mail-user-agent 'mu4e-user-agent
-        mu4e-change-filenames-when-moving t
-        mu4e-get-mail-command "/usr/bin/mbsync -a"
-        mu4e-update-interval 120
-        ;;mu4e-html2text-command "html2text --unicode-snob"
-        ;;shr-color-visible-luminance-min 80
-        message-kill-buffer-on-exit t
-        mu4e-index-update-error-warning nil
-        mu4e-view-show-images t
-        mu4e-attachment-dir "/tmp"
-        message-send-mail-function 'smtpmail-send-it
-        mu4e-compose-dont-reply-to-self t
-        mu4e-context-policy 'pick-first
-        mu4e-compose-context-policy 'ask
-        )
-  (add-to-list 'mu4e-bookmarks
-               '(:name "Coba Inbox"
-                       :query "maildir:/coba/Inbox"
-                       :key ?j)
-               )
-  (add-to-list 'mu4e-bookmarks
-               '(:name "Cosas Inbox"
-                       :query "maildir:/cosas/Inbox"
-                       :key ?k)
-               )
-  (setq mu4e-contexts
-        (list
-         (make-mu4e-context
-          :name "coba"
-          :match-func (lambda (msg)
-                        (when msg
-                          (string-prefix-p "/coba" (mu4e-message-field msg :maildir))))
-          :vars '((user-full-name        . "Coba")
-                  (user-mail-address     . "coba@cobac.eu")
-                  (mu4e-drafts-folder    . "/coba/Inbox/Drafts")
-                  (mu4e-sent-folder      . "/coba/Inbox/Sent")
-                  (mu4e-refile-folder    . "/coba/Inbox/Archives")
-                  (mu4e-trash-folder     . "/coba/Inbox/Trash")
-                  (smtpmail-smtp-user    . "coba@cobac.eu")
-                  (smtpmail-smtp-server  . "mail.your-server.de")
-                  (smtpmail-stream-type  . ssl)
-                  (smtpmail-smtp-service . 465)))
-         (make-mu4e-context
-          :name "j-cosas"
-          :match-func (lambda (msg)
-                        (when msg
-                          (string-prefix-p "/cosas" (mu4e-message-field msg :maildir))))
-          :vars '((user-full-name        . "David Coba")
-                  (user-mail-address     . "cosas@cobac.eu")
-                  (mu4e-drafts-folder    . "/cosas/Inbox/Drafts")
-                  (mu4e-sent-folder      . "/cosas/Inbox/Sent")
-                  (mu4e-refile-folder    . "/cosas/Inbox/Archives")
-                  (mu4e-trash-folder     . "/cosas/Inbox/Trash")
-                  (smtpmail-smtp-user    . "cosas@cobac.eu")
-                  (smtpmail-smtp-server  . "mail.your-server.de")
-                  (smtpmail-stream-type  . ssl)
-                  (smtpmail-smtp-service . 465)))))
+	:straight t
+	:general
+	(coba-leader-def
+		"m" 'mu4e)
+	:config
+	(add-hook 'mu4e-compose-mode-hook 'flyspell-mode)
+	(setq mail-user-agent 'mu4e-user-agent
+				mu4e-change-filenames-when-moving t
+				mu4e-get-mail-command "/usr/bin/mbsync -a"
+				mu4e-update-interval 120
+				;;mu4e-html2text-command "html2text --unicode-snob"
+				;;shr-color-visible-luminance-min 80
+				message-kill-buffer-on-exit t
+				mu4e-index-update-error-warning nil
+				mu4e-view-show-images t
+				mu4e-attachment-dir "/tmp"
+				message-send-mail-function 'smtpmail-send-it
+				mu4e-compose-dont-reply-to-self t
+				mu4e-context-policy 'pick-first
+				mu4e-compose-context-policy 'ask
+				)
+	(add-to-list 'mu4e-bookmarks
+							 '(:name "Coba Inbox"
+											 :query "maildir:/coba/Inbox"
+											 :key ?j)
+							 )
+	(add-to-list 'mu4e-bookmarks
+							 '(:name "Cosas Inbox"
+											 :query "maildir:/cosas/Inbox"
+											 :key ?k)
+							 )
+	(setq mu4e-contexts
+				(list
+				 (make-mu4e-context
+					:name "coba"
+					:match-func (lambda (msg)
+												(when msg
+													(string-prefix-p "/coba" (mu4e-message-field msg :maildir))))
+					:vars '((user-full-name				 . "Coba")
+									(user-mail-address		 . "coba@cobac.eu")
+									(mu4e-drafts-folder		 . "/coba/Inbox/Drafts")
+									(mu4e-sent-folder			 . "/coba/Inbox/Sent")
+									(mu4e-refile-folder		 . "/coba/Inbox/Archives")
+									(mu4e-trash-folder		 . "/coba/Inbox/Trash")
+									(smtpmail-smtp-user		 . "coba@cobac.eu")
+									(smtpmail-smtp-server	 . "mail.your-server.de")
+									(smtpmail-stream-type	 . ssl)
+									(smtpmail-smtp-service . 465)))
+				 (make-mu4e-context
+					:name "j-cosas"
+					:match-func (lambda (msg)
+												(when msg
+													(string-prefix-p "/cosas" (mu4e-message-field msg :maildir))))
+					:vars '((user-full-name				 . "David Coba")
+									(user-mail-address		 . "cosas@cobac.eu")
+									(mu4e-drafts-folder		 . "/cosas/Inbox/Drafts")
+									(mu4e-sent-folder			 . "/cosas/Inbox/Sent")
+									(mu4e-refile-folder		 . "/cosas/Inbox/Archives")
+									(mu4e-trash-folder		 . "/cosas/Inbox/Trash")
+									(smtpmail-smtp-user		 . "cosas@cobac.eu")
+									(smtpmail-smtp-server	 . "mail.your-server.de")
+									(smtpmail-stream-type	 . ssl)
+									(smtpmail-smtp-service . 465)))))
 
-  (setq mu4e-split-view 'horizontal
-        mu4e-view-show-addresses t
-        mu4e-view-show-images t
-        )
-  (add-to-list 'mu4e-view-actions '("browser" . mu4e-action-view-in-browser) t)
+	(setq mu4e-split-view 'horizontal
+				mu4e-view-show-addresses t
+				mu4e-view-show-images t
+				)
+	(add-to-list 'mu4e-view-actions '("browser" . mu4e-action-view-in-browser) t)
 
-  (coba-local-leader-def 'mu4e-view-mode-map
-    "t" '(lambda () (interactive)(org-capture "nil" "f"))
-    )
-  (add-to-list 'auto-mode-alist '("\\.eml\\'" . org-mode))
-  (add-to-list 'mu4e-marks
-               '(archive
-                 :char       "A"
-                 :prompt     "Archive"
-                 :dyn-target (lambda (target msg)
-                               (mu4e-get-refile-folder msg))
-                 :show-target (lambda (target) "archive")
-                 :action      (lambda (docid msg target)
-                                (mu4e~proc-move
-                                 docid (mu4e~mark-check-target target) "+S-u-N"))))
-  (mu4e~headers-defun-mark-for archive)
-  (general-def 'mu4e-headers-mode-map
-    :states '(motion visual normal emacs)
-    "A" 'mu4e-headers-mark-for-archive)
-  )
+	(coba-local-leader-def 'mu4e-view-mode-map
+		"t" '(lambda () (interactive)(org-capture "nil" "f"))
+		)
+	(add-to-list 'auto-mode-alist '("\\.eml\\'" . org-mode))
+	(add-to-list 'mu4e-marks
+							 '(archive
+								 :char			 "A"
+								 :prompt		 "Archive"
+								 :dyn-target (lambda (target msg)
+															 (mu4e-get-refile-folder msg))
+								 :show-target (lambda (target) "archive")
+								 :action			(lambda (docid msg target)
+																(mu4e~proc-move
+																 docid (mu4e~mark-check-target target) "+S-u-N"))))
+	(mu4e~headers-defun-mark-for archive)
+	(general-def 'mu4e-headers-mode-map
+		:states '(motion visual normal emacs)
+		"A" 'mu4e-headers-mark-for-archive)
+	)
 
 (use-package mu4e-alert
-  :straight t
-  :config
-  (mu4e-alert-set-default-style 'libnotify)
-  (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
-  (add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
-  (setq doom-modeline-mu4e t)
-  )
+	:straight t
+	:config
+	(mu4e-alert-set-default-style 'libnotify)
+	(add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
+	(add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
+	(setq doom-modeline-mu4e t)
+	)
 
 ;; TODO: Fix mu4e-thread-folding
 ;; Error with nano-color-background not defined
 ;;(use-package mu4e-thread-folding
-;;  :straight (:type git :host github :repo "rougier/mu4e-thread-folding")
-;;  :config 
-;;  (require 'mu4e-thread-folding)
-;;  (add-to-list 'mu4e-header-info-custom
-;;               '(:empty . (:name "Empty"
-;;                                 :shortname ""
-;;                                 :function (lambda (msg) "  "))))
-;;  (setq mu4e-headers-fields '((:empty         .    2)
-;;                              (:human-date    .   12)
-;;                              (:flags         .    6)
-;;                              (:mailing-list  .   10)
-;;                              (:from          .   22)
-;;                              (:subject       .   nil)))
-;;  (define-key mu4e-headers-mode-map (kbd "<tab>")     'mu4e-headers-toggle-at-point)
-;;  )
+;;	:straight (:type git :host github :repo "rougier/mu4e-thread-folding")
+;;	:config 
+;;	(require 'mu4e-thread-folding)
+;;	(add-to-list 'mu4e-header-info-custom
+;;							 '(:empty . (:name "Empty"
+;;																 :shortname ""
+;;																 :function (lambda (msg) "	"))))
+;;	(setq mu4e-headers-fields '((:empty					.		 2)
+;;															(:human-date		.		12)
+;;															(:flags					.		 6)
+;;															(:mailing-list	.		10)
+;;															(:from					.		22)
+;;															(:subject				.		nil)))
+;;	(define-key mu4e-headers-mode-map (kbd "<tab>")			'mu4e-headers-toggle-at-point)
+;;	)
 
 ;; TODO: check inline thing
 (use-package org-msg
-  :straight t
-  :config
-  (setq
-   org-msg-default-alternatives '(text html)
-   org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
+	:straight t
+	:config
+	(setq
+	 org-msg-default-alternatives '(text html)
+	 org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
 	 org-msg-startup "inlineimages"
-   org-msg-convert-citation t)
-  (setq-default org-html-with-latex 'dvipng)
-  (org-msg-mode)
-  (add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
-  )
+	 org-msg-convert-citation t)
+	(setq-default org-html-with-latex 'dvipng)
+	(org-msg-mode)
+	(add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
+	)
 
 (mu4e)
 
 (use-package elfeed
-  :straight t
-  :general
-  (coba-leader-def
-    "E" '(lambda () (interactive) (elfeed) (elfeed-update)))
-  :config 
-  (setq elfeed-feeds
-        '(("https://archlinux.org/feeds/news/" Arch)))
-  )
+	:straight t
+	:general
+	(coba-leader-def
+		"E" '(lambda () (interactive) (elfeed) (elfeed-update)))
+	:config 
+	(setq elfeed-feeds
+				'(("https://archlinux.org/feeds/news/" Arch)))
+	)
 
 ;; TODO: IRC
 
 ;; Dired
 
 (use-package dired
-  :hook (dired-mode . dired-hide-details-mode)
+	:hook (dired-mode . dired-hide-details-mode)
 	:config
 	)
 (use-package dired-subtree
-  :straight t
-  :after dired
-  )
+	:straight t
+	:after dired
+	)
 
 ;; Olivetti
 (use-package olivetti
@@ -1306,65 +1307,65 @@
 
 ;; Libvterm
 (use-package vterm
-  :straight (:type git :host github :repo "akermu/emacs-libvterm")
+	:straight (:type git :host github :repo "akermu/emacs-libvterm")
 	:general
 	(coba-leader-def
 		"RET" 'vterm)
-  )
+	)
 
 ;;(use-package project
-;;   :straight t
-;;   )
+;;	 :straight t
+;;	 )
 
 (use-package lsp-mode
-  :straight t
-  :init
-  (setq lsp-keymap-prefix "C-l")
-  ;; Optimization stuff
-  (setq gc-cons-threshold 100000000
-        read-process-output-max (* 1024 1024)
-        lsp-completion-provider :capf
-        lsp-idle-delay 0.500
-        )
-  :hook ((lsp-mode . lsp-enable-which-key-integration))
-  :general
-  (general-def 'lsp-browser-mode-map
-    "q" 'quit-window)
-  (general-def 'lsp-mode-map
-    "C-l i" 'lsp-ivy-workspace-symbol)
-  :config
-  (evil-set-initial-state 'lsp-browser-mode 'motion)
-  (setq lsp-headerline-breadcrumb-segments '(symbols)
-        lsp-log-io t
-        lsp-print-performance t
-        ) 
-  ) 
+	:straight t
+	:init
+	(setq lsp-keymap-prefix "C-l")
+	;; Optimization stuff
+	(setq gc-cons-threshold 100000000
+				read-process-output-max (* 1024 1024)
+				lsp-completion-provider :capf
+				lsp-idle-delay 0.500
+				)
+	:hook ((lsp-mode . lsp-enable-which-key-integration))
+	:general
+	(general-def 'lsp-browser-mode-map
+		"q" 'quit-window)
+	(general-def 'lsp-mode-map
+		"C-l i" 'lsp-ivy-workspace-symbol)
+	:config
+	(evil-set-initial-state 'lsp-browser-mode 'motion)
+	(setq lsp-headerline-breadcrumb-segments '(symbols)
+				lsp-log-io t
+				lsp-print-performance t
+				) 
+	) 
 
 (use-package lsp-ui
-  :straight t)
+	:straight t)
 
 (use-package lsp-ivy
-  :straight t)
+	:straight t)
 
 ;; debugger
 ;;(use-package dap-mode
-;;  :straight t)
+;;	:straight t)
 ;; (use-package dap-LANGUAGE
-;;   :straight t)
+;;	 :straight t)
 
 ;; gpg passwords
 
 (defun coba-lookup-password (&rest keys)
-  "Helper to get KEYS from emacsclient."
-  (when-let ((result (apply #'auth-source-search keys)))
-    (funcall (plist-get (car result) :secret))))
+	"Helper to get KEYS from emacsclient."
+	(when-let ((result (apply #'auth-source-search keys)))
+		(funcall (plist-get (car result) :secret))))
 
 (use-package atomic-chrome
-  :straight t
-  :config
-  (atomic-chrome-start-server)
-  (setq atomic-chrome-buffer-open-style 'full)
-  )
+	:straight t
+	:config
+	(atomic-chrome-start-server)
+	(setq atomic-chrome-buffer-open-style 'full)
+	)
 
 																				; Languages
 ;; Systemd
@@ -1380,9 +1381,9 @@
 ;; ESS
 (use-package ess
 	:straight t
-                                        ;  :hook
-                                        ;  (ess-r-mode . lsp)
-                                        ;  (inferior-ess-r-mode . lsp)
+																				;	 :hook
+																				;	 (ess-r-mode . lsp)
+																				;	 (inferior-ess-r-mode . lsp)
 	:config
 	(require 'ess-site)
 	(setq
@@ -1393,17 +1394,17 @@
 	 ess-style 'RStudio
 	 )
 
-  (evil-set-initial-state 'ess-r-help-mode 'motion)
-  (general-def 'ess-r-help-mode-map
-    "q" 'quit-window)
+	(evil-set-initial-state 'ess-r-help-mode 'motion)
+	(general-def 'ess-r-help-mode-map
+		"q" 'quit-window)
 
 	(general-def
 		:keymaps '(comint-mode-map)
-    :states '(motion normal insert)
-	  "C-S-k" 'comint-previous-input
-	  "C-S-j" 'comint-next-input
-	  "C-h" 'comint-previous-matching-input-from-input
-	  "C-ñ" 'ess-insert-assign)
+		:states '(motion normal insert)
+		"C-S-k" 'comint-previous-input
+		"C-S-j" 'comint-next-input
+		"C-h" 'comint-previous-matching-input-from-input
+		"C-ñ" 'ess-insert-assign)
 
 	(general-def
 		:states '(insert)
@@ -1419,7 +1420,7 @@
 
 (evil-set-initial-state 'ess-julia-help-mode 'motion)
 (general-def 'ess-julia-help-mode-map
-  "q" 'quit-window)
+	"q" 'quit-window)
 
 ;;	Stan
 (use-package stan-mode
@@ -1455,61 +1456,61 @@
 	)
 
 (use-package lsp-julia
-  :straight (:type git :host github :repo "non-Jedi/lsp-julia")
-  :after lsp-mode
-  :config
-  (setq lsp-julia-default-environment "~/.julia/environments/v1.6")
-  (setq lsp-julia-timeout 99999999)
-  )
+	:straight (:type git :host github :repo "non-Jedi/lsp-julia")
+	:after lsp-mode
+	:config
+	(setq lsp-julia-default-environment "~/.julia/environments/v1.6")
+	(setq lsp-julia-timeout 99999999)
+	)
 
 (use-package julia-mode
-  :straight t
-  :config
-  (add-hook 'julia-mode-hook #'lsp)
-  )
+	:straight t
+	:config
+	(add-hook 'julia-mode-hook #'lsp)
+	)
 
 (use-package julia-vterm
-  :straight t
-  :config
-  (add-hook 'julia-mode-hook #'julia-vterm-mode)
-  (general-def 
-	  :states '(normal visual insert motion emacs)
-	  :keymaps 'julia-mode-map
-    "C-c C-c" 'julia-vterm-send-region-or-current-line
-    "C-t" 'coba-julia-vterm-define-threads
-    )
+	:straight t
+	:config
+	(add-hook 'julia-mode-hook #'julia-vterm-mode)
+	(general-def 
+		:states '(normal visual insert motion emacs)
+		:keymaps 'julia-mode-map
+		"C-c C-c" 'julia-vterm-send-region-or-current-line
+		"C-t" 'coba-julia-vterm-define-threads
+		)
 
-  (defun coba-julia-vterm-define-threads ()
-    (interactive)
-    (let ((val (read-from-minibuffer "Number of threads: ")))
-      (setq julia-vterm-repl-program (concat "/usr/bin/julia -t " val))))
-  (setq display-buffer-reuse-frames t)
-  )
+	(defun coba-julia-vterm-define-threads ()
+		(interactive)
+		(let ((val (read-from-minibuffer "Number of threads: ")))
+			(setq julia-vterm-repl-program (concat "/usr/bin/julia -t " val))))
+	(setq display-buffer-reuse-frames t)
+	)
 
 (use-package ob-julia-vterm
-  :straight t
-  :config 
-  (add-to-list 'org-babel-load-languages '(julia-vterm . t))
-  (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
-  (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
-  )
+	:straight t
+	:config 
+	(add-to-list 'org-babel-load-languages '(julia-vterm . t))
+	(org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+	(defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
+	)
 
 ;;(use-package ob-julia
-;;  :straight (:type git :host github :repo "nico202/ob-julia" :files (:defaults))
-;;  )
+;;	:straight (:type git :host github :repo "nico202/ob-julia" :files (:defaults))
+;;	)
 
 ;; TODO: Julia-formatter
 ;; (use-package julia-formatter
-;;   :straight (:type git :repo "https://codeberg.org/FelipeLema/julia-formatter.el"
-;;                    :files ("*.jl" "*.el" "*.toml"))
-;;   :config
-;;   (julia-formatter-setup-aggressive-hooks)
-;;   )
+;;	 :straight (:type git :repo "https://codeberg.org/FelipeLema/julia-formatter.el"
+;;										:files ("*.jl" "*.el" "*.toml"))
+;;	 :config
+;;	 (julia-formatter-setup-aggressive-hooks)
+;;	 )
 
 (use-package eterm-256color
-  :straight t
-  :config
-  (add-hook 'term-mode-hook #'eterm-256color-mode))
+	:straight t
+	:config
+	(add-hook 'term-mode-hook #'eterm-256color-mode))
 
 ;; Markdown
 (use-package markdown-mode
@@ -1520,9 +1521,9 @@
 																				;("\\.Rmd\\'" . markdown-mode)
 	 ("\\.markdown\\'" . markdown-mode)
 	 )
-  :config
-  (general-def 'markdown-view-mode-map
-    "q" 'quit-window)
+	:config
+	(general-def 'markdown-view-mode-map
+		"q" 'quit-window)
 	)
 
 ;; Polymode
@@ -1588,14 +1589,14 @@
 		(save-buffer)
 		(shell-command (concat "texcount " (buffer-name))))
 
-  (defun coba-bibtex-check()
-    "Check the validity of a bibtex file."
-    (interactive)
-    (save-buffer)
-    (shell-command (concat "biber -tool -V " (buffer-name))))
-  (coba-local-leader-def
-    :keymaps 'bibtex-mode-map
-    "c" 'coba-bibtex-check)
+	(defun coba-bibtex-check()
+		"Check the validity of a bibtex file."
+		(interactive)
+		(save-buffer)
+		(shell-command (concat "biber -tool -V " (buffer-name))))
+	(coba-local-leader-def
+		:keymaps 'bibtex-mode-map
+		"c" 'coba-bibtex-check)
 	)
 
 ;; Haskell
@@ -1607,19 +1608,19 @@
 		"C-ñ" '(lambda () (interactive) (insert "-> "))
 		"C-Ñ" '(lambda () (interactive) (insert "<- ")))
 	(general-def 'haskell-mode-map 
-    "C-c C-c" '(lambda ()
-                 (interactive)
-                 (save-buffer)
-                 (haskell-process-load-file)))
+		"C-c C-c" '(lambda ()
+								 (interactive)
+								 (save-buffer)
+								 (haskell-process-load-file)))
 	(coba-local-leader-def 'haskell-mode-map
 		"r" 'hlint-refactor-refactor-at-point
 		"h" 'hoogle)
-  (general-def 'haskell-interactive-mode-map
-    :states '(insert motion)
-    "C-k" 'haskell-interactive-mode-history-previous
-    "C-j" 'haskell-interactive-mode-history-next)
-  :config
-  (evil-set-initial-state 'haskell-error-mode 'motion)
+	(general-def 'haskell-interactive-mode-map
+		:states '(insert motion)
+		"C-k" 'haskell-interactive-mode-history-previous
+		"C-j" 'haskell-interactive-mode-history-next)
+	:config
+	(evil-set-initial-state 'haskell-error-mode 'motion)
 	)
 
 (use-package flycheck-haskell
@@ -1634,10 +1635,10 @@
 	)
 
 (use-package yaml-mode
-  :straight t
-  :config
-  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-  )
+	:straight t
+	:config
+	(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+	)
 
 
 ;; Make
@@ -1648,26 +1649,49 @@
 												 (tabify (point-min) (point-max))))))
 
 (use-package docker
-  :straight t
-  :general
-  (coba-leader-def
-    "D" 'docker)
-  :config
-  (setq docker-run-as-root t))
+	:straight t
+	:general
+	(coba-leader-def
+		"D" 'docker)
+	:config
+	(setq docker-run-as-root t))
 
 (use-package nov
-  :straight t
-  :config
-  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-  (defun coba-nov-font-setup ()
-    (face-remap-add-relative 'variable-pitch :family "ibm plex serif text"
-                             :height 1.0))
-  (add-hook 'nov-mode-hook 'coba-nov-font-setup)
-  )
+	:straight t
+	:config
+	(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+	(defun coba-nov-font-setup ()
+		(face-remap-add-relative 'variable-pitch :family "ibm plex serif text"
+														 :height 1.0))
+	(add-hook 'nov-mode-hook 'coba-nov-font-setup)
+	)
 
 (use-package powerthesaurus
-  :straight t
-  :general
-  (coba-leader-def
-    "it" 'powerthesaurus-lookup-word-dwim)
-  )
+	:straight t
+	:general
+	(coba-leader-def
+		"it" 'powerthesaurus-lookup-word-dwim)
+	)
+
+(use-package org-static-blog
+	:straight t
+	:config
+	(defvar coba-website-folder "~/website/")
+	(setq org-static-blog-publish-title "Coba's website"
+				org-static-blog-publish-url "https://cobac.eu"
+				org-static-blog-publish-directory (concat coba-website-folder "public/")
+				org-static-blog-posts-directory (concat coba-website-folder "posts/")
+				org-static-blog-drafts-directory (concat coba-website-folder "drafts/")
+				org-static-blog-enable-tags t
+				org-export-with-toc nil
+				org-export-with-section-numbers nil
+				;; This header is inserted into the <head> section of every page:
+				org-static-blog-page-header (coba-file-content-as-string (concat coba-website-folder "elements/page-header.html"))
+				;; This preamble is inserted at the beginning of the <body> of every page:
+				org-static-blog-page-preamble (coba-file-content-as-string (concat coba-website-folder "elements/page-preamble.html"))
+				;; This postamble is inserted at the end of the <body> of every page:
+				org-static-blog-page-postamble (coba-file-content-as-string (concat coba-website-folder "elements/page-postamble.html"))
+				;; This HTML code is inserted into the index page between the preamble and the blog posts
+				org-static-blog-index-front-matter (coba-file-content-as-string (concat coba-website-folder "elements/index-front-matter.html"))
+				)
+	)

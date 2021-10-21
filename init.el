@@ -39,7 +39,6 @@
 (setq-default indent-tabs-mode nil
 							tab-width 2)
 
-
 ;; Font
 (setq default-frame-alist
 			(add-to-list 'default-frame-alist '(font . "ibm plex mono-14")))
@@ -1678,11 +1677,13 @@
 	:config
 	(defvar coba-website-folder "~/website/")
 	(setq org-static-blog-publish-title "Coba's website"
-				org-static-blog-publish-url "https://cobac.eu"
+				org-static-blog-publish-url "https://cobac.eu/"
 				org-static-blog-publish-directory (concat coba-website-folder "public/")
 				org-static-blog-posts-directory (concat coba-website-folder "posts/")
 				org-static-blog-drafts-directory (concat coba-website-folder "drafts/")
 				org-static-blog-enable-tags t
+				org-static-blog-use-preview t
+				org-static-blog-preview-ellipsis "<div id=\"read more\">Read more.</div>"
 				org-export-with-toc nil
 				org-export-with-section-numbers nil
 				;; This header is inserted into the <head> section of every page:

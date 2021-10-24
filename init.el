@@ -1696,4 +1696,7 @@
 				;; This HTML code is inserted into the index page between the preamble and the blog posts
 				org-static-blog-index-front-matter (coba-file-content-as-string (concat coba-website-folder "elements/index-front-matter.html"))
 				)
-	)
+  (defun coba-build-web ()
+    (interactive)
+    (let ((default-directory "~/website")) (shell-command "emacs -Q --script build.el")))
+  )

@@ -148,6 +148,7 @@
 		"ñ" 'counsel-yank-pop
 		"gt" 'undo-tree-visualize
 		"gA" 'align-regexp
+    "gc" 'comment-dwim
 		)
 	(general-def
 		:states '(visual)

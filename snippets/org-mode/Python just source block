@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Python just source block
+# key: ,pp
+# --
+
+#+BEGIN_SRC python :results silent :exports code
+$1
+#+END_SRC
+$0

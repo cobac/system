@@ -1634,12 +1634,52 @@
 	:straight t
 	)
 
+;; Python
+
+;; (use-package elpy
+;;   :straight t
+;;   :init
+;;   (elpy-enable)
+;;   )
+
+(use-package python-mode
+  :straight t
+  :config
+  (setq py-shell-name "python"
+        py-keep-windows-configuration t
+        py-split-window-on-execute nil
+        py-switch-buffers-on-execute-p t)
+  (add-hook 'python-mode-hook
+            (lambda () (add-hook 'before-save-hook apheleia)))
+  (general-def 'python-mode-map
+    "C-c C-c" 'py-execute-region
+    "C-c C-l" 'py-execute-line
+    "C-c C-b" 'py-execute-buffer)
+  )
+
+(use-package lsp-pyright
+  :straight t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))  ; or lsp-deferred
+(use-package pyvenv
+  :config
+  (general-def 'python-mode-map
+    "C-c C-a" 'pyvenv-activate)
+  (pyvenv-mode 1))
+
+;; Notebooks
+
+(use-package ein
+  :straight t
+  )
+
+;; Yaml
 (use-package yaml-mode
 	:straight t
 	:config
 	(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 	)
-
 
 ;; Make
 (add-hook 'makefile-gmake-mode-hook
@@ -1700,3 +1740,5 @@
     (interactive)
     (let ((default-directory "~/website")) (shell-command "emacs -Q --script build.el")))
   )
+
+

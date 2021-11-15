@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Python source block
+# key: ,py
+# --
+
+#+BEGIN_SRC py :eval :session :results output :tangle yes :exports both
+$1
+#+END_SRC
+$0

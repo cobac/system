@@ -983,7 +983,7 @@
 	(use-package org-ref-sci-id)
 	(use-package org-ref-url-utils)
 	(use-package org-ref-latex)
-	(use-package org-ref-pdf)
+	;;(use-package org-ref-pdf)
 	)
 
 (use-package graphviz-dot-mode

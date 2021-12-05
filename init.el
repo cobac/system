@@ -1662,7 +1662,9 @@
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
                          (lsp))))  ; or lsp-deferred
+
 (use-package pyvenv
+  :straight t
   :config
   (general-def 'python-mode-map
     "C-c C-a" 'pyvenv-activate)

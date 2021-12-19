@@ -1712,7 +1712,7 @@
 	:straight t
 	:general
 	(coba-leader-def
-		"it" 'powerthesaurus-lookup-word-dwim)
+		"it" 'powerthesaurus-lookup-synonyms-dwim)
 	)
 
 (use-package org-static-blog

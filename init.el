@@ -1471,12 +1471,13 @@
 
 (use-package julia-vterm
 	:straight t
+  :hook (julia-mode . julia-vterm-mode)
 	:config
-	(add-hook 'julia-mode-hook #'julia-vterm-mode)
 	(general-def 
 		:states '(normal visual insert motion emacs)
 		:keymaps 'julia-mode-map
 		"C-c C-c" 'julia-vterm-send-region-or-current-line
+    "C-c C-l" 'julia-vterm-send-current-line
 		"C-t" 'coba-julia-vterm-define-threads
 		)
 

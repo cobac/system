@@ -807,7 +807,7 @@
 	 bibtex-completion-notes-path		"~/Brain/";;"bibnotes.org"
 	 bibtex-completion-pdf-open-function (lambda (fpath)
 																				 (call-process "zathura" nil 0 nil fpath))
-																				;bibtex-completion-notes-template-multiple-files "#+TITLE: {author-or-editor} (${year}): ${title} "
+	 bibtex-completion-notes-template-multiple-files "ERROR: bibtex-completion is being used instead of ORB"
 	 )
 	;; So that org-ref inherits ivy-bibtex format
 	;; From: https://github.com/jkitchin/org-ref/issues/717#issuecomment-633788035
@@ -959,16 +959,17 @@
 	:init
 	(setq org-ref-completion-library 'org-ref-ivy-cite)
 	:config
-	(setq reftex-default-bibliography	 '("~/Brain/bib.bib")
-				org-ref-default-bibliography '("~/Brain/bib.bib")
-				org-ref-bibliography-notes	 "~/Brain/"
-				org-ref-pdf-directory				 "~/Brain/pdf"
-				org-ref-default-citation-link "parencite"
-				org-ref-open-pdf-function (lambda (fpath)
-																		(call-process "zathura" nil 0 nil fpath))
-				)
+  (setq org-ref-default-citation-link "parencite")
+
+  (require 'org-ref-ivy)
+  (setq org-ref-insert-link-function 'org-ref-insert-link-hydra/body
+        org-ref-insert-cite-function 'org-ref-cite-insert-ivy
+        org-ref-insert-label-function 'org-ref-insert-label-link
+        org-ref-insert-ref-function 'org-ref-insert-ref-link
+        org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body)))
+
 	(general-def 'org-mode-map
-		"C-c ]" 'org-ref-ivy-insert-cite-link)
+		"C-c ]" 'org-ref-cite-insert-ivy)
 
 	(use-package doi-utils
 		:config
@@ -984,7 +985,6 @@
 	(use-package org-ref-sci-id)
 	(use-package org-ref-url-utils)
 	(use-package org-ref-latex)
-	;;(use-package org-ref-pdf)
 	)
 
 (use-package graphviz-dot-mode

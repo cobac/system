@@ -735,6 +735,7 @@
 	:after org-roam
 	:config
 	(setq orb-note-actions-interface 'hydra
+        orb-roam-ref-format 'org-ref-v3
 				orb-preformat-keywords '("citekey" "year" "author-abbrev")
 				org-roam-capture-templates '(
 																		 ("r" "default" plain "- tags :: %?"

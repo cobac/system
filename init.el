@@ -1692,6 +1692,10 @@
 											 (lambda ()
 												 (tabify (point-min) (point-max))))))
 
+(setq compile-command '(concat "cd "
+															 (file-name-directory (locate-dominating-file (buffer-file-name) "Makefile"))
+															 " && make"))
+
 (use-package docker
 	:straight t
 	:general

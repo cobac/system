@@ -1694,7 +1694,7 @@
 
 (setq compile-command '(concat "cd "
 															 (file-name-directory (locate-dominating-file (buffer-file-name) "Makefile"))
-															 " && make"))
+															 " && make "))
 
 (use-package docker
 	:straight t

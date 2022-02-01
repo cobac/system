@@ -279,6 +279,21 @@
   :hook (wgrep-setup . evil-normal-state)
   )
 
+;; Posframe
+
+(use-package ivy-posframe
+  :straight t
+  :config
+  (set-face-attribute 'ivy-posframe nil :foreground (doom-color 'fg) :background (doom-color 'bg-alt))
+  (ivy-posframe-mode t)
+  )
+
+(use-package transient-posframe
+  :straight t
+  :config
+  (transient-posframe-mode t)
+  )
+
 ;; Hydra
 (use-package hydra
   :straight t)

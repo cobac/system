@@ -1279,7 +1279,9 @@
   :straight t
   :config
   (setq
-   org-msg-default-alternatives '(text html)
+   org-msg-default-alternatives '((new           . (text html))
+                                  (reply-to-text . (text))
+                                  (reply-to-html . (html text)))
    org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
    org-msg-startup "inlineimages"
    org-msg-convert-citation t)

@@ -865,6 +865,9 @@
 (defvar org-tex-math-template
   (coba-file-content-as-string "~/.emacs.d/ox-templates/math.tex"))
 
+(defvar org-tex-listings-template
+  (coba-file-content-as-string "~/.emacs.d/ox-templates/listings.tex"))
+
 (defvar custom-tex-template nil
   "Custom latex preamble for org-export."
   )
@@ -894,6 +897,9 @@
 
   (setq org-tex-math-template
         (coba-file-content-as-string "~/.emacs.d/ox-templates/math.tex"))
+
+  (setq org-tex-listings-template
+        (coba-file-content-as-string "~/.emacs.d/ox-templates/listings.tex"))
 
   (setq org-latex-classes
         `(("custom" ,(format "%s

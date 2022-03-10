@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Mathcal M
+# key: \M
+# --
+
+\mathcal M$0

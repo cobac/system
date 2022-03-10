@@ -1253,7 +1253,6 @@
   (require 'mu4e-icalendar)
   (mu4e-icalendar-setup)
   (setq gnus-icalendar-org-capture-file "~/Sync/Org/todo.org"
-        ;; TODO: The headline is not working
         gnus-icalendar-org-capture-headline '("Other"))
   (gnus-icalendar-org-setup)
   )

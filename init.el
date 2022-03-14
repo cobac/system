@@ -818,7 +818,7 @@
   :config
   (setq
    bibtex-completion-bibliography "~/Brain/bib.bib"
-   bibtex-completion-library-path "~/Brain/pdf"
+   bibtex-completion-library-path "~/Brain/pdf/"
    bibtex-completion-notes-path		 "~/Brain/";;"bibnotes.org"
    bibtex-completion-pdf-open-function (lambda (fpath)
                                          (call-process "zathura" nil 0 nil fpath))

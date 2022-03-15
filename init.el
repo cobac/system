@@ -921,6 +921,16 @@
            ("\\subsubsection*{%s}" . "\\subsubsection*{%s}")
            ("\\paragraph*{%s}" . "\\paragraph*{%s}")
            ("\\subparagraph*{%s}" . "\\subparagraph*{%s}"))
+
+          ("article" "\\documentclass[11pt]{article}
+[NO-DEFAULT-PACKAGES]
+[NO-PACKAGES]
+[EXTRA]"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
           )))
 
 (coba-define-org-tex-template)

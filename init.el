@@ -327,7 +327,7 @@
 ;; Openwith
 
 (use-package openwith
-  :straight (:type git :host github :repo "carltonf/openwith")
+  :straight (:type git :host github :repo "cobac/openwith")
   :config
   (setq openwith-associations
         (list

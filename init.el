@@ -101,7 +101,7 @@
   :after memoize)
 
 (use-package doom-modeline
-  :straight t
+  :straight (:type git :host github :repo "seagle0128/doom-modeline")
   :after all-the-icons
   :hook (after-init . doom-modeline-mode)
   :config

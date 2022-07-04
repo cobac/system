@@ -1255,8 +1255,8 @@
                                (mu4e-get-refile-folder msg))
                  :show-target (lambda (target) "archive")
                  :action			(lambda (docid msg target)
-                                (mu4e~proc-move
-                                 docid (mu4e~mark-check-target target) "+S-u-N"))))
+                                (mu4e--server-move
+                                 docid (mu4e--mark-check-target target) "+S-u-N"))))
   (mu4e~headers-defun-mark-for archive)
   (general-def 'mu4e-headers-mode-map
     :states '(motion visual normal emacs)

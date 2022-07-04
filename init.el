@@ -182,6 +182,7 @@
     (evil-collection-init 'magit)
     (evil-collection-init 'xref)
     (evil-collection-init 'nov)
+    (evil-collection-init 'tar-mode)
     )
   (use-package evil-snipe
     :straight t

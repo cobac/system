@@ -183,6 +183,7 @@
     (evil-collection-init 'xref)
     (evil-collection-init 'nov)
     (evil-collection-init 'tar-mode)
+    (evil-collection-init 'image)
     )
   (use-package evil-snipe
     :straight t
@@ -1787,4 +1788,13 @@
         ;; This HTML code is inserted into the index page between the preamble and the blog posts
         org-static-blog-index-front-matter (coba-file-content-as-string (concat coba-website-folder "elements/index-front-matter.html"))
         )
+  )
+
+(use-package image
+  :config
+  (general-def 'image-mode-map
+    :states '(normal)
+    "J" 'image-next-file
+    "K" 'image-previous-file
+    )
   )

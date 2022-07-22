@@ -54,17 +54,17 @@
 (load custom-file 'noerror)
 
 
-(setq delete-old-versions -1 )		;; delete excess backup versions silently
-(setq version-control t )		 ;; use version control
-(setq vc-make-backup-files t )		;; make backups file even when in version controlled dir
+(setq delete-old-versions -1 )    ;; delete excess backup versions silently
+(setq version-control t )     ;; use version control
+(setq vc-make-backup-files t )    ;; make backups file even when in version controlled dir
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")) ) ;; which directory to put backups file
-(setq vc-follow-symlinks t )					;; don't ask for confirmation when opening symlinked file
+(setq vc-follow-symlinks t )          ;; don't ask for confirmation when opening symlinked file
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
-(setq inhibit-startup-screen t)					 ;; inhibit useless and old-school startup screen
-(setq ring-bell-function 'ignore )	;; silent bell when you make a mistake
-(setq coding-system-for-read 'utf-8 )	 ;; use utf-8 by default
+(setq inhibit-startup-screen t)           ;; inhibit useless and old-school startup screen
+(setq ring-bell-function 'ignore )  ;; silent bell when you make a mistake
+(setq coding-system-for-read 'utf-8 )   ;; use utf-8 by default
 (setq coding-system-for-write 'utf-8 )
-(setq sentence-end-double-space nil)	;; sentence SHOULD end with only a point.
+(setq sentence-end-double-space nil)  ;; sentence SHOULD end with only a point.
 (setq initial-scratch-message nil) ; print a default message in the empty scratch buffer opened at startup
 (setq delete-by-moving-to-trash t)
 (setq auth-sources '("~/.authinfo.gpg"))
@@ -108,7 +108,7 @@
   (setq doom-modeline-modal-icon nil
         doom-modeline-enable-word-count t
         doom-modeline-icon t
-        mode-line-format '("%e" (:eval (doom-modeline-format--main)) "	 ")
+        mode-line-format '("%e" (:eval (doom-modeline-format--main)) "   ")
         )
   )
 
@@ -373,17 +373,17 @@
 ;;:straight (:host github :repo "peterwu/plus-minus")
 ;;:general
 ;;(general-def
-;;	:states '(normal motion)
-;;	"C-a" '+/-:forward+
-;;	"C-x" '+/-:forward-
-;;	)
+;;  :states '(normal motion)
+;;  "C-a" '+/-:forward+
+;;  "C-x" '+/-:forward-
+;;  )
 ;;(general-def
-;;	:states '(visual)
-;;	"C-a" '+/-:region+
-;;	"C-x" '+/-:region-
-;;	"C-A" '+/-:block+
-;;	"C-X" '+/-:block-
-;;	)
+;;  :states '(visual)
+;;  "C-a" '+/-:region+
+;;  "C-x" '+/-:region-
+;;  "C-A" '+/-:block+
+;;  "C-X" '+/-:block-
+;;  )
 ;;)
 ;; Org
 
@@ -513,24 +513,24 @@
       org-icalendar-include-todo t
       org-icalendar-include-body 1000
       org-icalendar-use-scheduled '(event-if-todo event-if-not-todo todo-start)
-      org-icalendar-use-deadline	'(event-if-todo event-if-not-todo todo-start)
+      org-icalendar-use-deadline  '(event-if-todo event-if-not-todo todo-start)
       )
 
 (general-define-key
  :keymaps 'org-capture-mode-map
- [remap evil-save-and-close]					'org-capture-finalize
+ [remap evil-save-and-close]          'org-capture-finalize
  [remap evil-save-modified-and-close] 'org-capture-finalize
- [remap evil-quit]										'org-capture-kill)
+ [remap evil-quit]                    'org-capture-kill)
 
 (setq-default org-display-custom-times t)
 (setq org-time-stamp-custom-formats '("<%e-%m-%Y, %a>" . "<%e-%m-%Y, %a %H:%M>"))
 
 (coba-leader-def
-  "c"		'org-capture
-  "a"		'(:ignore t :which-key "Org-Agenda")
+  "c"    'org-capture
+  "a"    '(:ignore t :which-key "Org-Agenda")
   "aa" '(lambda() (interactive)(coba-org-agenda-weekly))
-  "o"		'(lambda() (interactive)(find-file "~/Sync/Org/todo.org"))
-  "R"		'(lambda() (interactive)(find-file "~/Sync/Org/refile.org"))
+  "o"    '(lambda() (interactive)(find-file "~/Sync/Org/todo.org"))
+  "R"    '(lambda() (interactive)(find-file "~/Sync/Org/refile.org"))
   "ad" '(lambda ()(interactive)(org-ql-search "~/Sync/Org/todo.org"
                                  '(done) :sort '(date priority todo)))
   "ap" '(lambda()(interactive)
@@ -563,8 +563,8 @@
     )
   )
 ;;(add-hook 'org-mode-hook
-;;					(lambda ()
-;;						(add-hook 'after-save-hook 'coba-org-icalendar-combine-agenda-files-hook nil 'make-it-local)))
+;;          (lambda ()
+;;            (add-hook 'after-save-hook 'coba-org-icalendar-combine-agenda-files-hook nil 'make-it-local)))
 
 (use-package evil-org
   :straight t
@@ -595,9 +595,9 @@
   :keymaps 'org-mode-map
   "C-t" 'org-todo
   "C-S-T" 'coba-org-todo-yesterday-twice
-  "ga"	'org-archive-subtree-default
-  "gr"	'org-refile
-  "gR"	'org-refile-goto-last-stored
+  "ga"  'org-archive-subtree-default
+  "gr"  'org-refile
+  "gR"  'org-refile-goto-last-stored
   "C-j" 'org-metadown
   "C-k" 'org-metaup
   "C-h" 'org-metaleft
@@ -607,7 +607,7 @@
   "C-H" 'org-shiftmetaleft
   "C-L" 'org-shiftmetaright
   "C-P" 'org-latex-preview
-  "gG"	'counsel-outline
+  "gG"  'counsel-outline
   )
 
 (general-def
@@ -822,7 +822,7 @@
   (setq
    bibtex-completion-bibliography "~/Brain/bib.bib"
    bibtex-completion-library-path "~/Brain/pdf/"
-   bibtex-completion-notes-path		 "~/Brain/";;"bibnotes.org"
+   bibtex-completion-notes-path     "~/Brain/";;"bibnotes.org"
    bibtex-completion-pdf-open-function (lambda (fpath)
                                          (call-process "zathura" nil 0 nil fpath))
    bibtex-completion-notes-template-multiple-files "ERROR: bibtex-completion is being used instead of ORB"
@@ -1059,13 +1059,13 @@
     "Push to all remotes.
   From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?utm_medium=android_app&utm_source=share"
     (interactive)
-    (mapcar (lambda(remote)		;; Loops through the remotes returned by magit-list-remotes
+    (mapcar (lambda(remote)    ;; Loops through the remotes returned by magit-list-remotes
               (magit-run-git-async "push" "-v" remote (magit-get-current-branch))) ;; Simply run git push -v {{remote}} {{current-branch}}
             (magit-list-remotes)) ;; Returns all remotes configured
     )
 
-  (transient-append-suffix 'magit-push "e"	;; Puts the following command after the 'e' option on the magit-push menu
-    '("a" "Push all" coba-magit-push-all))	;; Configures the my/magit-push-all method to be callable with "a" while on the magit-push menu. It's description will read "Push All"
+  (transient-append-suffix 'magit-push "e"  ;; Puts the following command after the 'e' option on the magit-push menu
+    '("a" "Push all" coba-magit-push-all))  ;; Configures the my/magit-push-all method to be callable with "a" while on the magit-push menu. It's description will read "Push All"
   )
 (evil-set-initial-state 'magit-commit-message-section-map 'insert)
 
@@ -1126,21 +1126,21 @@
   (general-def
     :states '(normal motion)
     "gf" 'apheleia-format-buffer)
-  ;;	:config
-  ;;	(push '(ess-r-mode . styler)
-  ;;				apheleia-mode-alist)
+  ;;  :config
+  ;;  (push '(ess-r-mode . styler)
+  ;;        apheleia-mode-alist)
   ;;
-  ;;	(push '(styler . ((concat
-  ;;										 "Rscript -e"
-  ;;										 "library(styler)"
-  ;;																				;		"options(styler.colored_print.vertical=FALSE);"
-  ;;										 " con <-"
-  ;;										 file
-  ;;										 ";"
-  ;;										 " out <- styler::style_text(readLines(con));"
-  ;;										 " close(con);"
-  ;;										 " out")))
-  ;;				apheleia-formatters)
+  ;;  (push '(styler . ((concat
+  ;;                     "Rscript -e"
+  ;;                     "library(styler)"
+  ;;                                        ;    "options(styler.colored_print.vertical=FALSE);"
+  ;;                     " con <-"
+  ;;                     file
+  ;;                     ";"
+  ;;                     " out <- styler::style_text(readLines(con));"
+  ;;                     " close(con);"
+  ;;                     " out")))
+  ;;        apheleia-formatters)
   :config
   (apheleia-global-mode)
   )
@@ -1213,30 +1213,30 @@
           :match-func (lambda (msg)
                         (when msg
                           (string-prefix-p "/coba" (mu4e-message-field msg :maildir))))
-          :vars '((user-full-name					. "Coba")
-                  (user-mail-address		 . "coba@cobac.eu")
-                  (mu4e-drafts-folder			. "/coba/Drafts")
-                  (mu4e-sent-folder				. "/coba/Sent")
-                  (mu4e-refile-folder			. "/coba/Archives")
-                  (mu4e-trash-folder		 . "/coba/Trash")
-                  (smtpmail-smtp-user			. "coba@cobac.eu")
-                  (smtpmail-smtp-server		. "mail.your-server.de")
-                  (smtpmail-stream-type		. ssl)
+          :vars '((user-full-name          . "Coba")
+                  (user-mail-address     . "coba@cobac.eu")
+                  (mu4e-drafts-folder      . "/coba/Drafts")
+                  (mu4e-sent-folder        . "/coba/Sent")
+                  (mu4e-refile-folder      . "/coba/Archives")
+                  (mu4e-trash-folder     . "/coba/Trash")
+                  (smtpmail-smtp-user      . "coba@cobac.eu")
+                  (smtpmail-smtp-server    . "mail.your-server.de")
+                  (smtpmail-stream-type    . ssl)
                   (smtpmail-smtp-service . 465)))
          (make-mu4e-context
           :name "j-cosas"
           :match-func (lambda (msg)
                         (when msg
                           (string-prefix-p "/cosas" (mu4e-message-field msg :maildir))))
-          :vars '((user-full-name					. "David Coba")
-                  (user-mail-address		 . "cosas@cobac.eu")
-                  (mu4e-drafts-folder			. "/cosas/Drafts")
-                  (mu4e-sent-folder				. "/cosas/Sent")
-                  (mu4e-refile-folder			. "/cosas/Archives")
-                  (mu4e-trash-folder		 . "/cosas/Trash")
-                  (smtpmail-smtp-user			. "cosas@cobac.eu")
-                  (smtpmail-smtp-server		. "mail.your-server.de")
-                  (smtpmail-stream-type		. ssl)
+          :vars '((user-full-name          . "David Coba")
+                  (user-mail-address     . "cosas@cobac.eu")
+                  (mu4e-drafts-folder      . "/cosas/Drafts")
+                  (mu4e-sent-folder        . "/cosas/Sent")
+                  (mu4e-refile-folder      . "/cosas/Archives")
+                  (mu4e-trash-folder     . "/cosas/Trash")
+                  (smtpmail-smtp-user      . "cosas@cobac.eu")
+                  (smtpmail-smtp-server    . "mail.your-server.de")
+                  (smtpmail-stream-type    . ssl)
                   (smtpmail-smtp-service . 465)))))
 
   (setq mu4e-split-view 'horizontal
@@ -1251,12 +1251,12 @@
   (add-to-list 'auto-mode-alist '("\\.eml\\'" . org-mode))
   (add-to-list 'mu4e-marks
                '(archive
-                 :char			 "A"
-                 :prompt		 "Archive"
+                 :char       "A"
+                 :prompt     "Archive"
                  :dyn-target (lambda (target msg)
                                (mu4e-get-refile-folder msg))
                  :show-target (lambda (target) "archive")
-                 :action			(lambda (docid msg target)
+                 :action      (lambda (docid msg target)
                                 (mu4e--server-move
                                  docid (mu4e--mark-check-target target) "+S-u-N"))))
   (mu4e~headers-defun-mark-for archive)
@@ -1283,21 +1283,21 @@
 ;; TODO: Fix mu4e-thread-folding
 ;; Error with nano-color-background not defined
 ;;(use-package mu4e-thread-folding
-;;	:straight (:type git :host github :repo "rougier/mu4e-thread-folding")
-;;	:config
-;;	(require 'mu4e-thread-folding)
-;;	(add-to-list 'mu4e-header-info-custom
-;;							 '(:empty . (:name "Empty"
-;;																 :shortname ""
-;;																 :function (lambda (msg) "	"))))
-;;	(setq mu4e-headers-fields '((:empty					 .		 2)
-;;															(:human-date		.		 12)
-;;															(:flags					 .		 6)
-;;															(:mailing-list	.		 10)
-;;															(:from					.		 22)
-;;															(:subject				 .		nil)))
-;;	(define-key mu4e-headers-mode-map (kbd "<tab>")			 'mu4e-headers-toggle-at-point)
-;;	)
+;;  :straight (:type git :host github :repo "rougier/mu4e-thread-folding")
+;;  :config
+;;  (require 'mu4e-thread-folding)
+;;  (add-to-list 'mu4e-header-info-custom
+;;               '(:empty . (:name "Empty"
+;;                                 :shortname ""
+;;                                 :function (lambda (msg) "  "))))
+;;  (setq mu4e-headers-fields '((:empty           .     2)
+;;                              (:human-date    .     12)
+;;                              (:flags           .     6)
+;;                              (:mailing-list  .     10)
+;;                              (:from          .     22)
+;;                              (:subject         .    nil)))
+;;  (define-key mu4e-headers-mode-map (kbd "<tab>")       'mu4e-headers-toggle-at-point)
+;;  )
 
 ;; TODO: check inline thing
 (use-package org-msg
@@ -1357,8 +1357,8 @@
   )
 
 ;;(use-package project
-;;	 :straight t
-;;	 )
+;;   :straight t
+;;   )
 
 (use-package lsp-mode
   :straight t
@@ -1392,9 +1392,9 @@
 
 ;; debugger
 ;;(use-package dap-mode
-;;	:straight t)
+;;  :straight t)
 ;; (use-package dap-LANGUAGE
-;;	 :straight t)
+;;   :straight t)
 
 ;; gpg passwords
 
@@ -1424,9 +1424,9 @@
 ;; ESS
 (use-package ess
   :straight t
-                                        ;		:hook
-                                        ;		(ess-r-mode . lsp)
-                                        ;		(inferior-ess-r-mode . lsp)
+                                        ;    :hook
+                                        ;    (ess-r-mode . lsp)
+                                        ;    (inferior-ess-r-mode . lsp)
   :config
   (require 'ess-site)
   (setq
@@ -1465,7 +1465,7 @@
 (general-def 'ess-julia-help-mode-map
   "q" 'quit-window)
 
-;;	Stan
+;;  Stan
 (use-package stan-mode
   :straight t
   :after company
@@ -1540,16 +1540,16 @@
   )
 
 ;;(use-package ob-julia
-;;	:straight (:type git :host github :repo "nico202/ob-julia" :files (:defaults))
-;;	)
+;;  :straight (:type git :host github :repo "nico202/ob-julia" :files (:defaults))
+;;  )
 
 ;; TODO: Julia-formatter
 ;; (use-package julia-formatter
-;;	 :straight (:type git :repo "https://codeberg.org/FelipeLema/julia-formatter.el"
-;;										:files ("*.jl" "*.el" "*.toml"))
-;;	 :config
-;;	 (julia-formatter-setup-aggressive-hooks)
-;;	 )
+;;   :straight (:type git :repo "https://codeberg.org/FelipeLema/julia-formatter.el"
+;;                    :files ("*.jl" "*.el" "*.toml"))
+;;   :config
+;;   (julia-formatter-setup-aggressive-hooks)
+;;   )
 
 (use-package eterm-256color
   :straight t
@@ -1681,10 +1681,10 @@
 ;; Python
 
 ;; (use-package elpy
-;;	 :straight t
-;;	 :init
-;;	 (elpy-enable)
-;;	 )
+;;   :straight t
+;;   :init
+;;   (elpy-enable)
+;;   )
 
 (use-package python-mode
   :straight t
@@ -1705,7 +1705,7 @@
   :straight t
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
-                         (lsp))))	 ; or lsp-deferred
+                         (lsp))))   ; or lsp-deferred
 
 (use-package pyvenv
   :straight t
@@ -1728,6 +1728,7 @@
   )
 
 ;; Make
+;; TODO: Fix this so only applies to make mode
 (add-hook 'makefile-gmake-mode-hook
           '(lambda ()
              (add-hook 'before-save-hook

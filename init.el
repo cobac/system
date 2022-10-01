@@ -806,6 +806,10 @@
   (company-prescient-mode)
   )
 
+(use-package company-box
+  :straight t
+  :hook (company-mode . company-box-mode))
+
 ;; Indent
 (use-package aggressive-indent
   :straight t

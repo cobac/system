@@ -1659,7 +1659,8 @@
     "C-c C-c" '(lambda ()
                  (interactive)
                  (save-buffer)
-                 (haskell-process-load-file)))
+                 (haskell-process-load-file))
+    "gf" 'ormolu-format-buffer)
   (coba-local-leader-def 'haskell-mode-map
     "r" 'hlint-refactor-refactor-at-point
     "h" 'hoogle)
@@ -1669,6 +1670,11 @@
     "C-j" 'haskell-interactive-mode-history-next)
   :config
   (evil-set-initial-state 'haskell-error-mode 'motion)
+  )
+
+(use-package ormolu
+  :straight t
+  :hook (haskell-mode . ormolu-format-on-save-mode)
   )
 
 (use-package flycheck-haskell

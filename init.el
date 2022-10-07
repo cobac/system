@@ -1813,8 +1813,6 @@
 ;; Rust
 (use-package rustic
   :straight t
-  :bind (:map rustic-mode-map
-              ("C-c C-c s" . lsp-rust-analyzer-status))
   :config
   ;; uncomment for less flashiness
   ;; (setq lsp-eldoc-hook nil)
@@ -1835,5 +1833,12 @@
     (add-hook 'before-save-hook 'lsp-format-buffer nil t))
 
   (evil-set-initial-state 'rustic-popup-mode 'emacs)
+
+  (general-def 'rustic-mode-map
+    "C-c C-c s"  'lsp-rust-analyzer-status
+    "C-c C-c C-S-r"  'rustic-cargo-comint-run)
+  (general-def 'rustic-mode-map
+    "C-ñ" '(lambda () (interactive) (insert "-> "))
+    )
   )
 

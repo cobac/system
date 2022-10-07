@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Haskell source block
+# key: ,h
+# --
+
+#+BEGIN_SRC haskell
+$1
+#+END_SRC
+$0

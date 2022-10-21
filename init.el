@@ -1659,8 +1659,7 @@
     "C-c C-c" '(lambda ()
                  (interactive)
                  (save-buffer)
-                 (haskell-process-load-file))
-    "gf" 'ormolu-format-buffer)
+                 (haskell-process-load-file)))
   (coba-local-leader-def 'haskell-mode-map
     "r" 'hlint-refactor-refactor-at-point
     "h" 'hoogle)
@@ -1672,10 +1671,17 @@
   (evil-set-initial-state 'haskell-error-mode 'motion)
   )
 
-(use-package ormolu
-  :straight t
-  :hook (haskell-mode . ormolu-format-on-save-mode)
-  )
+;;(use-package ormolu
+  ;;:straight t
+  ;;:hook (haskell-mode . ormolu-format-on-save-mode)
+  ;;:general
+  ;;(general-def 'haskell-mode-map
+    ;;:states '(normal)
+    ;;"gf" 'ormolu-format-buffer)
+  ;;:config
+  ;;(setq ormolu-no-cabal t)
+  ;;)
+
 
 (use-package flycheck-haskell
   :straight t

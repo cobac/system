@@ -175,7 +175,7 @@
     (evil-collection-init 'magit-todos)
     (evil-collection-init 'vterm)
     (evil-collection-init 'info)
-    (evil-collection-init 'lsp-ui-menu)
+    ;;(evil-collection-init 'lsp-ui-menu)
     (evil-collection-init 'elfeed)
     (evil-collection-init 'docker)
     ;;(evil-collection-init 'calendar)
@@ -1388,8 +1388,8 @@
         )
   )
 
-(use-package lsp-ui
-  :straight t)
+;;(use-package lsp-ui
+;;  :straight t)
 
 (use-package lsp-ivy
   :straight t)

@@ -1,0 +1,4 @@
+# key: ,debug
+# name: derive-debug
+# --
+#[derive(Debug)]

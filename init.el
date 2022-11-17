@@ -1842,9 +1842,16 @@
 
   (general-def 'rustic-mode-map
     "C-c C-c s"  'lsp-rust-analyzer-status
-    "C-c C-c C-S-r"  'rustic-cargo-comint-run)
+    "C-c C-c C-S-r"  'rustic-cargo-comint-run
+    "C-c C-c C-S-d"  'coba-rustic-cargo-doc-std
+    )
   (general-def 'rustic-mode-map
     "C-ñ" '(lambda () (interactive) (insert "-> "))
     )
+
+  (defun coba-rustic-cargo-doc-std ()
+    "Open the documentation for the standard library in a browser."
+    (interactive)
+    (shell-command "rustup docs --std"))
   )
 

@@ -1385,6 +1385,7 @@
   (setq lsp-headerline-breadcrumb-segments '(symbols)
         lsp-log-io t
         lsp-print-performance t
+        lsp-modeline-code-actions-segments '(count name)
         )
   )
 

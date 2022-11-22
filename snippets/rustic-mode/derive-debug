@@ -1,4 +1,4 @@
-# key: ,debug
+# key: #db
 # name: derive-debug
 # --
 #[derive(Debug)]

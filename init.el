@@ -1828,16 +1828,14 @@
 
   ;; comment to disable rustfmt on save
   (setq rustic-format-on-save t)
-  (add-hook 'rustic-mode-hook 'coba-rustic-autosave-mode-hook)
+  (add-hook 'before-save-hook 'lsp-format-buffer nil t)
 
   (defun coba-rustic-autosave-mode-hook ()
-    ;; so that run C-c C-c C-r works without having to confirm, but don't try to
-    ;; save rust buffers that are not file visiting. Once
-    ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
-    ;; no longer be necessary.
+    "Enable auto-saving in rustic-mode buffers."
     (when buffer-file-name
-      (setq-local buffer-save-without-query t))
-    (add-hook 'before-save-hook 'lsp-format-buffer nil t))
+      (setq-local compilation-ask-about-save nil))
+    )
+  (add-hook 'rustic-mode-hook 'coba-rustic-autosave-mode-hook)
 
   (evil-set-initial-state 'rustic-popup-mode 'emacs)
 

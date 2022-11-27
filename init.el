@@ -1852,5 +1852,10 @@
     "Open the documentation for the standard library in a browser."
     (interactive)
     (shell-command "rustup docs --std"))
+  (defun coba-cargo-new (args)
+    "Call cargo new with args"
+    (interactive "scargo new: ")
+    (message (format "cargo new %s" args))
+    (shell-command (format "cargo new %s" args)))
   )
 

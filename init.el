@@ -1843,6 +1843,7 @@
     "C-c C-c s"  'lsp-rust-analyzer-status
     "C-c C-c C-S-r"  'rustic-cargo-comint-run
     "C-c C-c C-S-d"  'coba-rustic-cargo-doc-std
+    "C-c C-c C-S-b"  'rustic-cargo-build-doc
     )
   (general-def 'rustic-mode-map
     "C-ñ" '(lambda () (interactive) (insert "-> "))

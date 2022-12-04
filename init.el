@@ -149,6 +149,8 @@
     "gt" 'undo-tree-visualize
     "gA" 'align-regexp
     "gc" 'comment-dwim
+    "C-j" '(lambda () (interactive) (evil-scroll-down 0) (recenter nil))
+    "C-k" '(lambda () (interactive) (evil-scroll-up 0) (recenter nil))
     )
   (general-def
     :states '(visual)

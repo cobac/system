@@ -600,16 +600,8 @@
   "ga"  'org-archive-subtree-default
   "gr"  'org-refile
   "gR"  'org-refile-goto-last-stored
-  "C-j" 'org-metadown
-  "C-k" 'org-metaup
-  "C-h" 'org-metaleft
-  "C-l" 'org-metaright
-  "C-J" 'org-shiftmetadown
-  "C-K" 'org-shiftmetaup
-  "C-H" 'org-shiftmetaleft
-  "C-L" 'org-shiftmetaright
-  "C-P" 'org-latex-preview
   "gG"  'counsel-outline
+  "C-P" 'org-latex-preview
   )
 
 (general-def

@@ -1849,5 +1849,8 @@
     (interactive "scargo new: ")
     (message (format "cargo new %s" args))
     (shell-command (format "cargo new %s" args)))
+
+  (add-hook 'rustic-mode-hook (lambda ()
+                                (push '(?< . ("< " . " >")) evil-surround-pairs-alist)))
   )
 

@@ -204,9 +204,6 @@
     :straight t
     :after evil
     :config (global-evil-surround-mode))
-  (use-package evil-exchange
-    :straight t
-    )
   )
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain

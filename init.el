@@ -258,6 +258,8 @@
     "x" 'counsel-M-x
     "/" 'counsel-rg
     "T" 'counsel-load-theme
+    "!" 'shell-command
+    "¡" 'async-shell-command
     )
   (general-def 'counsel-find-file-map
     "C-h" 'counsel-up-directory

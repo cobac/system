@@ -683,7 +683,8 @@
   :straight t
   :general
   (coba-leader-def
-    "r" 'org-roam-node-find)
+    "r" 'org-roam-node-find
+    "fd" 'org-roam-dailies-goto-today)
   (general-def
     :keymaps 'org-mode-map
     "C-i" 'org-roam-node-insert)
@@ -708,7 +709,14 @@
   (setq org-roam-v2-ack t)
   :config
   (setq org-roam-directory (file-truename "~/Brain")
-        org-roam-db-location "~/Brain/roam.db")
+        org-roam-db-location "~/Brain/roam.db"
+        org-roam-dailies-directory "diario"
+        org-roam-dailies-capture-templates
+        '(("d" "default" plain
+           "%?"
+           :target (file+head "%<%Y-%m>.org"
+                              "* %<%d %A>\n\n")))
+        )
   (evil-set-initial-state 'org-roam-mode 'motion)
   ;; Show hierarchy of nodes from https://github.com/org-roam/org-roam/issues/1565
   (cl-defmethod org-roam-node-filetitle ((node org-roam-node))
@@ -758,6 +766,7 @@
                                       :immediate-finish t
                                       :unnarrowed t)))
   (org-roam-bibtex-mode t))
+
 ;; Company
 
 (use-package company

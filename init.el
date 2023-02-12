@@ -1336,6 +1336,9 @@
   :straight t
   :after dired
   )
+(use-package dired-filter
+  :straight t
+  )
 
 ;; Olivetti
 (use-package olivetti

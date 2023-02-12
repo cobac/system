@@ -1699,38 +1699,39 @@
 ;;   (elpy-enable)
 ;;   )
 
-(use-package python-mode
-  :straight t
-  :config
-  (setq py-shell-name "python"
-        py-keep-windows-configuration t
-        py-split-window-on-execute nil
-        py-switch-buffers-on-execute-p t)
-  (add-hook 'python-mode-hook
-            (lambda () (add-hook 'before-save-hook apheleia)))
-  (general-def 'python-mode-map
-    "C-c C-c" 'py-execute-region
-    "C-c C-l" 'py-execute-line
-    "C-c C-b" 'py-execute-buffer)
-  )
+;;(use-package python-mode
+;;  :straight t
+;;  :hook (python-mode . lsp)
+;;  :config
+;;  (setq py-keep-windows-configuration t)
+;;  (general-def 'python-mode-map
+;;    "C-c C-c" 'py-execute-region
+;;    "C-c C-l" 'py-execute-line
+;;    "C-c C-b" 'py-execute-buffer)
+;;  )
 
-(use-package lsp-pyright
+(use-package python
   :straight t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp))))   ; or lsp-deferred
+  :hook (python-mode . lsp)
+  :config
+  (general-def 'python-mode-map
+    "C-c C-c" 'python-shell-send-region
+    "C-c C-b" 'python-shell-send-buffer)
+  )
 
 (use-package pyvenv
   :straight t
   :config
   (general-def 'python-mode-map
-    "C-c C-a" 'pyvenv-activate)
+    "C-c C-a" 'pyvenv-workon)
   (pyvenv-mode 1))
 
 ;; Notebooks
 
 (use-package ein
   :straight t
+  :config
+  (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
   )
 
 ;; Yaml

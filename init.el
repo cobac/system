@@ -26,6 +26,8 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (recentf-mode 1)
+(setq recentf-max-saved-items 100)
+(run-at-time nil (* 2 60) 'recentf-save-list)
 
 ;; Remove startup screen
 (setq inhibit-splash-screen t

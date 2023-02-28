@@ -482,7 +482,7 @@
                               ("p" "Check Psychology" entry (file+olp "~/Sync/Org/todo.org" "Psychology" "Check")
                                "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
                                :empty-lines 1)
-                              ("r" "Resmas" entry (file+olp "~/Sync/Org/todo.org" "Psychology" "Uni" "Resma")
+                              ("r" "Xebia" entry (file+olp "~/Sync/Org/todo.org" "Work" "Xebia")
                                "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
                                :empty-lines 1)
                               ("m" "Movies" entry (file+olp "~/Sync/Org/todo.org" "Leisure" "Movies")

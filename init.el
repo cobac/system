@@ -761,7 +761,9 @@
         org-roam-capture-templates '(
                                      ("r" "default" plain "- tags :: %?"
                                       :target (file+head "${slug}.org"
-                                                         ":PROPERTIES:\n:ROAM_ALIASES:\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${title}\n"))
+                                                         ":PROPERTIES:\n:ROAM_ALIASES:\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${title}\n")
+                                      :immediate-finish t
+                                      :unnarrowed t)
                                      ("p" "bib" plain "- tags :: %?"
                                       :target (file+head "${citekey}.org"
                                                          ":PROPERTIES:\n:ROAM_ALIASES: \"${author-abbrev}(${year}): ${title}\"\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${citekey}\n")

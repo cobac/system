@@ -353,7 +353,7 @@
                '(file))
 
          (list (openwith-make-extension-regexp
-                '("png" "jpg" "jpeg" ))
+                '("png" "jpg" "jpeg" "webp"))
                "feh"
                '(file))
          ))

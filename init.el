@@ -682,7 +682,7 @@
                 org-download-heading-lvl nil))
 
 (use-package org-roam
-  :straight t
+  :straight (:host github :repo "org-roam/org-roam" :branch "main" :files ("*.el" "out" "extensions/*.el"))
   :general
   (coba-leader-def
     "r" 'org-roam-node-find

@@ -50,7 +50,7 @@ alias muinitcoba="mu init --maildir=/home/coba/.Mail/ --my-address=coba@cobac.eu
 alias mm="make"
 alias gg="gotop"
 alias pydataenv="source ~/.virtualenvs/datastuff/bin/activate"
-alias ansiblep="ansible-pull -U https://github.com/cobac/system.git --ask-become-pass"
+alias ansiblep="ansible-pull -U https://github.com/cobac/system.git --ask-become-pass -vv"
 
 
 # Completion

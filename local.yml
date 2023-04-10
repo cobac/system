@@ -41,6 +41,10 @@
         ansible.builtin.copy:
           src: files/.zshrc
           dest: /home/coba/
+      - name: Copy zsh .config
+        ansible.builtin.copy:
+          src: files/zsh
+          dest: /home/coba/.config/
       - name: Change shell to zsh
         ansible.builtin.user:
           name: coba

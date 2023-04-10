@@ -1,3 +1,6 @@
 [submodule "files/zsh/powerlevel10k"]
 	path = files/zsh/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "files/kitty/kitty-themes"]
+	path = files/kitty/kitty-themes
+	url = https://github.com/dexpota/kitty-themes.git

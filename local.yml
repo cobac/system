@@ -2,6 +2,10 @@
 - hosts: localhost
   connection: local
   become: true
+  module_defaults:
+    copy:
+      owner: coba
+      group: wheel
 
   tasks:
     - name: Full system upgrade

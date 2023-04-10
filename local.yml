@@ -9,7 +9,7 @@
         update_cache: true
         upgrade: true
 
-    - name: install emacs
-      community.general.pacman:
-        name:
-          - emacs-nativecomp
+    - name: Setup emacs
+      import_tasks: emacs/emacs.yml
+      
+

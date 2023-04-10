@@ -1,0 +1,12 @@
+- name: Install emacs
+  community.general.pacman:
+    name:
+      - emacs-nativecomp
+    state: latest
+
+- name: Config emacs
+  ansible.builtin.copy: 
+    src: files/
+    dest: /home/coba/.emacs.d
+    owner: coba
+    group: wheel

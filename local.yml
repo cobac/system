@@ -6,6 +6,9 @@
     copy:
       owner: coba
       group: wheel
+    file:
+      owner: coba
+      group: wheel
 
   tasks:
     - name: Full system upgrade

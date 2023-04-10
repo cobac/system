@@ -256,9 +256,9 @@ font pango:fontawesome, IBMPlexMono 16
 status_command i3status -c ~/.config/i3status/config
 position top
 mode dock
-output eDP-1-1
-output HDMI-1-1
-output DP-1-2
+output eDP-1
+output HDMI-1
+output DP-1
 
 separator_symbol "  "
 #tray_output eDP-1-1

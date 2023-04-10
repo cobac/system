@@ -21,6 +21,19 @@
         name: "{{ lookup('file', 'packages').splitlines() }}"
         state: latest
 
+    - name: Ensure main directories exist
+      ansible.builtin.file:
+        path: "/home/coba/{{ item.dir }}"
+        state: directory
+        modification_time: now
+        access_time: now
+      loop:
+        - {dir: Documentos}
+        - {dir: Documentos/Archive}
+        - {dir: Documentos/Work}
+        - {dir: Documentos/Work/Xebia}
+        - {dir: Downloads}
+
     - name: Setup emacs
       import_tasks: emacs/emacs.yml
       

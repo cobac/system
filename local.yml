@@ -35,6 +35,17 @@
         - {dir: Documentos/Work/Xebia}
         - {dir: Downloads}
 
+    - name: Setup shell
+      block:
+      - name: Copy .zshrc
+        ansible.builtin.copy:
+          src: files/.zshrc
+          dest: /home/coba/
+      - name: Change shell to zsh
+        ansible.builtin.user:
+          name: coba
+          shell: /bin/zsh
+
     - name: Setup graphical interface
       import_tasks: graphical/graphical.yml
 

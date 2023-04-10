@@ -19,3 +19,6 @@
     - i3
     - i3blocks
     - i3status
+
+- name: set es keyboard
+  ansible.builtin.command: localectl set-x11-keymap es

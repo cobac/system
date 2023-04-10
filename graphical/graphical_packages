@@ -6,3 +6,13 @@ xcompmgr
 hsetroot
 i3
 rofi
+alsa-firmware
+alsa-utils
+pavucontrol
+pipewire-audio
+pipewire-alsa
+pipewire-docs
+pipewire-jack
+pipewire-pulse
+qjackctl
+wireplumber

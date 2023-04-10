@@ -66,3 +66,17 @@
         name: "{{ lookup('file', 'packages').splitlines() }}"
         state: latest
 
+    - name: Activate syncthing
+      ansible.builtin.systemd:
+        name: syncthing
+        state: started
+        enabled: true
+        scope: user
+      become: yes
+      become_user: coba
+      become_method: su
+      environment: 
+        # This is horrible hardcoded
+        XDG_RUNTIME_DIR: "/run/user/1000"
+
+

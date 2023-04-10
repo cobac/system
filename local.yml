@@ -46,6 +46,11 @@
           name: coba
           shell: /bin/zsh
 
+    - name: Copy kitty conf
+      ansible.builtin.copy:
+        src: files/kitty
+        dest: /home/coba/.config/
+
     - name: Setup graphical interface
       import_tasks: graphical/graphical.yml
 

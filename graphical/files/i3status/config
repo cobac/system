@@ -1,0 +1,77 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+output_format = "i3bar"
+colors = false
+}
+
+
+#order += "arch_updates"
+order += "volume master"
+#order += "backlight"
+#order += "battery_level"
+order += "battery 0"
+order += "time"
+order += "wireless _first_"
+
+
+time {
+        format = " %d %B - %A  %H:%M"
+}
+
+battery 0 {
+        format = "%status %percentage"
+        format_down = "No battery (!)"
+        integer_battery_capacity = true
+        # true: 100%, false: real max%
+        last_full_capacity = true
+        status_bat = ""
+        status_full = ""
+        status_chr = ""
+        status_unk = "  Check power plug "
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+}
+
+#threshold_bad = 15
+#threshold_degraded = 30
+#color_bad = "#cb4b16"
+#color_charging = "#b58900"
+#color_good ="#859900"
+#color_degraded = "eee8d5"
+#measurement_mode = "sys"
+#
+#cache_timeout = 30
+#on_udev_power_supply = "refresh"
+#
+#blocks = ""
+#charging_character = "⚡"
+#format = "{icon} {percent}%"
+#
+#notify_low_level = True
+#notifications = True
+#}
+
+
+volume master {
+
+format = " 墳 %volume"
+format_muted = "ﱝ"
+}
+
+#arch_updates{
+#format =" {pacman}  {aur}"
+#cache_timeout = 600
+#hide_if_zero = False
+#}
+
+wireless _first_ {
+        format_up = "%essid"
+        format_down = ""
+}

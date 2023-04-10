@@ -1,0 +1,8 @@
+xorg
+mesa
+vulkan-intel
+xorg-xinit
+xcompmgr
+hsetroot
+i3-wm
+rofi

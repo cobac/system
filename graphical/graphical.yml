@@ -1,0 +1,21 @@
+- name: Install graphical packages packages
+  community.general.pacman:
+    name: "{{ lookup('file', 'graphical_packages').splitlines() }}"
+    state: latest
+
+- name: copy xorg files
+  ansible.builtin.copy:
+    src: files/{{ item }}
+    dest: /home/coba/
+  with_items:
+    - .xinitrc
+    - .Xkeymap-laptop
+
+- name: copy i3 files
+  ansible.builtin.copy:
+    src: files/{{ item }}
+    dest: /home/coba/.config/
+  with_items:
+    - i3
+    - i3blocks
+    - i3status

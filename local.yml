@@ -18,7 +18,7 @@
 
     - name: Install basic packages
       community.general.pacman:
-        name: "{{ lookup('file', 'packages').splitlines() }}"
+        name: "{{ lookup('file', 'basic_packages').splitlines() }}"
         state: latest
 
     - name: Ensure main directories exist
@@ -28,11 +28,15 @@
         modification_time: now
         access_time: now
       loop:
+        - {dir: .config}
         - {dir: Documentos}
         - {dir: Documentos/Archive}
         - {dir: Documentos/Work}
         - {dir: Documentos/Work/Xebia}
         - {dir: Downloads}
+
+    - name: Setup graphical interface
+      import_tasks: graphical/graphical.yml
 
     - name: Setup emacs
       import_tasks: emacs/emacs.yml

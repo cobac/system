@@ -251,7 +251,7 @@
     "C-d" 'ivy-switch-buffer-kill)
   (coba-leader-def
     "f" '(:ignore t :which-key "Files")
-    "fi" '(lambda() (interactive)(find-file "~/.emacs.d/init.el"))
+    "fi" '(lambda() (interactive)(find-file "~/Documentos/system/emacs/files/init.el"))
     "fp" '(lambda() (interactive)(counsel-find-file "~/Documentos/Work/xebia"))
     "ff" 'counsel-find-file
     "fr" 'counsel-recentf

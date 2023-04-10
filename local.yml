@@ -10,6 +10,6 @@
         upgrade: true
 
     - name: install emacs
-      package:
+      community.general.pacman:
         name:
           - emacs-nativecomp

@@ -34,6 +34,8 @@
         - {dir: Documentos/Work}
         - {dir: Documentos/Work/Xebia}
         - {dir: Downloads}
+        - {dir: Sync}
+        - {dir: Sync/database}
 
     - name: Setup shell
       block:

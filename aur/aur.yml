@@ -1,0 +1,32 @@
+- name: Install aur module
+  ansible.builtin.command: ansible-galaxy collection install kewlfft.aur
+
+- name: Create the `aur_builder` user
+  become: yes
+  ansible.builtin.user:
+    name: aur_builder
+    create_home: yes
+    group: wheel
+
+- name: Allow the `aur_builder` user to run `sudo pacman` without a password
+  become: yes
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/11-install-aur_builder
+    line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+    create: yes
+    validate: 'visudo -cf %s'
+
+- name: Install paru using makepkg if it isn't installed already
+  kewlfft.aur.aur:
+    name: paru
+    state: latest
+  become: yes
+  become_user: aur_builder
+
+- name: Install aur packages
+  kewlfft.aur.aur:
+    name: "{{ lookup('file', 'aur_packages').splitlines() }}"
+    use: paru
+    state: latest
+  become: yes
+  become_user: aur_builder

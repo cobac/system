@@ -78,6 +78,8 @@
         # This is horrible hardcoded
         XDG_RUNTIME_DIR: "/run/user/1000"
 
+    - name: Aur stuff
+      import_tasks: aur/aur.yml
 
     - name: Setup emacs
       import_tasks: emacs/emacs.yml

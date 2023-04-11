@@ -60,9 +60,6 @@
     - name: Setup graphical interface
       import_tasks: graphical/graphical.yml
 
-    - name: Setup emacs
-      import_tasks: emacs/emacs.yml
-      
     - name: install rest of packages
       community.general.pacman:
         name: "{{ lookup('file', 'packages').splitlines() }}"
@@ -82,3 +79,5 @@
         XDG_RUNTIME_DIR: "/run/user/1000"
 
 
+    - name: Setup emacs
+      import_tasks: emacs/emacs.yml

@@ -1,6 +1,7 @@
 acpi
 base
 base-devel
+cmake
 fzf
 git
 git-lfs

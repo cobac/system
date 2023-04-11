@@ -11,4 +11,5 @@ keepassxc
 less
 syncthing
 python
-python-pipenv
+python-pipenvunrar
+unzip

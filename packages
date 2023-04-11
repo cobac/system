@@ -4,6 +4,7 @@ feh
 firefox
 gnu-free-fonts
 grep
+ripgrep
 htop
 ipython
 jupyter-notebook
@@ -11,5 +12,6 @@ keepassxc
 less
 syncthing
 python
-python-pipenvunrar
+python-pipenv
+unrar
 unzip

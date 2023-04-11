@@ -69,6 +69,17 @@
         - {name: github.user, value: cobac}
         - {name: init.defaultbranch, value: main}
 
+    - name: Configure ssh for github
+      ansible.builtin.blockinfile:
+        path: /home/coba/.ssh/config
+        create: true
+        block: |
+          Host github.com
+            Hostname ssh.github.com
+            User git
+            Port 443
+            # IdentityFile ~/.ssh/[[ ID NAME ]]
+
     - name: Setup graphical interface
       import_tasks: graphical/graphical.yml
 

@@ -33,7 +33,7 @@
         - {dir: Documentos}
         - {dir: Documentos/Archive}
         - {dir: Documentos/Work}
-        - {dir: Documentos/Work/Xebia}
+        - {dir: Documentos/Work/xebia}
         - {dir: Downloads}
         - {dir: Sync}
         - {dir: Sync/database}

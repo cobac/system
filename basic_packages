@@ -4,6 +4,7 @@ base-devel
 fzf
 git
 git-lfs
+openssh
 kitty
 neovim
 powerline-fonts

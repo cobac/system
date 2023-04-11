@@ -29,6 +29,7 @@
         access_time: now
       loop:
         - {dir: .config}
+        - {dir: .ssh}
         - {dir: Documentos}
         - {dir: Documentos/Archive}
         - {dir: Documentos/Work}
@@ -56,6 +57,17 @@
       ansible.builtin.copy:
         src: files/kitty
         dest: /home/coba/.config/
+
+    - name: Configure git
+      community.general.git_config:
+        name: "{{ item.name }}"
+        scope: global
+        value: "{{ item.value }}"
+      loop:
+        - {name: user.email, value: coba@cobac.eu}
+        - {name: user.name, value: David Coba}
+        - {name: github.user, value: cobac}
+        - {name: init.defaultbranch, value: main}
 
     - name: Setup graphical interface
       import_tasks: graphical/graphical.yml

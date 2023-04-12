@@ -8,3 +8,16 @@
   ansible.builtin.copy: 
     src: files/
     dest: /home/coba/.emacs.d
+
+- name: Activate emacs service
+  ansible.builtin.systemd:
+    name: emacs
+    state: started
+    enabled: true
+    scope: user
+  become: yes
+  become_user: coba
+  become_method: su
+  environment:
+    # This is horrible hardcoded
+    XDG_RUNTIME_DIR: "/run/user/1000"

@@ -49,7 +49,7 @@ alias tl="tldr --list | fzf --preview 'tldr {} --color always' | xargs tldr"
 alias muinitcoba="mu init --maildir=/home/coba/.Mail/ --my-address=coba@cobac.eu --my-address=cosas@cobac.eu"
 alias mm="make"
 alias gg="gotop"
-alias pydataenv="source ~/.virtualenvs/datastuff/bin/activate"
+alias pydataenv="source ~/.pyenvs/datastuff/bin/activate"
 alias ansiblep="ansible-pull -U https://github.com/cobac/system.git --ask-become-pass -vv"
 
 

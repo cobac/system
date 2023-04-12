@@ -41,5 +41,6 @@ fi
 #nextcloud &
 hsetroot -solid "#282828" &
 xcompmgr -c -l0 -t0 -r0 -o.00 &
+xss-lock -- i3lock -c 1d2021 -e -f &
 #caffeine &
 exec i3

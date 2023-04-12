@@ -28,3 +28,17 @@
     name: coba
     groups: video
     append: yes
+
+- name: Configure trackpad
+  # also install libinput gestures
+  ansible.builtin.blockinfile:
+    path: /etc/X11/xorg.conf.d/30-touchpad.conf
+    create: true
+    block: |
+      Section "InputClass"
+        Identifier "Touchpad"
+        MatchIsTouchpad "on"
+        Driver "libinput"
+        Option "ClickMethod" "clickfinger"
+        Option "Tapping" "on"
+      EndSection

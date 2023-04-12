@@ -9,6 +9,7 @@
     dest: /home/coba/
   with_items:
     - .xinitrc
+    - .xserverrc
     - .Xkeymap-laptop
 
 - name: copy i3 files

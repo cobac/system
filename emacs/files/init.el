@@ -679,7 +679,7 @@
   :config
   (coba-local-leader-def 'org-mode-map
     "p" 'org-download-clipboard)
-  (setq-default org-download-image-dir "~/Brain/pictures"
+  (setq-default org-download-image-dir "~/Sync/Brain/pictures"
                 org-download-heading-lvl nil))
 
 (use-package org-roam
@@ -711,8 +711,8 @@
   :init
   (setq org-roam-v2-ack t)
   :config
-  (setq org-roam-directory (file-truename "~/Brain")
-        org-roam-db-location "~/Brain/roam.db"
+  (setq org-roam-directory (file-truename "~/Sync/Brain")
+        org-roam-db-location "~/Sync/Brain/roam.db"
         org-roam-dailies-directory "diario"
         org-roam-dailies-capture-templates
         '(("d" "default" plain
@@ -831,9 +831,9 @@
   :straight t
   :config
   (setq
-   bibtex-completion-bibliography "~/Brain/bib.bib"
-   bibtex-completion-library-path "~/Brain/pdf/"
-   bibtex-completion-notes-path     "~/Brain/";;"bibnotes.org"
+   bibtex-completion-bibliography "~/Sync/Brain/bib.bib"
+   bibtex-completion-library-path "~/Sync/Brain/pdf/"
+   bibtex-completion-notes-path     "~/Sync/Brain/";;"bibnotes.org"
    bibtex-completion-pdf-open-function (lambda (fpath)
                                          (call-process "zathura" nil 0 nil fpath))
    bibtex-completion-notes-template-multiple-files "ERROR: bibtex-completion is being used instead of ORB"
@@ -849,8 +849,8 @@
     "pp" 'ivy-bibtex
     "pd" 'doi-add-bibtex-entry
     "pa" 'arxiv-get-pdf-add-bibtex-entry
-    "pf" '(lambda() (interactive)(find-file "~/Brain/bib.bib"))
-    "pn" '(lambda() (interactive)(find-file "~/Brain/bibnotes.org"))
+    "pf" '(lambda() (interactive)(find-file "~/Sync/Brain/bib.bib"))
+    "pn" '(lambda() (interactive)(find-file "~/Sync/Brain/bibnotes.org"))
     )
   )
 
@@ -992,7 +992,7 @@
                               ("framerule" "1pt")
                               )
  org-latex-pdf-process
- '("ln -s ~/Brain/bib.bib bib.bib"
+ '("ln -s ~/Sync/Brain/bib.bib bib.bib"
    "latexmk -pdflatex='xelatex -interaction nonstopmode' -shell-escape -pdf -bibtex -f %f")
  )
 

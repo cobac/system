@@ -61,8 +61,8 @@ battery 0 {
 
 volume master {
 
-format = " 墳 %volume"
-format_muted = "ﱝ"
+format = "  %volume"
+format_muted = ""
 }
 
 #arch_updates{

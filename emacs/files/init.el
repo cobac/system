@@ -136,6 +136,11 @@
   (general-create-definer coba-local-leader-def
     :states '(normal visual motion)
     :prefix ",")
+  (general-def
+    "s-+" 'text-scale-increase
+    "s--" 'text-scale-decrease
+    "s-0" '(lambda () (interactive) (text-scale-adjust 0))
+    )
   )
 
 

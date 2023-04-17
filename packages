@@ -26,6 +26,8 @@ breeze-gtk
 breeze-icons
 texlive-most
 aspell
+aspell-en
+aspell-es
 zathura
 zathura-pdf-poppler 
 okular

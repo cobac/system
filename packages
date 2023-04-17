@@ -26,3 +26,6 @@ breeze-gtk
 breeze-icons
 texlive-most
 aspell
+zathura
+zathura-pdf-poppler 
+okular

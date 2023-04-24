@@ -13,6 +13,7 @@ keepassxc
 less
 syncthing
 obs-studio
+v4l2loopback-dkms
 python
 python-pipenv
 unrar

@@ -1,6 +1,7 @@
 acpi
 base
 base-devel
+reflector
 cmake
 fzf
 git

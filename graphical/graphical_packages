@@ -5,6 +5,7 @@ xorg-xinit
 xcompmgr
 hsetroot
 i3
+picom
 rofi
 alsa-firmware
 alsa-utils

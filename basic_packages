@@ -7,7 +7,7 @@ fzf
 git
 git-lfs
 openssh
-resync
+rsync
 kitty
 neovim
 powerline-fonts

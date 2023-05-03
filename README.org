@@ -1,0 +1,4 @@
+* TODO manually
+- Generate ssh keys and edit =~/.ssh/config=
+- Clone this repo
+- Run =run_once=, optionally disabling some scripts

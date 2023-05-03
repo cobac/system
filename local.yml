@@ -147,3 +147,13 @@
           file:///home/coba/Sync/Brain/pdf
           file:///home/coba/Documentos
           file:///home/coba/Downloads
+
+    - name: Setup sleep
+      ansible.builtin.blockinfile:
+        path: /etc/systemd/logind.conf
+        create: true
+        block: |
+          HandlePowerKey=suspend-then-hibernate
+          HandlePowerKeyLongPress=poweroff
+    - name: set xss-lock
+      ansible.builtin.command: xss-lock -- i3lock -c 1d2021 -e -f

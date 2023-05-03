@@ -1,1 +1,2 @@
 xss-lock -- i3lock -c 1d2021 -e -f
+xdg-settings set default-web-browser firefox.desktop

@@ -1,4 +1,36 @@
-* TODO manually
+Files and logic that deploy my personal system config.
+
+It's designed to be called via [[https://docs.ansible.com/ansible/latest/cli/ansible-pull.html][ansible-pull]] from the local machine.
+
+* Why
+- I want to be able to deploy my config as quickly and painlessly as possible on new machines.
+- I want to configure my system in a declarative way, like NixOS or Guix.
+- But I want to use Archlinux
+  - I've been using it for years
+  - I want rolling releases
+  - I like pacman
+  - I like how they approach packaging
+  - I like the AUR
+  - I want to compile myself as few packages as possible
+  - Documentation is great
+
+* Manual prerequisites
+- Archlinux installed and booting
+  - kernel, swap, locale, fstab
+- Configure suspend/hibernation at the kernel level
+- User created and /wheeled/
+- installed
+  - sudo
+  - ansible
+  - git
+- Install and enable+start =NetworkManager=
+
+* How to run
+- ~sudo ansible-pull -U https://github.com/cobac/system.git --ask-become-pass~
+  - aliased to ~ansiblep~ with zsh
+
+* TO-DO manually after installation
 - Generate ssh keys and edit =~/.ssh/config=
 - Clone this repo
-- Run =run_once=, optionally disabling some scripts
+- Run =run_once=, optionally disabling some commands
+- Config Syncthing

@@ -156,4 +156,4 @@
           HandlePowerKey=suspend-then-hibernate
           HandlePowerKeyLongPress=poweroff
     - name: set xss-lock
-      ansible.builtin.command: xss-lock -- i3lock -c 1d2021 -e -f
+      ansible.builtin.command: 

@@ -12,6 +12,7 @@ It's designed to be called via [[https://docs.ansible.com/ansible/latest/cli/ans
   - I like how they approach packaging
   - I like the AUR
   - I want to compile myself as few packages as possible
+    - And when I have to I want to do it with a PKGBUILD
   - Documentation is great
 
 * Manual prerequisites

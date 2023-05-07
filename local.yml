@@ -155,5 +155,3 @@
         block: |
           HandlePowerKey=suspend-then-hibernate
           HandlePowerKeyLongPress=poweroff
-    - name: set xss-lock
-      ansible.builtin.command: 

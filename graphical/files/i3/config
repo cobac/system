@@ -138,7 +138,7 @@ bindsym $mod+ctrl+c move container to workspace $ws9
 bindsym $mod+ctrl+v move container to workspace $ws10
 
 # move workspaces to outputs
-bindsym $mod+n move workspace to output right
+bindsym $mod+n move workspace to output next
 
 # select output configuration
 bindsym $mod+shift+m exec --no-startup-id ~/scripts/rofi/myrmidon.sh ~/scripts/rofi/monitors.json

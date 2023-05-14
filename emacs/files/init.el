@@ -259,6 +259,7 @@
     "fi" '(lambda() (interactive)(find-file "~/Documentos/system/emacs/files/init.el"))
     "fs" '(lambda() (interactive)(counsel-find-file "~/Documentos/system/"))
     "fp" '(lambda() (interactive)(counsel-find-file "~/Documentos/Work/xebia"))
+    "fo" '(lambda() (interactive)(counsel-find-file "~/Sync/oros/main.ledger"))
     "ff" 'counsel-find-file
     "fr" 'counsel-recentf
     "FF" 'counsel-fzf
@@ -1879,3 +1880,7 @@
                                 (push '(?< . ("< " . " >")) evil-surround-pairs-alist)))
   )
 
+
+(use-package ledger-mode
+  :straight t
+  )

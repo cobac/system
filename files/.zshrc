@@ -20,6 +20,7 @@ bindkey -v
 zstyle :compinstall filename '/home/coba/.zshrc'
 
 # End of lines added by compinstall
+
 export BROWSER="firefox"
 
 autoload -Uz promptinit

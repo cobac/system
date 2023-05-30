@@ -37,6 +37,8 @@
         - {dir: Downloads}
         - {dir: Sync}
         - {dir: Sync/database}
+        - {dir: .Mail/coba}
+        - {dir: .Mail/cosas}
 
     - name: Setup shell
       block:
@@ -156,3 +158,8 @@
           HandlePowerKey=suspend-then-hibernate
           HandlePowerKeyLongPress=poweroff
           HandleLidSwitch=suspend-then-hibernate
+
+    - name: Copy .mbsync
+      ansible.builtin.copy:
+        src: files/.mbsyncrc
+        dest: /home/coba/

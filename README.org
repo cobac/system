@@ -32,6 +32,10 @@ It's designed to be called via [[https://docs.ansible.com/ansible/latest/cli/ans
 
 * TO-DO manually after installation
 - Generate ssh keys and edit =~/.ssh/config=
+- Generate and populate =~/.authinfo.gpg=
+  - root pass for tramp
+  - personal email passwords
+  - github/gitlab apis for forge
 - Clone this repo
 - Run =run_once=, optionally disabling some commands
 - Config Syncthing

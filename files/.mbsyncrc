@@ -1,0 +1,54 @@
+##### coba@cobac.eu
+IMAPStore coba-remote
+Host mail.your-server.de
+Port 993
+User coba@cobac.eu
+PassCmd "emacsclient -e \"(coba-lookup-password :host \\\"mail.your-server.de\\\" :user \\\"coba@cobac.eu\\\")\" | cut -d '\"' -f2"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore coba-local
+# The trailing "/" is important
+Path ~/.Mail/coba/
+Inbox ~/.Mail/coba/Inbox
+SubFolders Verbatim
+
+Channel coba
+Far :coba-remote:
+Near :coba-local:
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Same with delete
+Expunge Both
+# Include everything
+Patterns * 
+# Save the synchronization state files in the mailbox
+SyncState *
+
+
+##### cosas@cobac.eu
+IMAPStore cosas-remote
+Host mail.your-server.de
+Port 993
+User cosas@cobac.eu
+PassCmd "emacsclient -e \"(coba-lookup-password :host \\\"mail.your-server.de\\\" :user \\\"cosas@cobac.eu\\\")\" | cut -d '\"' -f2"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore cosas-local
+# The trailing "/" is important
+Path ~/.Mail/cosas/
+Inbox ~/.Mail/cosas/Inbox
+SubFolders Verbatim
+
+Channel cosas
+Far :cosas-remote:
+Near :cosas-local:
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Same with delete
+Expunge Both
+# Include everything
+Patterns * 
+# Save the synchronization state files in the mailbox
+SyncState *

@@ -2,6 +2,7 @@ alsa-firmware
 alsa-utils
 arandr
 autorandr
+gtk2
 hsetroot
 i3
 light

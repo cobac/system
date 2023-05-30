@@ -193,6 +193,7 @@
     (evil-collection-init 'nov)
     (evil-collection-init 'tar-mode)
     (evil-collection-init 'image)
+    (evil-collection-init 'profiler)
     )
   (use-package evil-snipe
     :straight t

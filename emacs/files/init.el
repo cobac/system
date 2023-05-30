@@ -1885,9 +1885,9 @@
   :straight t
   :config
   (coba-leader-def
-    "e" '(lambda () (interactive) (shell-command
-                                   (string-join '("hledger"
-                                                  "-f /home/coba/Sync/oros/main.ledger"
-                                                  "bal --monthly --sort --tree")
-                                                " "))))
+    "e" #'(lambda () (interactive) (shell-command
+                                    (string-join '("hledger"
+                                                   "-f /home/coba/Sync/oros/main.ledger"
+                                                   "bal --monthly --sort --tree")
+                                                 " "))))
   )

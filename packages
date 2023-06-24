@@ -28,7 +28,8 @@ python
 python-pipenv
 ripgrep
 syncthing
-texlive-most
+texlive-basic
+texlive-meta
 unrar
 unzip
 v4l2loopback-dkms

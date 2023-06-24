@@ -102,16 +102,23 @@
   :straight t
   :after memoize)
 
-(use-package doom-modeline
-  :straight (:type git :host github :repo "seagle0128/doom-modeline")
-  :after nerd-icons
-  :hook (after-init . doom-modeline-mode)
-  :config
-  (setq doom-modeline-modal-icon nil
-        doom-modeline-enable-word-count t
-        doom-modeline-icon t
-        mode-line-format '("%e" (:eval (doom-modeline-format--main)) "   ")
-        )
+;;(use-package doom-modeline
+;;  :straight (:type git :host github :repo "seagle0128/doom-modeline")
+;;  :after nerd-icons
+;;  :hook (after-init . doom-modeline-mode)
+;;  :config
+;;  (setq doom-modeline-modal-icon nil
+;;        doom-modeline-enable-word-count t
+;;        doom-modeline-icon t
+;;        ;;mode-line-format '("%e" (:eval (doom-modeline-format--main)) "   ")
+;;        )
+;; (setq doom-modeline-mu4e t)
+
+;;  )
+
+(use-package mood-line
+  :straight t
+  :hook (after-init . mood-line-mode)
   )
 
 ;; General - which-key
@@ -1295,9 +1302,9 @@
   (mu4e-alert-set-default-style 'libnotify)
   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
   (add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
-  (setq doom-modeline-mu4e t)
   (mu4e-alert-enable-mode-line-display)
   )
+
 
 ;; TODO: Fix mu4e-thread-folding
 ;; Error with nano-color-background not defined

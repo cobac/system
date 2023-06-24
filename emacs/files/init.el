@@ -98,13 +98,13 @@
 (use-package memoize
   :straight t)
 
-(use-package all-the-icons
+(use-package nerd-icons
   :straight t
   :after memoize)
 
 (use-package doom-modeline
   :straight (:type git :host github :repo "seagle0128/doom-modeline")
-  :after all-the-icons
+  :after nerd-icons
   :hook (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-modal-icon nil
@@ -1296,6 +1296,7 @@
   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
   (add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
   (setq doom-modeline-mu4e t)
+  (mu4e-alert-enable-mode-line-display)
   )
 
 ;; TODO: Fix mu4e-thread-folding

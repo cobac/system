@@ -1447,16 +1447,19 @@
 
 ;; Lisp
 (coba-local-leader-def
-  :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
-  "r" 'eval-region
-  "b" 'eval-buffer)
+ :keymaps
+ '(emacs-lisp-mode-map
+   lisp-interaction-mode-map)
+ "r" 'eval-region "b" 'eval-buffer)
 
-(use-package elisp-autofmt
-  :straight t
-  :config
-  (elisp-autofmt-mode)
-  )
-
+(use-package
+ elisp-autofmt
+ :straight t
+ :config
+ (add-hook
+  'emacs-lisp-mode-hook
+  (lambda ()
+    (add-hook 'before-save-hook (lambda () (elisp-autofmt-buffer))))))
 ;; ESS
 (use-package ess
   :straight t

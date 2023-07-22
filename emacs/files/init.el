@@ -1618,13 +1618,8 @@
  "r" 'eval-region "b" 'eval-buffer)
 
 (use-package
- elisp-autofmt
- :straight t
- :config
- (add-hook
-  'emacs-lisp-mode-hook
-  (lambda ()
-    (add-hook 'before-save-hook (lambda () (elisp-autofmt-buffer))))))
+  elisp-autofmt
+  :straight t)
 
 ;; ESS
 (use-package

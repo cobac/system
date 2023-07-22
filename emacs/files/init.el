@@ -1451,6 +1451,12 @@
   "r" 'eval-region
   "b" 'eval-buffer)
 
+(use-package elisp-autofmt
+  :straight t
+  :config
+  (elisp-autofmt-mode)
+  )
+
 ;; ESS
 (use-package ess
   :straight t

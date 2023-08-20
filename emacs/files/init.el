@@ -1382,7 +1382,7 @@
   message-kill-buffer-on-exit t
   mu4e-index-update-error-warning nil
   mu4e-view-show-images t
-  mu4e-attachment-dir "/tmp"
+  mu4e-attachment-dir "/Downloads"
   message-send-mail-function 'smtpmail-send-it
   mu4e-compose-dont-reply-to-self t
   mu4e-context-policy 'pick-first

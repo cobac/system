@@ -53,6 +53,7 @@ alias gg="gotop"
 alias pydataenv="source ~/.pyenvs/datastuff/bin/activate"
 alias pylocalenv="source .venv/bin/activate"
 alias ansiblep="ansible-pull -U https://github.com/cobac/system.git --ask-become-pass -vv"
+alias tarz="tar --zstd -cf"
 
 
 # Completion
@@ -75,6 +76,7 @@ extract() {
 	    *.rar)       unrar xv $1 ;;
 	    *.gz)        gunzip $1 ;;
 	    *.tar)       tar xvf $1 ;;
+	    *.tar.zst)   tar axf $1 ;;
 	    *.tbz2)      tar xjvf $1 ;;
 	    *.tgz)       tar xzvf $1 ;;
 	    *.zip)       unzip $1 ;;

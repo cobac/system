@@ -1152,7 +1152,7 @@
  org-latex-hyperref-template nil
  org-latex-prefer-user-labels t
  org-export-with-toc nil
- org-latex-listings t
+ org-latex-src-block-backend 'engraved
  org-latex-listings-options
  '(("basicstyle" "\\ttfamily\\color{code-fg}")
    ("stringstyle" "\\ttfamily\\color{code-string}")

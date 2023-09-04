@@ -632,7 +632,7 @@
 
 (setq-default org-display-custom-times t)
 (setq org-time-stamp-custom-formats
-      '("<%e-%m-%Y, %a>" . "<%e-%m-%Y, %a %H:%M>"))
+      '("<%Y-%m-%e, %a>" . "<%Y-%m-%e, %a %H:%M>"))
 
 (coba-leader-def
  "c" 'org-capture "a" '(:ignore t :which-key "Org-Agenda") "aa"
@@ -776,11 +776,20 @@
  "P"
  'coba-org-create-project)
 
-(use-package
- org-superstar
- :straight t
- :config
- (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+;; (use-package
+;;   org-superstar
+;;   :straight t
+;;   :config
+;;   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+
+(use-package org-modern
+  :straight t
+  :config
+  (with-eval-after-load 'org (global-org-modern-mode))
+  (setq org-modern-keyword nil
+        org-modern-todo nil
+        org-modern-tag nil)
+  )
 
 (add-hook 'org-mode-hook (lambda () visual-line-mode))
 (add-hook 'org-mode-hook 'org-indent-mode)

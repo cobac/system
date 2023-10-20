@@ -82,6 +82,12 @@
             Port 443
             # IdentityFile ~/.ssh/[[ ID NAME ]]
 
+    - name: Activate clock synchronization
+      ansible.builtin.systemd:
+        name: systemd-timesyncd
+        state: started
+        enabled: true
+
     - name: Setup graphical interface
       import_tasks: graphical/graphical.yml
 

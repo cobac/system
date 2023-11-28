@@ -27,6 +27,8 @@ okular
 papirus-icon-theme
 python
 python-pipenv
+pyright
+ruff-lsp
 qbittorrent
 ripgrep
 syncthing

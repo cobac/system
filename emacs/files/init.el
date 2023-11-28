@@ -1948,11 +1948,15 @@
   'python-shell-send-buffer))
 
 (use-package
- pyvenv
- :straight t
- :config
- (general-def 'python-mode-map "C-c C-a" 'pyvenv-workon)
- (pyvenv-mode 1))
+  pyvenv
+  :straight t
+  :config
+  (general-def 'python-mode-map "C-c C-a" 'pyvenv-workon)
+  (pyvenv-mode 1))
+
+(use-package lsp-pyright
+  :straight t
+  )
 
 ;; Notebooks
 

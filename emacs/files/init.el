@@ -1,7 +1,5 @@
 ; Straight.el config
 
-(setq straight-recipes-gnu-elpa-use-mirror t)
-
 ;; Bootstrap
 (defvar bootstrap-version)
 (let ((bootstrap-file

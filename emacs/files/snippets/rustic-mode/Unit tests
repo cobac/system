@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Unit tests
-# key: #tests
+# key: #ts
 # --
 #[cfg(test)]
 mod tests {

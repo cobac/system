@@ -185,7 +185,7 @@
        (recenter nil)))
   (general-def :states '(visual) "C-=" 'count-words-region)
   :config
-  (setq evil-want-minibuffer t)
+  (setq evil-want-minibuffer nil)
   (use-package
     undo-tree
     :straight t

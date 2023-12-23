@@ -11,6 +11,13 @@
       group: wheel
 
   tasks:
+    - name: Allow parallel downloads
+      ansible.builtin.blockinfile:
+        path: /etc/pacman.conf
+        create: true
+        block: |
+          ParallelDownloads = 10
+
     - name: Full system upgrade
       community.general.pacman:
         update_cache: true

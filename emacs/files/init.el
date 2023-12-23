@@ -1587,7 +1587,9 @@
    lsp-headerline-breadcrumb-segments '(symbols)
    lsp-log-io t
    lsp-print-performance t
-   lsp-modeline-code-actions-segments '(count name)))
+   lsp-modeline-code-actions-segments '(count name)
+   lsp-lens-enable nil)
+  )
 
 ;;(use-package lsp-ui
 ;;  :straight t)
@@ -1985,6 +1987,7 @@
         (file-name-directory
          (locate-dominating-file (buffer-file-name) "Makefile"))
         " && make "))
+
 (coba-leader-def "C" 'compile)
 
 (use-package

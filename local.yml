@@ -17,7 +17,7 @@
         path: /etc/pacman.conf
         section: options
         option: ParallelDownloads
-        value: 6
+        value: 10
 
 
     - name: Full system upgrade

@@ -11,12 +11,14 @@
       group: wheel
 
   tasks:
-    - name: Allow parallel downloads
-      ansible.builtin.blockinfile:
+
+    - name: Config pacman
+      community.general.ini_file:
         path: /etc/pacman.conf
-        create: true
-        block: |
-          ParallelDownloads = 10
+        section: options
+        option: ParallelDownloads
+        value: 10
+
 
     - name: Full system upgrade
       community.general.pacman:

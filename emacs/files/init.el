@@ -1776,7 +1776,9 @@
    ("\\.md\\'" . markdown-mode)
                                         ;("\\.Rmd\\'" . markdown-mode)
    ("\\.markdown\\'" . markdown-mode))
-  :config (general-def 'markdown-view-mode-map "q" 'quit-window))
+  :config (general-def 'markdown-view-mode-map "q" 'quit-window)
+  (setq markdown-hide-markup nil))
+
 
 ;; Polymode
 (use-package polymode :straight t)

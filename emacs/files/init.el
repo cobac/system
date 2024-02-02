@@ -2123,3 +2123,11 @@
           " "))
         (windmove-right)
         (delete-other-windows))))
+
+(defun coba-sync-init-with-system ()
+  "Sync `init.el`, `ox-templates` and `snippets` from `~/.emacs.d` into `~/Documentos/system/emacs/files`."
+  (interactive)
+  (shell-command "cp $HOME/Documentos/system/emacs/files/init.el $HOME/.emacs.d/")
+  (shell-command "cp -r $HOME/Documentos/system/emacs/files/ox-templates $HOME/.emacs.d/")
+  (shell-command "cp -r $HOME/.emacs.d/snippets $HOME/Documentos/system/emacs/files/")
+  )

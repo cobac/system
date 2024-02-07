@@ -4,5 +4,6 @@ gotop-bin
 hledger-bin
 libinput-gestures
 mu
+pandoc-bin
 slack-desktop
 ttf-ms-fonts

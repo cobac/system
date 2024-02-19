@@ -204,7 +204,7 @@
     (evil-collection-init 'mu4e)
     (evil-collection-init 'dired)
     (evil-collection-init 'ediff)
-    (evil-collection-init 'magit-todos)
+    ;;(evil-collection-init 'magit-todos)
     (evil-collection-init 'vterm)
     (evil-collection-init 'info)
     ;;(evil-collection-init 'lsp-ui-menu)
@@ -1282,12 +1282,12 @@
 
 (use-package forge :straight t :after magit)
 
-(use-package
-  magit-todos
-  :straight t
-  :config
-  (global-hl-todo-mode 1)
-  (magit-todos-mode 1))
+;; (use-package
+;;   magit-todos
+;;   :straight t
+;;   :config
+;;   (global-hl-todo-mode 1)
+;;   (magit-todos-mode 1))
 
 (use-package
   git-timemachine

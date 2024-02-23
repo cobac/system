@@ -1998,6 +1998,10 @@
   :general (coba-leader-def "D" 'docker)
   :config (setq docker-run-as-root t))
 
+(use-package dockerfile-mode
+  :straight t
+  )
+
 (use-package
   nov
   :straight t

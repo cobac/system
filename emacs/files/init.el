@@ -1794,6 +1794,10 @@
 
 (use-package poly-org :straight t)
 
+(use-package quarto-mode
+  :straight t
+  )
+
 ;; Latex
 (use-package
   tex

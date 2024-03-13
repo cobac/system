@@ -858,21 +858,21 @@
       :target (file+head "%<%Y-%m>.org" "* %<%d %A>\n\n"))))
   (evil-set-initial-state 'org-roam-mode 'motion)
   ;; Show hierarchy of nodes from https://github.com/org-roam/org-roam/issues/1565
-  (cl-defmethod org-roam-node-filetitle ((node org-roam-node))
-    "Return the file TITLE for the node."
-    (org-roam-get-keyword "TITLE" (org-roam-node-file node)))
-  (cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
-    "Return the hierarchy for the node."
-    (let ((title (org-roam-node-title node))
-          (olp (org-roam-node-olp node))
-          (level (org-roam-node-level node))
-          (filetitle (org-roam-node-filetitle node)))
-      (concat
-       title
-       (if (> level 0)
-           (concat ", from " filetitle))
-       (if (> level 1)
-           (concat " -> " (string-join olp " -> "))))))
+  ;; (cl-defmethod org-roam-node-filetitle ((node org-roam-node))
+  ;;   "Return the file TITLE for the node."
+  ;;   (org-roam-get-keyword "TITLE" (org-roam-node-file node)))
+  ;; (cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
+  ;;   "Return the hierarchy for the node."
+  ;;   (let ((title (org-roam-node-title node))
+  ;;         (olp (org-roam-node-olp node))
+  ;;         (level (org-roam-node-level node))
+  ;;         (filetitle (org-roam-node-filetitle node)))
+  ;;     (concat
+  ;;      title
+  ;;      (if (> level 0)
+  ;;          (concat ", from " filetitle))
+  ;;      (if (> level 1)
+  ;;          (concat " -> " (string-join olp " -> "))))))
   (setq org-roam-node-display-template "${hierarchy:*} ${tags:20}")
   (org-roam-db-autosync-enable))
 

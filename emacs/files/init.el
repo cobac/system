@@ -101,6 +101,7 @@
   :straight t
   :config
   (doom-themes-org-config)
+  (setq doom-gruvbox-dark-variant "hard")
   (load-theme 'doom-gruvbox t))
 
 (use-package memoize :straight t)

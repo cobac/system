@@ -18,7 +18,7 @@
 
 - name: Install paru using makepkg if it isn't installed already
   kewlfft.aur.aur:
-    name: paru
+    name: paru-bin
     state: latest
   become: yes
   become_user: aur_builder

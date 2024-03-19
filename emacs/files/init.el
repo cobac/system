@@ -2120,18 +2120,25 @@
   ledger-mode
   :straight t
   :config
-  (coba-leader-def
-    "e"
-    #'(lambda ()
-        (interactive)
-        (shell-command
-         (string-join
-          '("hledger"
+  (defun coba-hledger-call (command)
+    (interactive)
+    (shell-command
+     (string-join
+      (list "hledger"
             "-f /home/coba/Sync/oros/main.ledger"
-            "bal --monthly --sort --tree")
-          " "))
-        (windmove-right)
-        (delete-other-windows))))
+            command
+            "--monthly --sort --tree"
+            "-b=\"12 months ago\"")
+      " "))
+    (windmove-right)
+    (delete-other-windows)
+    (text-scale-decrease 2)
+    )
+  
+  (coba-leader-def
+    "eb" '(lambda() (interactive) (coba-hledger-call "bal"))
+    "ei" '(lambda() (interactive) (coba-hledger-call "is"))))
+
 
 (defun coba-sync-init-with-system ()
   "Sync `init.el`, `ox-templates` and `snippets` from `~/.emacs.d` into `~/Documentos/system/emacs/files`."

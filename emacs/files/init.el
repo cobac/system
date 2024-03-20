@@ -874,7 +874,7 @@
   ;;          (concat ", from " filetitle))
   ;;      (if (> level 1)
   ;;          (concat " -> " (string-join olp " -> "))))))
-  (setq org-roam-node-display-template "${hierarchy:*} ${tags:20}")
+  ;;(setq org-roam-node-display-template "${hierarchy:*} ${tags:20}")
   (org-roam-db-autosync-enable))
 
 (use-package

@@ -43,3 +43,16 @@
         Option "ClickMethod" "clickfinger"
         Option "Tapping" "on"
       EndSection
+
+- name: Configure trackball
+  ansible.builtin.blockinfile:
+    path: /etc/X11/xorg.conf.d/41-trackball.conf
+    create: true
+    block: |
+      Section "InputClass"
+        Identifier "Logitech ERGO M575"
+        MatchDriver "libinput"
+        MatchProduct "Logitech ERGO M575"
+        Option "Accel Profile Enabled" "1 0 0"
+        Option "Accel Speed" "1"
+      EndSection

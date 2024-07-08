@@ -78,6 +78,12 @@
 (put #'upcase-region 'disabled nil)
 (put #'narrow-to-region 'disabled nil)
 
+(when (eq system-type 'darwin)
+  (load "~/.emacs.d/emulate-mac-keyboard-mode.el")
+  (emulate-mac-spanish-keyboard-mode)
+  (setq mac-command-modifier 'control)
+  )
+
                                         ; Packages
 
 ;; Get correct path

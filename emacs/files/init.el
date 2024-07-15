@@ -318,6 +318,8 @@
     "fr"
     'counsel-recentf
     "FF"
+    'project-find-file
+    "fz"
     'counsel-fzf
     "SPC"
     'counsel-switch-buffer

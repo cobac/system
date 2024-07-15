@@ -42,6 +42,8 @@
         Driver "libinput"
         Option "ClickMethod" "clickfinger"
         Option "Tapping" "on"
+        Option "Accel Profile Enabled" "1 0 0"
+        Option "Accel Speed" "1"
       EndSection
 
 - name: Configure trackball

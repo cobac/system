@@ -1568,12 +1568,11 @@
 ;; Libvterm
 (use-package
   vterm
-  :straight (:type git :host github :repo "akermu/emacs-libvterm")
+  :straight (:type git :host github :repo "akermu/emacs-libvterm"))
 
 (use-package multi-vterm
   :straight t
-  :general (coba-leader-def "RET" 'multi-vterm)
-  )
+  :general (coba-leader-def "RET" 'multi-vterm))
 
 ;;(use-package project
 ;;   :straight t

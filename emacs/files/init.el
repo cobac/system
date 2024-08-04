@@ -1992,12 +1992,11 @@
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
 
 ;; Make
-;; TODO: Fix this so only applies to make mode
 (add-hook
- 'makefile-gmake-mode-hook
- '(lambda ()
+ 'makefile-mode-hook
+ (lambda ()
     (add-hook
-     'before-save-hook (lambda () (tabify (point-min) (point-max))))))
+     'before-save-hook (lambda () (tabify (point-min) (point-max))) 'make-it-local)))
 
 (setq compile-command
       '(concat

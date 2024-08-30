@@ -28,9 +28,7 @@ less
 obs-studio
 okular
 papirus-icon-theme
-pyenv
 python
-python-pipenv
 pyright
 ruff-lsp
 qbittorrent
@@ -40,6 +38,7 @@ texlive-basic
 texlive-meta
 unrar
 unzip
+uv
 v4l2loopback-dkms
 vlc
 xclip

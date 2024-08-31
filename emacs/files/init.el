@@ -858,6 +858,7 @@
   (setq
    org-roam-directory (file-truename "~/Sync/Brain")
    org-roam-db-location "~/Sync/Brain/roam.db"
+   org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))
    org-roam-dailies-directory "diario"
    org-roam-dailies-capture-templates
    '(("d"

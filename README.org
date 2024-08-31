@@ -14,6 +14,7 @@ It's designed to be called via [[https://docs.ansible.com/ansible/latest/cli/ans
   - I want to compile myself as few packages as possible
     - And when I have to I want to do it with a PKGBUILD
   - Documentation is great
+- ... actually I think I'd like to switch over to NixOS, but haven't bothered to do so yet
 
 * Manual prerequisites
 - Archlinux installed and booting
@@ -25,6 +26,8 @@ It's designed to be called via [[https://docs.ansible.com/ansible/latest/cli/ans
   - ansible
   - git
 - Install and enable+start =NetworkManager=
+  - Make sure that if you use =iwd= during install, either the service is not enabled or you are using it as the backend of =NetworkManager=
+  - Otherwise, kernel panicking
 
 * How to run
 - ~sudo ansible-pull -U https://github.com/cobac/system.git --ask-become-pass~

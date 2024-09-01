@@ -208,22 +208,7 @@
     evil-collection
     :straight (:type git :host github :repo "emacs-evil/evil-collection") ;:branch "retain-selection")
     :config
-    (evil-collection-init 'mu4e)
-    (evil-collection-init 'dired)
-    (evil-collection-init 'ediff)
-    ;;(evil-collection-init 'magit-todos)
-    (evil-collection-init 'vterm)
-    (evil-collection-init 'info)
-    ;;(evil-collection-init 'lsp-ui-menu)
-    (evil-collection-init 'elfeed)
-    (evil-collection-init 'docker)
-    ;;(evil-collection-init 'calendar)
-    (evil-collection-init 'magit)
-    (evil-collection-init 'xref)
-    (evil-collection-init 'nov)
-    (evil-collection-init 'tar-mode)
-    (evil-collection-init 'image)
-    (evil-collection-init 'profiler))
+    (evil-collection-init '(mu4e dired ediff vterm info elfeed docker magit xref nov tar-mode image profiler)))
   (use-package
     evil-snipe
     :straight t

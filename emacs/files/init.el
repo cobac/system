@@ -208,7 +208,8 @@
     evil-collection
     :straight (:type git :host github :repo "emacs-evil/evil-collection") ;:branch "retain-selection")
     :config
-    (evil-collection-init '(mu4e dired ediff smerge vterm info elfeed docker magit xref nov tar-mode image profiler)))
+    (evil-collection-init '(mu4e dired ediff vterm info elfeed docker magit xref nov tar-mode image profiler))
+    (add-hook 'smerge-mode-hook 'evil-collection-smerge-mode-setup))
   (use-package
     evil-snipe
     :straight t

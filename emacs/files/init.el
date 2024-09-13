@@ -2144,3 +2144,6 @@
   (shell-command "cp -r $HOME/Documentos/system/emacs/files/ox-templates $HOME/.emacs.d/")
   (shell-command "cp -r $HOME/.emacs.d/snippets $HOME/Documentos/system/emacs/files/")
   )
+
+(use-package nix-mode
+  :straight t)

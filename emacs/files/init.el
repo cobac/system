@@ -2147,3 +2147,10 @@
 
 (use-package nix-mode
   :straight t)
+
+(use-package gleam-ts-mode
+  :straight t
+  :mode (rx ".gleam" eos)
+  :config
+  (add-hook 'gleam-ts-mode-hook
+            (lambda () (add-hook 'before-save-hook 'gleam-ts-format nil 'make-it-local))))

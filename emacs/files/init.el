@@ -2159,3 +2159,8 @@
     '(lambda ()
        (interactive)
        (insert "-> "))))
+
+
+(use-package exercism
+  :straight t
+  )

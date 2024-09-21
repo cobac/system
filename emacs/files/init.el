@@ -1985,12 +1985,12 @@
     (add-hook
      'before-save-hook (lambda () (tabify (point-min) (point-max))) 'make-it-local)))
 
-(setq compile-command
-      '(concat
-        "cd "
-        (file-name-directory
-         (locate-dominating-file (buffer-file-name) "Makefile"))
-        " && make "))
+;; (setq compile-command
+;;       '(concat
+;;         "cd "
+;;         (file-name-directory
+;;          (locate-dominating-file (buffer-file-name) "Makefile"))
+;;         " && make "))
 
 (coba-leader-def "C" 'compile)
 

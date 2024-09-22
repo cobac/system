@@ -1992,7 +1992,7 @@
 ;;          (locate-dominating-file (buffer-file-name) "Makefile"))
 ;;         " && make "))
 
-(coba-leader-def "C" 'compile)
+(coba-leader-def "C" 'project-compile)
 
 (use-package
   docker

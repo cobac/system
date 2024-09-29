@@ -1998,6 +1998,12 @@
 
 (coba-leader-def "C" 'project-compile)
 
+(defun coba-colorize-compilation-buffer ()
+  "From https://stackoverflow.com/questions/13397737/ansi-coloring-in-compilation-mode ."
+  (when (eq major-mode 'compilation-mode)
+    (ansi-color-apply-on-region compilation-filter-start (point-max))))
+(add-hook 'compilation-filter-hook 'coba-colorize-compilation-buffer)
+
 (use-package
   docker
   :straight t

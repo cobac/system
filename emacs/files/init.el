@@ -1780,7 +1780,11 @@
 
 
 ;; Polymode
-(use-package polymode :straight t)
+(use-package polymode
+  :straight t
+  :config
+  ;; WAITING: Remove if github.com/polymode/polymode/pull/340 get's merged
+  (add-to-list 'polymode-move-these-minor-modes-from-old-buffer 'olivetti-mode))
 
 (use-package poly-R :straight t)
 

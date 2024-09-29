@@ -1550,7 +1550,12 @@
 (use-package
   olivetti
   :straight t
-  :config (coba-leader-def "W" 'olivetti-mode))
+  :after polymode
+  :config (coba-leader-def "W" 'olivetti-mode)
+  ;; WAITING: Remove if github.com/polymode/polymode/pull/340 get's merged
+  (add-to-list 'polymode-move-these-minor-modes-from-old-buffer 'olivetti-mode)
+  (add-to-list 'polymode-move-these-vars-from-old-buffer 'olivetti-body-width)
+  )
 
 ;; Libvterm
 (use-package
@@ -1781,10 +1786,7 @@
 
 ;; Polymode
 (use-package polymode
-  :straight t
-  :config
-  ;; WAITING: Remove if github.com/polymode/polymode/pull/340 get's merged
-  (add-to-list 'polymode-move-these-minor-modes-from-old-buffer 'olivetti-mode))
+  :straight t)
 
 (use-package poly-R :straight t)
 

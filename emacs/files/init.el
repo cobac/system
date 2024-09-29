@@ -2158,6 +2158,7 @@
   :config
   (add-hook 'gleam-ts-mode-hook
             (lambda () (add-hook 'before-save-hook 'gleam-ts-format nil 'make-it-local)))
+  (add-hook 'gleam-ts-mode-hook #'lsp)
   (general-def
     '(gleam-ts-mode-map) "C-ñ"
     '(lambda ()

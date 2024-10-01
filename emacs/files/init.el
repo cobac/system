@@ -782,8 +782,8 @@
   (with-eval-after-load 'org (global-org-modern-mode))
   (setq org-modern-keyword nil
         org-modern-todo nil
-        org-modern-tag nil)
-  )
+        org-modern-tag nil
+        org-modern-star 'replace))
 
 (add-hook 'org-mode-hook (lambda () visual-line-mode))
 (add-hook 'org-mode-hook 'org-indent-mode)

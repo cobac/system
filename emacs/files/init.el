@@ -167,8 +167,7 @@
   evil
   :straight t
   :init
-  (setq evil-want-keybinding nil
-        ;; for evil-collection
+  (setq evil-want-keybinding nil ;; for evil-collection
         evil-respect-visual-line-mode t)
   :general
   (general-def

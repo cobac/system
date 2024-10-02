@@ -1783,6 +1783,7 @@
                                         ;("\\.Rmd\\'" . markdown-mode)
    ("\\.markdown\\'" . markdown-mode))
   :config (general-def 'markdown-view-mode-map "q" 'quit-window)
+  (add-hook 'markdown-mode-hook (lambda () visual-line-mode))
   (setq markdown-hide-markup nil))
 
 

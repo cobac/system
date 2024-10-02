@@ -208,7 +208,7 @@
     evil-collection
     :straight (:type git :host github :repo "emacs-evil/evil-collection") ;:branch "retain-selection")
     :config
-    (evil-collection-init '(mu4e dired ediff vterm info elfeed docker magit xref nov tar-mode image profiler))
+    (evil-collection-init '(dired docker ediff elfeed image info ivy magit mu4e nov profiler tar-mode vterm xref))
     (add-hook 'smerge-mode-hook 'evil-collection-smerge-mode-setup))
   (use-package
     evil-snipe
@@ -2167,7 +2167,7 @@
   :config
   (add-hook 'gleam-ts-mode-hook
             (lambda () (add-hook 'before-save-hook 'gleam-ts-format nil 'make-it-local)))
-  (add-hook 'gleam-ts-mode-hook #'lsp)
+  ;; (add-hook 'gleam-ts-mode-hook #'lsp)
   (general-def
     '(gleam-ts-mode-map) "C-ñ"
     '(lambda ()

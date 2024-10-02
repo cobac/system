@@ -193,7 +193,8 @@
        (recenter nil)))
   (general-def :states '(visual) "C-=" 'count-words-region)
   :config
-  (setq evil-want-C-d-scroll nil)
+  (setq evil-want-minibuffer t
+        evil-want-C-d-scroll nil)
   (use-package
     undo-tree
     :straight t

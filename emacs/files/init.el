@@ -787,7 +787,6 @@
         org-modern-tag nil
         org-modern-star 'replace))
 
-(add-hook 'org-mode-hook (lambda () visual-line-mode))
 (add-hook 'org-mode-hook 'org-indent-mode)
 (add-hook 'org-mode-hook (lambda () (electric-indent-local-mode -1)))
 
@@ -1557,6 +1556,7 @@
   ;; WAITING: Remove if github.com/polymode/polymode/pull/340 get's merged
   (add-to-list 'polymode-move-these-minor-modes-from-old-buffer 'olivetti-mode)
   (add-to-list 'polymode-move-these-vars-from-old-buffer 'olivetti-body-width)
+  (add-hook 'olivetti-mode-on-hook #'visual-line-mode)
   )
 
 ;; Libvterm
@@ -1783,7 +1783,6 @@
                                         ;("\\.Rmd\\'" . markdown-mode)
    ("\\.markdown\\'" . markdown-mode))
   :config (general-def 'markdown-view-mode-map "q" 'quit-window)
-  (add-hook 'markdown-mode-hook (lambda () visual-line-mode))
   (setq markdown-hide-markup nil))
 
 

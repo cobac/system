@@ -1999,6 +1999,7 @@
 ;;         " && make "))
 
 (coba-leader-def "C" 'project-compile)
+(setq compilation-scroll-output 'first-error)
 
 (defun coba-colorize-compilation-buffer ()
   "From https://stackoverflow.com/questions/13397737/ansi-coloring-in-compilation-mode ."

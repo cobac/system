@@ -2143,3 +2143,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :straight t
   :config
   (add-hook 'project-find-functions #'coba-project-root-override))
+
+(use-package
+  dbt-mode
+  :straight (:type git :host github :repo "CyberShadow/dbt-mode"))

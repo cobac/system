@@ -1562,8 +1562,6 @@
 ;;(use-package lsp-ui
 ;;  :straight t)
 
-(use-package lsp-ivy :straight t)
-
 ;; debugger
 ;;(use-package dap-mode
 ;;  :straight t)

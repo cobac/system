@@ -174,7 +174,7 @@
     :states
     '(normal motion)
     "ñ"
-    'counsel-yank-pop
+    'consult-yank-pop
     "gt"
     'undo-tree-visualize
     "gA"
@@ -210,7 +210,7 @@
     evil-collection
     :straight (:type git :host github :repo "emacs-evil/evil-collection") ;:branch "retain-selection")
     :config
-    (evil-collection-init '(dired docker ediff elfeed image info ivy magit mu4e nov profiler tar-mode vterm xref))
+    (evil-collection-init '(dired docker ediff elfeed image info magit mu4e nov profiler tar-mode vterm xref))
     (add-hook 'smerge-mode-hook 'evil-collection-smerge-mode-setup))
   (use-package
     evil-snipe
@@ -248,110 +248,91 @@
 
 ;; Ivy - Counsel - Prescient
 
-(use-package
-  ivy
+(use-package vertico
   :straight t
-  :after general
-  :config (ivy-mode 1)
-  (setq
-   ivy-count-format ""
-   ivy-wrap t
-   ivy-height 25)
-  (setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
-
-  (general-def
-    'ivy-minibuffer-map
-    "<escape>"
-    'minibuffer-keyboard-quit
-    "C-j"
-    'ivy-next-line
-    "C-k"
-    'ivy-previous-line
-    "C-u"
-    'ivy-dispatching-done
-    "C-)"
-    'ivy-immediate-done))
-
-(use-package
-  counsel
-  :straight t
+  :after evil-collection
+  :init
+  (vertico-mode)
   :config
   (general-def
-    'ivy-switch-buffer-map
-    "C-k"
-    'ivy-previous-line
-    "C-d"
-    'ivy-switch-buffer-kill)
-  (coba-leader-def
-    "f"
-    '(:ignore t :which-key "Files")
-    "fi"
-    '(lambda ()
-       (interactive)
-       (find-file "~/Documentos/system/emacs/files/init.el"))
-    "fs"
-    '(lambda ()
-       (interactive)
-       (counsel-find-file "~/Documentos/system/"))
-    "fp"
-    '(lambda ()
-       (interactive)
-       (counsel-find-file "~/Documentos/Work/xebia"))
-    "fo"
-    '(lambda ()
-       (interactive)
-       (counsel-find-file "~/Sync/oros/main.ledger"))
-    "ff"
-    'counsel-find-file
-    "fr"
-    'counsel-recentf
-    "FF"
-    'project-find-file
-    "fz"
-    'counsel-fzf
-    "SPC"
-    'counsel-switch-buffer
-    "x"
-    'counsel-M-x
-    "/"
-    'counsel-rg
-    "T"
-    'counsel-load-theme
-    "!"
-    'shell-command
-    "¡"
-    'async-shell-command)
+    :keymaps 'vertico-map
+    :states '(motion insert)
+    "C-k" 'vertico-previous
+    "C-j" 'vertico-next)
   (general-def
-    'counsel-find-file-map
-    "C-h"
-    'counsel-up-directory
-    "C-l"
-    'ivy-alt-done))
+    :keymaps 'vertico-map
+    :states '(motion)
+    "<escape>" 'minibuffer-keyboard-quit
+    ))
 
-(use-package prescient :straight t)
-(use-package
-  ivy-prescient
+(use-package embark
   :straight t
-  :after counsel
+  :bind
+  (("C-." . embark-act)
+   ("C-)" . embark-dwim)))
+
+(use-package embark-consult
+  :straight t
   :config
-  (prescient-persist-mode)
-  (ivy-prescient-mode))
+  )
+
+;; to check
+;; - Delete buffer
+
+(use-package vertico-posframe
+  :straight t
+  :config (vertico-posframe-mode))
+
+(use-package consult
+  :straight t)
+
+(use-package marginalia
+  :straight t
+  :config (marginalia-mode))
+
+(use-package orderless
+  :straight t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+
+(coba-leader-def
+  "f" '(:ignore t :which-key "Files")
+  "fi" '(lambda ()
+          (interactive)
+          (find-file "~/Documentos/system/emacs/files/init.el"))
+  "fs" '(lambda ()
+          (interactive)
+          (find-file "~/Documentos/system/"))
+  "fp" '(lambda ()
+          (interactive)
+          (find-file "~/Documentos/Work/xebia"))
+  "fo" '(lambda ()
+          (interactive)
+          (find-file "~/Sync/oros/main.ledger"))
+  "ff" 'find-file
+  "fr" 'recentf
+  "FF" 'project-find-file
+  ;; "fz" 'counsel-fzf
+  "SPC" 'switch-to-buffer
+  "x" 'execute-extended-command
+  "/" 'consult-ripgrep
+  "T" 'consult-theme
+  "!" 'async-shell-command
+  "¡" 'shell-command)
+
+(use-package prescient :straight t
+  :config (prescient-persist-mode))
+(use-package vertico-prescient
+  :straight t
+  :config
+  (vertico-prescient-mode))
 
 (use-package
   wgrep
   :straight t
   :hook (wgrep-setup . evil-normal-state))
-
-;; Posframe
-
-(use-package
-  ivy-posframe
-  :straight t
-  :config
-  (set-face-attribute 'ivy-posframe nil
-                      :foreground (doom-color 'fg)
-                      :background (doom-color 'bg-alt))
-  (ivy-posframe-mode t))
 
 (use-package
   transient-posframe
@@ -718,7 +699,7 @@
   "gR"
   'org-refile-goto-last-stored
   "gG"
-  'counsel-outline
+  'consult-outline
   "C-P"
   'org-latex-preview)
 
@@ -768,7 +749,7 @@
   "d"
   'org-deadline
   "t"
-  'counsel-org-tag
+  'org-set-tag-command
   "P"
   'coba-org-create-project)
 
@@ -809,11 +790,7 @@
 (use-package
   org-roam
   :straight
-  (:host
-   github
-   :repo "org-roam/org-roam"
-   :branch "main"
-   :files ("*.el" "out" "extensions/*.el"))
+  (:host github :repo "org-roam/org-roam" :branch "main" :files ("*.el" "out" "extensions/*.el"))
   :general
   (coba-leader-def
     "r" 'org-roam-node-find "fd" 'org-roam-dailies-goto-today)
@@ -852,7 +829,22 @@
       "default"
       plain
       "%?"
-      :target (file+head "%<%Y-%m>.org" "* %<%d %A>\n\n"))))
+      :target (file+head "%<%Y-%m>.org" "* %<%d %A>\n\n")))
+   org-roam-capture-templates
+   '(("r" "default" plain "- tags :: %?"
+      :target
+      (file+head
+       "${slug}.org"
+       ":PROPERTIES:\n:ROAM_ALIASES:\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${title}\n")
+      :immediate-finish t
+      :unnarrowed t)
+     ("p" "bib" plain "- tags :: %?"
+      :target
+      (file+head
+       "${citekey}.org"
+       ":PROPERTIES:\n:ROAM_ALIASES: \"${author-abbrev}(${year}): ${title}\"\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${citekey}\n")
+      :immediate-finish t
+      :unnarrowed t)))
   (evil-set-initial-state 'org-roam-mode 'motion)
   ;; Show hierarchy of nodes from https://github.com/org-roam/org-roam/issues/1565
   ;; (cl-defmethod org-roam-node-filetitle ((node org-roam-node))
@@ -860,7 +852,6 @@
   ;;   (org-roam-get-keyword "TITLE" (org-roam-node-file node)))
   ;; (cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
   ;;   "Return the hierarchy for the node."
-  ;;   (let ((title (org-roam-node-title node))
   ;;         (olp (org-roam-node-olp node))
   ;;         (level (org-roam-node-level node))
   ;;         (filetitle (org-roam-node-filetitle node)))
@@ -889,32 +880,6 @@
    org-roam-ui-follow nil
    org-roam-ui-update-on-save t
    org-roam-ui-open-on-start nil))
-
-(use-package
-  org-roam-bibtex
-  :straight (:host github :repo "org-roam/org-roam-bibtex")
-  :after org-roam
-  :config
-  (setq
-   orb-note-actions-interface 'hydra
-   orb-roam-ref-format 'org-ref-v3
-   orb-preformat-keywords '("citekey" "year" "author-abbrev")
-   org-roam-capture-templates
-   '(("r" "default" plain "- tags :: %?"
-      :target
-      (file+head
-       "${slug}.org"
-       ":PROPERTIES:\n:ROAM_ALIASES:\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${title}\n")
-      :immediate-finish t
-      :unnarrowed t)
-     ("p" "bib" plain "- tags :: %?"
-      :target
-      (file+head
-       "${citekey}.org"
-       ":PROPERTIES:\n:ROAM_ALIASES: \"${author-abbrev}(${year}): ${title}\"\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${citekey}\n")
-      :immediate-finish t
-      :unnarrowed t)))
-  (org-roam-bibtex-mode t))
 
 ;; Company
 
@@ -975,37 +940,32 @@
 
 ;; Reference management
 
-(use-package
-  ivy-bibtex
+;; TODO: link pdfs to notes
+(use-package citar
+  :straight t
+  :hook
+  (LaTeX-mode . citar-capf-setup)
+  (org-mode . citar-capf-setup)
+  :config
+  (coba-leader-def
+    "pp" 'citar-open
+    "pf" '(lambda ()
+            (interactive)
+            (find-file "~/Sync/Brain/bib.bib")))
+  (setq citar-bibliography '("~/Sync/Brain/bib.bib")
+        citar-notes-paths '("~/Sync/Brain/")
+        citar-library-paths '("~/Sync/Brain/pdf")))
+
+(use-package citar-org-roam
   :straight t
   :config
-  (setq
-   bibtex-completion-bibliography "~/Sync/Brain/bib.bib"
-   bibtex-completion-library-path "~/Sync/Brain/pdf/"
-   bibtex-completion-notes-path "~/Sync/Brain/" ;;"bibnotes.org"
-   bibtex-completion-pdf-open-function (lambda (fpath) (call-process "zathura" nil 0 nil fpath))
-   bibtex-completion-notes-template-multiple-files "ERROR: bibtex-completion is being used instead of ORB")
-  ;; So that org-ref inherits ivy-bibtex format
-  ;; From: https://github.com/jkitchin/org-ref/issues/717#issuecomment-633788035
-  (ivy-set-display-transformer
-   'org-ref-ivy-insert-cite-link 'ivy-bibtex-display-transformer)
+  (setq citar-org-roam-note-capture-key "p")
+  (citar-org-roam-mode))
 
-  :general
-  (coba-leader-def
-    "pp"
-    'ivy-bibtex
-    "pd"
-    'doi-add-bibtex-entry
-    "pa"
-    'arxiv-get-pdf-add-bibtex-entry
-    "pf"
-    '(lambda ()
-       (interactive)
-       (find-file "~/Sync/Brain/bib.bib"))
-    "pn"
-    '(lambda ()
-       (interactive)
-       (find-file "~/Sync/Brain/bibnotes.org"))))
+;; (use-package citar-embark
+;;   :after citar embark
+;;   :no-require
+;;   :config (citar-embark-mode))
 
 (defun coba-file-content-as-string (filename)
   "Return the contents of FILENAME as string.
@@ -1175,38 +1135,6 @@
 
 (add-to-list 'org-latex-default-packages-alist '("" "txfonts" t))
 (add-to-list 'org-latex-default-packages-alist '("" "graphviz" t))
-
-(use-package
-  org-ref
-  :straight t
-  :init (setq org-ref-completion-library 'org-ref-ivy-cite)
-  :config (setq org-ref-default-citation-link "parencite")
-
-  (require 'org-ref-ivy)
-  (setq
-   org-ref-insert-link-function 'org-ref-insert-link-hydra/body
-   org-ref-insert-cite-function 'org-ref-cite-insert-ivy
-   org-ref-insert-label-function 'org-ref-insert-label-link
-   org-ref-insert-ref-function 'org-ref-insert-ref-link
-   org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body)))
-
-  (general-def 'org-mode-map "C-c ]" 'org-ref-cite-insert-ivy)
-
-  (use-package
-    doi-utils
-    :config
-    (setq
-     bibtex-autokey-year-length 4
-     bibtex-autokey-name-year-separator ""
-     bibtex-autokey-year-title-separator ""
-     bibtex-autokey-titleword-separator ""
-     bibtex-autokey-titlewords 2
-     bibtex-autokey-titlewords-stretch 1
-     bibtex-autokey-titleword-length 5))
-  (use-package org-ref-isbn)
-  (use-package org-ref-sci-id)
-  (use-package org-ref-url-utils)
-  (use-package org-ref-latex))
 
 (use-package
   graphviz-dot-mode

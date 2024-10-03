@@ -812,12 +812,6 @@ targets."
   "P"
   'coba-org-create-project)
 
-;; (use-package
-;;   org-superstar
-;;   :straight t
-;;   :config
-;;   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
-
 (use-package
   org-modern
   :straight t

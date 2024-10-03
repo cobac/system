@@ -1559,15 +1559,6 @@
    lsp-modeline-code-actions-segments '(count name)
    lsp-lens-enable nil))
 
-;;(use-package lsp-ui
-;;  :straight t)
-
-;; debugger
-;;(use-package dap-mode
-;;  :straight t)
-;; (use-package dap-LANGUAGE
-;;   :straight t)
-
 ;; gpg passwords
 
 (defun coba-lookup-password (&rest keys)

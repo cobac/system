@@ -315,7 +315,7 @@
   (general-def
     :keymaps 'minibuffer-local-map
     :states '(insert normal)
-    "C-d" (general-simulate-key "C-. k"))
+    "C-d" (general-simulate-key "C-. k C-j"))
   ;; https://github.com/oantolin/embark/wiki/Additional-Configuration#use-which-key-like-a-key-menu-prompt
   (defun embark-which-key-indicator ()
     "An embark indicator that displays keymaps using which-key.

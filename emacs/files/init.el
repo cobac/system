@@ -275,13 +275,19 @@
     "C-S-k"
     'vertico-previous-group
     "C-S-j"
-    'vertico-next-group)
+    'vertico-next-group
+    "C-l"
+    'vertico-insert)
   (general-def
     :keymaps 'vertico-map
     :states
     '(normal)
     "<escape>"
-    'minibuffer-keyboard-quit))
+    'minibuffer-keyboard-quit
+    "gg"
+    'vertico-first
+    "G"
+    'vertico-last))
 
 (use-package
   vertico-posframe

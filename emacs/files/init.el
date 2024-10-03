@@ -1226,8 +1226,7 @@ targets."
   graphviz-dot-mode
   :straight t
   :config
-  (setq graphviz-dot-indent-width 4)
-  (use-package company-graphviz-dot))
+  (setq graphviz-dot-indent-width 4))
 
 (use-package
   dumb-jump

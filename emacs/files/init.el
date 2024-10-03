@@ -2001,38 +2001,6 @@
   (coba-leader-def "it" 'powerthesaurus-lookup-synonyms-dwim))
 
 (use-package
-  org-static-blog
-  :straight t
-  :config (defvar coba-website-folder "~/website/")
-  (setq
-   org-static-blog-publish-title "Coba's website"
-   org-static-blog-publish-url "https://cobac.eu/"
-   org-static-blog-publish-directory (concat coba-website-folder "public/")
-   org-static-blog-posts-directory (concat coba-website-folder "posts/")
-   org-static-blog-drafts-directory (concat coba-website-folder "drafts/")
-   org-static-blog-enable-tags t
-   org-static-blog-use-preview t
-   org-static-blog-preview-ellipsis "<div id=\"read more\">Read more.</div>"
-   org-export-with-toc nil
-   org-export-with-section-numbers nil
-   ;; This header is inserted into the <head> section of every page:
-   org-static-blog-page-header
-   (coba-file-content-as-string
-    (concat coba-website-folder "elements/page-header.html"))
-   ;; This preamble is inserted at the beginning of the <body> of every page:
-   org-static-blog-page-preamble
-   (coba-file-content-as-string
-    (concat coba-website-folder "elements/page-preamble.html"))
-   ;; This postamble is inserted at the end of the <body> of every page:
-   org-static-blog-page-postamble
-   (coba-file-content-as-string
-    (concat coba-website-folder "elements/page-postamble.html"))
-   ;; This HTML code is inserted into the index page between the preamble and the blog posts
-   org-static-blog-index-front-matter
-   (coba-file-content-as-string
-    (concat coba-website-folder "elements/index-front-matter.html"))))
-
-(use-package
   image
   :config
   (general-def

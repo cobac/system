@@ -260,7 +260,7 @@
     "C-i"
     'better-jumper-jump-forward))
 
-;; Ivy - Counsel - Prescient
+;; Vertico, Consult and company
 
 (use-package
   vertico

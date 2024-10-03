@@ -368,11 +368,11 @@ targets."
   "fs"
   '(lambda ()
      (interactive)
-     (find-file "~/Documentos/system/"))
+     (ido-find-file-in-dir "~/Documentos/system/"))
   "fp"
   '(lambda ()
      (interactive)
-     (find-file "~/Documentos/Work/xebia"))
+     (ido-find-file-in-dir "~/Documentos/Work/xebia"))
   "fo"
   '(lambda ()
      (interactive)

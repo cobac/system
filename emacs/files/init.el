@@ -309,8 +309,21 @@
 (use-package
   embark
   :straight t
+  :after consult
   :bind (("C-." . embark-act) ("C-)" . embark-dwim))
   :config
+  ;; C-d: kill-buffer during switch-to-buffer
+  ;; https://www.reddit.com/r/emacs/comments/16g08me/killbuffer_from_the_minibuffer_after_mx/
+  ;; no confirmation
+  (setf (alist-get 'kill-buffer embark-pre-action-hooks) ())
+  ;; ;; don't embark--restart
+  (setf (alist-get 'kill-buffer embark-post-action-hooks) ())
+  ;; ;; don't quit
+  (setq embark-quit-after-action '((kill-buffer . nil) (t . t)))
+  (general-def
+    :keymaps 'minibuffer-local-map
+    :states '(insert normal)
+    "C-d" (general-simulate-key "C-. k"))
   ;; https://github.com/oantolin/embark/wiki/Additional-Configuration#use-which-key-like-a-key-menu-prompt
   (defun embark-which-key-indicator ()
     "An embark indicator that displays keymaps using which-key.

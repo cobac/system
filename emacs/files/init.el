@@ -298,6 +298,15 @@
     'minibuffer-keyboard-quit))
 
 (use-package
+  vertico-posframe
+  :straight t
+  :config (vertico-posframe-mode))
+
+(use-package consult :straight t)
+
+(use-package marginalia :straight t :config (marginalia-mode))
+
+(use-package
   embark
   :straight t
   :bind (("C-." . embark-act) ("C-)" . embark-dwim))
@@ -342,18 +351,6 @@ targets."
               :around #'embark-hide-which-key-indicator))
 
 (use-package embark-consult :straight t :config)
-
-;; to check
-;; - Delete buffer
-
-(use-package
-  vertico-posframe
-  :straight t
-  :config (vertico-posframe-mode))
-
-(use-package consult :straight t)
-
-(use-package marginalia :straight t :config (marginalia-mode))
 
 (use-package
   orderless

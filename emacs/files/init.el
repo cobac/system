@@ -1230,11 +1230,19 @@
      (magit-list-remotes)) ;; Returns all remotes configured
     )
 
+  (defun coba-magit-diff-to-main ()
+    "Diff HEAD to master"
+    (interactive)
+    (magit-diff-range (concat (magit-main-branch) "..HEAD")))
+
   (transient-append-suffix
     'magit-push
-    "e" ;; Puts the following command after the 'e' option on the magit-push menu
-    '("a" "Push all" coba-magit-push-all)) ;; Configures the my/magit-push-all method to be callable with "a" while on the magit-push menu. It's description will read "Push All"
-  )
+    "e" ;; after `e` key
+    '("a" "Push all" coba-magit-push-all))
+  (transient-append-suffix
+    'magit-diff
+    "d" ;; after `e` key
+    '("D" "Diff to main" coba-magit-diff-to-main)))
 (evil-set-initial-state 'magit-commit-message-section-map 'insert)
 
 (defun coba-magit-status ()

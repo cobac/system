@@ -1229,19 +1229,7 @@ targets."
   dumb-jump
   :straight t
   :config
-  (setq
-   dumb-jump-prefer-searcher 'rg
-   dumb-jump-selector 'ivy)
-  :general
-  (coba-leader-def
-    "G"
-    '(:ignore t :which-key "dumb jump")
-    "GG"
-    'dumb-jump-go
-    "GS"
-    'dumb-jump-go-other-window
-    "GF"
-    'dumb-jump-back))
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
 ;; TODO : pdf
 

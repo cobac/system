@@ -81,8 +81,7 @@
 (when (eq system-type 'darwin)
   (load "~/.emacs.d/emulate-mac-keyboard-mode.el")
   (emulate-mac-spanish-keyboard-mode)
-  (setq mac-command-modifier 'control)
-  )
+  (setq mac-command-modifier 'control))
 
                                         ; Packages
 
@@ -167,8 +166,9 @@
   evil
   :straight t
   :init
-  (setq evil-want-keybinding nil ;; for evil-collection
-        evil-respect-visual-line-mode t)
+  (setq
+   evil-want-keybinding nil ;; for evil-collection
+   evil-respect-visual-line-mode t)
   :general
   (general-def
     :states
@@ -193,8 +193,9 @@
        (recenter nil)))
   (general-def :states '(visual) "C-=" 'count-words-region)
   :config
-  (setq evil-want-minibuffer t
-        evil-want-C-d-scroll nil)
+  (setq
+   evil-want-minibuffer t
+   evil-want-C-d-scroll nil)
   (use-package
     undo-tree
     :straight t
@@ -210,7 +211,20 @@
     evil-collection
     :straight (:type git :host github :repo "emacs-evil/evil-collection") ;:branch "retain-selection")
     :config
-    (evil-collection-init '(dired docker ediff elfeed image info magit mu4e nov profiler tar-mode vterm xref))
+    (evil-collection-init
+     '(dired
+       docker
+       ediff
+       elfeed
+       image
+       info
+       magit
+       mu4e
+       nov
+       profiler
+       tar-mode
+       vterm
+       xref))
     (add-hook 'smerge-mode-hook 'evil-collection-smerge-mode-setup))
   (use-package
     evil-snipe
@@ -248,87 +262,102 @@
 
 ;; Ivy - Counsel - Prescient
 
-(use-package vertico
+(use-package
+  vertico
   :straight t
   :after evil-collection
-  :init
-  (vertico-mode)
+  :init (vertico-mode)
   :config
   (general-def
     :keymaps 'vertico-map
-    :states '(motion insert)
-    "C-k" 'vertico-previous
-    "C-j" 'vertico-next
-    "C-S-k" 'vertico-previous-group
-    "C-S-j" 'vertico-next-group)
+    :states
+    '(motion insert)
+    "C-k"
+    'vertico-previous
+    "C-j"
+    'vertico-next
+    "C-S-k"
+    'vertico-previous-group
+    "C-S-j"
+    'vertico-next-group)
   (general-def
     :keymaps 'vertico-map
-    :states '(normal)
-    "<escape>" 'minibuffer-keyboard-quit))
+    :states
+    '(normal)
+    "<escape>"
+    'minibuffer-keyboard-quit))
 
-(use-package embark
+(use-package
+  embark
   :straight t
-  :bind
-  (("C-." . embark-act)
-   ("C-)" . embark-dwim)))
+  :bind (("C-." . embark-act) ("C-)" . embark-dwim)))
 
-(use-package embark-consult
-  :straight t
-  :config
-  )
+(use-package embark-consult :straight t :config)
 
 ;; to check
 ;; - Delete buffer
 
-(use-package vertico-posframe
+(use-package
+  vertico-posframe
   :straight t
   :config (vertico-posframe-mode))
 
-(use-package consult
-  :straight t)
+(use-package consult :straight t)
 
-(use-package marginalia
-  :straight t
-  :config (marginalia-mode))
+(use-package marginalia :straight t :config (marginalia-mode))
 
-(use-package orderless
+(use-package
+  orderless
   :straight t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))
+  :custom (completion-styles '(orderless basic))
+  (completion-category-overrides
+   '((file (styles basic partial-completion)))))
 
 
 (coba-leader-def
-  "f" '(:ignore t :which-key "Files")
-  "fi" '(lambda ()
-          (interactive)
-          (find-file "~/Documentos/system/emacs/files/init.el"))
-  "fs" '(lambda ()
-          (interactive)
-          (find-file "~/Documentos/system/"))
-  "fp" '(lambda ()
-          (interactive)
-          (find-file "~/Documentos/Work/xebia"))
-  "fo" '(lambda ()
-          (interactive)
-          (find-file "~/Sync/oros/main.ledger"))
-  "ff" 'find-file
-  "fr" 'recentf
-  "FF" 'project-find-file
+  "f"
+  '(:ignore t :which-key "Files")
+  "fi"
+  '(lambda ()
+     (interactive)
+     (find-file "~/Documentos/system/emacs/files/init.el"))
+  "fs"
+  '(lambda ()
+     (interactive)
+     (find-file "~/Documentos/system/"))
+  "fp"
+  '(lambda ()
+     (interactive)
+     (find-file "~/Documentos/Work/xebia"))
+  "fo"
+  '(lambda ()
+     (interactive)
+     (find-file "~/Sync/oros/main.ledger"))
+  "ff"
+  'find-file
+  "fr"
+  'recentf
+  "FF"
+  'project-find-file
   ;; "fz" 'counsel-fzf
-  "SPC" 'switch-to-buffer
-  "x" 'execute-extended-command
-  "/" 'consult-ripgrep
-  "T" 'consult-theme
-  "!" 'async-shell-command
-  "¡" 'shell-command)
+  "SPC"
+  'switch-to-buffer
+  "x"
+  'execute-extended-command
+  "/"
+  'consult-ripgrep
+  "T"
+  'consult-theme
+  "!"
+  'async-shell-command
+  "¡"
+  'shell-command)
 
-(use-package prescient :straight t
-  :config (prescient-persist-mode))
-(use-package vertico-prescient
+(use-package prescient :straight t :config (prescient-persist-mode))
+(use-package
+  vertico-prescient
   :straight t
-  :config
-  (vertico-prescient-mode))
+  :config (vertico-prescient-mode))
 
 (use-package
   wgrep
@@ -760,14 +789,17 @@
 ;;   :config
 ;;   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
-(use-package org-modern
+(use-package
+  org-modern
   :straight t
   :config
-  (with-eval-after-load 'org (global-org-modern-mode))
-  (setq org-modern-keyword nil
-        org-modern-todo nil
-        org-modern-tag nil
-        org-modern-star 'replace))
+  (with-eval-after-load 'org
+    (global-org-modern-mode))
+  (setq
+   org-modern-keyword nil
+   org-modern-todo nil
+   org-modern-tag nil
+   org-modern-star 'replace))
 
 (add-hook 'org-mode-hook 'org-indent-mode)
 (add-hook 'org-mode-hook (lambda () (electric-indent-local-mode -1)))
@@ -791,7 +823,11 @@
 (use-package
   org-roam
   :straight
-  (:host github :repo "org-roam/org-roam" :branch "main" :files ("*.el" "out" "extensions/*.el"))
+  (:host
+   github
+   :repo "org-roam/org-roam"
+   :branch "main"
+   :files ("*.el" "out" "extensions/*.el"))
   :general
   (coba-leader-def
     "r" 'org-roam-node-find "fd" 'org-roam-dailies-goto-today)
@@ -942,22 +978,23 @@
 ;; Reference management
 
 ;; TODO: link pdfs to notes
-(use-package citar
+(use-package
+  citar
   :straight t
-  :hook
-  (LaTeX-mode . citar-capf-setup)
-  (org-mode . citar-capf-setup)
+  :hook (LaTeX-mode . citar-capf-setup) (org-mode . citar-capf-setup)
   :config
   (coba-leader-def
-    "pp" 'citar-open
-    "pf" '(lambda ()
-            (interactive)
-            (find-file "~/Sync/Brain/bib.bib")))
-  (setq citar-bibliography '("~/Sync/Brain/bib.bib")
-        citar-notes-paths '("~/Sync/Brain/")
-        citar-library-paths '("~/Sync/Brain/pdf")))
+    "pp" 'citar-open "pf"
+    '(lambda ()
+       (interactive)
+       (find-file "~/Sync/Brain/bib.bib")))
+  (setq
+   citar-bibliography '("~/Sync/Brain/bib.bib")
+   citar-notes-paths '("~/Sync/Brain/")
+   citar-library-paths '("~/Sync/Brain/pdf")))
 
-(use-package citar-org-roam
+(use-package
+  citar-org-roam
   :straight t
   :config
   (setq citar-org-roam-note-capture-key "p")
@@ -1004,13 +1041,12 @@
   "Custom latex preamble for org-export.")
 
 (setq custom-tex-template
-      (mapconcat
-       'identity
-       (list
-        org-tex-apa-template
-        org-tex-math-template
-        org-tex-graphix-template)
-       "\n"))
+      (mapconcat 'identity
+                 (list
+                  org-tex-apa-template
+                  org-tex-math-template
+                  org-tex-graphix-template)
+                 "\n"))
 
 (defun coba-define-org-tex-template ()
   "Define `org-latex-classes' concatenating snippets."
@@ -1483,17 +1519,19 @@
   :after polymode
   :config (coba-leader-def "W" 'olivetti-mode)
   ;; WAITING: Remove if github.com/polymode/polymode/pull/340 get's merged
-  (add-to-list 'polymode-move-these-minor-modes-from-old-buffer 'olivetti-mode)
-  (add-to-list 'polymode-move-these-vars-from-old-buffer 'olivetti-body-width)
-  (add-hook 'olivetti-mode-on-hook #'visual-line-mode)
-  )
+  (add-to-list
+   'polymode-move-these-minor-modes-from-old-buffer 'olivetti-mode)
+  (add-to-list
+   'polymode-move-these-vars-from-old-buffer 'olivetti-body-width)
+  (add-hook 'olivetti-mode-on-hook #'visual-line-mode))
 
 ;; Libvterm
 (use-package
   vterm
   :straight (:type git :host github :repo "akermu/emacs-libvterm"))
 
-(use-package multi-vterm
+(use-package
+  multi-vterm
   :straight t
   :general (coba-leader-def "RET" 'multi-vterm))
 
@@ -1523,8 +1561,7 @@
    lsp-log-io t
    lsp-print-performance t
    lsp-modeline-code-actions-segments '(count name)
-   lsp-lens-enable nil)
-  )
+   lsp-lens-enable nil))
 
 ;;(use-package lsp-ui
 ;;  :straight t)
@@ -1564,15 +1601,17 @@
 
 (use-package
   elisp-autofmt
-  :straight t)
+  :straight t
+  :hook
+  (emacs-lisp-mode . elisp-autofmt-mode))
 
 ;; ESS
 (use-package
   ess
   :straight t
-                                        ;    :hook
-                                        ;    (ess-r-mode . lsp)
-                                        ;    (inferior-ess-r-mode . lsp)
+  ;; :hook
+  ;; (ess-r-mode . lsp)
+  ;; (inferior-ess-r-mode . lsp)
   :config
   (require 'ess-site)
   (setq
@@ -1711,13 +1750,13 @@
    ("\\.md\\'" . markdown-mode)
                                         ;("\\.Rmd\\'" . markdown-mode)
    ("\\.markdown\\'" . markdown-mode))
-  :config (general-def 'markdown-view-mode-map "q" 'quit-window)
+  :config
+  (general-def 'markdown-view-mode-map "q" 'quit-window)
   (setq markdown-hide-markup nil))
 
 
 ;; Polymode
-(use-package polymode
-  :straight t)
+(use-package polymode :straight t)
 
 (use-package poly-R :straight t)
 
@@ -1730,9 +1769,7 @@
 
 (use-package poly-org :straight t)
 
-(use-package quarto-mode
-  :straight t
-  )
+(use-package quarto-mode :straight t)
 
 ;; Latex
 (use-package
@@ -1897,9 +1934,7 @@
   (general-def 'python-mode-map "C-c C-a" 'pyvenv-workon)
   (pyvenv-mode 1))
 
-(use-package lsp-pyright
-  :straight t
-  )
+(use-package lsp-pyright :straight t)
 
 ;; Notebooks
 
@@ -1919,8 +1954,9 @@
 (add-hook
  'makefile-mode-hook
  (lambda ()
-    (add-hook
-     'before-save-hook (lambda () (tabify (point-min) (point-max))) 'make-it-local)))
+   (add-hook
+    'before-save-hook (lambda () (tabify (point-min) (point-max)))
+    'make-it-local)))
 
 ;; (setq compile-command
 ;;       '(concat
@@ -1935,7 +1971,8 @@
 (defun coba-colorize-compilation-buffer ()
   "From https://stackoverflow.com/questions/13397737/ansi-coloring-in-compilation-mode ."
   (when (eq major-mode 'compilation-mode)
-    (ansi-color-apply-on-region compilation-filter-start (point-max))))
+    (ansi-color-apply-on-region
+     compilation-filter-start (point-max))))
 (add-hook 'compilation-filter-hook 'coba-colorize-compilation-buffer)
 
 (use-package
@@ -1944,9 +1981,7 @@
   :general (coba-leader-def "D" 'docker)
   :config (setq docker-run-as-root t))
 
-(use-package dockerfile-mode
-  :straight t
-  )
+(use-package dockerfile-mode :straight t)
 
 (use-package
   nov
@@ -2064,40 +2099,49 @@
   (defun coba-hledger-call (command)
     (interactive)
     (shell-command
-     (string-join
-      (list "hledger"
-            "-f /home/coba/Sync/oros/main.ledger"
-            command
-            "--monthly --sort --tree"
-            "-b=\"12 months ago\"")
-      " "))
+     (string-join (list
+                   "hledger"
+                   "-f /home/coba/Sync/oros/main.ledger"
+                   command
+                   "--monthly --sort --tree"
+                   "-b=\"12 months ago\"")
+                  " "))
     (windmove-right)
     (delete-other-windows)
-    (text-scale-decrease 2)
-    )
-  
+    (text-scale-decrease 2))
+
   (coba-leader-def
-    "eb" '(lambda() (interactive) (coba-hledger-call "bal"))
-    "ei" '(lambda() (interactive) (coba-hledger-call "is"))))
+    "eb"
+    '(lambda ()
+       (interactive)
+       (coba-hledger-call "bal"))
+    "ei"
+    '(lambda ()
+       (interactive)
+       (coba-hledger-call "is"))))
 
 
 (defun coba-sync-init-with-system ()
   "Sync `init.el`, `ox-templates` and `snippets` from `~/.emacs.d` into `~/Documentos/system/emacs/files`."
   (interactive)
-  (shell-command "cp $HOME/Documentos/system/emacs/files/init.el $HOME/.emacs.d/")
-  (shell-command "cp -r $HOME/Documentos/system/emacs/files/ox-templates $HOME/.emacs.d/")
-  (shell-command "cp -r $HOME/.emacs.d/snippets $HOME/Documentos/system/emacs/files/")
-  )
+  (shell-command
+   "cp $HOME/Documentos/system/emacs/files/init.el $HOME/.emacs.d/")
+  (shell-command
+   "cp -r $HOME/Documentos/system/emacs/files/ox-templates $HOME/.emacs.d/")
+  (shell-command
+   "cp -r $HOME/.emacs.d/snippets $HOME/Documentos/system/emacs/files/"))
 
-(use-package nix-mode
-  :straight t)
+(use-package nix-mode :straight t)
 
-(use-package gleam-ts-mode
+(use-package
+  gleam-ts-mode
   :straight t
   :mode (rx ".gleam" eos)
   :config
-  (add-hook 'gleam-ts-mode-hook
-            (lambda () (add-hook 'before-save-hook 'gleam-ts-format nil 'make-it-local)))
+  (add-hook
+   'gleam-ts-mode-hook
+   (lambda ()
+     (add-hook 'before-save-hook 'gleam-ts-format nil 'make-it-local)))
   ;; (add-hook 'gleam-ts-mode-hook #'lsp)
   (general-def
     '(gleam-ts-mode-map) "C-ñ"
@@ -2106,9 +2150,7 @@
        (insert "-> "))))
 
 
-(use-package exercism
-  :straight t
-  )
+(use-package exercism :straight t)
 
 (defun coba-project-root-override (dir)
   "Find DIR's project root by searching for a '.project.el' file.
@@ -2117,15 +2159,19 @@ If this file exists, it marks the project root. For convenient compatibility
 with Projectile, '.projectile' is also considered a project root marker.
 
 https://blog.jmthornton.net/p/emacs-project-override"
-  (let ((root (or (locate-dominating-file dir ".project.el")
-                  (locate-dominating-file dir ".projectile")))
-        (backend (ignore-errors (vc-responsible-backend dir))))
-    (when root (if (version<= emacs-version "28")
-                   (cons 'vc root)
-                 (list 'vc backend root)))))
+  (let ((root
+         (or (locate-dominating-file dir ".project.el")
+             (locate-dominating-file dir ".projectile")))
+        (backend
+         (ignore-errors
+           (vc-responsible-backend dir))))
+    (when root
+      (if (version<= emacs-version "28")
+          (cons 'vc root)
+        (list 'vc backend root)))))
 
-(use-package project
+(use-package
+  project
   :straight t
   :config
-  (add-hook 'project-find-functions #'coba-project-root-override)
-  )
+  (add-hook 'project-find-functions #'coba-project-root-override))

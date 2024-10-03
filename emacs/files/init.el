@@ -505,25 +505,8 @@ targets."
     'evil-numbers/inc-at-pt
     "C-x"
     'evil-numbers/dec-at-pt))
-;; Can't get to work block without incremental
-;;(use-package plus-minus
-;;:straight (:host github :repo "peterwu/plus-minus")
-;;:general
-;;(general-def
-;;  :states '(normal motion)
-;;  "C-a" '+/-:forward+
-;;  "C-x" '+/-:forward-
-;;  )
-;;(general-def
-;;  :states '(visual)
-;;  "C-a" '+/-:region+
-;;  "C-x" '+/-:region-
-;;  "C-A" '+/-:block+
-;;  "C-X" '+/-:block-
-;;  )
-;;)
-;; Org
 
+;; Org
 
 (use-package
   org-super-agenda

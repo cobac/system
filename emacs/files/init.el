@@ -1297,7 +1297,6 @@
 
 ;; TODO: Pamparam repetition, or anki-el, or org-drill
 
-
 ;; Spellchecking
 
 (setq

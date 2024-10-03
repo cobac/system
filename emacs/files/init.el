@@ -1562,13 +1562,6 @@ targets."
   (when-let ((result (apply #'auth-source-search keys)))
     (funcall (plist-get (car result) :secret))))
 
-(use-package
-  atomic-chrome
-  :straight t
-  :config
-  (atomic-chrome-start-server)
-  (setq atomic-chrome-buffer-open-style 'full))
-
                                         ; Languages
 ;; Systemd
 (use-package systemd :straight t)

@@ -83,6 +83,16 @@
   (emulate-mac-spanish-keyboard-mode)
   (setq mac-command-modifier 'control))
 
+(defun coba-sync-init-with-system ()
+  "Sync `init.el`, `ox-templates` and `snippets` from `~/.emacs.d` into `~/Documentos/system/emacs/files`."
+  (interactive)
+  (shell-command
+   "cp $HOME/Documentos/system/emacs/files/init.el $HOME/.emacs.d/")
+  (shell-command
+   "cp -r $HOME/Documentos/system/emacs/files/ox-templates $HOME/.emacs.d/")
+  (shell-command
+   "cp -r $HOME/.emacs.d/snippets $HOME/Documentos/system/emacs/files/"))
+
                                         ; Packages
 
 ;; Get correct path
@@ -2052,15 +2062,6 @@
        (coba-hledger-call "is"))))
 
 
-(defun coba-sync-init-with-system ()
-  "Sync `init.el`, `ox-templates` and `snippets` from `~/.emacs.d` into `~/Documentos/system/emacs/files`."
-  (interactive)
-  (shell-command
-   "cp $HOME/Documentos/system/emacs/files/init.el $HOME/.emacs.d/")
-  (shell-command
-   "cp -r $HOME/Documentos/system/emacs/files/ox-templates $HOME/.emacs.d/")
-  (shell-command
-   "cp -r $HOME/.emacs.d/snippets $HOME/Documentos/system/emacs/files/"))
 
 (use-package nix-mode :straight t)
 

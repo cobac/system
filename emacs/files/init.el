@@ -215,6 +215,7 @@
        image
        info
        magit
+       magit-todos
        mu4e
        nov
        profiler

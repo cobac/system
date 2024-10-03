@@ -258,12 +258,13 @@
     :keymaps 'vertico-map
     :states '(motion insert)
     "C-k" 'vertico-previous
-    "C-j" 'vertico-next)
+    "C-j" 'vertico-next
+    "C-S-k" 'vertico-previous-group
+    "C-S-j" 'vertico-next-group)
   (general-def
     :keymaps 'vertico-map
-    :states '(motion)
-    "<escape>" 'minibuffer-keyboard-quit
-    ))
+    :states '(normal)
+    "<escape>" 'minibuffer-keyboard-quit))
 
 (use-package embark
   :straight t

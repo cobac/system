@@ -1286,28 +1286,6 @@
     'ess-r-mode-map
     :states '(normal motion) "gf" 'format-all-buffer))
 
-(use-package
-  apheleia
-  :straight (:host github :repo "raxod502/apheleia")
-  :general (general-def :states '(normal motion) "gf" 'apheleia-format-buffer)
-  ;;  :config
-  ;;  (push '(ess-r-mode . styler)
-  ;;        apheleia-mode-alist)
-  ;;
-  ;;  (push '(styler . ((concat
-  ;;                     "Rscript -e"
-  ;;                     "library(styler)"
-  ;;                                        ;    "options(styler.colored_print.vertical=FALSE);"
-  ;;                     " con <-"
-  ;;                     file
-  ;;                     ";"
-  ;;                     " out <- styler::style_text(readLines(con));"
-  ;;                     " close(con);"
-  ;;                     " out")))
-  ;;        apheleia-formatters)
-  :config (apheleia-global-mode))
-
-
 ;; Yasnippets
 
 (use-package

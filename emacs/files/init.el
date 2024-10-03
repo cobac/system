@@ -1296,12 +1296,13 @@ targets."
 
 (use-package forge :straight t :after magit)
 
-;; (use-package
-;;   magit-todos
-;;   :straight t
-;;   :config
-;;   (global-hl-todo-mode 1)
-;;   (magit-todos-mode 1))
+(use-package
+  magit-todos
+  :straight t
+  :config
+  (global-hl-todo-mode 1)
+  (general-def 'magit-mode-map
+    "C-S-t" 'magit-todos-list))
 
 (use-package
   git-timemachine

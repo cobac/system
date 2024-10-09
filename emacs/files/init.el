@@ -1418,4 +1418,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
   dbt-mode
   :straight (:type git :host github :repo "CyberShadow/dbt-mode"))
 
+(use-package csv-mode :straight t)
+
 (when t (load "~/.emacs.d/big_init.el"))

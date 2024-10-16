@@ -176,6 +176,12 @@
     'align-regexp
     "gc"
     'comment-dwim
+    "gd"
+    'xref-find-definitions
+    "gD"
+    'eldoc
+    "gi"
+    'consult-imenu
     "C-j"
     '(lambda ()
        (interactive)

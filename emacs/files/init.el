@@ -1157,15 +1157,28 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package
   flycheck
   :straight t
-  :general
+  :config
   (general-def
-    :prefix
-    "C-S-f"
-    "v"
-    'flycheck-verify-setup
-    "C-f"
-    'flycheck-list-errors)
-  :config (add-hook 'after-init-hook #'global-flycheck-mode))
+    :states
+    '(normal motion)
+    "gB" 'flycheck-list-errors
+    "gJ" 'flycheck-next-error
+    "gK" 'flycheck-previous-error)
+  (add-hook 'after-init-hook #'global-flycheck-mode))
+
+(use-package flycheck-eglot
+  :straight t
+  :after (flycheck eglot)
+  :config
+  (global-flycheck-eglot-mode 1))
+
+(use-package eglot
+  :config
+  (general-def
+    :states
+    '(normal motion)
+    "gr" 'eglot-rename
+    "C-l" 'eglot-code-actions))
 
 ;; formatters
 (use-package

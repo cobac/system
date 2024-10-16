@@ -676,11 +676,13 @@
    'gleam-ts-mode-hook
    (lambda ()
      (add-hook 'before-save-hook 'gleam-ts-format nil 'make-it-local)))
-  ;; (add-hook 'gleam-ts-mode-hook #'lsp)
   (general-def
     '(gleam-ts-mode-map) "C-ñ"
     '(lambda ()
        (interactive)
-       (insert "-> "))))
+       (insert "-> ")))
+  (add-to-list 'eglot-server-programs
+               '(gleam-ts-mode . ("gleam" "lsp")))
+  (add-hook 'gleam-ts-mode-hook 'eglot-ensure))
 
 (use-package exercism :straight t)

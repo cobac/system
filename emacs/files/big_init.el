@@ -686,3 +686,10 @@
   (add-hook 'gleam-ts-mode-hook 'eglot-ensure))
 
 (use-package exercism :straight t)
+
+(use-package vue-mode
+  :straight t
+  :config
+  (add-hook 'mmm-mode-hook
+            (lambda ()
+              (set-face-background 'mmm-default-submode-face nil))))

@@ -407,7 +407,8 @@ targets."
   "!"
   'async-shell-command
   "¡"
-  'shell-command)
+  'shell-command
+  ":" 'eval-expression)
 
 (use-package prescient :straight t :config (prescient-persist-mode))
 (use-package

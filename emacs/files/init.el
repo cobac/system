@@ -223,6 +223,7 @@
        magit-todos
        mu4e
        nov
+       org-present
        profiler
        tar-mode
        vterm
@@ -1440,4 +1441,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package csv-mode :straight t)
 
-(when t (load "~/.emacs.d/big_init.el"))
+(use-package org-present
+  :straight t)
+
+  (when t (load "~/.emacs.d/big_init.el"))

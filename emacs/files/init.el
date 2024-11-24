@@ -225,10 +225,10 @@
        nov
        org-present
        profiler
+       smerge-mode
        tar-mode
        vterm
-       xref))
-    (add-hook 'smerge-mode-hook 'evil-collection-smerge-mode-setup))
+       xref)))
   (use-package
     evil-snipe
     :straight t

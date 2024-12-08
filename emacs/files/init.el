@@ -1329,7 +1329,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 ;; Polymode
 (use-package polymode :straight t)
 
-(use-package poly-org :straight t)
+(use-package poly-org :straight (:type git :host github :repo "polymode/poly-org"))
 
 (use-package quarto-mode :straight t)
 

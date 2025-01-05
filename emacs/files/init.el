@@ -43,6 +43,9 @@
  indent-tabs-mode nil
  tab-width 2)
 
+;; Remove trailing whitespace
+(add-hook 'before-save-hook #'delete-trailing-whitespace)
+
 ;; Font
 (setq default-frame-alist
       (add-to-list 'default-frame-alist '(font . "ibm plex mono-14")))

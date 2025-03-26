@@ -1438,6 +1438,15 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package nix-mode :straight t)
 
+(use-package terraform-mode
+	:straight t
+	:config
+	(setq terraform-format-on-save t)
+	(general-def
+		:keymaps 'terraform-mode-map
+		:states '(motion normal)
+		"gD" 'terraform-open-doc))
+
 (use-package
   dbt-mode
   :straight (:type git :host github :repo "CyberShadow/dbt-mode"))

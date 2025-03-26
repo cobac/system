@@ -60,6 +60,7 @@ alias pylocalenv="source .venv/bin/activate"
 alias pyinit="python -m venv .venv"
 alias ansiblep="ansible-pull -U https://github.com/cobac/system.git --ask-become-pass -vv"
 alias tarz="tar --zstd -cf"
+alias tf="opentofu"
 
 
 # Completion

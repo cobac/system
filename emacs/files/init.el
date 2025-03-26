@@ -1445,7 +1445,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
 	(general-def
 		:keymaps 'terraform-mode-map
 		:states '(motion normal)
-		"gD" 'terraform-open-doc))
+		"gD" 'terraform-open-doc
+		"<tab>" 'terraform-toggle-or-indent))
 
 (use-package
   dbt-mode

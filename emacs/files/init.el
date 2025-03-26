@@ -1446,7 +1446,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
 		:keymaps 'terraform-mode-map
 		:states '(motion normal)
 		"gD" 'terraform-open-doc
-		"<tab>" 'terraform-toggle-or-indent))
+		"<tab>" 'terraform-toggle-or-indent)
+  (add-hook 'terraform-mode-hook #'outline-minor-mode))
 
 (use-package
   dbt-mode

@@ -1438,6 +1438,10 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package nix-mode :straight t)
 
+(use-package direnv
+  :straight t
+  :config (direnv-mode))
+
 (use-package terraform-mode
 	:straight t
 	:config

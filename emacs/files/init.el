@@ -1178,12 +1178,18 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (global-flycheck-eglot-mode 1))
 
 (use-package eglot
+  :straight (:type built-in)
   :config
   (general-def
     :states
     '(normal motion)
     "gr" 'eglot-rename
     "C-l" 'eglot-code-actions))
+
+(use-package eglot-booster
+  :straight (eglot-booster :type git :host github :repo "jdtsmith/eglot-booster")
+  :after eglot
+  :config (eglot-booster-mode))
 
 ;; formatters
 (use-package

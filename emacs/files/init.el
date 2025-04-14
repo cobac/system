@@ -92,6 +92,8 @@
   (shell-command
    "cp $HOME/Documentos/system/emacs/files/big_init.el $HOME/.emacs.d/")
   (shell-command
+   "cp $HOME/Documentos/system/emacs/files/early-init.el $HOME/.emacs.d/")
+  (shell-command
    "cp -r $HOME/Documentos/system/emacs/files/ox-templates $HOME/.emacs.d/")
   (shell-command
    "cp -r $HOME/.emacs.d/snippets $HOME/Documentos/system/emacs/files/"))

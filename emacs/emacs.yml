@@ -1,7 +1,7 @@
 - name: Install emacs
   community.general.pacman:
     name:
-      - emacs-nativecomp
+      - emacs
     state: latest
 
 - name: Config emacs

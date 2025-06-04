@@ -259,6 +259,10 @@ mode dock
 output eDP-1
 output HDMI-1
 output DP-1
+output DP-1-1
+output DP-1-2
+output DP-1-2-1
+output DP-2
 
 separator_symbol "  "
 #tray_output eDP-1-1

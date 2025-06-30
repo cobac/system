@@ -864,7 +864,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
    org-modern-keyword nil
    org-modern-todo nil
    org-modern-tag nil
-   org-modern-star 'replace))
+   org-modern-star 'replace
+   org-modern-block-name nil))
 
 (add-hook 'org-mode-hook 'org-indent-mode)
 (add-hook 'org-mode-hook (lambda () (electric-indent-local-mode -1)))

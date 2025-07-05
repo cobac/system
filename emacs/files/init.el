@@ -1440,7 +1440,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
  (lambda ()
    (add-hook
     'before-save-hook (lambda () (tabify (point-min) (point-max)))
-    'make-it-local)))
+    nil 'make-it-local)))
 
 ;; (setq compile-command
 ;;       '(concat

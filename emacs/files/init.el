@@ -1353,7 +1353,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :keymaps
   '(emacs-lisp-mode-map
     lisp-interaction-mode-map)
-  "r" 'eval-region "b" 'eval-buffer)
+  "," 'eval-last-sexp "r" 'eval-region "b" 'eval-buffer)
 
 (use-package
   eterm-256color

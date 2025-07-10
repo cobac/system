@@ -255,6 +255,14 @@
  ediff-window-setup-function 'ediff-setup-windows-plain
  ediff-split-window-function 'split-window-horizontally)
 
+(use-package evil-mc
+  :straight t
+  :after evil
+  :config
+  (add-hook 'text-mode-hook 'evil-mc-mode)
+  (add-hook 'prog-mode-hook 'evil-mc-mode)
+  )
+
 (use-package
   better-jumper
   :straight t

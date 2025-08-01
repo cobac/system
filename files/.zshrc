@@ -6,6 +6,7 @@ export TERM=xterm-256color
 export KEYTIMEOUT=1
 export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-linux:/home/coba/.nix-profile/bin:/home/coba/.local/bin
 export TEXMFDIST=/usr/local/texlive/2020/texmf-dist/
+export EDITOR=emacsclient
 export LEDGER_FILE=/home/coba/Sync/oros/main.ledger
 
 # Lines configured by zsh-newuser-install

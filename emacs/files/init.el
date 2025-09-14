@@ -257,11 +257,7 @@
 
 (use-package evil-mc
   :straight t
-  :after evil
-  :config
-  (add-hook 'text-mode-hook 'evil-mc-mode)
-  (add-hook 'prog-mode-hook 'evil-mc-mode)
-  )
+  :after evil)
 
 (use-package
   better-jumper

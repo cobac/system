@@ -42,7 +42,6 @@
         - {dir: Documentos}
         - {dir: Documentos/Archive}
         - {dir: Documentos/Work}
-        - {dir: Documentos/Work/xebia}
         - {dir: Downloads}
         - {dir: Sync}
         - {dir: Sync/database}
@@ -114,7 +113,7 @@
       become: yes
       become_user: coba
       become_method: su
-      environment: 
+      environment:
         # This is horrible hardcoded
         XDG_RUNTIME_DIR: "/run/user/1000"
 
@@ -154,13 +153,12 @@
               gtk-xft-hinting=1
               gtk-xft-hintstyle=hintfull
               gtk-xft-rgba=rgb
-    
+
     - name: gtk bookmarks
       ansible.builtin.blockinfile:
         path: /home/coba/.config/gtk-3.0/bookmarks
         create: true
         block: |
-          file:///home/coba/Documentos/Work/xebia
           file:///home/coba/Sync/Brain/pdf
           file:///home/coba/Documentos
           file:///home/coba/Downloads

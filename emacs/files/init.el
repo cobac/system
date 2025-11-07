@@ -394,7 +394,7 @@ targets."
   "fp"
   '(lambda ()
      (interactive)
-     (ido-find-file-in-dir "~/Documentos/Work/xebia"))
+     (ido-find-file-in-dir "~/Documentos/"))
   "fo"
   '(lambda ()
      (interactive)
@@ -644,12 +644,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
     "Check Psychology"
     entry
     (file+olp "~/Sync/Org/todo.org" "Psychology" "Check")
-    "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
-    :empty-lines 1)
-   ("r"
-    "Xebia"
-    entry
-    (file+olp "~/Sync/Org/todo.org" "Work" "Xebia")
     "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
     :empty-lines 1)
    ("m"

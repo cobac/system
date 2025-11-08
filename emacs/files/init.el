@@ -1339,8 +1339,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :straight (prettier-elisp
              :type git
              :host github
-             :repo "KarimAziev/prettier-elisp")
-  :hook ((emacs-lisp-mode . prettier-elisp-buffer-mode)))
+             :repo "KarimAziev/prettier-elisp"))
 
 (use-package eterm-256color
   :straight t

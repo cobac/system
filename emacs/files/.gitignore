@@ -3,6 +3,7 @@
 !big_init.el
 !early-init.el
 !.gitignore
+!.dir-locals.el
 
 !snippets/
 /snippets/**/.yas-compiled-snippets.el

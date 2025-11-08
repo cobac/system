@@ -1,8 +1,4 @@
-; Straight.el config
-
-;; Bootstrap
 (defvar bootstrap-version)
-
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el"
                          user-emacs-directory))
@@ -17,10 +13,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; use-package
 (straight-use-package 'use-package)
-
-                                        ; Built-in setup
 
 ;; Remove scroll, tool and menu bars
 (scroll-bar-mode -1)
@@ -727,11 +720,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
     "Helper to open Agenda in weekly view by default."
     (org-agenda nil "w")
     (delete-other-windows))
-  (defun coba-org-create-project (PROJECT)
-    "Create an 'org-mode' PROJECT for querying with org-ql."
-    (interactive "sProject name: ")
-    (org-toggle-tag "track")
-    (org-set-property "Project" PROJECT))
   (general-def
     :states '(normal motion)
     :keymaps
@@ -787,14 +775,9 @@ https://blog.jmthornton.net/p/emacs-project-override"
     :keymaps 'org-mode-map
     :states
     '(normal motion)
-    "s"
-    'org-schedule
-    "d"
-    'org-deadline
-    "t"
-    'org-set-tag-command
-    "P"
-    'coba-org-create-project)
+    "s" 'org-schedule
+    "d" 'org-deadline
+    "t" 'org-set-tag-command)
   (add-hook 'org-mode-hook 'org-indent-mode)
   (add-hook 'org-mode-hook (lambda ()
                              (electric-indent-local-mode -1)))
@@ -910,10 +893,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
     :states
     '(normal visual motion)
     "SPC")
-  ;; (coba-local-leader-def
-  ;; :keymaps 'org-roam-mode-map
-  ;; :states '(normal visual motion)
-  ;; )
   (general-def
     :keymaps 'org-roam-mode-map
     :states

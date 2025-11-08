@@ -108,13 +108,6 @@
   (when (daemonp)
     (exec-path-from-shell-initialize)))
 
-;; Load upstream org
-(straight-use-package
- '(org
-   :host github
-   :repo "emacs-straight/org-mode"
-   :local-repo "org"))
-
 ;; Visual
 (use-package
   doom-themes
@@ -554,6 +547,253 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 ;; Org
 
+(use-package org
+  :straight t
+  :config
+  (set-face-attribute 'org-headline-done nil :strike-through t)
+  (setq
+   org-agenda-files
+   '("~/Sync/Org/todo.org"
+     "~/Sync/Org/refile.org"
+     "~/Sync/Org/annuals.org")
+   org-agenda-span 7
+   org-agenda-start-on-weekday 1
+   org-enforce-todo-dependencies t
+   org-enforce-todo-checkbox-dependencies t
+   org-log-done (quote time)
+   org-log-readline (quote time)
+   org-log-reschedule (quote time)
+   org-refile-allow-creating-parent-nodes 'confirm
+   org-archive-location "~/Sync/Org/archive.org::* From ??"
+   org-deadline-warning-days 14
+   org-refile-use-outline-path t
+   org-extend-today-until 4
+   org-use-property-inheritance t
+   calendar-date-style 'european
+   org-outline-path-complete-in-steps nil
+   calendar-week-start-day 1
+   org-default-notes-file "~/Sync/Org/refile.org"
+   org-capture-templates
+   '(("t"
+      "Todo"
+      entry
+      (file "~/Sync/Org/refile.org")
+      "* TODO %?"
+      :empty-lines 1)
+     ("l"
+      "Link"
+      entry
+      (file "~/Sync/Org/refile.org")
+      "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+      :empty-lines 1)
+     ("f"
+      "File link"
+      entry
+      (file "~/Sync/Org/refile.org")
+      "* TODO %A\n:PROPERTIES:\n:CREATED: %U\n:END:"
+      :empty-lines 1)
+     ("c"
+      "Check Computer"
+      entry
+      (file+olp "~/Sync/Org/todo.org" "Computer" "Check")
+      "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+      :empty-lines 1)
+     ("p"
+      "Check Psychology"
+      entry
+      (file+olp "~/Sync/Org/todo.org" "Psychology" "Check")
+      "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+      :empty-lines 1)
+     ("m"
+      "Movies"
+      entry
+      (file+olp "~/Sync/Org/todo.org" "Leisure" "Movies")
+      "* TODO %?"
+      :empty-lines 1)
+     ("n"
+      "Movies waiting"
+      entry
+      (file+olp "~/Sync/Org/todo.org" "Leisure" "Movies" "Waiting")
+      "* TODO %?"
+      :empty-lines 1)
+     ("s"
+      "Series"
+      entry
+      (file+olp "~/Sync/Org/todo.org" "Leisure" "Series")
+      "* TODO %?"
+      :empty-lines 1)
+     ("w"
+      "Series waiting"
+      entry
+      (file+olp "~/Sync/Org/todo.org" "Leisure" "Series" "Waiting")
+      "* TODO %?"
+      :empty-lines 1)
+     ("b"
+      "Books"
+      entry
+      (file+olp "~/Sync/Org/todo.org" "Leisure" "Books")
+      "* TODO %?"
+      :empty-lines 1)
+     ("o"
+      "Otro"
+      entry
+      (file+olp "~/Sync/Org/todo.org" "Other")
+      "* TODO %?"
+      :empty-lines 1))
+   org-refile-targets
+   (quote (("~/Sync/Org/todo.org" :maxlevel . 10)
+           ("~/Sync/Org/annuals.org" :maxlevel . 10)))
+   org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE" "CANCELED"))
+   org-agenda-custom-commands
+   '(("w"
+      "Weekly view"
+      ((org-ql-block '(and (todo "WAITING"))) (agenda)))))
+
+  (general-define-key
+   :keymaps
+   'org-capture-mode-map
+   [remap evil-save-and-close]
+   'org-capture-finalize
+   [remap evil-save-modified-and-close]
+   'org-capture-finalize
+   [remap evil-quit]
+   'org-capture-kill)
+
+  (setq-default org-display-custom-times t)
+  (setq org-time-stamp-custom-formats
+        '("<%Y-%m-%e, %a>" . "<%Y-%m-%e, %a %H:%M>"))
+
+  (coba-leader-def
+    "c" 'org-capture
+    "a" '(:ignore t :which-key "Org-Agenda") "aa"
+    '(lambda ()
+       (interactive)
+       (coba-org-agenda-weekly))
+    "o"
+    '(lambda ()
+       (interactive)
+       (find-file "~/Sync/Org/todo.org"))
+    "R"
+    '(lambda ()
+       (interactive)
+       (find-file "~/Sync/Org/refile.org"))
+    "ad"
+    '(lambda ()
+       (interactive)
+       (org-ql-search
+         "~/Sync/Org/todo.org"
+         '(done)
+         :sort '(date priority todo)))
+    "ap"
+    '(lambda ()
+       (interactive)
+       (org-ql-search
+         (org-agenda-files)
+         '(and (tags "track") (or (todo "TODO") (todo "WAITING")))
+         :title "Projects"
+         :sort '(date priority todo)
+         :super-groups '((:auto-property "Project")))
+       (delete-other-windows)))
+
+  (defun coba-org-agenda-weekly ()
+    "Helper to open Agenda in weekly view by default."
+    (org-agenda nil "w")
+    (delete-other-windows))
+
+  (defun coba-org-create-project (PROJECT)
+    "Create an 'org-mode' PROJECT for querying with org-ql."
+    (interactive "sProject name: ")
+    (org-toggle-tag "track")
+    (org-set-property "Project" PROJECT))
+  (general-def
+    :states '(normal motion)
+    :keymaps
+    'org-mode-map
+    "C-t"
+    'org-todo
+    "C-S-T"
+    'coba-org-todo-yesterday-twice
+    "ga"
+    'org-archive-subtree-default
+    "gr"
+    'org-refile
+    "gR"
+    'org-refile-goto-last-stored
+    "gG"
+    'consult-outline
+    "C-P"
+    'org-latex-preview)
+
+  (general-def
+    :states '(normal motion)
+    :keymaps
+    'org-agenda-mode-map
+    "ga"
+    'org-agenda-archive
+    "C-t"
+    'org-agenda-todo
+    "C-S-T"
+    'coba-org-agenda-todo-yesterday-twice)
+
+  (coba-local-leader-def
+    :keymaps
+    'org-agenda-mode-map
+    "s"
+    'org-agenda-schedule
+    "d"
+    'org-agenda-deadline)
+
+  (defun coba-org-todo-yesterday-twice ()
+    "Call `org-todo-yesterday` twice."
+    (interactive)
+    (org-todo-yesterday)
+    (org-todo-yesterday))
+
+  (defun coba-org-agenda-todo-yesterday-twice ()
+    "Call `org-todo-yesterday` twice."
+    (interactive)
+    (org-agenda-todo-yesterday)
+    (org-agenda-todo-yesterday))
+  (general-def
+    :states '(normal motion)
+    :keymaps
+    'org-ql-view-map
+    "ga"
+    'org-agenda-archive)
+
+  (coba-local-leader-def
+    :keymaps 'org-mode-map
+    :states
+    '(normal motion)
+    "s"
+    'org-schedule
+    "d"
+    'org-deadline
+    "t"
+    'org-set-tag-command
+    "P"
+    'coba-org-create-project)
+
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  (add-hook 'org-mode-hook (lambda () (electric-indent-local-mode -1)))
+  (org-babel-do-load-languages
+   'org-babel-load-languages '((R . t) (dot . t)))
+  (setq org-confirm-babel-evaluate nil)
+  (setf org-babel-default-header-args:R '((:output . "results")))
+  )
+
+(use-package
+  evil-org
+  :straight t
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook (lambda () (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+(setq org-format-latex-options
+      (plist-put org-format-latex-options :scale 1.85))
+
 (use-package
   org-super-agenda
   :straight (:host github :repo "alphapapa/org-super-agenda")
@@ -587,192 +827,12 @@ https://blog.jmthornton.net/p/emacs-project-override"
            :and (:deadline future :tag "uni")
            :order 10)
           (:name "Other Deadlines" :deadline future :order 11)
-          (:name "Refile" :scheduled past :order 99))))
+          (:name "Refile" :scheduled past :order 99)))
 
-(org-super-agenda-mode)
-(set-face-attribute 'org-headline-done nil :strike-through t)
+  (org-super-agenda-mode)
+  )
 (use-package transient :straight t)
 (use-package org-ql :straight (:host github :repo "alphapapa/org-ql"))
-
-(setq
- org-agenda-files
- '("~/Sync/Org/todo.org"
-   "~/Sync/Org/refile.org"
-   "~/Sync/Org/annuals.org")
- org-agenda-span 7
- org-agenda-start-on-weekday 1
- org-enforce-todo-dependencies t
- org-enforce-todo-checkbox-dependencies t
- org-log-done (quote time)
- org-log-readline (quote time)
- org-log-reschedule (quote time)
- org-refile-allow-creating-parent-nodes 'confirm
- org-archive-location "~/Sync/Org/archive.org::* From ??"
- org-deadline-warning-days 14
- org-refile-use-outline-path t
- org-extend-today-until 4
- org-use-property-inheritance t
- calendar-date-style 'european
- org-outline-path-complete-in-steps nil
- calendar-week-start-day 1
- org-default-notes-file "~/Sync/Org/refile.org"
- org-capture-templates
- '(("t"
-    "Todo"
-    entry
-    (file "~/Sync/Org/refile.org")
-    "* TODO %?"
-    :empty-lines 1)
-   ("l"
-    "Link"
-    entry
-    (file "~/Sync/Org/refile.org")
-    "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
-    :empty-lines 1)
-   ("f"
-    "File link"
-    entry
-    (file "~/Sync/Org/refile.org")
-    "* TODO %A\n:PROPERTIES:\n:CREATED: %U\n:END:"
-    :empty-lines 1)
-   ("c"
-    "Check Computer"
-    entry
-    (file+olp "~/Sync/Org/todo.org" "Computer" "Check")
-    "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
-    :empty-lines 1)
-   ("p"
-    "Check Psychology"
-    entry
-    (file+olp "~/Sync/Org/todo.org" "Psychology" "Check")
-    "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
-    :empty-lines 1)
-   ("m"
-    "Movies"
-    entry
-    (file+olp "~/Sync/Org/todo.org" "Leisure" "Movies")
-    "* TODO %?"
-    :empty-lines 1)
-   ("n"
-    "Movies waiting"
-    entry
-    (file+olp "~/Sync/Org/todo.org" "Leisure" "Movies" "Waiting")
-    "* TODO %?"
-    :empty-lines 1)
-   ("s"
-    "Series"
-    entry
-    (file+olp "~/Sync/Org/todo.org" "Leisure" "Series")
-    "* TODO %?"
-    :empty-lines 1)
-   ("w"
-    "Series waiting"
-    entry
-    (file+olp "~/Sync/Org/todo.org" "Leisure" "Series" "Waiting")
-    "* TODO %?"
-    :empty-lines 1)
-   ("b"
-    "Books"
-    entry
-    (file+olp "~/Sync/Org/todo.org" "Leisure" "Books")
-    "* TODO %?"
-    :empty-lines 1)
-   ("o"
-    "Otro"
-    entry
-    (file+olp "~/Sync/Org/todo.org" "Other")
-    "* TODO %?"
-    :empty-lines 1))
- org-refile-targets
- (quote (("~/Sync/Org/todo.org" :maxlevel . 10)
-         ("~/Sync/Org/annuals.org" :maxlevel . 10)))
- org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE" "CANCELED"))
- org-agenda-custom-commands
- '(("w"
-    "Weekly view"
-    ((org-ql-block '(and (todo "WAITING"))) (agenda))))
- org-icalendar-combined-agenda-file "~/Sync/Org/calendar.ics"
- org-icalendar-include-todo t
- org-icalendar-include-body 1000
- org-icalendar-use-scheduled '(event-if-todo event-if-not-todo todo-start)
- org-icalendar-use-deadline '(event-if-todo event-if-not-todo todo-start))
-
-(general-define-key
- :keymaps
- 'org-capture-mode-map
- [remap evil-save-and-close]
- 'org-capture-finalize
- [remap evil-save-modified-and-close]
- 'org-capture-finalize
- [remap evil-quit]
- 'org-capture-kill)
-
-(setq-default org-display-custom-times t)
-(setq org-time-stamp-custom-formats
-      '("<%Y-%m-%e, %a>" . "<%Y-%m-%e, %a %H:%M>"))
-
-(coba-leader-def
-  "c" 'org-capture "a" '(:ignore t :which-key "Org-Agenda") "aa"
-  '(lambda ()
-     (interactive)
-     (coba-org-agenda-weekly))
-  "o"
-  '(lambda ()
-     (interactive)
-     (find-file "~/Sync/Org/todo.org"))
-  "R"
-  '(lambda ()
-     (interactive)
-     (find-file "~/Sync/Org/refile.org"))
-  "ad"
-  '(lambda ()
-     (interactive)
-     (org-ql-search
-       "~/Sync/Org/todo.org"
-       '(done)
-       :sort '(date priority todo)))
-  "ap"
-  '(lambda ()
-     (interactive)
-     (org-ql-search
-       (org-agenda-files)
-       '(and (tags "track") (or (todo "TODO") (todo "WAITING")))
-       :title "Projects"
-       :sort '(date priority todo)
-       :super-groups '((:auto-property "Project")))
-     (delete-other-windows)))
-
-(defun coba-org-agenda-weekly ()
-  "Helper to open Agenda in weekly view by default."
-  (org-agenda nil "w")
-  (delete-other-windows))
-
-(defun coba-org-create-project (PROJECT)
-  "Create an 'org-mode' PROJECT for querying with org-ql."
-  (interactive "sProject name: ")
-  (org-toggle-tag "track")
-  (org-set-property "Project" PROJECT))
-
-(defun coba-org-icalendar-combine-agenda-files-hook ()
-  "Create a .ics file from agenda files asynchronously when an `org-mode` file is saved."
-  (interactive)
-  (when (eq (buffer-name) "todo.org")
-    (org-icalendar-combine-agenda-files t)))
-;;(add-hook 'org-mode-hook
-;;          (lambda ()
-;;            (add-hook 'after-save-hook 'coba-org-icalendar-combine-agenda-files-hook nil 'make-it-local)))
-
-(use-package
-  evil-org
-  :straight t
-  :after org
-  :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook (lambda () (evil-org-set-key-theme)))
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
-(setq org-format-latex-options
-      (plist-put org-format-latex-options :scale 1.85))
 
 (use-package
   org-pomodoro
@@ -784,74 +844,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
    org-pomodoro-manual-break t
    org-pomodoro-play-sounds nil))
 
-(general-def
-  :states '(normal motion)
-  :keymaps
-  'org-mode-map
-  "C-t"
-  'org-todo
-  "C-S-T"
-  'coba-org-todo-yesterday-twice
-  "ga"
-  'org-archive-subtree-default
-  "gr"
-  'org-refile
-  "gR"
-  'org-refile-goto-last-stored
-  "gG"
-  'consult-outline
-  "C-P"
-  'org-latex-preview)
-
-(general-def
-  :states '(normal motion)
-  :keymaps
-  'org-agenda-mode-map
-  "ga"
-  'org-agenda-archive
-  "C-t"
-  'org-agenda-todo
-  "C-S-T"
-  'coba-org-agenda-todo-yesterday-twice)
-
-(coba-local-leader-def
-  :keymaps
-  'org-agenda-mode-map
-  "s"
-  'org-agenda-schedule
-  "d"
-  'org-agenda-deadline)
-
-(defun coba-org-todo-yesterday-twice ()
-  "Call `org-todo-yesterday` twice."
-  (interactive)
-  (org-todo-yesterday)
-  (org-todo-yesterday))
-
-(defun coba-org-agenda-todo-yesterday-twice ()
-  "Call `org-todo-yesterday` twice."
-  (interactive)
-  (org-agenda-todo-yesterday)
-  (org-agenda-todo-yesterday))
-(general-def
-  :states '(normal motion)
-  :keymaps
-  'org-ql-view-map
-  "ga"
-  'org-agenda-archive)
-
-(coba-local-leader-def
-  :keymaps 'org-mode-map
-  :states
-  '(normal motion)
-  "s"
-  'org-schedule
-  "d"
-  'org-deadline
-  "t"
-  'org-set-tag-command
-  "P"
-  'coba-org-create-project)
 
 (use-package
   org-modern
@@ -866,14 +858,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
    org-modern-star 'replace
    org-modern-block-name nil))
 
-(add-hook 'org-mode-hook 'org-indent-mode)
-(add-hook 'org-mode-hook (lambda () (electric-indent-local-mode -1)))
 
-;; Babel
-(org-babel-do-load-languages
- 'org-babel-load-languages '((R . t) (dot . t)))
-(setq org-confirm-babel-evaluate nil)
-(setf org-babel-default-header-args:R '((:output . "results")))
+
 
 (use-package
   org-download
@@ -1512,4 +1498,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package org-present
   :straight t)
 
-  (when t (load "~/.emacs.d/big_init.el"))
+(use-package calfw
+  :straight (:type git :host github :repo "kiwanami/emacs-calfw" :files ("*.el")))
+
+
+(when t (load "~/.emacs.d/big_init.el"))

@@ -939,6 +939,13 @@ https://blog.jmthornton.net/p/emacs-project-override"
        ":PROPERTIES:\n:ROAM_ALIASES:\n:ROAM_REFS:\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${title}\n")
       :immediate-finish t
       :unnarrowed t)
+     ("w" "motherduck" plain "%?"
+      :target
+      (file+head
+       "motherduck/${slug}.org"
+       ":PROPERTIES:\n:ROAM_ALIASES:\n:ROAM_REFS:\n:END:\n#+STARTUP: latexpreview\n#+filetags: motherduck\n#+title: ${title}\n")
+      :immediate-finish t
+      :unnarrowed t)
      ("p" "bib" plain "- tags :: %?"
       :target
       (file+head

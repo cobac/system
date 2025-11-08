@@ -1,7 +1,8 @@
-                                        ; Straight.el config
+; Straight.el config
 
 ;; Bootstrap
 (defvar bootstrap-version)
+
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el"
                          user-emacs-directory))
@@ -23,25 +24,30 @@
 
 ;; Remove scroll, tool and menu bars
 (scroll-bar-mode -1)
+
 (tool-bar-mode -1)
+
 (menu-bar-mode -1)
+
 (recentf-mode 1)
+
 (setq recentf-max-saved-items 100)
+
 (run-at-time nil (* 2 60) 'recentf-save-list)
 
 ;; Remove startup screen
-(setq
- inhibit-splash-screen t
- inhibit-startup-message t
- inhibit-startup-echo-area-message t)
+(setq inhibit-splash-screen t
+      inhibit-startup-message t
+      inhibit-startup-echo-area-message t)
+
 ;; Show matching paranthesis
 (show-paren-mode 1)
+
 (electric-pair-mode)
 
 ;; Always indent with spaces
-(setq-default
- indent-tabs-mode nil
- tab-width 2)
+(setq-default indent-tabs-mode nil
+              tab-width 2)
 
 ;; Remove trailing whitespace
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
@@ -51,32 +57,60 @@
       (add-to-list 'default-frame-alist '(font . "ibm plex mono-14")))
 
 (setq-default line-spacing 0.15)
+
 ;; Not-crazy scroll
-(setq
- scroll-step 1
- scroll-conservatively 10000)
+(setq scroll-step 1
+      scroll-conservatively 10000)
 
 ;; Keep init.el clean
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+
 (load custom-file 'noerror)
 
-(setq delete-old-versions -1) ;; delete excess backup versions silently
-(setq version-control t) ;; use version control
-(setq vc-make-backup-files t) ;; make backups file even when in version controlled dir
-(setq backup-directory-alist `(("." . "~/.emacs.d/backups"))) ;; which directory to put backups file
-(setq vc-follow-symlinks t) ;; don't ask for confirmation when opening symlinked file
+(setq delete-old-versions -1)
+
+;; delete excess backup versions silently
+(setq version-control t)
+
+;; use version control
+(setq vc-make-backup-files t)
+
+;; make backups file even when in version controlled dir
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
+
+;; don't ask for confirmation when opening symlinked file
+(setq vc-follow-symlinks t)
+
+;; which directory to put backups file
 (setq auto-save-file-name-transforms
-      '((".*" "~/.emacs.d/auto-save-list/" t))) ;transform backups file name
-(setq inhibit-startup-screen t) ;; inhibit useless and old-school startup screen
-(setq ring-bell-function 'ignore) ;; silent bell when you make a mistake
-(setq coding-system-for-read 'utf-8) ;; use utf-8 by default
+      '((".*" "~/.emacs.d/auto-save-list/" t)))
+
+;;transform backups file name
+(setq inhibit-startup-screen t)
+
+;; inhibit useless and old-school startup screen
+(setq ring-bell-function 'ignore)
+
+;; silent bell when you make a mistake
+(setq coding-system-for-read 'utf-8)
+
+;; use utf-8 by default
 (setq coding-system-for-write 'utf-8)
-(setq sentence-end-double-space nil) ;; sentence SHOULD end with only a point.
-(setq initial-scratch-message nil) ; print a default message in the empty scratch buffer opened at startup
+
+;; sentence SHOULD end with only a point.
+(setq sentence-end-double-space nil)
+
+;; print a default message in the empty scratch buffer opened at startup
+(setq initial-scratch-message nil)
+
 (setq delete-by-moving-to-trash t)
+
 (setq auth-sources '("~/.authinfo.gpg"))
+
 (put #'downcase-region 'disabled nil)
+
 (put #'upcase-region 'disabled nil)
+
 (put #'narrow-to-region 'disabled nil)
 
 (when (eq system-type 'darwin)
@@ -101,49 +135,48 @@
                                         ; Packages
 
 ;; Get correct path
-(use-package
-  exec-path-from-shell
+(use-package exec-path-from-shell
   :straight t
   :config
   (when (daemonp)
     (exec-path-from-shell-initialize)))
 
 ;; Visual
-(use-package
-  doom-themes
+(use-package doom-themes
   :straight t
   :config
   (doom-themes-org-config)
   (setq doom-gruvbox-dark-variant "hard")
   (load-theme 'doom-gruvbox t))
 
-(use-package memoize :straight t)
+(use-package memoize
+  :straight t)
 
-(use-package nerd-icons :straight t :after memoize)
+(use-package nerd-icons
+  :straight t
+  :after memoize)
 
-(use-package
-  mood-line
+(use-package mood-line
   :straight t
   :hook (after-init . mood-line-mode))
 
 ;; General - which-key
-(use-package which-key :straight t :config (which-key-mode 1))
+(use-package which-key
+  :straight t
+  :config (which-key-mode 1))
 
-(use-package
-  general
+(use-package general
   :after which-key
   :straight t
   :config
   (setq general-override-states
         '(insert emacs hybrid normal visual motion operator replace))
-
   (general-create-definer
     coba-leader-def
     :states '(normal visual insert motion emacs)
     :keymaps 'override
     :prefix "SPC"
     :non-normal-prefix "C-SPC")
-
   (general-create-definer
     coba-local-leader-def
     :states '(normal visual motion)
@@ -155,13 +188,11 @@
        (text-scale-adjust 0))))
 
 ;; Evil
-(use-package
-  evil
+(use-package evil
   :straight t
   :init
-  (setq
-   evil-want-keybinding nil ;; for evil-collection
-   evil-respect-visual-line-mode t)
+  (setq evil-want-keybinding nil ;; for evil-collection
+        evil-respect-visual-line-mode t)
   :general
   (general-def
     :states
@@ -192,23 +223,22 @@
        (recenter nil)))
   (general-def :states '(visual) "C-=" 'count-words-region)
   :config
-  (setq
-   evil-want-minibuffer t
-   evil-want-C-d-scroll nil)
-  (use-package
-    undo-tree
+  (setq evil-want-minibuffer t
+        evil-want-C-d-scroll nil)
+  (use-package undo-tree
     :straight t
     :config
-    (setq
-     undo-tree-visualizer-diff t
-     undo-tree-auto-save-history nil))
+    (setq undo-tree-visualizer-diff t
+          undo-tree-auto-save-history nil))
   (custom-set-variables '(evil-undo-system 'undo-tree))
   (evil-mode)
   (global-undo-tree-mode)
-  (use-package evil-anzu :straight t)
-  (use-package
-    evil-collection
-    :straight (:type git :host github :repo "emacs-evil/evil-collection") ;:branch "retain-selection")
+  (use-package evil-anzu
+    :straight t)
+  (use-package evil-collection
+    :straight (:type git
+               :host github
+               :repo "emacs-evil/evil-collection") ;:branch "retain-selection")
     :config
     (evil-collection-init
      '(dired
@@ -227,33 +257,29 @@
        tar-mode
        vterm
        xref)))
-  (use-package
-    evil-snipe
+  (use-package evil-snipe
     :straight t
-    :config (evil-snipe-mode 1) (evil-snipe-override-mode 1)
-    (setq
-     evil-snipe-smart-case t
-     evil-snipe-show-prompt nil
-     evil-snipe-auto-scroll nil
-     evil-snipe-scope 'whole-buffer
-     evil-snipe-repeat-scope 'whole-buffer)
+    :config (evil-snipe-mode 1)
+    (evil-snipe-override-mode 1)
+    (setq evil-snipe-smart-case t
+          evil-snipe-show-prompt nil
+          evil-snipe-auto-scroll nil
+          evil-snipe-scope 'whole-buffer
+          evil-snipe-repeat-scope 'whole-buffer)
     (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
-  (use-package
-    evil-surround
+  (use-package evil-surround
     :straight t
     :after evil
     :config (global-evil-surround-mode)))
 
-(setq
- ediff-window-setup-function 'ediff-setup-windows-plain
- ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain
+      ediff-split-window-function 'split-window-horizontally)
 
 (use-package evil-mc
   :straight t
   :after evil)
 
-(use-package
-  better-jumper
+(use-package better-jumper
   :straight t
   :after evil
   :config (better-jumper-mode +1)
@@ -267,8 +293,7 @@
 
 ;; Vertico, Consult and company
 
-(use-package
-  vertico
+(use-package vertico
   :straight t
   :after evil-collection
   :init (vertico-mode)
@@ -298,27 +323,31 @@
     "G"
     'vertico-last))
 
-(use-package
-  vertico-posframe
+(use-package vertico-posframe
   :straight t
   :config (vertico-posframe-mode))
 
-(use-package consult :straight t)
+(use-package consult
+  :straight t)
 
-(use-package marginalia :straight t :config (marginalia-mode))
+(use-package marginalia
+  :straight t
+  :config (marginalia-mode))
 
-(use-package
-  embark
+(use-package embark
   :straight t
   :after consult
-  :bind (("C-." . embark-act) ("C-)" . embark-dwim))
+  :bind (("C-." . embark-act)
+         ("C-)" . embark-dwim))
   :config
   ;; C-d: kill-buffer during switch-to-buffer
   ;; https://www.reddit.com/r/emacs/comments/16g08me/killbuffer_from_the_minibuffer_after_mx/
   ;; no confirmation
-  (setf (alist-get 'kill-buffer embark-pre-action-hooks) ())
+  (setf (alist-get 'kill-buffer embark-pre-action-hooks)
+        ())
   ;; ;; don't embark--restart
-  (setf (alist-get 'kill-buffer embark-post-action-hooks) ())
+  (setf (alist-get 'kill-buffer embark-post-action-hooks)
+        ())
   ;; ;; don't quit
   (setq embark-quit-after-action '((kill-buffer . nil) (t . t)))
   (general-def
@@ -339,35 +368,35 @@ targets."
              "Become"
            (format "Act on %s '%s'%s"
                    (plist-get (car targets) :type)
-                   (embark--truncate-target (plist-get (car targets) :target))
+                   (embark--truncate-target (plist-get (car targets)
+                                                       :target))
                    (if (cdr targets) "…" "")))
          (if prefix
              (pcase (lookup-key keymap prefix 'accept-default)
                ((and (pred keymapp) km) km)
                (_ (key-binding prefix 'accept-default)))
            keymap)
-         nil nil t (lambda (binding)
-                     (not (string-suffix-p "-argument" (cdr binding))))))))
-
+         nil nil t
+         (lambda (binding)
+           (not (string-suffix-p "-argument" (cdr binding))))))))
   (setq embark-indicators
         '(embark-which-key-indicator
           embark-highlight-indicator
           embark-isearch-highlight-indicator))
-
   (defun embark-hide-which-key-indicator (fn &rest args)
     "Hide the which-key indicator immediately when using the completing-read prompter."
     (which-key--hide-popup-ignore-command)
     (let ((embark-indicators
            (remq #'embark-which-key-indicator embark-indicators)))
       (apply fn args)))
-
   (advice-add #'embark-completing-read-prompter
               :around #'embark-hide-which-key-indicator))
 
-(use-package embark-consult :straight t :config)
+(use-package embark-consult
+  :straight t
+  :config)
 
-(use-package
-  orderless
+(use-package orderless
   :straight t
   :custom (completion-styles '(orderless basic))
   (completion-category-overrides
@@ -375,7 +404,8 @@ targets."
 
 (coba-leader-def
   "f"
-  '(:ignore t :which-key "Files")
+  '(:ignore t
+    :which-key "Files")
   "fi"
   '(lambda ()
      (interactive)
@@ -413,19 +443,19 @@ targets."
   'shell-command
   ":" 'eval-expression)
 
-(use-package prescient :straight t :config (prescient-persist-mode))
-(use-package
-  vertico-prescient
+(use-package prescient
+  :straight t
+  :config (prescient-persist-mode))
+
+(use-package vertico-prescient
   :straight t
   :config (vertico-prescient-mode))
 
-(use-package
-  wgrep
+(use-package wgrep
   :straight t
   :hook (wgrep-setup . evil-normal-state))
 
-(use-package
-  transient-posframe
+(use-package transient-posframe
   :straight t
   :config (transient-posframe-mode t))
 
@@ -448,18 +478,16 @@ https://blog.jmthornton.net/p/emacs-project-override"
           (cons 'vc root)
         (list 'vc backend root)))))
 
-(use-package
-  project
+(use-package project
   :straight t
   :config
   (add-hook 'project-find-functions #'coba-project-root-override))
 
 ;; Hydra
-(use-package hydra :straight t)
+(use-package hydra
+  :straight t)
 
-(defhydra
-  coba-hydra-windows
-  ()
+(defhydra coba-hydra-windows ()
   "Manage window movement with evil-window funcions."
   ("h" evil-window-left)
   ("j" evil-window-down)
@@ -478,7 +506,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
   "dd"
   'evil-delete-buffer
   "s"
-  '(:ignore t :which-key "Split")
+  '(:ignore t
+    :which-key "Split")
   "sd"
   'delete-other-windows
   "sh"
@@ -494,9 +523,10 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 ;; Openwith
 
-(use-package
-  openwith
-  :straight (:type git :host github :repo "cobac/openwith")
+(use-package openwith
+  :straight (:type git
+             :host github
+             :repo "cobac/openwith")
   :config
   (setq openwith-associations
         (list
@@ -523,7 +553,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
           (openwith-make-extension-regexp
            '("pdf" "ps" "ps.gz" "dvi"))
           "zathura" '(file))
-
          (list
           (openwith-make-extension-regexp
            '("png" "jpg" "jpeg" "webp"))
@@ -532,9 +561,10 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 ;; Numbers stuff TODO: check visual selection
 ;; I tried :(
-(use-package
-  evil-numbers
-  :straight (:type git :host github :repo "janpath/evil-numbers") ;:branch "retain-selection")
+(use-package evil-numbers
+  :straight (:type git
+             :host github
+             :repo "janpath/evil-numbers") ;:branch "retain-selection")
   :after evil
   :config
   (general-def
@@ -551,104 +581,102 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :straight t
   :config
   (set-face-attribute 'org-headline-done nil :strike-through t)
-  (setq
-   org-agenda-files
-   '("~/Sync/Org/todo.org"
-     "~/Sync/Org/refile.org"
-     "~/Sync/Org/annuals.org")
-   org-agenda-span 7
-   org-agenda-start-on-weekday 1
-   org-enforce-todo-dependencies t
-   org-enforce-todo-checkbox-dependencies t
-   org-log-done (quote time)
-   org-log-readline (quote time)
-   org-log-reschedule (quote time)
-   org-refile-allow-creating-parent-nodes 'confirm
-   org-archive-location "~/Sync/Org/archive.org::* From ??"
-   org-deadline-warning-days 14
-   org-refile-use-outline-path t
-   org-extend-today-until 4
-   org-use-property-inheritance t
-   calendar-date-style 'european
-   org-outline-path-complete-in-steps nil
-   calendar-week-start-day 1
-   org-default-notes-file "~/Sync/Org/refile.org"
-   org-capture-templates
-   '(("t"
-      "Todo"
-      entry
-      (file "~/Sync/Org/refile.org")
-      "* TODO %?"
-      :empty-lines 1)
-     ("l"
-      "Link"
-      entry
-      (file "~/Sync/Org/refile.org")
-      "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
-      :empty-lines 1)
-     ("f"
-      "File link"
-      entry
-      (file "~/Sync/Org/refile.org")
-      "* TODO %A\n:PROPERTIES:\n:CREATED: %U\n:END:"
-      :empty-lines 1)
-     ("c"
-      "Check Computer"
-      entry
-      (file+olp "~/Sync/Org/todo.org" "Computer" "Check")
-      "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
-      :empty-lines 1)
-     ("p"
-      "Check Psychology"
-      entry
-      (file+olp "~/Sync/Org/todo.org" "Psychology" "Check")
-      "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
-      :empty-lines 1)
-     ("m"
-      "Movies"
-      entry
-      (file+olp "~/Sync/Org/todo.org" "Leisure" "Movies")
-      "* TODO %?"
-      :empty-lines 1)
-     ("n"
-      "Movies waiting"
-      entry
-      (file+olp "~/Sync/Org/todo.org" "Leisure" "Movies" "Waiting")
-      "* TODO %?"
-      :empty-lines 1)
-     ("s"
-      "Series"
-      entry
-      (file+olp "~/Sync/Org/todo.org" "Leisure" "Series")
-      "* TODO %?"
-      :empty-lines 1)
-     ("w"
-      "Series waiting"
-      entry
-      (file+olp "~/Sync/Org/todo.org" "Leisure" "Series" "Waiting")
-      "* TODO %?"
-      :empty-lines 1)
-     ("b"
-      "Books"
-      entry
-      (file+olp "~/Sync/Org/todo.org" "Leisure" "Books")
-      "* TODO %?"
-      :empty-lines 1)
-     ("o"
-      "Otro"
-      entry
-      (file+olp "~/Sync/Org/todo.org" "Other")
-      "* TODO %?"
-      :empty-lines 1))
-   org-refile-targets
-   (quote (("~/Sync/Org/todo.org" :maxlevel . 10)
-           ("~/Sync/Org/annuals.org" :maxlevel . 10)))
-   org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE" "CANCELED"))
-   org-agenda-custom-commands
-   '(("w"
-      "Weekly view"
-      ((org-ql-block '(and (todo "WAITING"))) (agenda)))))
-
+  (setq org-agenda-files
+        '("~/Sync/Org/todo.org"
+          "~/Sync/Org/refile.org"
+          "~/Sync/Org/annuals.org")
+        org-agenda-span 7
+        org-agenda-start-on-weekday 1
+        org-enforce-todo-dependencies t
+        org-enforce-todo-checkbox-dependencies t
+        org-log-done (quote time)
+        org-log-readline (quote time)
+        org-log-reschedule (quote time)
+        org-refile-allow-creating-parent-nodes 'confirm
+        org-archive-location "~/Sync/Org/archive.org::* From ??"
+        org-deadline-warning-days 14
+        org-refile-use-outline-path t
+        org-extend-today-until 4
+        org-use-property-inheritance t
+        calendar-date-style 'european
+        org-outline-path-complete-in-steps nil
+        calendar-week-start-day 1
+        org-default-notes-file "~/Sync/Org/refile.org"
+        org-capture-templates
+        '(("t"
+           "Todo"
+           entry
+           (file "~/Sync/Org/refile.org")
+           "* TODO %?"
+           :empty-lines 1)
+          ("l"
+           "Link"
+           entry
+           (file "~/Sync/Org/refile.org")
+           "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+           :empty-lines 1)
+          ("f"
+           "File link"
+           entry
+           (file "~/Sync/Org/refile.org")
+           "* TODO %A\n:PROPERTIES:\n:CREATED: %U\n:END:"
+           :empty-lines 1)
+          ("c"
+           "Check Computer"
+           entry
+           (file+olp "~/Sync/Org/todo.org" "Computer" "Check")
+           "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+           :empty-lines 1)
+          ("p"
+           "Check Psychology"
+           entry
+           (file+olp "~/Sync/Org/todo.org" "Psychology" "Check")
+           "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
+           :empty-lines 1)
+          ("m"
+           "Movies"
+           entry
+           (file+olp "~/Sync/Org/todo.org" "Leisure" "Movies")
+           "* TODO %?"
+           :empty-lines 1)
+          ("n"
+           "Movies waiting"
+           entry
+           (file+olp "~/Sync/Org/todo.org" "Leisure" "Movies" "Waiting")
+           "* TODO %?"
+           :empty-lines 1)
+          ("s"
+           "Series"
+           entry
+           (file+olp "~/Sync/Org/todo.org" "Leisure" "Series")
+           "* TODO %?"
+           :empty-lines 1)
+          ("w"
+           "Series waiting"
+           entry
+           (file+olp "~/Sync/Org/todo.org" "Leisure" "Series" "Waiting")
+           "* TODO %?"
+           :empty-lines 1)
+          ("b"
+           "Books"
+           entry
+           (file+olp "~/Sync/Org/todo.org" "Leisure" "Books")
+           "* TODO %?"
+           :empty-lines 1)
+          ("o"
+           "Otro"
+           entry
+           (file+olp "~/Sync/Org/todo.org" "Other")
+           "* TODO %?"
+           :empty-lines 1))
+        org-refile-targets
+        (quote (("~/Sync/Org/todo.org" :maxlevel . 10)
+                ("~/Sync/Org/annuals.org" :maxlevel . 10)))
+        org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE" "CANCELED"))
+        org-agenda-custom-commands
+        '(("w"
+           "Weekly view"
+           ((org-ql-block '(and (todo "WAITING"))) (agenda)))))
   (general-define-key
    :keymaps
    'org-capture-mode-map
@@ -658,14 +686,13 @@ https://blog.jmthornton.net/p/emacs-project-override"
    'org-capture-finalize
    [remap evil-quit]
    'org-capture-kill)
-
   (setq-default org-display-custom-times t)
   (setq org-time-stamp-custom-formats
         '("<%Y-%m-%e, %a>" . "<%Y-%m-%e, %a %H:%M>"))
-
   (coba-leader-def
     "c" 'org-capture
-    "a" '(:ignore t :which-key "Org-Agenda") "aa"
+    "a" '(:ignore t
+          :which-key "Org-Agenda") "aa"
     '(lambda ()
        (interactive)
        (coba-org-agenda-weekly))
@@ -689,17 +716,17 @@ https://blog.jmthornton.net/p/emacs-project-override"
        (interactive)
        (org-ql-search
          (org-agenda-files)
-         '(and (tags "track") (or (todo "TODO") (todo "WAITING")))
+         '(and (tags "track")
+           (or (todo "TODO")
+            (todo "WAITING")))
          :title "Projects"
          :sort '(date priority todo)
          :super-groups '((:auto-property "Project")))
        (delete-other-windows)))
-
   (defun coba-org-agenda-weekly ()
     "Helper to open Agenda in weekly view by default."
     (org-agenda nil "w")
     (delete-other-windows))
-
   (defun coba-org-create-project (PROJECT)
     "Create an 'org-mode' PROJECT for querying with org-ql."
     (interactive "sProject name: ")
@@ -723,7 +750,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
     'consult-outline
     "C-P"
     'org-latex-preview)
-
   (general-def
     :states '(normal motion)
     :keymaps
@@ -734,7 +760,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
     'org-agenda-todo
     "C-S-T"
     'coba-org-agenda-todo-yesterday-twice)
-
   (coba-local-leader-def
     :keymaps
     'org-agenda-mode-map
@@ -742,13 +767,11 @@ https://blog.jmthornton.net/p/emacs-project-override"
     'org-agenda-schedule
     "d"
     'org-agenda-deadline)
-
   (defun coba-org-todo-yesterday-twice ()
     "Call `org-todo-yesterday` twice."
     (interactive)
     (org-todo-yesterday)
     (org-todo-yesterday))
-
   (defun coba-org-agenda-todo-yesterday-twice ()
     "Call `org-todo-yesterday` twice."
     (interactive)
@@ -760,7 +783,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
     'org-ql-view-map
     "ga"
     'org-agenda-archive)
-
   (coba-local-leader-def
     :keymaps 'org-mode-map
     :states
@@ -773,30 +795,31 @@ https://blog.jmthornton.net/p/emacs-project-override"
     'org-set-tag-command
     "P"
     'coba-org-create-project)
-
   (add-hook 'org-mode-hook 'org-indent-mode)
-  (add-hook 'org-mode-hook (lambda () (electric-indent-local-mode -1)))
+  (add-hook 'org-mode-hook (lambda ()
+                             (electric-indent-local-mode -1)))
   (org-babel-do-load-languages
-   'org-babel-load-languages '((R . t) (dot . t)))
+   'org-babel-load-languages '((R . t)
+                               (dot . t)))
   (setq org-confirm-babel-evaluate nil)
-  (setf org-babel-default-header-args:R '((:output . "results")))
-  )
+  (setf org-babel-default-header-args:R '((:output . "results"))))
 
-(use-package
-  evil-org
+(use-package evil-org
   :straight t
   :after org
   :config
   (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook (lambda () (evil-org-set-key-theme)))
+  (add-hook 'evil-org-mode-hook (lambda ()
+                                  (evil-org-set-key-theme)))
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
+
 (setq org-format-latex-options
       (plist-put org-format-latex-options :scale 1.85))
 
-(use-package
-  org-super-agenda
-  :straight (:host github :repo "alphapapa/org-super-agenda")
+(use-package org-super-agenda
+  :straight (:host github
+             :repo "alphapapa/org-super-agenda")
   :after org
   :general
   (general-def
@@ -828,51 +851,43 @@ https://blog.jmthornton.net/p/emacs-project-override"
            :order 10)
           (:name "Other Deadlines" :deadline future :order 11)
           (:name "Refile" :scheduled past :order 99)))
+  (org-super-agenda-mode))
 
-  (org-super-agenda-mode)
-  )
-(use-package transient :straight t)
-(use-package org-ql :straight (:host github :repo "alphapapa/org-ql"))
+(use-package transient
+  :straight t)
 
-(use-package
-  org-pomodoro
+(use-package org-ql
+  :straight (:host github
+             :repo "alphapapa/org-ql"))
+
+(use-package org-pomodoro
   :straight t
   :general (coba-leader-def "t" 'org-pomodoro)
   :config
-  (setq
-   org-pomodoro-keep-killed-pomodoro-time t
-   org-pomodoro-manual-break t
-   org-pomodoro-play-sounds nil))
+  (setq org-pomodoro-keep-killed-pomodoro-time t
+        org-pomodoro-manual-break t
+        org-pomodoro-play-sounds nil))
 
-
-(use-package
-  org-modern
+(use-package org-modern
   :straight t
   :config
   (with-eval-after-load 'org
     (global-org-modern-mode))
-  (setq
-   org-modern-keyword nil
-   org-modern-todo nil
-   org-modern-tag nil
-   org-modern-star 'replace
-   org-modern-block-name nil))
+  (setq org-modern-keyword nil
+        org-modern-todo nil
+        org-modern-tag nil
+        org-modern-star 'replace
+        org-modern-block-name nil))
 
-
-
-
-(use-package
-  org-download
+(use-package org-download
   :straight t
   :after general
   :config
   (coba-local-leader-def 'org-mode-map "p" 'org-download-clipboard)
-  (setq-default
-   org-download-image-dir "~/Sync/Brain/pictures"
-   org-download-heading-lvl nil))
+  (setq-default org-download-image-dir "~/Sync/Brain/pictures"
+                org-download-heading-lvl nil))
 
-(use-package
-  org-roam
+(use-package org-roam
   :straight
   (:host
    github
@@ -907,39 +922,38 @@ https://blog.jmthornton.net/p/emacs-project-override"
     'evil-delete-buffer)
   :init (setq org-roam-v2-ack t)
   :config
-  (setq
-   org-roam-directory (file-truename "~/Sync/Brain")
-   org-roam-db-location "~/Sync/Brain/roam.db"
-   org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))
-   org-roam-dailies-directory "diario"
-   org-roam-dailies-capture-templates
-   '(("d"
-      "default"
-      plain
-      "%?"
-      :target (file+head "%<%Y-%m>.org" "* %<%d %A>\n\n")))
-   org-roam-capture-templates
-   '(("r" "default" plain "- tags :: %?"
-      :target
-      (file+head
-       "${slug}.org"
-       ":PROPERTIES:\n:ROAM_ALIASES:\n:ROAM_REFS:\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${title}\n")
-      :immediate-finish t
-      :unnarrowed t)
-     ("w" "motherduck" plain "%?"
-      :target
-      (file+head
-       "motherduck/${slug}.org"
-       ":PROPERTIES:\n:ROAM_ALIASES:\n:ROAM_REFS:\n:END:\n#+STARTUP: latexpreview\n#+filetags: motherduck\n#+title: ${title}\n")
-      :immediate-finish t
-      :unnarrowed t)
-     ("p" "bib" plain "- tags :: %?"
-      :target
-      (file+head
-       "${citekey}.org"
-       ":PROPERTIES:\n:ROAM_ALIASES: \"${author-abbrev}(${year}): ${title}\"\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${citekey}\n")
-      :immediate-finish t
-      :unnarrowed t)))
+  (setq org-roam-directory (file-truename "~/Sync/Brain")
+        org-roam-db-location "~/Sync/Brain/roam.db"
+        org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))
+        org-roam-dailies-directory "diario"
+        org-roam-dailies-capture-templates
+        '(("d"
+           "default"
+           plain
+           "%?"
+           :target (file+head "%<%Y-%m>.org" "* %<%d %A>\n\n")))
+        org-roam-capture-templates
+        '(("r" "default" plain "- tags :: %?"
+           :target
+           (file+head
+            "${slug}.org"
+            ":PROPERTIES:\n:ROAM_ALIASES:\n:ROAM_REFS:\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${title}\n")
+           :immediate-finish t
+           :unnarrowed t)
+          ("w" "motherduck" plain "%?"
+           :target
+           (file+head
+            "motherduck/${slug}.org"
+            ":PROPERTIES:\n:ROAM_ALIASES:\n:ROAM_REFS:\n:END:\n#+STARTUP: latexpreview\n#+filetags: motherduck\n#+title: ${title}\n")
+           :immediate-finish t
+           :unnarrowed t)
+          ("p" "bib" plain "- tags :: %?"
+           :target
+           (file+head
+            "${citekey}.org"
+            ":PROPERTIES:\n:ROAM_ALIASES: \"${author-abbrev}(${year}): ${title}\"\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${citekey}\n")
+           :immediate-finish t
+           :unnarrowed t)))
   (evil-set-initial-state 'org-roam-mode 'motion)
   ;; Show hierarchy of nodes from https://github.com/org-roam/org-roam/issues/1565
   ;; (cl-defmethod org-roam-node-filetitle ((node org-roam-node))
@@ -959,8 +973,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
   ;;(setq org-roam-node-display-template "${hierarchy:*} ${tags:20}")
   (org-roam-db-autosync-enable))
 
-(use-package
-  org-roam-ui
+(use-package org-roam-ui
   :straight
   (:host
    github
@@ -970,35 +983,30 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :after org-roam
   :hook (after-init . org-roam-ui-mode)
   :config
-  (setq
-   org-roam-ui-sync-theme t
-   org-roam-ui-follow nil
-   org-roam-ui-update-on-save t
-   org-roam-ui-open-on-start nil))
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow nil
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start nil))
 
 ;; Company
 
-(use-package
-  company
+(use-package company
   :straight t
   :config (global-company-mode)
-
-  (setq
-   company-idle-delay 0
-   company-minimum-prefix-length 2
-   company-selection-wrap-around t)
-  (setq
-   default-company-backends
-   '(company-semantic
-     company-gtags
-     company-files
-     company-keywords
-     company-capf
-     company-yasnippet
-     company-abbrev
-     company-dabbrev
-     company-dabbrev-code)
-   company-backends (list default-company-backends))
+  (setq company-idle-delay 0
+        company-minimum-prefix-length 2
+        company-selection-wrap-around t)
+  (setq default-company-backends
+        '(company-semantic
+          company-gtags
+          company-files
+          company-keywords
+          company-capf
+          company-yasnippet
+          company-abbrev
+          company-dabbrev
+          company-dabbrev-code)
+        company-backends (list default-company-backends))
   (general-def
     'company-active-map
     "C-j"
@@ -1008,26 +1016,22 @@ https://blog.jmthornton.net/p/emacs-project-override"
     "C-s"
     'company-search-candidates))
 
-(use-package
-  company-quickhelp
+(use-package company-quickhelp
   :straight t
   :after company
   :config (company-quickhelp-mode))
 
-(use-package
-  company-prescient
+(use-package company-prescient
   :straight t
   :after company
   :config (company-prescient-mode))
 
-(use-package
-  company-box
+(use-package company-box
   :straight t
   :hook (company-mode . company-box-mode))
 
 ;; Indent
-(use-package
-  aggressive-indent
+(use-package aggressive-indent
   :straight t
   :config
   (global-aggressive-indent-mode 1)
@@ -1036,23 +1040,21 @@ https://blog.jmthornton.net/p/emacs-project-override"
 ;; Reference management
 
 ;; TODO: link pdfs to notes
-(use-package
-  citar
+(use-package citar
   :straight t
-  :hook (LaTeX-mode . citar-capf-setup) (org-mode . citar-capf-setup)
+  :hook (LaTeX-mode . citar-capf-setup)
+  (org-mode . citar-capf-setup)
   :config
   (coba-leader-def
     "pp" 'citar-open "pf"
     '(lambda ()
        (interactive)
        (find-file "~/Sync/Brain/bib.bib")))
-  (setq
-   citar-bibliography '("~/Sync/Brain/bib.bib")
-   citar-notes-paths '("~/Sync/Brain/")
-   citar-library-paths '("~/Sync/Brain/pdf")))
+  (setq citar-bibliography '("~/Sync/Brain/bib.bib")
+        citar-notes-paths '("~/Sync/Brain/")
+        citar-library-paths '("~/Sync/Brain/pdf")))
 
-(use-package
-  citar-org-roam
+(use-package citar-org-roam
   :straight t
   :config
   (setq citar-org-roam-note-capture-key "p")
@@ -1070,21 +1072,18 @@ https://blog.jmthornton.net/p/emacs-project-override"
     (insert-file-contents filename)
     (buffer-string)))
 
-(use-package
-  graphviz-dot-mode
+(use-package graphviz-dot-mode
   :straight t
   :config
   (setq graphviz-dot-indent-width 4))
 
-(use-package
-  dumb-jump
+(use-package dumb-jump
   :straight t
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
 ;; Git
-(use-package
-  magit
+(use-package magit
   :straight t
   :after evil
   :config
@@ -1111,12 +1110,10 @@ https://blog.jmthornton.net/p/emacs-project-override"
         "push" "-v" remote (magit-get-current-branch))) ;; Simply run git push -v {{remote}} {{current-branch}}
      (magit-list-remotes)) ;; Returns all remotes configured
     )
-
   (defun coba-magit-diff-to-main ()
     "Diff HEAD to main"
     (interactive)
     (magit-diff-range (concat (magit-main-branch) "..HEAD")))
-
   (transient-append-suffix
     'magit-push
     "e" ;; after `e` key
@@ -1125,6 +1122,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
     'magit-diff
     "d" ;; after `e` key
     '("D" "Diff to main" coba-magit-diff-to-main)))
+
 (evil-set-initial-state 'magit-commit-message-section-map 'insert)
 
 (defun coba-magit-status ()
@@ -1132,18 +1130,18 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (magit-status)
   (delete-other-windows))
 
-(use-package forge :straight t :after magit)
+(use-package forge
+  :straight t
+  :after magit)
 
-(use-package
-  magit-todos
+(use-package magit-todos
   :straight t
   :config
   (global-hl-todo-mode 1)
   (general-def 'magit-mode-map
     "C-S-t" 'magit-todos-list))
 
-(use-package
-  git-timemachine
+(use-package git-timemachine
   :straight t
   :config
   ;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
@@ -1154,8 +1152,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
     (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
 
 ;; Flyckeck
-(use-package
-  flycheck
+(use-package flycheck
   :straight t
   :config
   (general-def
@@ -1182,13 +1179,15 @@ https://blog.jmthornton.net/p/emacs-project-override"
     "C-l" 'eglot-code-actions))
 
 (use-package eglot-booster
-  :straight (eglot-booster :type git :host github :repo "jdtsmith/eglot-booster")
+  :straight (eglot-booster
+             :type git
+             :host github
+             :repo "jdtsmith/eglot-booster")
   :after eglot
   :config (eglot-booster-mode))
 
 ;; formatters
-(use-package
-  format-all
+(use-package format-all
   :straight t
   :after apheleia
   :general
@@ -1198,8 +1197,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 ;; Yasnippets
 
-(use-package
-  yasnippet
+(use-package yasnippet
   :straight t
   :config
   (yas-global-mode 1)
@@ -1209,23 +1207,22 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 ;; Spellchecking
 
-(setq
- ispell-program-name "aspell"
- ispell-extra-args '("--sug-mode=ultra"))
+(setq ispell-program-name "aspell"
+      ispell-extra-args '("--sug-mode=ultra"))
 
 (add-hook 'text-mode-hook 'flyspell-mode)
+
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
-(use-package
-  auto-dictionary
+(use-package auto-dictionary
   :straight t
   :config
   (add-hook
-   'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
+   'flyspell-mode-hook (lambda ()
+                         (auto-dictionary-mode 1)))
   (coba-leader-def "zz" 'adict-change-dictionary))
 
-(use-package
-  elfeed
+(use-package elfeed
   :straight t
   :general
   (coba-leader-def
@@ -1234,22 +1231,26 @@ https://blog.jmthornton.net/p/emacs-project-override"
        (interactive)
        (elfeed)
        (elfeed-update)))
-  :config (setq elfeed-feeds '(("https://archlinux.org/feeds/news/" Arch))))
+  :config
+  (setq elfeed-feeds '(("https://archlinux.org/feeds/news/" Arch))))
 
 ;; TODO: IRC
 
 ;; Dired
 
-(use-package
-  dired
+(use-package dired
   :hook (dired-mode . dired-hide-details-mode)
   :config)
-(use-package dired-subtree :straight t :after dired)
-(use-package dired-filter :straight t)
+
+(use-package dired-subtree
+  :straight t
+  :after dired)
+
+(use-package dired-filter
+  :straight t)
 
 ;; Olivetti
-(use-package
-  olivetti
+(use-package olivetti
   :straight t
   :after polymode
   :config (coba-leader-def "W" 'olivetti-mode)
@@ -1261,38 +1262,35 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (add-hook 'olivetti-mode-on-hook #'visual-line-mode))
 
 ;; Libvterm
-(use-package
-  vterm
-  :straight (:type git :host github :repo "akermu/emacs-libvterm"))
+(use-package vterm
+  :straight (:type git
+             :host github
+             :repo "akermu/emacs-libvterm"))
 
-(use-package
-  multi-vterm
+(use-package multi-vterm
   :straight t
   :general (coba-leader-def "RET" 'multi-vterm))
 
-(use-package
-  lsp-mode
+(use-package lsp-mode
   :straight t
   :init (setq lsp-keymap-prefix "C-l")
   ;; Optimization stuff
-  (setq
-   gc-cons-threshold 100000000
-   read-process-output-max (* 1024 1024)
-   lsp-completion-provider
-   :capf
-   lsp-idle-delay 0.500)
+  (setq gc-cons-threshold 100000000
+        read-process-output-max (* 1024 1024)
+        lsp-completion-provider
+        :capf
+        lsp-idle-delay 0.500)
   :hook ((lsp-mode . lsp-enable-which-key-integration))
   :general
   (general-def 'lsp-browser-mode-map "q" 'quit-window)
   (general-def 'lsp-mode-map "C-l i" 'lsp-ivy-workspace-symbol)
   :config
   (evil-set-initial-state 'lsp-browser-mode 'motion)
-  (setq
-   lsp-headerline-breadcrumb-segments '(symbols)
-   lsp-log-io t
-   lsp-print-performance t
-   lsp-modeline-code-actions-segments '(count name)
-   lsp-lens-enable nil))
+  (setq lsp-headerline-breadcrumb-segments '(symbols)
+        lsp-log-io t
+        lsp-print-performance t
+        lsp-modeline-code-actions-segments '(count name)
+        lsp-lens-enable nil))
 
 ;; ==========================
 ;; From https://github.com/blahgeek/emacs-lsp-booster
@@ -1304,8 +1302,10 @@ https://blog.jmthornton.net/p/emacs-project-override"
        (when (byte-code-function-p bytecode)
          (funcall bytecode))))
    (apply old-fn args)))
-(advice-add (if (progn (require 'json)
-                       (fboundp 'json-parse-buffer))
+
+(advice-add (if (progn
+                  (require 'json)
+                  (fboundp 'json-parse-buffer))
                 'json-parse-buffer
               'json-read)
             :around
@@ -1314,18 +1314,24 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
   "Prepend emacs-lsp-booster command to lsp CMD."
   (let ((orig-result (funcall old-fn cmd test?)))
-    (if (and (not test?)                             ;; for check lsp-server-present?
+    (if (and (not test?) ;; for check lsp-server-present?
              (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
              lsp-use-plists
-             (not (functionp 'json-rpc-connection))  ;; native json-rpc
+             (not (functionp 'json-rpc-connection)) ;; native json-rpc
              (executable-find "emacs-lsp-booster"))
         (progn
-          (when-let ((command-from-exec-path (executable-find (car orig-result))))  ;; resolve command from exec-path (in case not found in $PATH)
+          (when-let ((command-from-exec-path
+                      (executable-find
+                       (car
+                        orig-result)))) ;; resolve command from exec-path (in case not found in $PATH)
             (setcar orig-result command-from-exec-path))
           (message "Using emacs-lsp-booster for %s!" orig-result)
           (cons "emacs-lsp-booster" orig-result))
       orig-result)))
-(advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
+
+(advice-add 'lsp-resolve-final-command :around
+            #'lsp-booster--advice-final-command)
+
 ;; ==========================
 ;; end of copied snippet
 
@@ -1337,8 +1343,11 @@ https://blog.jmthornton.net/p/emacs-project-override"
     (funcall (plist-get (car result) :secret))))
 
 ;; Languages
+
+
 ;; Systemd
-(use-package systemd :straight t)
+(use-package systemd
+  :straight t)
 
 ;; Lisp
 (coba-local-leader-def
@@ -1347,14 +1356,19 @@ https://blog.jmthornton.net/p/emacs-project-override"
     lisp-interaction-mode-map)
   "," 'eval-last-sexp "r" 'eval-region "b" 'eval-buffer)
 
-(use-package
-  eterm-256color
+(use-package prettier-elisp
+  :straight (prettier-elisp
+             :type git
+             :host github
+             :repo "KarimAziev/prettier-elisp")
+  :hook ((emacs-lisp-mode . prettier-elisp-buffer-mode)))
+
+(use-package eterm-256color
   :straight t
   :config (add-hook 'term-mode-hook #'eterm-256color-mode))
 
 ;; Markdown
-(use-package
-  markdown-mode
+(use-package markdown-mode
   :straight t
   :mode
   (("README\\.md\\'" . gfm-mode)
@@ -1366,11 +1380,16 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (setq markdown-hide-markup nil))
 
 ;; Polymode
-(use-package polymode :straight t)
+(use-package polymode
+  :straight t)
 
-(use-package poly-org :straight (:type git :host github :repo "polymode/poly-org"))
+(use-package poly-org
+  :straight (:type git
+             :host github
+             :repo "polymode/poly-org"))
 
-(use-package quarto-mode :straight t)
+(use-package quarto-mode
+  :straight t)
 
 ;; Python
 
@@ -1391,8 +1410,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 ;;    "C-c C-b" 'py-execute-buffer)
 ;;  )
 
-(use-package
-  python
+(use-package python
   :straight t
   :hook (python-mode . lsp)
   :config
@@ -1403,25 +1421,23 @@ https://blog.jmthornton.net/p/emacs-project-override"
     "C-c C-b"
     'python-shell-send-buffer))
 
-(use-package
-  pyvenv
+(use-package pyvenv
   :straight t
   :config
   (general-def 'python-mode-map "C-c C-a" 'pyvenv-workon)
   (pyvenv-mode 1))
 
-(use-package lsp-pyright :straight t)
+(use-package lsp-pyright
+  :straight t)
 
 ;; Notebooks
 
-(use-package
-  ein
+(use-package ein
   :straight t
   :config (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode))
 
 ;; Yaml
-(use-package
-  yaml-mode
+(use-package yaml-mode
   :straight t
   :config
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
@@ -1431,7 +1447,9 @@ https://blog.jmthornton.net/p/emacs-project-override"
  'makefile-mode-hook
  (lambda ()
    (add-hook
-    'before-save-hook (lambda () (tabify (point-min) (point-max)))
+    'before-save-hook (lambda ()
+                        (tabify (point-min)
+                                (point-max)))
     nil 'make-it-local)))
 
 ;; (setq compile-command
@@ -1442,6 +1460,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 ;;         " && make "))
 
 (coba-leader-def "C" 'project-compile)
+
 (setq compilation-scroll-output 'first-error)
 
 (defun coba-colorize-compilation-buffer ()
@@ -1449,57 +1468,61 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (when (eq major-mode 'compilation-mode)
     (ansi-color-apply-on-region
      compilation-filter-start (point-max))))
+
 (add-hook 'compilation-filter-hook 'coba-colorize-compilation-buffer)
 
-(use-package
-  docker
+(use-package docker
   :straight t
   :general (coba-leader-def "D" 'docker)
   :config (setq docker-run-as-root t))
 
-(use-package dockerfile-mode :straight t)
+(use-package dockerfile-mode
+  :straight t)
 
-(use-package
-  powerthesaurus
+(use-package powerthesaurus
   :straight t
   :general
   (coba-leader-def "it" 'powerthesaurus-lookup-synonyms-dwim))
 
-(use-package
-  image
+(use-package image
   :config
   (general-def
     'image-mode-map
     :states '(normal) "J" 'image-next-file "K" 'image-previous-file))
 
-(use-package nix-mode :straight t)
+(use-package nix-mode
+  :straight t)
 
 (use-package direnv
   :straight t
   :config (direnv-mode))
 
 (use-package terraform-mode
-	:straight t
-	:config
-	(setq terraform-format-on-save t)
-	(general-def
-		:keymaps 'terraform-mode-map
-		:states '(motion normal)
-		"gD" 'terraform-open-doc
-		"<tab>" 'terraform-toggle-or-indent)
+  :straight t
+  :config
+  (setq terraform-format-on-save t)
+  (general-def
+    :keymaps 'terraform-mode-map
+    :states '(motion normal)
+    "gD" 'terraform-open-doc
+    "<tab>" 'terraform-toggle-or-indent)
   (add-hook 'terraform-mode-hook #'outline-minor-mode))
 
-(use-package
-  dbt-mode
-  :straight (:type git :host github :repo "CyberShadow/dbt-mode"))
+(use-package dbt-mode
+  :straight (:type git
+             :host github
+             :repo "CyberShadow/dbt-mode"))
 
-(use-package csv-mode :straight t)
+(use-package csv-mode
+  :straight t)
 
 (use-package org-present
   :straight t)
 
 (use-package calfw
-  :straight (:type git :host github :repo "kiwanami/emacs-calfw" :files ("*.el")))
-
+  :straight (:type git
+             :host github
+             :repo "kiwanami/emacs-calfw"
+             :files ("*.el")))
 
 (when t (load "~/.emacs.d/big_init.el"))

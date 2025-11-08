@@ -599,6 +599,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
  '("~/Sync/Org/todo.org"
    "~/Sync/Org/refile.org"
    "~/Sync/Org/annuals.org")
+ org-agenda-span 7
+ org-agenda-start-on-weekday 1
  org-enforce-todo-dependencies t
  org-enforce-todo-checkbox-dependencies t
  org-log-done (quote time)
@@ -611,7 +613,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
  org-extend-today-until 4
  org-use-property-inheritance t
  calendar-date-style 'european
- org-agenda-start-on-weekday nil
  org-outline-path-complete-in-steps nil
  calendar-week-start-day 1
  org-default-notes-file "~/Sync/Org/refile.org"

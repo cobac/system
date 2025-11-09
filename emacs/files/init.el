@@ -17,6 +17,7 @@
 (straight-use-package 'use-package)
 
 ;; Remove scroll, tool and menu bars
+
 (scroll-bar-mode -1)
 
 (tool-bar-mode -1)
@@ -231,8 +232,8 @@
     :straight t)
   (use-package evil-collection
     :straight (:type git
-               :host github
-               :repo "emacs-evil/evil-collection") ;:branch "retain-selection")
+                     :host github
+                     :repo "emacs-evil/evil-collection") ;:branch "retain-selection")
     :config
     (evil-collection-init
      '(dired
@@ -399,7 +400,7 @@ targets."
 (coba-leader-def
   "f"
   '(:ignore t
-    :which-key "Files")
+            :which-key "Files")
   "fi"
   '(lambda ()
      (interactive)
@@ -501,7 +502,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
   'evil-delete-buffer
   "s"
   '(:ignore t
-    :which-key "Split")
+            :which-key "Split")
   "sd"
   'delete-other-windows
   "sh"
@@ -519,8 +520,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package openwith
   :straight (:type git
-             :host github
-             :repo "cobac/openwith")
+                   :host github
+                   :repo "cobac/openwith")
   :config
   (setq openwith-associations
         (list
@@ -557,8 +558,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
 ;; I tried :(
 (use-package evil-numbers
   :straight (:type git
-             :host github
-             :repo "janpath/evil-numbers") ;:branch "retain-selection")
+                   :host github
+                   :repo "janpath/evil-numbers") ;:branch "retain-selection")
   :after evil
   :config
   (general-def
@@ -803,7 +804,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package org-super-agenda
   :straight (:host github
-             :repo "alphapapa/org-super-agenda")
+                   :repo "alphapapa/org-super-agenda")
   :after org
   :general
   (general-def
@@ -842,7 +843,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package org-ql
   :straight (:host github
-             :repo "alphapapa/org-ql"))
+                   :repo "alphapapa/org-ql"))
 
 (use-package org-pomodoro
   :straight t
@@ -1244,8 +1245,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
 ;; Libvterm
 (use-package vterm
   :straight (:type git
-             :host github
-             :repo "akermu/emacs-libvterm"))
+                   :host github
+                   :repo "akermu/emacs-libvterm"))
 
 (use-package multi-vterm
   :straight t
@@ -1364,8 +1365,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package poly-org
   :straight (:type git
-             :host github
-             :repo "polymode/poly-org"))
+                   :host github
+                   :repo "polymode/poly-org"))
 
 (use-package quarto-mode
   :straight t)
@@ -1489,8 +1490,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package dbt-mode
   :straight (:type git
-             :host github
-             :repo "CyberShadow/dbt-mode"))
+                   :host github
+                   :repo "CyberShadow/dbt-mode"))
 
 (use-package csv-mode
   :straight t)

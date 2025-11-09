@@ -687,7 +687,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (coba-leader-def
     "c" 'org-capture
     "a" '(:ignore t
-          :which-key "Org-Agenda") "aa"
+                  :which-key "Org-Agenda") "aa"
     '(lambda ()
        (interactive)
        (coba-org-agenda-weekly))
@@ -712,8 +712,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
        (org-ql-search
          (org-agenda-files)
          '(and (tags "track")
-           (or (todo "TODO")
-            (todo "WAITING")))
+               (or (todo "TODO")
+                   (todo "WAITING")))
          :title "Projects"
          :sort '(date priority todo)
          :super-groups '((:auto-property "Project")))
@@ -787,7 +787,13 @@ https://blog.jmthornton.net/p/emacs-project-override"
    'org-babel-load-languages '((R . t)
                                (dot . t)))
   (setq org-confirm-babel-evaluate nil)
-  (setf org-babel-default-header-args:R '((:output . "results"))))
+  (setf org-babel-default-header-args:R '((:output . "results")))
+  (setq org-format-latex-options
+        (plist-put org-format-latex-options :scale 1.85)))
+
+(use-package org-present
+  :after org
+  :straight t)
 
 (use-package evil-org
   :straight t
@@ -798,9 +804,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
                                   (evil-org-set-key-theme)))
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
-
-(setq org-format-latex-options
-      (plist-put org-format-latex-options :scale 1.85))
 
 (use-package org-super-agenda
   :straight (:host github
@@ -843,15 +846,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package org-ql
   :straight (:host github
-                   :repo "alphapapa/org-ql"))
-
-(use-package org-pomodoro
-  :straight t
-  :general (coba-leader-def "t" 'org-pomodoro)
-  :config
-  (setq org-pomodoro-keep-killed-pomodoro-time t
-        org-pomodoro-manual-break t
-        org-pomodoro-play-sounds nil))
+                   :repo "alphapapa/org-ql")
+  :after org)
 
 (use-package org-modern
   :straight t
@@ -873,12 +869,12 @@ https://blog.jmthornton.net/p/emacs-project-override"
                 org-download-heading-lvl nil))
 
 (use-package org-roam
-  :straight
-  (:host
-   github
-   :repo "org-roam/org-roam"
-   :branch "main"
-   :files ("*.el" "out" "extensions/*.el"))
+  :after org
+  :straight (:host
+             github
+             :repo "org-roam/org-roam"
+             :branch "main"
+             :files ("*.el" "out" "extensions/*.el"))
   :general
   (coba-leader-def
     "r" 'org-roam-node-find "fd" 'org-roam-dailies-goto-today)
@@ -955,13 +951,12 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (org-roam-db-autosync-enable))
 
 (use-package org-roam-ui
-  :straight
-  (:host
-   github
-   :repo "org-roam/org-roam-ui"
-   :branch "main"
-   :files ("*.el" "out"))
   :after org-roam
+  :straight (:host
+             github
+             :repo "org-roam/org-roam-ui"
+             :branch "main"
+             :files ("*.el" "out"))
   :hook (after-init . org-roam-ui-mode)
   :config
   (setq org-roam-ui-sync-theme t
@@ -1020,9 +1015,9 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 ;; Reference management
 
-;; TODO: link pdfs to notes
 (use-package citar
   :straight t
+  :after org-roam
   :hook (LaTeX-mode . citar-capf-setup)
   (org-mode . citar-capf-setup)
   :config
@@ -1037,6 +1032,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package citar-org-roam
   :straight t
+  :after citar
   :config
   (setq citar-org-roam-note-capture-key "p")
   (citar-org-roam-mode))
@@ -1496,13 +1492,14 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package csv-mode
   :straight t)
 
-(use-package org-present
-  :straight t)
-
 (use-package calfw
   :straight (:type git
-             :host github
-             :repo "kiwanami/emacs-calfw"
-             :files ("*.el")))
+                   :host github
+                   :repo "kiwanami/emacs-calfw"))
+
+(use-package calfw-org
+  :straight (:type git
+                   :host github
+                   :repo "kiwanami/emacs-calfw"))
 
 (when t (load "~/.emacs.d/big_init.el"))

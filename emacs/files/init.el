@@ -35,7 +35,7 @@
       inhibit-startup-message t
       inhibit-startup-echo-area-message t)
 
-;; Show matching paranthesis
+;; Show matching parenthesis
 (show-paren-mode 1)
 
 (electric-pair-mode)

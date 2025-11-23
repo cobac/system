@@ -16,6 +16,8 @@
 
 (straight-use-package 'use-package)
 
+(setq native-comp-async-report-warnings-errors 'silent)
+
 ;; Remove scroll, tool and menu bars
 
 (scroll-bar-mode -1)

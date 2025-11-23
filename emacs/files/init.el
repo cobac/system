@@ -188,16 +188,18 @@
 (use-package evil
   :straight t
   :init
-  (setq evil-want-keybinding nil ;; for evil-collection
-        evil-respect-visual-line-mode t)
-  :general
+  (setopt evil-want-keybinding nil ;; for evil-collection
+          evil-respect-visual-line-mode t)
+  :custom
+  (evil-want-minibuffer t)
+  (evil-want-C-d-scroll nil)
+  (evil-undo-system 'undo-redo)
+  :config
   (general-def
     :states
     '(normal motion)
     "ñ"
     'consult-yank-pop
-    "gt"
-    'undo-tree-visualize
     "gA"
     'align-regexp
     "gc"
@@ -219,62 +221,81 @@
        (evil-scroll-up 0)
        (recenter nil)))
   (general-def :states '(visual) "C-=" 'count-words-region)
-  :config
-  (setq evil-want-minibuffer t
-        evil-want-C-d-scroll nil)
-  (use-package undo-tree
-    :straight t
-    :config
-    (setq undo-tree-visualizer-diff t
-          undo-tree-auto-save-history nil))
-  (custom-set-variables '(evil-undo-system 'undo-tree))
-  (evil-mode)
-  (global-undo-tree-mode)
-  (use-package evil-anzu
-    :straight t)
-  (use-package evil-collection
-    :straight (:type git
-                     :host github
-                     :repo "emacs-evil/evil-collection") ;:branch "retain-selection")
-    :config
-    (evil-collection-init
-     '(dired
-       docker
-       ediff
-       elfeed
-       image
-       info
-       magit
-       magit-todos
-       mu4e
-       nov
-       org-present
-       profiler
-       smerge-mode
-       tar-mode
-       vterm
-       xref)))
-  (use-package evil-snipe
-    :straight t
-    :config (evil-snipe-mode 1)
-    (evil-snipe-override-mode 1)
-    (setq evil-snipe-smart-case t
-          evil-snipe-show-prompt nil
-          evil-snipe-auto-scroll nil
-          evil-snipe-scope 'whole-buffer
-          evil-snipe-repeat-scope 'whole-buffer)
-    (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
-  (use-package evil-surround
-    :straight t
-    :after evil
-    :config (global-evil-surround-mode)))
+  (evil-mode 1))
 
-(setq ediff-window-setup-function 'ediff-setup-windows-plain
-      ediff-split-window-function 'split-window-horizontally)
+(use-package goto-chg
+  :straight t
+  :after evil)
+
+(use-package evil-collection
+  :straight (:type git
+                   :host github
+                   :repo "emacs-evil/evil-collection") ;:branch "retain-selection")
+  :after evil
+  :custom (evil-collection-setup-minibuffer t)
+  :config
+  (evil-collection-init
+   '(dired
+     docker
+     ediff
+     elfeed
+     image
+     info
+     magit
+     magit-todos
+     mu4e
+     nov
+     org-present
+     profiler
+     smerge-mode
+     tar-mode
+     vterm
+     xref)))
+
+(use-package evil-anzu
+  :straight t
+  :after evil)
+
+(use-package evil-snipe
+  :after evil
+  :straight t
+  :custom
+  (evil-snipe-smart-case t)
+  (evil-snipe-show-prompt nil)
+  (evil-snipe-auto-scroll nil)
+  (evil-snipe-scope 'whole-buffer)
+  (evil-snipe-repeat-scope 'whole-buffer)
+  :config
+  (evil-snipe-mode 1)
+  (evil-snipe-override-mode 1)
+  :hook (magit-mode-hook . turn-off-evil-snipe-override-mode))
+
+(use-package evil-surround
+  :straight t
+  :after evil
+  :after evil
+  :config (global-evil-surround-mode))
+
+(setopt ediff-window-setup-function 'ediff-setup-windows-plain
+        ediff-split-window-function 'split-window-horizontally)
 
 (use-package evil-mc
   :straight t
   :after evil)
+
+(use-package evil-numbers
+  :straight (:type git
+                   :host github
+                   :repo "janpath/evil-numbers") ;:branch "retain-selection")
+  :after evil
+  :config
+  (general-def
+    :states
+    '(normal motion visual)
+    "C-a"
+    'evil-numbers/inc-at-pt
+    "C-x"
+    'evil-numbers/dec-at-pt))
 
 (use-package better-jumper
   :straight t
@@ -1412,8 +1433,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 ;; Notebooks
 
 (use-package ein
-  :straight t
-  :config (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode))
+  :straight t)
 
 ;; Yaml
 (use-package yaml-mode

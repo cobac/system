@@ -704,7 +704,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
        (interactive)
        (org-ql-search
          "~/Sync/Org/todo.org"
-         '(done)
+         '(and (done)
+               (level < 4))
          :sort '(date priority todo)))
     "ap"
     '(lambda ()

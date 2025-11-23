@@ -536,62 +536,135 @@
   "bs"
   'save-some-buffers)
 
-;; Openwith
-
 (use-package openwith
   :straight (:type git
                    :host github
                    :repo "cobac/openwith")
   :config
-  (setq openwith-associations
-        (list
-         (list
-          (openwith-make-extension-regexp
-           '("mpg"
-             "mpeg"
-             "mp3"
-             "mp4"
-             "avi"
-             "wmv"
-             "wav"
-             "mov"
-             "flv"
-             "ogm"
-             "ogg"
-             "mkv"))
-          "vlc" '(file))
-         (list
-          (openwith-make-extension-regexp
-           '("doc" "docx" "xls" "ppt" "pptx" "odt" "ods" "odg" "odp"))
-          "libreoffice" '(file))
-         (list
-          (openwith-make-extension-regexp
-           '("pdf" "ps" "ps.gz" "dvi"))
-          "zathura" '(file))
-         (list
-          (openwith-make-extension-regexp
-           '("png" "jpg" "jpeg" "webp"))
-          "feh" '(file))))
+  (setq openwith-associations (list
+                               (list
+                                (openwith-make-extension-regexp
+                                 '("mpg"
+                                   "mpeg"
+                                   "mp3"
+                                   "mp4"
+                                   "avi"
+                                   "wmv"
+                                   "wav"
+                                   "mov"
+                                   "flv"
+                                   "ogm"
+                                   "ogg"
+                                   "mkv"))
+                                "vlc" '(file))
+                               (list
+                                (openwith-make-extension-regexp
+                                 '("doc" "docx" "xls" "ppt" "pptx" "odt"
+                                   "ods" "odg" "odp"))
+                                "libreoffice" '(file))
+                               (list
+                                (openwith-make-extension-regexp
+                                 '("pdf" "ps" "ps.gz" "dvi"))
+                                "zathura" '(file))
+                               (list
+                                (openwith-make-extension-regexp
+                                 '("png" "jpg" "jpeg" "webp"))
+                                "feh" '(file))))
   (openwith-mode 1))
 
-;; Numbers stuff TODO: check visual selection
-;; I tried :(
-(use-package evil-numbers
-  :straight (:type git
-                   :host github
-                   :repo "janpath/evil-numbers") ;:branch "retain-selection")
-  :after evil
+(use-package magit
+  :straight t
+  :after (evil transient)
   :config
+  (coba-leader-def
+    "g"
+    '(lambda ()
+       (interactive)
+       (coba-magit-status)))
   (general-def
-    :states
-    '(normal motion visual)
-    "C-a"
-    'evil-numbers/inc-at-pt
-    "C-x"
-    'evil-numbers/dec-at-pt))
+    :keymaps
+    'git-rebase-mode-map
+    "C-j"
+    'git-rebase-move-line-down
+    "C-k"
+    'git-rebase-move-line-up)
+  (defun coba-magit-push-all ()
+    "Push to all remotes.
+From https://www.reddit.com/r/emacs/comments/ja97xs"
+    (interactive)
+    (mapcar
+     (lambda
+       (remote) ;; Loops through the remotes returned by magit-list-remotes
+       (magit-run-git-async
+        "push" "-v" remote (magit-get-current-branch))) ;; Simply run git push -v {{remote}} {{current-branch}}
+     (magit-list-remotes)) ;; Returns all remotes configured
+    )
+  (defun coba-magit-diff-to-main ()
+    "Diff HEAD to main"
+    (interactive)
+    (magit-diff-range (concat (magit-main-branch) "..HEAD")))
+  (transient-append-suffix
+    'magit-push
+    "e" '("a" "Push all" coba-magit-push-all))
+  (transient-append-suffix
+    'magit-diff
+    "d" '("D" "Diff to main" coba-magit-diff-to-main))
+  (defun coba-magit-status ()
+    "Open magit-status in full screen."
+    (magit-status)
+    (delete-other-windows))
+  (evil-set-initial-state 'magit-commit-message-section-map 'insert))
+
+;; (use-package forge
+;;   :straight t
+;;   :after magit)
+
+(use-package magit-todos
+  :straight t
+  :after magit
+  :config
+  (global-hl-todo-mode 1)
+  (general-def 'magit-mode-map
+    "C-S-t" 'magit-todos-list))
+
+;; Lisp
+(coba-local-leader-def
+  :keymaps
+  '(emacs-lisp-mode-map
+    lisp-interaction-mode-map)
+  "," 'eval-last-sexp "r" 'eval-region "b" 'eval-buffer)
+
+(use-package prettier-elisp
+  :straight (prettier-elisp
+             :type git
+             :host github
+             :repo "KarimAziev/prettier-elisp"))
+
+;; Project
+(defun coba-project-root-override (dir)
+  "Find DIR's project root by searching for a '.project.el' file.
+
+If this file exists, it marks the project root. For convenient compatibility
+with Projectile, '.projectile' is also considered a project root marker.
+
+https://blog.jmthornton.net/p/emacs-project-override"
+  (let ((root
+         (or (locate-dominating-file dir ".project.el")
+             (locate-dominating-file dir ".projectile")))
+        (backend
+         (ignore-errors
+           (vc-responsible-backend dir))))
+    (when root
+      (if (version<= emacs-version "28")
+          (cons 'vc root)
+        (list 'vc backend root)))))
+
+(use-package project
+  :straight t
+  :config
+  (add-hook 'project-find-functions #'coba-project-root-override))
 
 ;; Org
-
 (use-package org
   :straight t
   :config
@@ -1080,75 +1153,6 @@
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
-;; Git
-(use-package magit
-  :straight t
-  :after evil
-  :config
-  (coba-leader-def
-    "g"
-    '(lambda ()
-       (interactive)
-       (coba-magit-status)))
-  (general-def
-    :keymaps
-    'git-rebase-mode-map
-    "C-j"
-    'git-rebase-move-line-down
-    "C-k"
-    'git-rebase-move-line-up)
-  (defun coba-magit-push-all ()
-    "Push to all remotes.
-  From https://www.reddit.com/r/emacs/comments/ja97xs/weekly_tipstricketc_thread/?utm_medium=android_app&utm_source=share"
-    (interactive)
-    (mapcar
-     (lambda
-       (remote) ;; Loops through the remotes returned by magit-list-remotes
-       (magit-run-git-async
-        "push" "-v" remote (magit-get-current-branch))) ;; Simply run git push -v {{remote}} {{current-branch}}
-     (magit-list-remotes)) ;; Returns all remotes configured
-    )
-  (defun coba-magit-diff-to-main ()
-    "Diff HEAD to main"
-    (interactive)
-    (magit-diff-range (concat (magit-main-branch) "..HEAD")))
-  (transient-append-suffix
-    'magit-push
-    "e" ;; after `e` key
-    '("a" "Push all" coba-magit-push-all))
-  (transient-append-suffix
-    'magit-diff
-    "d" ;; after `e` key
-    '("D" "Diff to main" coba-magit-diff-to-main)))
-
-(evil-set-initial-state 'magit-commit-message-section-map 'insert)
-
-(defun coba-magit-status ()
-  "Open magit-status in full screen."
-  (magit-status)
-  (delete-other-windows))
-
-(use-package forge
-  :straight t
-  :after magit)
-
-(use-package magit-todos
-  :straight t
-  :config
-  (global-hl-todo-mode 1)
-  (general-def 'magit-mode-map
-    "C-S-t" 'magit-todos-list))
-
-(use-package git-timemachine
-  :straight t
-  :config
-  ;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
-  ;; Unavailable link
-  (with-eval-after-load 'git-timemachine
-    (evil-make-overriding-map git-timemachine-mode-map 'normal)
-    ;; force update evil keymaps after git-timemachine-mode loaded
-    (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
-
 ;; Flyckeck
 (use-package flycheck
   :straight t
@@ -1231,8 +1235,6 @@
        (elfeed-update)))
   :config
   (setq elfeed-feeds '(("https://archlinux.org/feeds/news/" Arch))))
-
-;; TODO: IRC
 
 ;; Dired
 
@@ -1346,19 +1348,6 @@
 ;; Systemd
 (use-package systemd
   :straight t)
-
-;; Lisp
-(coba-local-leader-def
-  :keymaps
-  '(emacs-lisp-mode-map
-    lisp-interaction-mode-map)
-  "," 'eval-last-sexp "r" 'eval-region "b" 'eval-buffer)
-
-(use-package prettier-elisp
-  :straight (prettier-elisp
-             :type git
-             :host github
-             :repo "KarimAziev/prettier-elisp"))
 
 (use-package eterm-256color
   :straight t

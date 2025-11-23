@@ -1503,4 +1503,10 @@ https://blog.jmthornton.net/p/emacs-project-override"
                    :host github
                    :repo "kiwanami/emacs-calfw"))
 
+(use-package gt
+  :straight t
+  :config
+  (setq gt-langs '(nl en))
+  (setq gt-default-translator (gt-translator :engines (gt-google-engine) :render (gt-buffer-render))))
+
 (when t (load "~/.emacs.d/big_init.el"))

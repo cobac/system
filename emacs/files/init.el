@@ -309,11 +309,20 @@
     "C-i"
     'better-jumper-jump-forward))
 
-;; Vertico, Consult and company
+;; (use-package git-timemachine
+;;   :straight t
+;;   :after evil
+;;   :config
+;;   ;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
+;;   ;; Unavailable link
+;;   (with-eval-after-load 'git-timemachine
+;;     (evil-make-overriding-map git-timemachine-mode-map 'normal)
+;;     ;; force update evil keymaps after git-timemachine-mode loaded
+;;     (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
 
+;; Vertico, Consult and company
 (use-package vertico
   :straight t
-  :after evil-collection
   :init (vertico-mode)
   :config
   (general-def
@@ -341,9 +350,14 @@
     "G"
     'vertico-last))
 
+(use-package posframe
+  :straight t)
+
 (use-package vertico-posframe
   :straight t
-  :config (vertico-posframe-mode))
+  :after (vertico posframe)
+  :config
+  (vertico-posframe-mode))
 
 (use-package consult
   :straight t)
@@ -352,73 +366,96 @@
   :straight t
   :config (marginalia-mode))
 
-(use-package embark
-  :straight t
-  :after consult
-  :bind (("C-." . embark-act)
-         ("C-)" . embark-dwim))
-  :config
-  ;; C-d: kill-buffer during switch-to-buffer
-  ;; https://www.reddit.com/r/emacs/comments/16g08me/killbuffer_from_the_minibuffer_after_mx/
-  ;; no confirmation
-  (setf (alist-get 'kill-buffer embark-pre-action-hooks)
-        ())
-  ;; ;; don't embark--restart
-  (setf (alist-get 'kill-buffer embark-post-action-hooks)
-        ())
-  ;; ;; don't quit
-  (setq embark-quit-after-action '((kill-buffer . nil) (t . t)))
-  (general-def
-    :keymaps 'minibuffer-local-map
-    :states '(insert normal)
-    "C-d" (general-simulate-key "C-. k C-j"))
-  ;; https://github.com/oantolin/embark/wiki/Additional-Configuration#use-which-key-like-a-key-menu-prompt
-  (defun embark-which-key-indicator ()
-    "An embark indicator that displays keymaps using which-key.
-The which-key help message will show the type and value of the
-current target followed by an ellipsis if there are further
-targets."
-    (lambda (&optional keymap targets prefix)
-      (if (null keymap)
-          (which-key--hide-popup-ignore-command)
-        (which-key--show-keymap
-         (if (eq (plist-get (car targets) :type) 'embark-become)
-             "Become"
-           (format "Act on %s '%s'%s"
-                   (plist-get (car targets) :type)
-                   (embark--truncate-target (plist-get (car targets)
-                                                       :target))
-                   (if (cdr targets) "…" "")))
-         (if prefix
-             (pcase (lookup-key keymap prefix 'accept-default)
-               ((and (pred keymapp) km) km)
-               (_ (key-binding prefix 'accept-default)))
-           keymap)
-         nil nil t
-         (lambda (binding)
-           (not (string-suffix-p "-argument" (cdr binding))))))))
-  (setq embark-indicators
-        '(embark-which-key-indicator
-          embark-highlight-indicator
-          embark-isearch-highlight-indicator))
-  (defun embark-hide-which-key-indicator (fn &rest args)
-    "Hide the which-key indicator immediately when using the completing-read prompter."
-    (which-key--hide-popup-ignore-command)
-    (let ((embark-indicators
-           (remq #'embark-which-key-indicator embark-indicators)))
-      (apply fn args)))
-  (advice-add #'embark-completing-read-prompter
-              :around #'embark-hide-which-key-indicator))
+;; (use-package embark
+;;   :straight t
+;;   :after consult
+;;   :bind (("C-." . embark-act)
+;;          ("C-)" . embark-dwim))
+;;   :config
+;;   ;; C-d: kill-buffer during switch-to-buffer
+;;   ;; https://www.reddit.com/r/emacs/comments/16g08me/killbuffer_from_the_minibuffer_after_mx/
+;;   ;; no confirmation
+;;   (setf (alist-get 'kill-buffer embark-pre-action-hooks)
+;;         ())
+;;   ;; ;; don't embark--restart
+;;   (setf (alist-get 'kill-buffer embark-post-action-hooks)
+;;         ())
+;;   ;; ;; don't quit
+;;   (setq embark-quit-after-action '((kill-buffer . nil) (t . t)))
+;;   (general-def
+;;     :keymaps 'minibuffer-local-map
+;;     :states '(insert normal)
+;;     "C-d" (general-simulate-key "C-. k C-j"))
+;;   ;; https://github.com/oantolin/embark/wiki/Additional-Configuration#use-which-key-like-a-key-menu-prompt
+;;   (defun embark-which-key-indicator ()
+;;     "An embark indicator that displays keymaps using which-key.
+;; The which-key help message will show the type and value of the
+;; current target followed by an ellipsis if there are further
+;; targets."
+;;     (lambda (&optional keymap targets prefix)
+;;       (if (null keymap)
+;;           (which-key--hide-popup-ignore-command)
+;;         (which-key--show-keymap
+;;          (if (eq (plist-get (car targets) :type) 'embark-become)
+;;              "Become"
+;;            (format "Act on %s '%s'%s"
+;;                    (plist-get (car targets) :type)
+;;                    (embark--truncate-target (plist-get (car targets)
+;;                                                        :target))
+;;                    (if (cdr targets) "…" "")))
+;;          (if prefix
+;;              (pcase (lookup-key keymap prefix 'accept-default)
+;;                ((and (pred keymapp) km) km)
+;;                (_ (key-binding prefix 'accept-default)))
+;;            keymap)
+;;          nil nil t
+;;          (lambda (binding)
+;;            (not (string-suffix-p "-argument" (cdr binding))))))))
+;;   (setq embark-indicators
+;;         '(embark-which-key-indicator
+;;           embark-highlight-indicator
+;;           embark-isearch-highlight-indicator))
+;;   (defun embark-hide-which-key-indicator (fn &rest args)
+;;     "Hide the which-key indicator immediately when using the completing-read prompter."
+;;     (which-key--hide-popup-ignore-command)
+;;     (let ((embark-indicators
+;;            (remq #'embark-which-key-indicator embark-indicators)))
+;;       (apply fn args)))
+;;   (advice-add #'embark-completing-read-prompter
+;;               :around #'embark-hide-which-key-indicator))
 
 (use-package embark-consult
   :straight t
+  :after (embark consult)
   :config)
 
 (use-package orderless
   :straight t
-  :custom (completion-styles '(orderless basic))
+  :custom
+  (completion-styles '(orderless basic))
   (completion-category-overrides
    '((file (styles basic partial-completion)))))
+
+(use-package prescient
+  :straight t
+  :config (prescient-persist-mode))
+
+(use-package vertico-prescient
+  :straight t
+  :after (vertico perscient)
+  :config (vertico-prescient-mode))
+
+(use-package wgrep
+  :straight t
+  :hook (wgrep-setup . evil-normal-state))
+
+(use-package transient
+  :straight t)
+
+(use-package transient-posframe
+  :straight t
+  :after posframe
+  :config (transient-posframe-mode t))
 
 (coba-leader-def
   "f"
@@ -454,69 +491,29 @@ targets."
   "/"
   'consult-ripgrep
   "T"
-  'consult-theme
+  'consult-them
   "!"
   'async-shell-command
   "¡"
   'shell-command
   ":" 'eval-expression)
 
-(use-package prescient
-  :straight t
-  :config (prescient-persist-mode))
-
-(use-package vertico-prescient
-  :straight t
-  :config (vertico-prescient-mode))
-
-(use-package wgrep
-  :straight t
-  :hook (wgrep-setup . evil-normal-state))
-
-(use-package transient-posframe
-  :straight t
-  :config (transient-posframe-mode t))
-
-;; Project
-(defun coba-project-root-override (dir)
-  "Find DIR's project root by searching for a '.project.el' file.
-
-If this file exists, it marks the project root. For convenient compatibility
-with Projectile, '.projectile' is also considered a project root marker.
-
-https://blog.jmthornton.net/p/emacs-project-override"
-  (let ((root
-         (or (locate-dominating-file dir ".project.el")
-             (locate-dominating-file dir ".projectile")))
-        (backend
-         (ignore-errors
-           (vc-responsible-backend dir))))
-    (when root
-      (if (version<= emacs-version "28")
-          (cons 'vc root)
-        (list 'vc backend root)))))
-
-(use-package project
-  :straight t
-  :config
-  (add-hook 'project-find-functions #'coba-project-root-override))
-
-;; Hydra
 (use-package hydra
-  :straight t)
-
-(defhydra coba-hydra-windows ()
-  "Manage window movement with evil-window funcions."
-  ("h" evil-window-left)
-  ("j" evil-window-down)
-  ("k" evil-window-up)
-  ("l" evil-window-right)
-  ("C-h" shrink-window-horizontally)
-  ("C-j" shrink-window)
-  ("C-k" enlarge-window)
-  ("C-l" enlarge-window-horizontally)
-  ("s" split-window-horizontally)
-  ("d" delete-window))
+  :straight t
+  :after evil
+  :config
+  (defhydra coba-hydra-windows ()
+    "Manage window movement with evil-window funcions."
+    ("h" evil-window-left)
+    ("j" evil-window-down)
+    ("k" evil-window-up)
+    ("l" evil-window-right)
+    ("C-h" shrink-window-horizontally)
+    ("C-j" shrink-window)
+    ("C-k" enlarge-window)
+    ("C-l" enlarge-window-horizontally)
+    ("s" split-window-horizontally)
+    ("d" delete-window)))
 
 (coba-leader-def
   "w"

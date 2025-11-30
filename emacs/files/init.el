@@ -989,32 +989,37 @@ https://blog.jmthornton.net/p/emacs-project-override"
     'evil-delete-buffer)
   :init (setq org-roam-v2-ack t)
   :config
-  (setq org-roam-directory (file-truename "~/Sync/Brain")
-        org-roam-db-location "~/Sync/Brain/roam.db"
-        org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))
-        org-roam-dailies-directory "diario"
-        org-roam-capture-templates
-        '(("r" "default" plain "- tags :: %?"
-           :target
-           (file+head
-            "${slug}.org"
-            ":PROPERTIES:\n:ROAM_ALIASES:\n:ROAM_REFS:\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${title}\n")
-           :immediate-finish t
-           :unnarrowed t)
-          ("w" "motherduck" plain "%?"
-           :target
-           (file+head
-            "motherduck/${slug}.org"
-            ":PROPERTIES:\n:ROAM_ALIASES:\n:ROAM_REFS:\n:END:\n#+STARTUP: latexpreview\n#+filetags: motherduck\n#+title: ${title}\n")
-           :immediate-finish t
-           :unnarrowed t)
-          ("p" "bib" plain "- tags :: %?"
-           :target
-           (file+head
-            "${citekey}.org"
-            ":PROPERTIES:\n:ROAM_ALIASES: \"${author-abbrev}(${year}): ${title}\"\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${citekey}\n")
-           :immediate-finish t
-           :unnarrowed t)))
+  (setopt org-roam-directory (file-truename "~/Sync/Brain")
+          org-roam-db-location "~/Sync/Brain/roam.db"
+          org-roam-node-display-template
+          (concat "${title:*} "
+                  (propertize
+                   "${tags:10}"
+                   'face
+                   'org-tag))
+          org-roam-dailies-directory "diario"
+          org-roam-capture-templates
+          '(("r" "default" plain "%?"
+             :target
+             (file+head
+              "${slug}.org"
+              ":PROPERTIES:\n:ROAM_ALIASES:\n:ROAM_REFS:\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${title}\n")
+             :immediate-finish t
+             :unnarrowed t)
+            ("w" "motherduck" plain "%?"
+             :target
+             (file+head
+              "motherduck/${slug}.org"
+              ":PROPERTIES:\n:ROAM_ALIASES:\n:ROAM_REFS:\n:END:\n#+STARTUP: latexpreview\n#+filetags: motherduck\n#+title: ${title}\n")
+             :immediate-finish t
+             :unnarrowed t)
+            ("p" "bib" plain "%?"
+             :target
+             (file+head
+              "${citekey}.org"
+              ":PROPERTIES:\n:ROAM_ALIASES: \"${author-abbrev}(${year}): ${title}\"\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${citekey}\n")
+             :immediate-finish t
+             :unnarrowed t)))
   (evil-set-initial-state 'org-roam-mode 'motion)
   ;; Show hierarchy of nodes from https://github.com/org-roam/org-roam/issues/1565
   ;; (cl-defmethod org-roam-node-filetitle ((node org-roam-node))

@@ -993,12 +993,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
         org-roam-db-location "~/Sync/Brain/roam.db"
         org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))
         org-roam-dailies-directory "diario"
-        org-roam-dailies-capture-templates
-        '(("d"
-           "default"
-           plain
-           "%?"
-           :target (file+head "%<%Y-%m>.org" "* %<%d %A>\n\n")))
         org-roam-capture-templates
         '(("r" "default" plain "- tags :: %?"
            :target

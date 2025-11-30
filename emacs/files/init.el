@@ -927,11 +927,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
            :order 80)
           (:name "Schedule" :time-grid t :order 2)
           (:name "Scheduled" :scheduled today :order 4)
-          (:name
-           "University Deadlines"
-           :and (:deadline future :tag "uni")
-           :order 10)
-          (:name "Other Deadlines" :deadline future :order 11)
+          (:name "Deadlines" :deadline future :order 11)
           (:name "Refile" :scheduled past :order 99)))
   (org-super-agenda-mode))
 

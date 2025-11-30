@@ -111,7 +111,7 @@
 (put #'narrow-to-region 'disabled nil)
 
 (when (eq system-type 'darwin)
-  (load "~/.emacs.d/emulate-mac-keyboard-mode.el")
+  (load "~/.emacs.d/lisp/emulate-mac-keyboard-mode.el")
   (emulate-mac-spanish-keyboard-mode)
   (setq mac-command-modifier 'control))
 
@@ -121,9 +121,9 @@
   (shell-command
    "cp $HOME/Documentos/system/emacs/files/init.el $HOME/.emacs.d/")
   (shell-command
-   "cp $HOME/Documentos/system/emacs/files/big_init.el $HOME/.emacs.d/")
-  (shell-command
    "cp $HOME/Documentos/system/emacs/files/early-init.el $HOME/.emacs.d/")
+  (shell-command
+   "cp -r $HOME/Documentos/system/emacs/files/lisp/ $HOME/.emacs.d/")
   (shell-command
    "cp -r $HOME/Documentos/system/emacs/files/ox-templates $HOME/.emacs.d/")
   (shell-command
@@ -1517,4 +1517,4 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (setq gt-langs '(nl en))
   (setq gt-default-translator (gt-translator :engines (gt-google-engine) :render (gt-buffer-render))))
 
-(when t (load "~/.emacs.d/big_init.el"))
+(when t (load "~/.emacs.d/lisp/big_init.el"))

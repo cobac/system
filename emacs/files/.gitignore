@@ -4,6 +4,7 @@
 !early-init.el
 !.gitignore
 !.dir-locals.el
+!lisp/
 
 !snippets/
 /snippets/**/.yas-compiled-snippets.el

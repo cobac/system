@@ -15,7 +15,6 @@
         mu4e-attachment-dir "/home/coba/Downloads"
         send-mail-function 'message-send-mail-with-sendmail
         message-send-mail-function 'message-send-mail-with-sendmail
-        mu4e-compose-dont-reply-to-self t
         mu4e-context-policy 'pick-first
         mu4e-compose-context-policy 'ask)
   (add-to-list

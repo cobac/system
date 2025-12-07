@@ -1,0 +1,2 @@
+- To install: =nix run github:nix-community/nixos-anywhere -- --flake '.#serba' --target-host root@{{ HOST }} -i ~/.ssh/coba --build-on remote=
+- To update: =nix run 'nixpkgs#nixos-rebuild' -- --flake '.#serba' --target-host root@{{ HOST }} switch=

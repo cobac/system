@@ -75,7 +75,7 @@
         value: "{{ item.value }}"
       loop:
         - {name: user.email, value: coba@cobac.eu}
-        - {name: user.name, value: Coba}
+        - {name: user.name, value: coba}
         - {name: github.user, value: cobac}
         - {name: init.defaultbranch, value: main}
 

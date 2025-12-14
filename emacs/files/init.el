@@ -116,18 +116,18 @@
   (setq mac-command-modifier 'control))
 
 (defun coba-sync-init-with-system ()
-  "Sync `init.el`, `ox-templates` and `snippets` from `~/.emacs.d` into `~/Documentos/system/emacs/files`."
+  "Sync `init.el`, `ox-templates` and `snippets` from `~/.emacs.d` into `~/Documentos/repos/system/emacs/files`."
   (interactive)
   (shell-command
-   "cp $HOME/Documentos/system/emacs/files/init.el $HOME/.emacs.d/")
+   "cp $HOME/Documentos/repos/system/emacs/files/init.el $HOME/.emacs.d/")
   (shell-command
-   "cp $HOME/Documentos/system/emacs/files/early-init.el $HOME/.emacs.d/")
+   "cp $HOME/Documentos/repos/system/emacs/files/early-init.el $HOME/.emacs.d/")
   (shell-command
-   "cp -r $HOME/Documentos/system/emacs/files/lisp/ $HOME/.emacs.d/")
+   "cp -r $HOME/Documentos/repos/system/emacs/files/lisp/ $HOME/.emacs.d/")
   (shell-command
-   "cp -r $HOME/Documentos/system/emacs/files/ox-templates $HOME/.emacs.d/")
+   "cp -r $HOME/Documentos/repos/system/emacs/files/ox-templates $HOME/.emacs.d/")
   (shell-command
-   "cp -r $HOME/.emacs.d/snippets $HOME/Documentos/system/emacs/files/"))
+   "cp -r $HOME/.emacs.d/snippets $HOME/Documentos/repos/system/emacs/files/"))
 
                                         ; Packages
 
@@ -464,11 +464,11 @@ targets."
   "fi"
   '(lambda ()
      (interactive)
-     (find-file "~/Documentos/system/emacs/files/init.el"))
+     (find-file "~/Documentos/repos/system/emacs/files/init.el"))
   "fs"
   '(lambda ()
      (interactive)
-     (ido-find-file-in-dir "~/Documentos/system/"))
+     (ido-find-file-in-dir "~/Documentos/repos/system/"))
   "fp"
   '(lambda ()
      (interactive)

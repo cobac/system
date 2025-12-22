@@ -10,6 +10,8 @@
   networking.hostName = "serba";
   time.timeZone = "Europe/Amsterdam";
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   users.users.coba = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
@@ -31,11 +33,6 @@
     };
   };
 
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = true;
-    dates = "daily";
-  };
   nix.gc = {
     automatic = true;
     dates = "weekly";

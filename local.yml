@@ -88,15 +88,16 @@
             Hostname ssh.github.com
             User git
             Port 443
-            # IdentityFile ~/.ssh/[[ ID NAME ]]
+            IdentityFile ~/.ssh/coba
+
+          Host *sr.ht
+            PreferredAuthentications publickey
+            IdentityFile ~/.ssh/coba
 
           # Host serba
-          #   HostName 159.69.44.13
+          #   HostName [[IP]]
           #   IdentityFile ~/.ssh/coba
 
-          # Host *sr.ht
-          #   PreferredAuthentications publickey
-          #   IdentityFile ~/.ssh/coba
 
     - name: Activate clock synchronization
       ansible.builtin.systemd:

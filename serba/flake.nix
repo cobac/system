@@ -2,7 +2,7 @@
   description = "Personal server config.";
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-25.05";
+      url = "github:NixOS/nixpkgs/nixos-unstable";
     };
 
     disko = {

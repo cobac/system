@@ -44,5 +44,11 @@
     defaultEditor = true;
   };
 
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.coba = import ./home.nix;
+  };
+
   system.stateVersion = "25.05";
 }

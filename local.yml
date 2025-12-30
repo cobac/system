@@ -97,7 +97,7 @@
           # Host serba
           #   HostName [[IP]]
           #   IdentityFile ~/.ssh/coba
-
+          #   LocalForward 9090 127.0.0.1:8384
 
     - name: Activate clock synchronization
       ansible.builtin.systemd:

@@ -1,26 +1,37 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./disko-config.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./disko-config.nix
+  ];
   boot.loader.grub.enable = true;
   networking.hostName = "serba";
   time.timeZone = "Europe/Amsterdam";
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   users.users.coba = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE3KLmITLqzVBObYvVrzQGrCo1NMA69ptC8FO+Glvwaf coba"];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE3KLmITLqzVBObYvVrzQGrCo1NMA69ptC8FO+Glvwaf coba"
+    ];
     initialHashedPassword = "$y$j9T$WAs6YSAnCkRtfcVRCtSim1$ccd88Zml3nw024IXcR02E1IkKvw.ddDs09ERfSo37W8"; # cottage-core
   };
 
   users.users.root = {
-    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE3KLmITLqzVBObYvVrzQGrCo1NMA69ptC8FO+Glvwaf coba"];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE3KLmITLqzVBObYvVrzQGrCo1NMA69ptC8FO+Glvwaf coba"
+    ];
   };
 
   services.openssh = {
@@ -29,7 +40,10 @@
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "yes";
-      AllowUsers = [ "coba" "root" ];
+      AllowUsers = [
+        "coba"
+        "root"
+      ];
     };
   };
 

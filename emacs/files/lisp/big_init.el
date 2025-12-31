@@ -13,8 +13,8 @@
         mu4e-index-update-error-warning nil
         mu4e-view-show-images t
         mu4e-attachment-dir "/home/coba/Downloads"
-        send-mail-function 'message-send-mail-with-sendmail
-        message-send-mail-function 'message-send-mail-with-sendmail
+        send-mail-function 'smtpmail-send-it
+        message-send-mail-function 'smtpmail-send-it
         mu4e-context-policy 'pick-first
         mu4e-compose-context-policy 'ask)
   (add-to-list

@@ -966,8 +966,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
              :branch "main"
              :files ("*.el" "out" "extensions/*.el"))
   :general
-  (coba-leader-def
-    "r" 'org-roam-node-find "fd" 'org-roam-dailies-goto-today)
+  (coba-leader-def "r" 'org-roam-node-find)
   (general-def :keymaps 'org-mode-map "C-i" 'org-roam-node-insert)
   (coba-local-leader-def
     :keymaps
@@ -997,7 +996,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
                    "${tags:10}"
                    'face
                    'org-tag))
-          org-roam-dailies-directory "diario"
           org-roam-capture-templates
           '(("r" "default" plain "%?"
              :target
@@ -1037,7 +1035,32 @@ https://blog.jmthornton.net/p/emacs-project-override"
   ;;      (if (> level 1)
   ;;          (concat " -> " (string-join olp " -> "))))))
   ;;(setq org-roam-node-display-template "${hierarchy:*} ${tags:20}")
-  (org-roam-db-autosync-enable))
+  (org-roam-db-autosync-enable)
+  (defun coba-diario (&optional arg)
+    "Write to `org-roam-directory/diario'."
+    (interactive "P")
+    (let* ((now (if arg
+                    (org-read-date nil t)
+                  (current-time)))
+           (year-month (format-time-string "%Y-%m" now))
+           (day-num (format-time-string "%d" now))
+           (day-name (format-time-string "%A" now))
+           (heading (format "* %s %s" day-num day-name))
+           (dailies-dir (expand-file-name "diario" org-roam-directory))
+           (file-path (expand-file-name (concat year-month ".org")
+                                        dailies-dir)))
+      (unless (file-directory-p dailies-dir)
+        (make-directory dailies-dir t))
+      (find-file file-path)
+      (goto-char (point-min))
+      (if (search-forward heading nil t)
+          (beginning-of-line)
+        (goto-char (point-max))
+        (unless (bobp)
+          (newline))
+        (insert heading)
+        (newline))))
+  (coba-leader-def "fd" 'coba-diario))
 
 (use-package org-roam-ui
   :after org-roam

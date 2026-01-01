@@ -39,12 +39,7 @@
       loop:
         - {dir: .config}
         - {dir: .ssh}
-        - {dir: Documentos}
-        - {dir: Documentos/Archive}
-        - {dir: Documentos/Work}
         - {dir: Downloads}
-        - {dir: Sync}
-        - {dir: Sync/database}
         - {dir: .Mail/coba}
         - {dir: .Mail/cosas}
 
@@ -168,8 +163,8 @@
         path: /home/coba/.config/gtk-3.0/bookmarks
         create: true
         block: |
-          file:///home/coba/Sync/Brain/pdf
-          file:///home/coba/Documentos
+          file:///home/coba/docs/brain/pdf
+          file:///home/coba/docs
           file:///home/coba/Downloads
 
     - name: Setup sleep

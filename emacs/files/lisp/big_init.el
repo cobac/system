@@ -98,7 +98,7 @@
     'mu4e-headers-mark-for-archive)
   (require 'mu4e-icalendar)
   (mu4e-icalendar-setup)
-  (setq gnus-icalendar-org-capture-file "~/Sync/Org/todo.org"
+  (setq gnus-icalendar-org-capture-file "~/docs/Org/todo.org"
         gnus-icalendar-org-capture-headline '("Other"))
   (gnus-icalendar-org-setup))
 
@@ -296,7 +296,7 @@
         ("rulecolor" "\\color{code-comment}")
         ("framerule" "1pt"))
       org-latex-pdf-process
-      '("ln -s ~/Sync/Brain/bib.bib bib.bib"
+      '("ln -s ~/docs/brain/bib.bib bib.bib"
         "latexmk -pdflatex='xelatex -interaction nonstopmode' -shell-escape -pdf -bibtex -f %f"))
 
 (add-to-list 'org-latex-default-packages-alist '("" "txfonts" t))
@@ -618,7 +618,7 @@
     (shell-command
      (string-join (list
                    "hledger"
-                   "-f /home/coba/Sync/oros/main.ledger"
+                   "-f /home/coba/docs/oros/main.ledger"
                    command
                    "--monthly --sort --tree"
                    "-b=\"12 months ago\"")

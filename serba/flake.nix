@@ -26,11 +26,13 @@
 
   outputs =
     inputs@{ self, nixpkgs, ... }:
+    let
+      system = "x86_64-linux";
+    in
     {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
+      formatter.x86_64-linux = nixpkgs.legacyPackages.${system}.nixfmt-tree;
       nixosConfigurations = {
         serba = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
           modules = [
             ./configuration.nix
             inputs.disko.nixosModules.disko

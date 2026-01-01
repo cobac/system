@@ -4,6 +4,11 @@
   pkgs,
   ...
 }:
+let
+  publicSSHKeys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE3KLmITLqzVBObYvVrzQGrCo1NMA69ptC8FO+Glvwaf coba"
+  ];
+in
 
 {
   imports = [
@@ -22,16 +27,12 @@
   users.users.coba = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE3KLmITLqzVBObYvVrzQGrCo1NMA69ptC8FO+Glvwaf coba"
-    ];
+    openssh.authorizedKeys.keys = publicSSHKeys;
     initialHashedPassword = "$y$j9T$WAs6YSAnCkRtfcVRCtSim1$ccd88Zml3nw024IXcR02E1IkKvw.ddDs09ERfSo37W8"; # cottage-core
   };
 
   users.users.root = {
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE3KLmITLqzVBObYvVrzQGrCo1NMA69ptC8FO+Glvwaf coba"
-    ];
+    openssh.authorizedKeys.keys = publicSSHKeys;
   };
 
   services.openssh = {

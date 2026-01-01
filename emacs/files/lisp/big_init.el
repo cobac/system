@@ -622,7 +622,8 @@
                    command
                    "--monthly --sort --tree"
                    "-b=\"12 months ago\"")
-                  " "))
+                  " ")
+     (string-join (list "hledger" command) " "))
     (windmove-right)
     (delete-other-windows)
     (text-scale-decrease 2))

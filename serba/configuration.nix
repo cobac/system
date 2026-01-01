@@ -24,6 +24,11 @@ in
     "flakes"
   ];
 
+  fileSystems."/media/docs" = {
+    device = "/dev/disk/by-uuid/473f8415-6796-4a74-95bc-729879e562d2";
+    fsType = "ext4";
+  };
+
   users.users.coba = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];

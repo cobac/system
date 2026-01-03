@@ -65,6 +65,32 @@ in
     defaultEditor = true;
   };
 
+  users.defaultUserShell = pkgs.zsh;
+
+  programs.zsh = {
+    enable = true;
+    promptInit = "";
+    enableCompletion = true;
+    interactiveShellInit = ''
+      bindkey -v
+      PS1="%B%F{yellow}%n@%m %~ \$%f%b "
+
+      zle-keymap-select() {
+        if [[ $KEYMAP == vicmd ]]; then
+          echo -ne '\e[2 q'  # block cursor
+        else
+          echo -ne '\e[6 q'  # line cursor
+        fi
+      }
+      zle -N zle-keymap-select
+
+      zle-line-init() {
+        echo -ne '\e[6 q'  # line cursor on new prompt
+      }
+      zle -N zle-line-init
+    '';
+  };
+
   services.syncthing = {
     enable = true;
     user = "coba";

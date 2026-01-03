@@ -989,7 +989,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :init (setq org-roam-v2-ack t)
   :config
   (setopt org-roam-directory (file-truename "~/docs/brain")
-          org-roam-db-location "~/docs/brain/roam.db"
+          org-roam-db-location "~/docs/brain/.roam.db"
           org-roam-node-display-template
           (concat "${title:*} "
                   (propertize

@@ -32,6 +32,7 @@ in
   users.users.coba = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
+    linger = true;
     openssh.authorizedKeys.keys = publicSSHKeys;
     initialHashedPassword = "$y$j9T$WAs6YSAnCkRtfcVRCtSim1$ccd88Zml3nw024IXcR02E1IkKvw.ddDs09ERfSo37W8"; # cottage-core
   };
@@ -62,6 +63,12 @@ in
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+  };
+
+  services.syncthing = {
+    enable = true;
+    user = "coba";
+    dataDir = "/home/coba";
   };
 
   home-manager = {

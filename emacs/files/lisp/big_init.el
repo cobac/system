@@ -98,7 +98,7 @@
     'mu4e-headers-mark-for-archive)
   (require 'mu4e-icalendar)
   (mu4e-icalendar-setup)
-  (setq gnus-icalendar-org-capture-file "~/docs/Org/todo.org"
+  (setq gnus-icalendar-org-capture-file "~/docs/org/todo.org"
         gnus-icalendar-org-capture-headline '("Other"))
   (gnus-icalendar-org-setup))
 

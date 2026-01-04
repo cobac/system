@@ -670,9 +670,9 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :config
   (set-face-attribute 'org-headline-done nil :strike-through t)
   (setq org-agenda-files
-        '("~/docs/Org/todo.org"
-          "~/docs/Org/refile.org"
-          "~/docs/Org/annuals.org")
+        '("~/docs/org/todo.org"
+          "~/docs/org/refile.org"
+          "~/docs/org/annuals.org")
         org-agenda-span 7
         org-agenda-start-on-weekday 1
         org-enforce-todo-dependencies t
@@ -681,7 +681,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
         org-log-readline (quote time)
         org-log-reschedule (quote time)
         org-refile-allow-creating-parent-nodes 'confirm
-        org-archive-location "~/docs/Org/archive.org::* From ??"
+        org-archive-location "~/docs/org/archive.org::* From ??"
         org-deadline-warning-days 14
         org-refile-use-outline-path t
         org-extend-today-until 4
@@ -689,77 +689,77 @@ https://blog.jmthornton.net/p/emacs-project-override"
         calendar-date-style 'european
         org-outline-path-complete-in-steps nil
         calendar-week-start-day 1
-        org-default-notes-file "~/docs/Org/refile.org"
+        org-default-notes-file "~/docs/org/refile.org"
         org-capture-templates
         '(("t"
            "Todo"
            entry
-           (file "~/docs/Org/refile.org")
+           (file "~/docs/org/refile.org")
            "* TODO %?"
            :empty-lines 1)
           ("l"
            "Link"
            entry
-           (file "~/docs/Org/refile.org")
+           (file "~/docs/org/refile.org")
            "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
            :empty-lines 1)
           ("f"
            "File link"
            entry
-           (file "~/docs/Org/refile.org")
+           (file "~/docs/org/refile.org")
            "* TODO %A\n:PROPERTIES:\n:CREATED: %U\n:END:"
            :empty-lines 1)
           ("c"
            "Check Computer"
            entry
-           (file+olp "~/docs/Org/todo.org" "Computer" "Check")
+           (file+olp "~/docs/org/todo.org" "Computer" "Check")
            "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
            :empty-lines 1)
           ("p"
            "Check Psychology"
            entry
-           (file+olp "~/docs/Org/todo.org" "Psychology" "Check")
+           (file+olp "~/docs/org/todo.org" "Psychology" "Check")
            "* TODO [%?[][]]\n:PROPERTIES:\n:CREATED: %U\n:END:"
            :empty-lines 1)
           ("m"
            "Movies"
            entry
-           (file+olp "~/docs/Org/todo.org" "Leisure" "Movies")
+           (file+olp "~/docs/org/todo.org" "Leisure" "Movies")
            "* TODO %?"
            :empty-lines 1)
           ("n"
            "Movies waiting"
            entry
-           (file+olp "~/docs/Org/todo.org" "Leisure" "Movies" "Waiting")
+           (file+olp "~/docs/org/todo.org" "Leisure" "Movies" "Waiting")
            "* TODO %?"
            :empty-lines 1)
           ("s"
            "Series"
            entry
-           (file+olp "~/docs/Org/todo.org" "Leisure" "Series")
+           (file+olp "~/docs/org/todo.org" "Leisure" "Series")
            "* TODO %?"
            :empty-lines 1)
           ("w"
            "Series waiting"
            entry
-           (file+olp "~/docs/Org/todo.org" "Leisure" "Series" "Waiting")
+           (file+olp "~/docs/org/todo.org" "Leisure" "Series" "Waiting")
            "* TODO %?"
            :empty-lines 1)
           ("b"
            "Books"
            entry
-           (file+olp "~/docs/Org/todo.org" "Leisure" "Books")
+           (file+olp "~/docs/org/todo.org" "Leisure" "Books")
            "* TODO %?"
            :empty-lines 1)
           ("o"
            "Otro"
            entry
-           (file+olp "~/docs/Org/todo.org" "Other")
+           (file+olp "~/docs/org/todo.org" "Other")
            "* TODO %?"
            :empty-lines 1))
         org-refile-targets
-        (quote (("~/docs/Org/todo.org" :maxlevel . 10)
-                ("~/docs/Org/annuals.org" :maxlevel . 10)))
+        (quote (("~/docs/org/todo.org" :maxlevel . 10)
+                ("~/docs/org/annuals.org" :maxlevel . 10)))
         org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE" "CANCELED"))
         org-agenda-custom-commands
         '(("w"
@@ -787,16 +787,16 @@ https://blog.jmthornton.net/p/emacs-project-override"
     "o"
     '(lambda ()
        (interactive)
-       (find-file "~/docs/Org/todo.org"))
+       (find-file "~/docs/org/todo.org"))
     "R"
     '(lambda ()
        (interactive)
-       (find-file "~/docs/Org/refile.org"))
+       (find-file "~/docs/org/refile.org"))
     "ad"
     '(lambda ()
        (interactive)
        (org-ql-search
-         "~/docs/Org/todo.org"
+         "~/docs/org/todo.org"
          '(and (done)
                (level < 4))
          :sort '(date priority todo)))

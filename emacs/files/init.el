@@ -60,7 +60,7 @@
       scroll-conservatively 10000)
 
 ;; Keep init.el clean
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file (expand-file-name "emacs-customize.el" user-emacs-directory))
 
 (load custom-file 'noerror)
 
@@ -1546,3 +1546,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (when (not (eq system-type 'darwin))
   (load "~/.emacs.d/lisp/big_init.el"))
+
+;; meant to be installation-specific
+(load "~/.emacs.d/custom.el" t)

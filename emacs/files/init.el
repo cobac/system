@@ -1544,4 +1544,5 @@ https://blog.jmthornton.net/p/emacs-project-override"
                    :host github
                    :repo "stevemolitor/monet"))
 
-(when t (load "~/.emacs.d/lisp/big_init.el"))
+(when (not (eq system-type 'darwin))
+  (load "~/.emacs.d/lisp/big_init.el"))

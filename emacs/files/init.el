@@ -1462,7 +1462,9 @@ https://blog.jmthornton.net/p/emacs-project-override"
 ;;          (locate-dominating-file (buffer-file-name) "Makefile"))
 ;;         " && make "))
 
-(coba-leader-def "C" 'project-compile)
+(coba-leader-def
+  "CC" 'project-compile
+  "Cc" 'compile)
 
 (setq compilation-scroll-output 'first-error)
 

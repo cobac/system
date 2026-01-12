@@ -1524,12 +1524,87 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package calfw
   :straight (:type git
                    :host github
-                   :repo "kiwanami/emacs-calfw"))
+                   :repo "kiwanami/emacs-calfw")
+  :config
+  (coba-leader-def "am" 'calfw-org-open-calendar)
+  (setopt calfw-display-calendar-holidays nil)
+  (general-def calfw-calendar-mode-map
+    :keymaps 'calfw-calendar-mode-map
+    :states '(normal motion)
+    "]]" 'calfw-navi-next-view
+    "[[" 'calfw-navi-prev-view
+    "." 'calfw-navi-goto-today-command
+    ;; "gd" 'calfw-org-goto-date
+    "RET" 'coba-calfw-org-open-agenda-week)
+  (defun coba-calfw-set-faces ()
+    "Set calfw faces using standard Emacs faces for theme compatibility."
+    (set-face-attribute 'calfw-title-face nil
+                        :inherit 'font-lock-type-face
+                        :height 1.5
+                        :weight 'bold)
+    (set-face-attribute 'calfw-header-face nil
+                        :inherit 'font-lock-type-face
+                        :foreground 'unspecified
+                        :weight 'bold)
+    (set-face-attribute 'calfw-sunday-face nil
+                        :inherit 'calfw-day-title-face
+                        :foreground 'unspecified)
+    (set-face-attribute 'calfw-saturday-face nil
+                        :inherit 'calfw-day-title-face
+                        :foreground 'unspecified)
+    (set-face-attribute 'calfw-holiday-face nil
+                        :inherit 'font-lock-warning-face)
+    (set-face-attribute 'calfw-grid-face nil
+                        :inherit 'shadow)
+    (set-face-attribute 'calfw-default-content-face nil
+                        :inherit 'font-lock-string-face)
+    (set-face-attribute 'calfw-periods-face nil
+                        :inherit 'font-lock-keyword-face
+                        :slant 'italic)
+    (set-face-attribute 'calfw-day-title-face nil
+                        :inherit 'default)
+    (set-face-attribute 'calfw-default-day-face nil
+                        :inherit 'calfw-day-title-face)
+    (set-face-attribute 'calfw-annotation-face nil
+                        :inherit 'calfw-day-title-face)
+    (set-face-attribute 'calfw-disable-face nil
+                        :inherit 'shadow)
+    (set-face-attribute 'calfw-today-title-face nil
+                        :inherit 'calfw-day-title-face
+                        :background 'unspecified
+                        :foreground (doom-color 'yellow)
+                        :weight 'bold)
+    (set-face-attribute 'calfw-today-face nil
+                        :inherit 'calfw-sanitized-face
+                        :background 'unspecified
+                        :foreground 'unspecified
+                        :weight 'bold)
+    (set-face-attribute 'calfw-toolbar-face nil
+                        :inherit 'calfw-day-title-face
+                        :background 'unspecified
+                        :foreground 'unspecified)
+    (set-face-attribute 'calfw-toolbar-button-off-face nil
+                        :inherit 'calfw-toolbar-face
+                        :background 'unspecified
+                        :foreground 'unspecified)
+    (set-face-attribute 'calfw-toolbar-button-on-face nil
+                        :inherit 'calfw-toolbar-face
+                        :background 'unspecified
+                        :foreground 'unspecified))
+  (with-eval-after-load 'calfw (coba-calfw-set-faces))
+  (add-hook 'after-load-theme-hook #'coba-calfw-set-faces))
 
 (use-package calfw-org
   :straight (:type git
                    :host github
-                   :repo "kiwanami/emacs-calfw"))
+                   :repo "kiwanami/emacs-calfw")
+  :config
+  (defun coba-calfw-org-open-agenda-week ()
+    "Rewritten from calfw-org's `calfw-org-open-agenda-day'"
+    (interactive)
+    (let ((date (calfw-cursor-to-nearest-date)))
+      (when date
+        (org-agenda-list nil (calendar-absolute-from-gregorian date) 7)))))
 
 (use-package gt
   :straight t

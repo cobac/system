@@ -1614,6 +1614,14 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (setq gt-langs '(nl en))
   (setq gt-default-translator (gt-translator :engines (gt-google-engine) :render (gt-buffer-render))))
 
+(use-package claude-code-ide
+  :straight (:type git
+                   :host github
+                   :repo "manzaltu/claude-code-ide.el")
+  :config
+  (coba-leader-def "Y" 'claude-code-ide-menu)
+  (claude-code-ide-emacs-tools-setup))
+
 (use-package monet
   :custom
   (monet-ediff-split-window-direction)

@@ -434,7 +434,9 @@ targets."
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides
-   '((file (styles basic partial-completion)))))
+   '((file (styles basic partial-completion))))
+  (completion-category-defaults nil)
+  (completion-pcm-leading-wildcard t))
 
 (use-package prescient
   :straight t

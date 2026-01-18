@@ -209,7 +209,7 @@
     "gD"
     'eldoc
     "gi"
-    'consult-imenu
+    'consult-imenu-multi
     "C-j"
     '(lambda ()
        (interactive)

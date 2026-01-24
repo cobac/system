@@ -89,6 +89,10 @@
             PreferredAuthentications publickey
             IdentityFile ~/.ssh/coba
 
+          Host codeberg.org
+            User git
+            IDentityFile ~/.ssh/coba
+
           # Host serba
           #   HostName [[IP]]
           #   IdentityFile ~/.ssh/coba

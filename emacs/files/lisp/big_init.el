@@ -662,3 +662,22 @@
   (add-hook 'mmm-mode-hook
             (lambda ()
               (set-face-background 'mmm-default-submode-face nil))))
+
+(use-package gdscript-mode
+  :straight (gdscript-mode
+             :type git
+             :host github
+             :repo "godotengine/emacs-gdscript-mode")
+  :hook (gdscript-mode . eglot-ensure)
+  :custom
+  (gdscript-use-tab-indents nil)
+  (gdscript-indent-offset 4)
+  (gdscript-gdformat-save-and-format t)
+  :config
+  ;; needs to be `after-save' instead of `before-save' because `gdscript-format-buffer' calls `save-buffer'...
+  (add-hook 'after-save-hook 'gdscript-format-buffer 'local)
+  (general-def
+    'gdscript-mode-map
+    :states
+    '(motion visual normal emacs insert)
+    "C-i" 'gdscript-completion-insert-file-path-at-point))

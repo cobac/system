@@ -1457,13 +1457,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
                                 (point-max)))
     nil 'make-it-local)))
 
-;; (setq compile-command
-;;       '(concat
-;;         "cd "
-;;         (file-name-directory
-;;          (locate-dominating-file (buffer-file-name) "Makefile"))
-;;         " && make "))
-
 (coba-leader-def
   "CC" 'project-compile
   "Cc" 'compile)

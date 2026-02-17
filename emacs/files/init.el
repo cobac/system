@@ -1613,7 +1613,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
                    :repo "manzaltu/claude-code-ide.el")
   :custom (claude-code-ide-use-side-window nil)
   :config
-  (coba-leader-def "Y" 'claude-code-ide-menu)
+  (coba-leader-def "I" 'claude-code-ide-menu)
   (claude-code-ide-emacs-tools-setup))
 
 (use-package monet

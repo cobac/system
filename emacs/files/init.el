@@ -1611,6 +1611,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :straight (:type git
                    :host github
                    :repo "manzaltu/claude-code-ide.el")
+  :custom (claude-code-ide-use-side-window nil)
   :config
   (coba-leader-def "Y" 'claude-code-ide-menu)
   (claude-code-ide-emacs-tools-setup))

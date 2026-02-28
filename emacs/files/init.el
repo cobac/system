@@ -536,7 +536,9 @@ targets."
   "l"
   'evil-window-next
   "bs"
-  'save-some-buffers)
+  'save-some-buffers
+  "br"
+  'rename-buffer)
 
 (use-package openwith
   :straight (:type git

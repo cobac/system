@@ -675,6 +675,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (set-face-attribute 'org-headline-done nil :strike-through t)
   (setq org-agenda-files
         '("~/docs/org/todo.org"
+          "~/docs/org/work.org"
           "~/docs/org/refile.org"
           "~/docs/org/annuals.org")
         org-agenda-span 7

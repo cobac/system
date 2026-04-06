@@ -63,6 +63,11 @@
         src: files/kitty
         dest: /home/coba/.config/
 
+    - name: Copy vopono conf
+      ansible.builtin.copy:
+        src: files/vopono
+        dest: /home/coba/.config/
+
     - name: Configure git
       community.general.git_config:
         name: "{{ item.name }}"

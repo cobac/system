@@ -617,7 +617,10 @@ From https://www.reddit.com/r/emacs/comments/ja97xs"
     "Open magit-status in full screen."
     (magit-status)
     (delete-other-windows))
-  (evil-set-initial-state 'magit-commit-message-section-map 'insert))
+  (evil-set-initial-state 'magit-commit-message-section-map 'insert)
+  (magit-add-section-hook 'magit-status-sections-hook
+                          'magit-insert-worktrees
+                          'magit-insert-status-headers t))
 
 ;; (use-package forge
 ;;   :straight t

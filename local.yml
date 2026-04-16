@@ -68,6 +68,11 @@
         src: files/vopono
         dest: /home/coba/.config/
 
+    - name: Copy zathura conf
+      ansible.builtin.copy:
+        src: files/zathurarc
+        dest: /home/coba/.config/zathura/
+
     - name: Configure git
       community.general.git_config:
         name: "{{ item.name }}"

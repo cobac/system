@@ -955,6 +955,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (setq org-modern-keyword nil
         org-modern-todo nil
         org-modern-tag nil
+        org-modern-footnote nil
         org-modern-star 'replace
         org-modern-block-name nil))
 

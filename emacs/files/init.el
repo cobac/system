@@ -295,6 +295,19 @@
     "C-i"
     'better-jumper-jump-forward))
 
+(use-package expand-region
+  :straight t
+  :config
+  (general-def
+    :keymaps 'override
+    "C-f" 'er/expand-region
+    "C-b" 'er/contract-region)
+  ;; whyy
+  (general-def
+    :keymaps '(evil-motion-state-map evil-normal-state-map)
+    "C-f" nil
+    "C-b" nil))
+
 ;; (use-package git-timemachine
 ;;   :straight t
 ;;   :after evil

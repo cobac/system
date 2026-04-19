@@ -256,20 +256,6 @@
   :straight t
   :after evil)
 
-(use-package evil-snipe
-  :after evil
-  :straight t
-  :custom
-  (evil-snipe-smart-case t)
-  (evil-snipe-show-prompt nil)
-  (evil-snipe-auto-scroll nil)
-  (evil-snipe-scope 'whole-buffer)
-  (evil-snipe-repeat-scope 'whole-buffer)
-  :config
-  (evil-snipe-mode 1)
-  (evil-snipe-override-mode 1)
-  :hook (magit-mode-hook . turn-off-evil-snipe-override-mode))
-
 (use-package evil-surround
   :straight t
   :after evil

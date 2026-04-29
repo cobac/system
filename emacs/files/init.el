@@ -1619,7 +1619,27 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :custom (claude-code-ide-use-side-window nil)
   :config
   (coba-leader-def "I" 'claude-code-ide-menu)
-  (claude-code-ide-emacs-tools-setup))
+  (claude-code-ide-emacs-tools-setup)
+  (defun coba-claude-code-ide-in-subdir (parent prompt)
+    "Prompt for a subdirectory of PARENT (default \"test\") and start Claude Code there."
+    (let* ((subdir (read-string prompt "test"))
+           (dir (expand-file-name subdir parent))
+           (default-directory (file-name-as-directory dir)))
+      (make-directory dir t)
+      (claude-code-ide)))
+  (defun coba-claude-code-ide-tmp ()
+    "Start a new Claude Code session in a subdirectory of /tmp."
+    (interactive)
+    (coba-claude-code-ide-in-subdir "/tmp" "Subdirectory under /tmp: "))
+  (defun coba-claude-code-ide-downloads ()
+    "Start a new Claude Code session in a subdirectory of ~/Downloads."
+    (interactive)
+    (coba-claude-code-ide-in-subdir "~/Downloads" "Subdirectory under ~/Downloads: "))
+  (with-eval-after-load 'claude-code-ide-transient
+    (transient-append-suffix 'claude-code-ide-menu "l"
+      '("D" "New session in ~/Downloads/<subdir>" coba-claude-code-ide-downloads))
+    (transient-append-suffix 'claude-code-ide-menu "l"
+      '("T" "New session in /tmp/<subdir>" coba-claude-code-ide-tmp))))
 
 (use-package monet
   :custom

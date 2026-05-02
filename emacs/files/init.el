@@ -28,7 +28,7 @@
 
 (recentf-mode 1)
 
-(setq recentf-max-saved-items 100)
+(setq recentf-max-saved-items 10000)
 
 (run-at-time nil (* 2 60) 'recentf-save-list)
 

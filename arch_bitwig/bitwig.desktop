@@ -1,0 +1,12 @@
+[Desktop Entry]
+ype=Application
+Name=Bitwig Studio (Nix)
+GenericName=Digital Audio Workstation
+Comment=arch_bitwig flake
+Exec=nix run /home/coba/docs/repos/system/arch_bitwig -- %F
+Icon=bitwig-studio
+Terminal=false
+Categories=AudioVideo;Audio;
+MimeType=application/x-bitwig-project;
+StartupNotify=true
+StartupWMClass=bitwig-studio

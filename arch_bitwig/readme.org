@@ -1,0 +1,11 @@
+bitwig licensing model 1yr of updates from the moment you pay
+
+until v5.2.7 for me
+
+arch packaging model rolling release and dynamically linked vulkan
+
+need to pin and run on it's own environment
+
+```
+cp bitwig.desktop ~/.local/share/applications/
+```

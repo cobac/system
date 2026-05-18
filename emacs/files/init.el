@@ -62,6 +62,12 @@
 ;; Keep init.el clean
 (setq custom-file (expand-file-name "emacs-customize.el" user-emacs-directory))
 
+(set-face-attribute 'variable-pitch nil :family "IBM Plex Serif")
+
+(setq shr-use-fonts nil)
+
+(set-face-attribute 'fixed-pitch nil :family "IBM Plex Mono")
+
 (load custom-file 'noerror)
 
 (setq delete-old-versions -1)

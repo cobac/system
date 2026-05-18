@@ -1251,15 +1251,16 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package elfeed
   :straight t
+  :custom
+  (elfeed-feeds '("https://archlinux.org/feeds/news/"
+                  "https://cobac.eu/rss.xml"))
   :general
   (coba-leader-def
     "E"
     '(lambda ()
        (interactive)
        (elfeed)
-       (elfeed-update)))
-  :config
-  (setq elfeed-feeds '(("https://archlinux.org/feeds/news/" Arch))))
+       (elfeed-update))))
 
 ;; Dired
 

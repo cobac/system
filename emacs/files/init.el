@@ -1641,10 +1641,12 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (defun coba-claude-code-ide-downloads ()
     "Start a new Claude Code session in a subdirectory of ~/Downloads."
     (interactive)
-    (coba-claude-code-ide-in-subdir "~/Downloads" "Subdirectory under ~/Downloads: "))
+    (coba-claude-code-ide-in-subdir "~/Downloads"
+                                    "Subdirectory under ~/Downloads: "))
   (with-eval-after-load 'claude-code-ide-transient
     (transient-append-suffix 'claude-code-ide-menu "l"
-      '("D" "New session in ~/Downloads/<subdir>" coba-claude-code-ide-downloads))
+      '("D" "New session in ~/Downloads/<subdir>"
+        coba-claude-code-ide-downloads))
     (transient-append-suffix 'claude-code-ide-menu "l"
       '("T" "New session in /tmp/<subdir>" coba-claude-code-ide-tmp))))
 

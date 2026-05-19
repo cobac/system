@@ -588,7 +588,8 @@ targets."
     "g"
     '(lambda ()
        (interactive)
-       (coba-magit-status)))
+       (coba-magit-status))
+    "G" 'magit-blame-addition)
   (general-def
     :keymaps
     'git-rebase-mode-map

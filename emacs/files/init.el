@@ -1644,6 +1644,19 @@ https://blog.jmthornton.net/p/emacs-project-override"
     (interactive)
     (coba-claude-code-ide-in-subdir "~/Downloads"
                                     "Subdirectory under ~/Downloads: "))
+  (defun coba-claude-code-ide-vterm-scroll-keys ()
+    (when (eq claude-code-ide-terminal-backend 'vterm)
+      (general-def
+        :states 'insert
+        :keymaps 'local
+        "C-j" (lambda ()
+                (interactive)
+                (vterm-send-key "<next>"))
+        "C-k" (lambda ()
+                (interactive)
+                (vterm-send-key "<prior>")))))
+  (advice-add 'claude-code-ide--setup-terminal-keybindings
+              :after #'coba-claude-code-ide-vterm-scroll-keys)
   (with-eval-after-load 'claude-code-ide-transient
     (transient-append-suffix 'claude-code-ide-menu "l"
       '("D" "New session in ~/Downloads/<subdir>"

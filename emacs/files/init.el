@@ -1506,9 +1506,9 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package nix-mode
   :straight t)
 
-(use-package direnv
+(use-package envrc
   :straight t
-  :config (direnv-mode))
+  :config (envrc-global-mode))
 
 (use-package terraform-mode
   :straight t

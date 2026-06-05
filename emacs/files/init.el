@@ -1628,22 +1628,49 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :config
   (coba-leader-def "I" 'claude-code-ide-menu)
   (claude-code-ide-emacs-tools-setup)
+  (defun coba-claude-code-ide--call-with-skip-permissions (fn)
+    (let ((claude-code-ide-cli-extra-flags
+           (if (member "--dangerously-skip-permissions"
+                       (ignore-errors (transient-args
+                                       'claude-code-ide-menu)))
+               (string-trim (concat claude-code-ide-cli-extra-flags
+                                    " --dangerously-skip-permissions"))
+             claude-code-ide-cli-extra-flags)))
+      (funcall fn)))
+  (defun coba-claude-code-ide--add-menu-entry (key fn)
+    (unless (ignore-errors (transient-get-suffix 'claude-code-ide-menu
+                                                 key))
+      (funcall fn)))
+  (defun coba-claude-code-ide-start ()
+    (interactive)
+    (coba-claude-code-ide--call-with-skip-permissions
+     #'claude-code-ide--start-if-no-session))
+  (defun coba-claude-code-ide-continue ()
+    (interactive)
+    (coba-claude-code-ide--call-with-skip-permissions
+     #'claude-code-ide--continue-if-no-session))
+  (defun coba-claude-code-ide-resume ()
+    (interactive)
+    (coba-claude-code-ide--call-with-skip-permissions
+     #'claude-code-ide--resume-if-no-session))
   (defun coba-claude-code-ide-in-subdir (parent prompt)
-    "Prompt for a subdirectory of PARENT (default \"test\") and start Claude Code there."
     (let* ((subdir (read-string prompt "test"))
            (dir (expand-file-name subdir parent))
            (default-directory (file-name-as-directory dir)))
       (make-directory dir t)
       (claude-code-ide)))
   (defun coba-claude-code-ide-tmp ()
-    "Start a new Claude Code session in a subdirectory of /tmp."
     (interactive)
-    (coba-claude-code-ide-in-subdir "/tmp" "Subdirectory under /tmp: "))
+    (coba-claude-code-ide--call-with-skip-permissions
+     (lambda ()
+       (coba-claude-code-ide-in-subdir "/tmp"
+                                       "Subdirectory under /tmp: "))))
   (defun coba-claude-code-ide-downloads ()
-    "Start a new Claude Code session in a subdirectory of ~/Downloads."
     (interactive)
-    (coba-claude-code-ide-in-subdir "~/Downloads"
-                                    "Subdirectory under ~/Downloads: "))
+    (coba-claude-code-ide--call-with-skip-permissions
+     (lambda ()
+       (coba-claude-code-ide-in-subdir "~/Downloads"
+                                       "Subdirectory under ~/Downloads: "))))
   (defun coba-claude-code-ide-vterm-scroll-keys ()
     (when (eq claude-code-ide-terminal-backend 'vterm)
       (general-def
@@ -1657,12 +1684,55 @@ https://blog.jmthornton.net/p/emacs-project-override"
                 (vterm-send-key "<prior>")))))
   (advice-add 'claude-code-ide--setup-terminal-keybindings
               :after #'coba-claude-code-ide-vterm-scroll-keys)
+  (defun coba-claude-code-ide--force-single-column ()
+    "Stack `claude-code-ide-menu' groups vertically, magit-style.
+Runs from `transient-setup-buffer-hook' before each redraw and toggles
+the buffer-local `transient-force-single-column' only for this prefix, so
+other transients keep their multi-column layout."
+    (setq-local transient-force-single-column
+                (eq (oref transient--prefix command) 'claude-code-ide-menu)))
+  (add-hook 'transient-setup-buffer-hook
+            #'coba-claude-code-ide--force-single-column)
   (with-eval-after-load 'claude-code-ide-transient
-    (transient-append-suffix 'claude-code-ide-menu "l"
-      '("D" "New session in ~/Downloads/<subdir>"
-        coba-claude-code-ide-downloads))
-    (transient-append-suffix 'claude-code-ide-menu "l"
-      '("T" "New session in /tmp/<subdir>" coba-claude-code-ide-tmp))))
+    (coba-claude-code-ide--add-menu-entry "-y"
+                                          (lambda ()
+                                            (transient-insert-suffix
+                                              'claude-code-ide-menu
+                                              '(1
+                                                0)
+                                              ["Arguments"
+                                               ("-y"
+                                                "Skip permissions"
+                                                "--dangerously-skip-permissions")])))
+    (dolist (spec '(("s" coba-claude-code-ide-start
+                     claude-code-ide--start-description)
+                    ("c" coba-claude-code-ide-continue
+                     claude-code-ide--continue-description)
+                    ("r" coba-claude-code-ide-resume
+                     claude-code-ide--resume-description)))
+      (transient-replace-suffix 'claude-code-ide-menu (car spec)
+        (list (nth 0 spec)
+              (nth 1 spec) :description (nth 2 spec))))
+    (coba-claude-code-ide--add-menu-entry "D"
+                                          (lambda ()
+                                            (transient-append-suffix
+                                              'claude-code-ide-menu
+                                              "l"
+                                              '("D"
+                                                "New session in ~/Downloads/<subdir>"
+                                                coba-claude-code-ide-downloads))))
+    (coba-claude-code-ide--add-menu-entry "T"
+                                          (lambda ()
+                                            (transient-append-suffix
+                                              'claude-code-ide-menu
+                                              "l"
+                                              '("T"
+                                                "New session in /tmp/<subdir>"
+                                                coba-claude-code-ide-tmp))))
+    ;; Default the skip-permissions switch to off each time the menu opens.
+    (oset (get 'claude-code-ide-menu 'transient--prefix)
+          init-value (lambda (obj)
+                       (oset obj value nil)))))
 
 (use-package monet
   :custom

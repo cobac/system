@@ -1547,6 +1547,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (general-def calfw-calendar-mode-map
     :keymaps 'calfw-calendar-mode-map
     :states '(normal motion)
+    "q" 'calfw-org-clean-exit
     "]]" 'calfw-navi-next-view
     "[[" 'calfw-navi-prev-view
     "." 'calfw-navi-goto-today-command

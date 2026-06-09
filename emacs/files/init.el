@@ -652,6 +652,14 @@ From https://www.reddit.com/r/emacs/comments/ja97xs"
              :host github
              :repo "KarimAziev/prettier-elisp"))
 
+(use-package paren-face
+  :straight t
+  :init (global-paren-face-mode)
+  :config
+  (set-face-attribute 'parenthesis nil
+                      :inherit 'font-lock-comment-face
+                      :foreground 'unspecified))
+
 ;; Project
 (defun coba-project-root-override (dir)
   "Find DIR's project root by searching for a '.project.el' file.

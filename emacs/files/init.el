@@ -640,6 +640,11 @@ From https://www.reddit.com/r/emacs/comments/ja97xs"
     "C-S-t" 'magit-todos-list))
 
 ;; Lisp
+
+(use-package evil-cleverparens
+  :straight t
+  :hook (emacs-lisp-mode scheme-mode))
+
 (coba-local-leader-def
   :keymaps
   '(emacs-lisp-mode-map

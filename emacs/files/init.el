@@ -1678,6 +1678,32 @@ https://blog.jmthornton.net/p/emacs-project-override"
     (transient-append-suffix 'claude-code-ide-menu "l"
       '("T" "New session in /tmp/<subdir>" coba-claude-code-ide-tmp))))
 
+(use-package codex-ide
+  :straight (:type git
+                   :host github
+                   :repo "dgillis/emacs-codex-ide")
+  :config
+  (coba-leader-def "U" 'codex-ide-menu)
+  (defun coba-codex-ide-in-subdir (parent prompt)
+    "Prompt for a subdirectory of PARENT (default \"test\") and start Codex there."
+    (let* ((subdir (read-string prompt "test"))
+           (dir (expand-file-name subdir parent))
+           (default-directory (file-name-as-directory dir)))
+      (make-directory dir t)
+      (codex-ide)))
+  (with-eval-after-load 'codex-ide-transient
+    (transient-append-suffix 'codex-ide-menu "l"
+      '("L" "New session in ~/Downloads/<subdir>"
+        (lambda ()
+          (interactive)
+          (coba-codex-ide-in-subdir "~/Downloads"
+                                    "Subdirectory under ~/Downloads: "))))
+    (transient-append-suffix 'codex-ide-menu "l"
+      '("T" "New session in /tmp/<subdir>"
+        (lambda ()
+          (interactive)
+          (coba-codex-ide-in-subdir "/tmp" "Subdirectory under /tmp: "))))))
+
 (use-package monet
   :custom
   (monet-ediff-split-window-direction)

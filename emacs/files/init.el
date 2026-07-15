@@ -1702,7 +1702,12 @@ https://blog.jmthornton.net/p/emacs-project-override"
       '("T" "New session in /tmp/<subdir>"
         (lambda ()
           (interactive)
-          (coba-codex-ide-in-subdir "/tmp" "Subdirectory under /tmp: "))))))
+          (coba-codex-ide-in-subdir "/tmp" "Subdirectory under /tmp: ")))))
+  ;; change max preset to be fast=off
+  (let
+      ((max-preset
+        (alist-get "Max" codex-ide-config-presets nil nil #'string=)))
+    (setf (plist-get max-preset 'fast) "off")))
 
 (use-package monet
   :custom

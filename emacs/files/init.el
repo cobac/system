@@ -487,6 +487,14 @@ targets."
   'find-file
   "fr"
   'recentf
+  "fy"
+  '(lambda ()
+     (interactive)
+     (if buffer-file-name
+         (progn
+           (kill-new buffer-file-name)
+           (message "%s" buffer-file-name))
+       (user-error "Buffer is not visiting a file")))
   "FF"
   'project-find-file
   ;; "fz" 'counsel-fzf

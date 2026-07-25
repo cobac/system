@@ -1642,6 +1642,10 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (setq gt-langs '(nl en))
   (setq gt-default-translator (gt-translator :engines (gt-google-engine) :render (gt-buffer-render))))
 
+(use-package lilypond-mode
+  ;; arch package installs it
+  :mode ("\\.ly\\'" "\\.ily\\'"))
+
 (use-package claude-code-ide
   :straight (:type git
                    :host github

@@ -1693,7 +1693,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package codex-ide
   :straight (:type git
                    :host github
-                   :repo "dgillis/emacs-codex-ide")
+                   :repo "cobac/emacs-codex-ide")
   :config
   (coba-leader-def "U" 'codex-ide-menu)
   (evil-set-initial-state 'codex-ide-status-mode 'motion)

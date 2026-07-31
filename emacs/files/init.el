@@ -1272,6 +1272,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package auto-dictionary
   :straight t
   :config
+  (setopt adict-change-dictionary-hook nil)
   (add-hook
    'flyspell-mode-hook (lambda ()
                          (auto-dictionary-mode 1)))

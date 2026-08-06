@@ -1270,9 +1270,16 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 (use-package auto-dictionary
-  :straight t
+  :straight (:type git
+                   :host github
+                   ;; fork that uses ispell instead of hardcoded word lists.
+                   ;; it also only scans only 100 words before and after the
+                   ;; cursor instead of the whole buffer,
+                   ;; that should be enough to prevent hangs
+                   :repo "813gan/auto-dictionary-mode")
   :config
-  (setopt adict-change-dictionary-hook nil)
+  (setopt adict-operation-mode 'ispell
+          adict-dictionary-list-ispell '("en" "es" "nl"))
   (add-hook
    'flyspell-mode-hook (lambda ()
                          (auto-dictionary-mode 1)))

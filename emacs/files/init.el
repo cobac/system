@@ -503,7 +503,8 @@ targets."
         '(("fi" . "~/docs/repos/system/emacs/files/init.el")
           ("fs" . "~/docs/repos/system/")
           ("fp" . "~/docs/")
-          ("fo" . "~/docs/oros/main.ledger")))
+          ("fo" . "~/docs/oros/main.ledger")
+          ("fe" . "~/.emacs.d/")))
        (find-file-or-ido-dir
         (lambda (path)
           (lambda ()

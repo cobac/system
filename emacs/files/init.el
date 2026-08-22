@@ -1723,8 +1723,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package codex-ide
   :straight (:type git
                    :host github
-                   :repo "cobac/emacs-codex-ide"
-                   :branch "coba/codex-resume-all")
+                   :repo "cobac/emacs-codex-ide")
   :config
   (coba-leader-def "U" 'codex-ide-menu)
   (evil-set-initial-state 'codex-ide-status-mode 'motion)

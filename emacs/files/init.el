@@ -470,22 +470,6 @@ targets."
   "f"
   '(:ignore t
             :which-key "Files")
-  "fi"
-  '(lambda ()
-     (interactive)
-     (find-file "~/docs/repos/system/emacs/files/init.el"))
-  "fs"
-  '(lambda ()
-     (interactive)
-     (ido-find-file-in-dir "~/docs/repos/system/"))
-  "fp"
-  '(lambda ()
-     (interactive)
-     (ido-find-file-in-dir "~/docs/"))
-  "fo"
-  '(lambda ()
-     (interactive)
-     (find-file "~/docs/oros/main.ledger"))
   "ff"
   'find-file
   "fr"
@@ -514,6 +498,29 @@ targets."
   "¡"
   'shell-command
   ":" 'eval-expression)
+
+(let* ((file-pairs
+        '(("fi" . "~/docs/repos/system/emacs/files/init.el")
+          ("fs" . "~/docs/repos/system/")
+          ("fp" . "~/docs/")
+          ("fo" . "~/docs/oros/main.ledger")))
+       (find-file-or-ido-dir
+        (lambda (path)
+          (lambda ()
+            (interactive)
+            (cond ((file-directory-p path)
+                   (ido-find-file-in-dir path))
+                  ((file-regular-p path)
+                   (find-file path))
+                  (t
+                   (error "Path is neither a file nor directory: %s"
+                          path))))))
+       (flat-list-of-pairs
+        (mapcan (lambda (pair)
+                  (list (car pair)
+                        (funcall find-file-or-ido-dir (cdr pair))))
+                file-pairs)))
+  (eval (cons 'coba-leader-def flat-list-of-pairs) t))
 
 (use-package hydra
   :straight t

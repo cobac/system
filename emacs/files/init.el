@@ -1757,7 +1757,13 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package codex-ide
   :straight (:type git
                    :host github
-                   :repo "cobac/emacs-codex-ide")
+                   :repo "dgillis/emacs-codex-ide"
+                   :remote "origin"
+                   :branch "main"
+                   :fork (:host github
+                          :repo "cobac/emacs-codex-ide"
+                          :remote "cobac"
+                          :branch "main"))
   :custom
   (codex-ide-renderer-markdown-show-code-block-fences t)
   :config

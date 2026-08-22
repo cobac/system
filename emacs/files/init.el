@@ -1735,10 +1735,13 @@ https://blog.jmthornton.net/p/emacs-project-override"
     (add-hook 'codex-ide-status-mode-hook #'evil-normalize-keymaps))
   (with-eval-after-load 'codex-ide-session-list
     (evil-make-overriding-map codex-ide-session-list-mode-map 'motion)
-    (add-hook 'codex-ide-session-list-mode-hook #'evil-normalize-keymaps))
+    (add-hook 'codex-ide-session-list-mode-hook
+              #'evil-normalize-keymaps))
   (with-eval-after-load 'codex-ide-session-buffer-list
-    (evil-make-overriding-map codex-ide-session-buffer-list-mode-map 'motion)
-    (add-hook 'codex-ide-session-buffer-list-mode-hook #'evil-normalize-keymaps))
+    (evil-make-overriding-map codex-ide-session-buffer-list-mode-map
+                              'motion)
+    (add-hook 'codex-ide-session-buffer-list-mode-hook
+              #'evil-normalize-keymaps))
   (defun coba-codex-ide-in-subdir (parent prompt)
     "Prompt for a subdirectory of PARENT (default \"test\") and start Codex there."
     (let* ((subdir (read-string prompt "test"))

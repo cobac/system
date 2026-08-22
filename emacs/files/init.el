@@ -1440,7 +1440,18 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 ;; Polymode
 (use-package polymode
-  :straight t)
+  :straight t
+  :config
+  (let ((cancel-buffer-local-timers
+         (lambda ()
+           (dolist (variable '(aggressive-indent--idle-timer
+                               adict-timer))
+             (when (and (boundp variable)
+                        (timerp (symbol-value variable)))
+               (cancel-timer (symbol-value variable))
+               (set variable nil))))))
+    (add-hook 'change-major-mode-hook cancel-buffer-local-timers)
+    (add-hook 'kill-buffer-hook cancel-buffer-local-timers)))
 
 (use-package poly-org
   :straight (:type git

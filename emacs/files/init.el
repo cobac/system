@@ -504,7 +504,7 @@ targets."
           ("fs" . "~/docs/repos/system/")
           ("fp" . "~/docs/")
           ("fo" . "~/docs/oros/main.ledger")
-          ("fe" . "~/.emacs.d/")))
+          ("fe" . "~/.emacs.d/straight/repos/")))
        (find-file-or-ido-dir
         (lambda (path)
           (lambda ()

@@ -119,6 +119,8 @@
 
 (put #'narrow-to-region 'disabled nil)
 
+(setopt help-window-select t)
+
 (when (eq system-type 'darwin)
   (load "~/.emacs.d/lisp/emulate-mac-keyboard-mode.el")
   (emulate-mac-spanish-keyboard-mode)

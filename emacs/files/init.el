@@ -1,4 +1,7 @@
+;;; -*- lexical-binding: t; -*-
+
 (defvar bootstrap-version)
+
 (let ((bootstrap-file
        (expand-file-name
         "straight/repos/straight.el/bootstrap.el"

@@ -1724,6 +1724,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :straight (:type git
                    :host github
                    :repo "cobac/emacs-codex-ide")
+  :custom
+  (codex-ide-renderer-markdown-show-code-block-fences t)
   :config
   (coba-leader-def "U" 'codex-ide-menu)
   (evil-set-initial-state 'codex-ide-status-mode 'motion)

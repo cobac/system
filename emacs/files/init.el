@@ -1022,7 +1022,9 @@ https://blog.jmthornton.net/p/emacs-project-override"
     ","
     'org-roam-buffer-toggle
     "i"
-    'org-id-get-create)
+    'org-id-get-create
+    "r"
+    'coba-org-roam-node-rename)
   (general-unbind
     :keymaps 'org-roam-mode-map
     :states
@@ -1066,6 +1068,36 @@ https://blog.jmthornton.net/p/emacs-project-override"
               ":PROPERTIES:\n:ROAM_ALIASES: \"${author-abbrev}(${year}): ${title}\"\n:END:\n#+STARTUP: latexpreview\n#+filetags:\n#+title: ${citekey}\n")
              :immediate-finish t
              :unnarrowed t)))
+  (defun coba-org-roam-node-rename ()
+    "Rename the Org-roam node at point."
+    (interactive)
+    (let* ((node (org-roam-node-at-point 'assert))
+           (title (org-trim
+                   (read-string "New title: "
+                                (org-roam-node-title node)))))
+      (when (string-empty-p title)
+        (user-error "Node title cannot be empty"))
+      (org-with-wide-buffer
+       (if
+           ;; file-level node
+           (zerop (org-roam-node-level node))
+           (let* ((old-file (buffer-file-name))
+                  (slug (org-roam-node-slug
+                         (org-roam-node-create :title title)))
+                  (new-file (expand-file-name
+                             (concat slug ".org")
+                             (file-name-directory old-file)))
+                  (rename-file-p
+                   (not (equal (file-truename old-file)
+                               (file-truename new-file)))))
+             (when (and rename-file-p (file-exists-p new-file))
+               (user-error "File already exists: %s" new-file))
+             (org-roam-set-keyword "title" title)
+             (save-buffer)
+             (when rename-file-p
+               (rename-visited-file new-file)))
+         ;; headline-level node
+         (org-edit-headline title)))))
   (evil-set-initial-state 'org-roam-mode 'motion)
   ;; Show hierarchy of nodes from https://github.com/org-roam/org-roam/issues/1565
   ;; (cl-defmethod org-roam-node-filetitle ((node org-roam-node))

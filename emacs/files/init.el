@@ -686,6 +686,12 @@ From https://www.reddit.com/r/emacs/comments/ja97xs"
                       :inherit 'font-lock-comment-face
                       :foreground 'unspecified))
 
+
+(use-package lacarte
+  :straight t
+  :config
+  (coba-leader-def "L" #'lacarte-execute-menu-command))
+
 ;; Project
 (defun coba-project-root-override (dir)
   "Find DIR's project root by searching for a '.project.el' file.

@@ -623,8 +623,7 @@ targets."
 From https://www.reddit.com/r/emacs/comments/ja97xs"
     (interactive)
     (mapcar
-     (lambda
-       (remote) ;; Loops through the remotes returned by magit-list-remotes
+     (lambda (remote) ;; Loops through the remotes returned by magit-list-remotes
        (magit-run-git-async
         "push" "-v" remote (magit-get-current-branch))) ;; Simply run git push -v {{remote}} {{current-branch}}
      (magit-list-remotes)) ;; Returns all remotes configured
@@ -1711,7 +1710,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
                         :inherit 'calfw-toolbar-face
                         :background 'unspecified
                         :foreground 'unspecified))
-  (with-eval-after-load 'calfw (coba-calfw-set-faces))
+  (with-eval-after-load 'calfw
+    (coba-calfw-set-faces))
   (add-hook 'after-load-theme-hook #'coba-calfw-set-faces))
 
 (use-package calfw-org
@@ -1787,9 +1787,9 @@ https://blog.jmthornton.net/p/emacs-project-override"
                    :remote "origin"
                    :branch "main"
                    :fork (:host github
-                          :repo "cobac/emacs-codex-ide"
-                          :remote "cobac"
-                          :branch "main"))
+                                :repo "cobac/emacs-codex-ide"
+                                :remote "cobac"
+                                :branch "main"))
   :custom
   (codex-ide-renderer-markdown-show-code-block-fences t)
   :config
@@ -1829,9 +1829,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
           (interactive)
           (coba-codex-ide-in-subdir "/tmp" "Subdirectory under /tmp: ")))))
   ;; change max preset to be fast=off
-  (let
-      ((max-preset
-        (alist-get "Max" codex-ide-config-presets nil nil #'string=)))
+  (let ((max-preset
+         (alist-get "Max" codex-ide-config-presets nil nil #'string=)))
     (setf (plist-get max-preset 'fast) "off")))
 
 (use-package monet

@@ -5,6 +5,7 @@
   ...
 }:
 let
+  volumeSyncthing = "/media/vol_1";
   publicSSHKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE3KLmITLqzVBObYvVrzQGrCo1NMA69ptC8FO+Glvwaf coba"
   ];
@@ -24,7 +25,7 @@ in
     "flakes"
   ];
 
-  fileSystems."/media/docs" = {
+  fileSystems.${volumeSyncthing} = {
     device = "/dev/disk/by-uuid/473f8415-6796-4a74-95bc-729879e562d2";
     fsType = "ext4";
   };
@@ -94,7 +95,7 @@ in
   services.syncthing = {
     enable = true;
     user = "coba";
-    dataDir = "/home/coba";
+    dataDir = volumeSyncthing;
   };
 
   home-manager = {

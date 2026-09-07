@@ -6,6 +6,7 @@
 
   home.packages = with pkgs; [
     git
+    ncdu
   ];
 
   home.stateVersion = "25.05";

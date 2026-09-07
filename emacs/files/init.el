@@ -686,6 +686,26 @@ From https://www.reddit.com/r/emacs/comments/ja97xs"
                       :inherit 'font-lock-comment-face
                       :foreground 'unspecified))
 
+(use-package geiser
+  :straight t
+  :config
+  (coba-local-leader-def
+    :keymaps 'geiser-mode-map
+    "," #'geiser-eval-definition
+    "r" #'geiser-eval-region
+    "b" #'geiser-eval-buffer)
+  (general-def
+    :keymaps '(geiser-mode-map geiser-repl-mode-map)
+    :states '(motion normal)
+    "gD" 'geiser-doc-look-up-manual)
+  (general-def
+    :states '(motion insert)
+    :keymaps '(geiser-repl-mode-map)
+    "C-k" #'comint-previous-input
+    "C-j" #'comint-next-input))
+
+(use-package geiser-guile
+  :straight t)
 
 (use-package lacarte
   :straight t

@@ -505,6 +505,7 @@ targets."
         '(("fi" . "~/docs/repos/system/emacs/files/init.el")
           ("fs" . "~/docs/repos/system/")
           ("fp" . "~/docs/")
+          ("fP" . "~/docs/work/motherduck/repos/")
           ("fo" . "~/docs/oros/main.ledger")
           ("fe" . "~/.emacs.d/straight/repos/")))
        (find-file-or-ido-dir

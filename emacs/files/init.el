@@ -596,11 +596,7 @@ targets."
                                (list
                                 (openwith-make-extension-regexp
                                  '("pdf" "ps" "ps.gz" "dvi"))
-                                "zathura" '(file))
-                               (list
-                                (openwith-make-extension-regexp
-                                 '("png" "jpg" "jpeg" "webp"))
-                                "feh" '(file))))
+                                "zathura" '(file))))
   (openwith-mode 1))
 
 (use-package magit

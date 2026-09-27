@@ -392,8 +392,6 @@
     'comint-previous-input
     "C-S-j"
     'comint-next-input
-    "C-h"
-    'comint-previous-matching-input-from-input
     "C-ñ"
     'ess-insert-assign)
   (general-def

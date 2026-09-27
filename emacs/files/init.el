@@ -603,6 +603,20 @@ targets."
   :straight t
   :after (evil transient)
   :config
+  (defun coba-magit-remote-ssh-url
+      (read-url prompt &optional suggested-url)
+    (when (and (equal prompt "Remote url")
+               (stringp suggested-url)  ; can be nil if no origin
+               (or (string-prefix-p "https://github.com/cobac/"
+                                    suggested-url)
+                   (string-prefix-p "https://github.com/motherduckdb/"
+                                    suggested-url)))
+      (setq suggested-url
+            (concat "git@github.com:"
+                    (substring suggested-url (length "https://github.com/")))))
+    (funcall read-url prompt suggested-url))
+  (advice-remove #'magit-read-url #'coba-magit-remote-ssh-url)
+  (advice-add #'magit-read-url :around #'coba-magit-remote-ssh-url)
   (coba-leader-def
     "g"
     '(lambda ()

@@ -196,7 +196,17 @@
 
 ;; Evil
 (use-package evil
-  :straight t
+  ;; revert if emacs-evil/evil/pull/2036 goes in
+  :straight (:type git
+                   :host github
+                   :repo "emacs-evil/evil"
+                   :remote "origin"
+                   :branch "master"
+                   :fork (:host github
+                                :repo "cobac/evil"
+                                :remote "cobac"
+                                :branch
+                                "coba/maintain-minibuffer-state"))
   :init
   (setopt evil-want-keybinding nil ;; for evil-collection
           evil-respect-visual-line-mode t)

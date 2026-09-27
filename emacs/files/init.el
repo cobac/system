@@ -253,6 +253,7 @@
      info
      magit
      magit-todos
+     minibuffer
      mu4e
      nov
      org-present

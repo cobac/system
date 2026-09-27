@@ -11,7 +11,6 @@
         ;;shr-color-visible-luminance-min 80
         message-kill-buffer-on-exit t
         mu4e-index-update-error-warning nil
-        mu4e-view-show-images t
         mu4e-attachment-dir "/home/coba/Downloads"
         send-mail-function 'smtpmail-send-it
         message-send-mail-function 'smtpmail-send-it
@@ -65,9 +64,7 @@
             (smtpmail-smtp-server . "mail.your-server.de")
             (smtpmail-stream-type . ssl)
             (smtpmail-smtp-service . 465)))))
-  (setq mu4e-split-view 'horizontal
-        mu4e-view-show-addresses t
-        mu4e-view-show-images t)
+  (setq mu4e-split-view 'horizontal)
   (add-to-list
    'mu4e-view-actions '("browser" . mu4e-action-view-in-browser)
    t)
@@ -84,7 +81,8 @@
      :prompt "Archive"
      :dyn-target (lambda (target msg)
                    (mu4e-get-refile-folder msg))
-     :show-target (lambda (target) "archive")
+     :show-target (lambda (target)
+                    "archive")
      :action
      (lambda (docid msg target)
        (mu4e--server-move
@@ -97,7 +95,7 @@
     "A"
     'mu4e-headers-mark-for-archive)
   (require 'mu4e-icalendar)
-  (mu4e-icalendar-setup)
+  (gnus-icalendar-setup)
   (setq gnus-icalendar-org-capture-file "~/docs/org/todo.org"
         gnus-icalendar-org-capture-headline '("Other"))
   (gnus-icalendar-org-setup))
@@ -480,7 +478,10 @@
     (let ((val (read-from-minibuffer "Number of threads: ")))
       (setq julia-vterm-repl-program
             (concat "/usr/bin/julia -t " val))))
-  (setq display-buffer-reuse-frames t))
+  (add-to-list 'display-buffer-alist
+               '("\\*julia:"
+                 (display-buffer-reuse-window)
+                 (reusable-frames . t))))
 
 (use-package ob-julia-vterm
   :straight t

@@ -1801,11 +1801,13 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
     (when-let ((label (alist-get 'label metadata)))
       (with-current-buffer shell-buffer
         (shell-maker-set-buffer-name shell-buffer label))))
+  :init
+  ;; `defvar'
+  (setq agent-shell-markdown-table-zebra-stripe nil)
   :custom
   (agent-shell-agent-configs
    (list #'agent-shell-anthropic-make-claude-code-config
          #'agent-shell-openai-make-codex-config))
-  (agent-shell-markdown-table-zebra-stripe nil)
   (agent-shell-header-style 'text)
   (agent-shell-chat-mode-enabled nil)
   (agent-shell-busy-submit-default-function

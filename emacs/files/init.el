@@ -1758,111 +1758,164 @@ https://blog.jmthornton.net/p/emacs-project-override"
   ;; arch package installs it
   :mode ("\\.ly\\'" "\\.ily\\'"))
 
-(use-package claude-code-ide
-  :straight (:type git
-                   :host github
-                   :repo "manzaltu/claude-code-ide.el")
-  :custom (claude-code-ide-use-side-window nil)
-  :config
-  (coba-leader-def "I" 'claude-code-ide-menu)
-  (claude-code-ide-emacs-tools-setup)
-  (defun coba-claude-code-ide-in-subdir (parent prompt)
-    "Prompt for a subdirectory of PARENT (default \"test\") and start Claude Code there."
-    (let* ((subdir (read-string prompt "test"))
-           (dir (expand-file-name subdir parent))
-           (default-directory (file-name-as-directory dir)))
-      (make-directory dir t)
-      (claude-code-ide)))
-  (defun coba-claude-code-ide-tmp ()
-    "Start a new Claude Code session in a subdirectory of /tmp."
+(use-package agent-shell
+  :straight t
+  :preface
+  (defun coba-agent-shell-return-dwim ()
+    "activate the button at point, otherwise newline."
     (interactive)
-    (coba-claude-code-ide-in-subdir "/tmp" "Subdirectory under /tmp: "))
-  (defun coba-claude-code-ide-downloads ()
-    "Start a new Claude Code session in a subdirectory of ~/Downloads."
-    (interactive)
-    (coba-claude-code-ide-in-subdir "~/Downloads"
-                                    "Subdirectory under ~/Downloads: "))
-  (defun coba-claude-code-ide-vterm-scroll-keys ()
-    (when (eq claude-code-ide-terminal-backend 'vterm)
-      (general-def
-        :states 'insert
-        :keymaps 'local
-        "C-j" (lambda ()
-                (interactive)
-                (vterm-send-key "<next>"))
-        "C-k" (lambda ()
-                (interactive)
-                (vterm-send-key "<prior>")))))
-  (advice-add 'claude-code-ide--setup-terminal-keybindings
-              :after #'coba-claude-code-ide-vterm-scroll-keys)
-  (with-eval-after-load 'claude-code-ide-transient
-    (transient-append-suffix 'claude-code-ide-menu "l"
-      '("D" "New session in ~/Downloads/<subdir>"
-        coba-claude-code-ide-downloads))
-    (transient-append-suffix 'claude-code-ide-menu "l"
-      '("T" "New session in /tmp/<subdir>" coba-claude-code-ide-tmp))))
-
-(use-package codex-ide
-  :straight (:type git
-                   :host github
-                   :repo "dgillis/emacs-codex-ide"
-                   :remote "origin"
-                   :branch "main"
-                   :fork (:host github
-                                :repo "cobac/emacs-codex-ide"
-                                :remote "cobac"
-                                :branch "main"))
+    (let* ((keymap-at-point (get-char-property (point) 'keymap))
+           (command-return (and (keymapp keymap-at-point)
+                                (lookup-key keymap-at-point
+                                            (kbd "RET")))))
+      (if (commandp command-return)
+          (call-interactively command-return)
+        (newline))))
+  (defun coba-agent-shell-rename-buffer-advice
+      (original &rest arguments)
+    "Persist agent-shell buffer renames as agent-recall labels.
+ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
+    (if (not (derived-mode-p 'agent-shell-mode))
+        (apply original arguments)
+      (let ((session-id
+             (map-nested-elt agent-shell--state '(:session :id)))
+            (shell-buffer (current-buffer))
+            (viewport-buffer
+             (when (fboundp 'agent-shell-viewport--buffer)
+               (agent-shell-viewport--buffer
+                :shell-buffer (current-buffer)
+                :existing-only t))))
+        (unless session-id
+          (user-error "Agent session is still initializing"))
+        (apply original arguments)
+        (when (buffer-live-p viewport-buffer)
+          (with-current-buffer viewport-buffer
+            (rename-buffer
+             (concat (buffer-name shell-buffer)
+                     agent-shell-viewport--suffix)
+             t)))
+        (agent-recall-metadata-put session-id 'label
+                                   (buffer-name shell-buffer)))))
+  (defun coba-agent-shell-restore-label (metadata shell-buffer)
+    "Restore the session label in METADATA onto SHELL-BUFFER."
+    (when-let ((label (alist-get 'label metadata)))
+      (with-current-buffer shell-buffer
+        (shell-maker-set-buffer-name shell-buffer label))))
   :custom
-  (codex-ide-renderer-markdown-show-code-block-fences t)
+  (agent-shell-agent-configs
+   (list #'agent-shell-anthropic-make-claude-code-config
+         #'agent-shell-openai-make-codex-config))
+  (agent-shell-markdown-table-zebra-stripe nil)
+  (agent-shell-header-style 'text)
+  (agent-shell-chat-mode-enabled nil)
+  (agent-shell-busy-submit-default-function
+   #'agent-shell-busy-submit-queue)
+  (agent-shell-busy-submit-override-function
+   #'agent-shell-busy-submit-steer)
+  (agent-shell-session-restore-verbosity 'full) ; replay history on resume
+  (agent-shell-transcript-file-path-function
+   (lambda ()
+     (let* ((project-name
+             (file-name-nondirectory
+              (directory-file-name (agent-shell-cwd))))
+            (transcript-dir
+             (expand-file-name
+              (format "%s/.agent-shell/transcripts" project-name)
+              "~/.emacs.d/agent-shell/")))
+       (make-directory transcript-dir t)
+       (expand-file-name
+        (format-time-string "%F-%H-%M-%S-%6N.md")
+        transcript-dir))))
   :config
-  (coba-leader-def "U" 'codex-ide-menu)
-  (evil-set-initial-state 'codex-ide-status-mode 'motion)
-  (evil-set-initial-state 'codex-ide-session-list-mode 'motion)
-  (evil-set-initial-state 'codex-ide-session-buffer-list-mode 'motion)
-  (with-eval-after-load 'codex-ide-status-mode
-    (evil-make-overriding-map codex-ide-status-mode-map 'motion)
-    (add-hook 'codex-ide-status-mode-hook #'evil-normalize-keymaps))
-  (with-eval-after-load 'codex-ide-session-list
-    (evil-make-overriding-map codex-ide-session-list-mode-map 'motion)
-    (add-hook 'codex-ide-session-list-mode-hook
-              #'evil-normalize-keymaps))
-  (with-eval-after-load 'codex-ide-session-buffer-list
-    (evil-make-overriding-map codex-ide-session-buffer-list-mode-map
-                              'motion)
-    (add-hook 'codex-ide-session-buffer-list-mode-hook
-              #'evil-normalize-keymaps))
-  (defun coba-codex-ide-in-subdir (parent prompt)
-    "Prompt for a subdirectory of PARENT (default \"test\") and start Codex there."
-    (let* ((subdir (read-string prompt "test"))
-           (dir (expand-file-name subdir parent))
-           (default-directory (file-name-as-directory dir)))
-      (make-directory dir t)
-      (codex-ide)))
-  (with-eval-after-load 'codex-ide-transient
-    (transient-append-suffix 'codex-ide-menu "l"
-      '("L" "New session in ~/Downloads/<subdir>"
-        (lambda ()
-          (interactive)
-          (coba-codex-ide-in-subdir "~/Downloads"
-                                    "Subdirectory under ~/Downloads: "))))
-    (transient-append-suffix 'codex-ide-menu "l"
-      '("T" "New session in /tmp/<subdir>"
-        (lambda ()
-          (interactive)
-          (coba-codex-ide-in-subdir "/tmp" "Subdirectory under /tmp: ")))))
-  ;; change max preset to be fast=off
-  (let ((max-preset
-         (alist-get "Max" codex-ide-config-presets nil nil #'string=)))
-    (setf (plist-get max-preset 'fast) "off")))
+  (advice-add 'shell-maker-rename-buffer :around
+              #'coba-agent-shell-rename-buffer-advice)
+  (transient-define-prefix coba-agent-shell-menu ()
+    "Start or resume agent-shell sessions."
+    [["Current buffer"
+      ("s" "Claude" agent-shell-anthropic-start-claude-code)
+      ("S" "Codex" agent-shell-openai-start-codex)]
+     ["Other directories"
+      ("t" "Claude in /tmp"
+       (lambda ()
+         (interactive)
+         (agent-shell-new-temp-shell
+          :config (agent-shell-anthropic-make-claude-code-config))))
+      ("T" "Codex in /tmp"
+       (lambda ()
+         (interactive)
+         (agent-shell-new-temp-shell
+          :config (agent-shell-openai-make-codex-config))))
+      ("d" "Claude in Downloads"
+       (lambda ()
+         (interactive)
+         (agent-shell-new-downloads-shell
+          :config (agent-shell-anthropic-make-claude-code-config))))
+      ("D" "Codex in Downloads"
+       (lambda ()
+         (interactive)
+         (agent-shell-new-downloads-shell
+          :config (agent-shell-openai-make-codex-config))))]
+     ["Resume"
+      ("a" "Any session"
+       (lambda ()
+         (interactive)
+         (coba-agent-recall--resume)))
+      ("r" "Current project"
+       (lambda ()
+         (interactive)
+         (let* ((project (or (project-current)
+                             (user-error "Not in a project")))
+                (name (file-name-nondirectory
+                       (directory-file-name (project-root project)))))
+           (coba-agent-recall--resume name))))]
+     ["Interact"
+      ("p" "Send region" agent-shell-send-region-to)]])
+  (coba-leader-def "U" #'coba-agent-shell-menu)
+  (general-def 'agent-shell-ui-mode-map
+    "<tab>" 'agent-shell-ui-toggle-fragment)
+  (general-def
+    :states '(motion normal visual insert)
+    :keymaps 'agent-shell-mode-map
+    "<return>" 'coba-agent-shell-return-dwim
+    "C-<return>" 'agent-shell-submit-override
+    "C-S-<return>" 'agent-shell-submit))
 
-(use-package monet
+(use-package agent-recall
+  :straight t
+  :after agent-shell
+  :commands agent-recall-metadata-put
+  :preface
+  (defun coba-agent-recall--resume (&optional project)
+    "Browse recent sessions and resume one, optionally limited to PROJECT."
+    (require 'agent-recall)
+    (agent-recall--setup-embark)
+    (let ((transcripts
+           (if project
+               (agent-recall--list-transcripts-for-project project)
+             (agent-recall--list-transcripts))))
+      (unless transcripts
+        (if project
+            (user-error "No transcripts indexed for project %s"
+                        project)
+          (user-error
+           "No transcripts indexed.  Run M-x agent-recall-reindex")))
+      (let* ((candidates (agent-recall--browse-candidates transcripts))
+             (selection
+              (agent-recall--browse-default
+               candidates
+               (agent-recall--browse-annotation-function candidates))))
+        (when selection
+          (agent-recall-embark-resume selection)))))
+  :hook
+  (agent-shell-mode . agent-recall-track-sessions)
   :custom
-  (monet-ediff-split-window-direction)
-  (monet-diff-tool #'monet-ediff-tool)
-  (monet-diff-cleanup-tool #'monet-ediff-cleanup-tool)
-  :straight (:type git
-                   :host github
-                   :repo "stevemolitor/monet"))
+  (agent-recall-search-paths '("~/.emacs.d/agent-shell"))
+  (agent-recall-search-function 'consult-ripgrep)
+  (agent-recall-browse-sort 'modified-desc)
+  (agent-recall-browse-preview nil)
+  :config
+  (add-hook 'agent-recall-restore-functions
+            #'coba-agent-shell-restore-label))
 
 (when (not (eq system-type 'darwin))
   (load "~/.emacs.d/lisp/big_init.el"))

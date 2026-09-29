@@ -1915,6 +1915,7 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
   (agent-recall-search-function 'consult-ripgrep)
   (agent-recall-browse-sort 'modified-desc)
   (agent-recall-browse-preview nil)
+  (agent-recall-show-provider-icons t)
   :config
   (add-hook 'agent-recall-restore-functions
             #'coba-agent-shell-restore-label))

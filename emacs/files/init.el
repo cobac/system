@@ -121,6 +121,8 @@
 
 (setopt help-window-select t)
 
+(setopt fill-column 100)
+
 (when (eq system-type 'darwin)
   (load "~/.emacs.d/lisp/emulate-mac-keyboard-mode.el")
   (emulate-mac-spanish-keyboard-mode)

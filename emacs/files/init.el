@@ -228,6 +228,8 @@
     'comment-dwim
     "gd"
     'xref-find-definitions
+    "gR"
+    'xref-find-references
     "gD"
     'eldoc
     "gi"

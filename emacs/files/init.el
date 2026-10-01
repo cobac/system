@@ -1351,6 +1351,12 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package eglot
   :straight (:type built-in)
   :config
+  (add-to-list
+   'eglot-server-programs
+   '((python-mode python-ts-mode)
+     . ("basedpyright-langserver" "--stdio")))
+  (setq-default eglot-workspace-configuration
+                '(:basedpyright (:analysis (:typeCheckingMode "standard"))))
   (general-def
     :states
     '(normal motion)
@@ -1595,7 +1601,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package python
   :straight t
-  :hook (python-mode . lsp)
+  :hook (python-mode . eglot-ensure)
   :config
   (general-def
     'python-mode-map
@@ -1609,9 +1615,6 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :config
   (general-def 'python-mode-map "C-c C-a" 'pyvenv-workon)
   (pyvenv-mode 1))
-
-(use-package lsp-pyright
-  :straight t)
 
 ;; Notebooks
 

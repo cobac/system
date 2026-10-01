@@ -1373,6 +1373,13 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :config (eglot-booster-mode))
 
 ;; formatters
+(use-package apheleia
+  :straight t
+  :hook ((python-mode python-ts-mode) . apheleia-mode)
+  :config
+  (setf (alist-get 'python-mode apheleia-mode-alist) '(ruff-isort ruff)
+        (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff-isort ruff)))
+
 (use-package format-all
   :straight t
   :after apheleia

@@ -22,6 +22,7 @@ brew "syncthing", restart_service: :changed
 brew "tldr"
 brew "tree-sitter"
 brew "uv"
+brew "ruff"
 brew "wget"
 brew "yarn"
 brew "smillerdev/tap/claude-agent-acp", link: false, trusted: true

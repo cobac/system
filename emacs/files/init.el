@@ -243,14 +243,13 @@
   (defun coba--evil-search-region (forward)
     (unless (region-active-p)
       (user-error "No active region"))
-    (let*
-        ((visual (evil-visual-state-p))
-         (beg (if visual (marker-position evil-visual-beginning)
-                (region-beginning)))
-         (end (if visual (marker-position evil-visual-end)
-                (region-end)))
-         (string (regexp-quote (buffer-substring-no-properties beg
-                                                               end))))
+    (let* ((visual (evil-visual-state-p))
+           (beg (if visual (marker-position evil-visual-beginning)
+                  (region-beginning)))
+           (end (if visual (marker-position evil-visual-end)
+                  (region-end)))
+           (string (regexp-quote (buffer-substring-no-properties beg
+                                                                 end))))
       (evil-set-jump)
       (when visual (evil-exit-visual-state))
       (goto-char beg)
@@ -1936,12 +1935,11 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
                         project)
           (user-error
            "No transcripts indexed.  Run M-x agent-recall-reindex")))
-      (let*
-          ((candidates (agent-recall--browse-candidates transcripts))
-           (selection
-            (agent-recall--browse-default
-             candidates
-             (agent-recall--browse-annotation-function candidates))))
+      (let* ((candidates (agent-recall--browse-candidates transcripts))
+             (selection
+              (agent-recall--browse-default
+               candidates
+               (agent-recall--browse-annotation-function candidates))))
         (when selection
           (agent-recall-embark-resume selection)))))
   :hook

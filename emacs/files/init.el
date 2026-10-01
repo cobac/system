@@ -240,7 +240,39 @@
        (interactive)
        (evil-scroll-up 0)
        (recenter nil)))
-  (general-def :states '(visual) "C-=" 'count-words-region)
+  (defun coba--evil-search-region (forward)
+    (unless (region-active-p)
+      (user-error "No active region"))
+    (let*
+        ((visual (evil-visual-state-p))
+         (beg (if visual (marker-position evil-visual-beginning)
+                (region-beginning)))
+         (end (if visual (marker-position evil-visual-end)
+                (region-end)))
+         (string (regexp-quote (buffer-substring-no-properties beg
+                                                               end))))
+      (evil-set-jump)
+      (when visual (evil-exit-visual-state))
+      (goto-char beg)
+      (evil-push-search-history string forward)
+      (evil-search string forward t)))
+  (defun coba-evil-search-region-forward ()
+    "Search forward for the text covered by the active region."
+    (interactive)
+    (coba--evil-search-region t))
+  (defun coba-evil-search-region-backward ()
+    "Search backward for the text covered by the active region."
+    (interactive)
+    (coba--evil-search-region nil))
+  (general-def
+    :states
+    '(visual)
+    "C-="
+    'count-words-region
+    "g/"
+    'coba-evil-search-region-forward
+    "g?"
+    'coba-evil-search-region-backward)
   (evil-mode 1))
 
 (use-package goto-chg
@@ -1901,11 +1933,12 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
                         project)
           (user-error
            "No transcripts indexed.  Run M-x agent-recall-reindex")))
-      (let* ((candidates (agent-recall--browse-candidates transcripts))
-             (selection
-              (agent-recall--browse-default
-               candidates
-               (agent-recall--browse-annotation-function candidates))))
+      (let*
+          ((candidates (agent-recall--browse-candidates transcripts))
+           (selection
+            (agent-recall--browse-default
+             candidates
+             (agent-recall--browse-annotation-function candidates))))
         (when selection
           (agent-recall-embark-resume selection)))))
   :hook

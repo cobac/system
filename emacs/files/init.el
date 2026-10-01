@@ -1350,7 +1350,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (global-flycheck-eglot-mode 1))
 
 (use-package eglot
-  :straight (:type built-in)
+  :straight t
   :config
   (add-to-list
    'eglot-server-programs

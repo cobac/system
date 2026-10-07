@@ -1363,7 +1363,10 @@ https://blog.jmthornton.net/p/emacs-project-override"
    '((python-mode python-ts-mode)
      . ("basedpyright-langserver" "--stdio")))
   (setq-default eglot-workspace-configuration
-                '(:basedpyright (:analysis (:typeCheckingMode "standard"))))
+                '(:basedpyright
+                  (:analysis
+                   (:typeCheckingMode "standard"
+                                      :inlayHints (:variableTypes :json-false)))))
   (general-def
     :states
     '(normal motion)

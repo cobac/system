@@ -525,11 +525,15 @@ targets."
   "fy"
   '(lambda ()
      (interactive)
-     (if buffer-file-name
-         (progn
-           (kill-new buffer-file-name)
-           (message "%s" buffer-file-name))
-       (user-error "Buffer is not visiting a file")))
+     (let ((path (cond (buffer-file-name buffer-file-name)
+                       ;; subtree-aware, unlike `default-directory'
+                       ((derived-mode-p 'dired-mode) (dired-current-directory))
+                       (t default-directory))))
+       (if path
+           (progn
+             (kill-new path)
+             (message "%s" path))
+         (user-error "Buffer has no associated path"))))
   "FF"
   'project-find-file
   ;; "fz" 'counsel-fzf

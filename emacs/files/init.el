@@ -667,10 +667,7 @@ targets."
   (advice-remove #'magit-read-url #'coba-magit-remote-ssh-url)
   (advice-add #'magit-read-url :around #'coba-magit-remote-ssh-url)
   (coba-leader-def
-    "g"
-    '(lambda ()
-       (interactive)
-       (coba-magit-status))
+    "g" 'magit-status
     "G" 'magit-blame-addition)
   (general-def
     :keymaps
@@ -699,10 +696,6 @@ From https://www.reddit.com/r/emacs/comments/ja97xs"
   (transient-append-suffix
     'magit-diff
     "d" '("D" "Diff to main" coba-magit-diff-to-main))
-  (defun coba-magit-status ()
-    "Open magit-status in full screen."
-    (magit-status)
-    (delete-other-windows))
   (evil-set-initial-state 'magit-commit-message-section-map 'insert)
   (magit-add-section-hook 'magit-status-sections-hook
                           'magit-insert-worktrees

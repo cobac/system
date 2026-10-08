@@ -567,52 +567,6 @@
      :height 1.0))
   (add-hook 'nov-mode-hook 'coba-nov-font-setup))
 
-;; Rust
-(use-package rustic
-  :straight t
-  :config
-  ;; uncomment for less flashiness
-  ;; (setq lsp-eldoc-hook nil)
-  ;; (setq lsp-enable-symbol-highlighting nil)
-  ;; (setq lsp-signature-auto-activate nil)
-  ;; comment to disable rustfmt on save
-  (setq rustic-format-on-save t)
-  (add-hook 'before-save-hook 'lsp-format-buffer nil t)
-  (defun coba-rustic-autosave-mode-hook ()
-    "Enable auto-saving in rustic-mode buffers."
-    (when buffer-file-name
-      (setq-local compilation-ask-about-save nil)))
-  (add-hook 'rustic-mode-hook 'coba-rustic-autosave-mode-hook)
-  (evil-set-initial-state 'rustic-popup-mode 'emacs)
-  (general-def
-    'rustic-mode-map
-    "C-c C-c s"
-    'lsp-rust-analyzer-status
-    "C-c C-c C-S-r"
-    'rustic-cargo-comint-run
-    "C-c C-c C-S-d"
-    'coba-rustic-cargo-doc-std
-    "C-c C-c C-S-b"
-    'rustic-cargo-build-doc)
-  (general-def
-    'rustic-mode-map "C-ñ"
-    '(lambda ()
-       (interactive)
-       (insert "-> ")))
-  (defun coba-rustic-cargo-doc-std ()
-    "Open the documentation for the standard library in a browser."
-    (interactive)
-    (shell-command "rustup docs --std"))
-  (defun coba-cargo-new (args)
-    "Call cargo new with args"
-    (interactive "scargo new: ")
-    (message (format "cargo new %s" args))
-    (shell-command (format "cargo new %s" args)))
-  (add-hook
-   'rustic-mode-hook
-   (lambda ()
-     (push '(?< . ("< " . " >")) evil-surround-pairs-alist))))
-
 (use-package ledger-mode
   :straight t
   :config

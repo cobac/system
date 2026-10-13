@@ -1918,6 +1918,8 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
        (expand-file-name
         (format-time-string "%F-%H-%M-%S-%6N.md")
         transcript-dir))))
+  (agent-shell-anthropic-default-model-id "claude-opus-5-5")
+  (agent-shell-openai-default-model-id "gpt-6.1-sol")
   :config
   (advice-add 'shell-maker-rename-buffer :around
               #'coba-agent-shell-rename-buffer-advice)

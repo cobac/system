@@ -255,7 +255,8 @@
            (string (regexp-quote (buffer-substring-no-properties beg
                                                                  end))))
       (evil-set-jump)
-      (when visual (evil-exit-visual-state))
+      (when visual
+        (evil-exit-visual-state))
       (goto-char beg)
       (evil-push-search-history string forward)
       (evil-search string forward t)))
@@ -525,10 +526,12 @@ targets."
   "fy"
   '(lambda ()
      (interactive)
-     (let ((path (cond (buffer-file-name buffer-file-name)
-                       ;; subtree-aware, unlike `default-directory'
-                       ((derived-mode-p 'dired-mode) (dired-current-directory))
-                       (t default-directory))))
+     (let ((path
+            (cond (buffer-file-name buffer-file-name)
+                  ;; subtree-aware, unlike `default-directory'
+                  ((derived-mode-p 'dired-mode)
+                   (dired-current-directory))
+                  (t default-directory))))
        (if path
            (progn
              (kill-new path)
@@ -652,8 +655,7 @@ targets."
   :straight t
   :after (evil transient)
   :config
-  (defun coba-magit-remote-ssh-url
-      (read-url prompt &optional suggested-url)
+  (defun coba-magit-remote-ssh-url (read-url prompt &optional suggested-url)
     (when (and (equal prompt "Remote url")
                (stringp suggested-url)  ; can be nil if no origin
                (or (string-prefix-p "https://github.com/cobac/"
@@ -1866,8 +1868,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
       (if (commandp command-return)
           (call-interactively command-return)
         (newline))))
-  (defun coba-agent-shell-rename-buffer-advice
-      (original &rest arguments)
+  (defun coba-agent-shell-rename-buffer-advice (original &rest arguments)
     "Persist agent-shell buffer renames as agent-recall labels.
 ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
     (if (not (derived-mode-p 'agent-shell-mode))
@@ -1897,7 +1898,6 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
       (with-current-buffer shell-buffer
         (shell-maker-set-buffer-name shell-buffer label))))
   :init
-  ;; `defvar'
   (setq agent-shell-markdown-table-zebra-stripe nil)
   :custom
   (agent-shell-agent-configs

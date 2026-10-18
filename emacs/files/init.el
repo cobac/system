@@ -1932,7 +1932,8 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
     "Start or resume agent-shell sessions."
     [["Current buffer"
       ("s" "Claude" agent-shell-anthropic-start-claude-code)
-      ("S" "Codex" agent-shell-openai-start-codex)]
+      ("S" "Codex" agent-shell-openai-start-codex)
+      ("u" "OpenCode" agent-shell-opencode-start-agent)]
      ["Other directories"
       ("t" "Claude in /tmp"
        (lambda ()
@@ -1958,15 +1959,7 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
       ("a" "Any session"
        (lambda ()
          (interactive)
-         (coba-agent-recall--resume)))
-      ("r" "Current project"
-       (lambda ()
-         (interactive)
-         (let* ((project (or (project-current)
-                             (user-error "Not in a project")))
-                (name (file-name-nondirectory
-                       (directory-file-name (project-root project)))))
-           (coba-agent-recall--resume name))))]
+         (coba-agent-recall--resume)))]
      ["Interact"
       ("p" "Send region" agent-shell-send-region-to)]])
   (coba-leader-def "U" #'coba-agent-shell-menu)

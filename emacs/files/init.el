@@ -1631,6 +1631,11 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package ein
   :straight t)
 
+(use-package go-mode
+  :straight t
+  :hook ((go-mode . eglot-ensure)
+         (go-mode . apheleia-mode)))
+
 ;; Rust
 (use-package rustic
   :straight t

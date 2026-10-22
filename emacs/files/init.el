@@ -1284,7 +1284,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :straight t
   :config
   (global-aggressive-indent-mode 1)
-  (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
+  (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'html-ts-mode))
 
 ;; Reference management
 
@@ -1633,10 +1634,22 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package ein
   :straight t)
 
+(use-package treesit-auto
+  :straight t
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
 (use-package go-mode
   :straight t
-  :hook ((go-mode . eglot-ensure)
-         (go-mode . apheleia-mode)))
+  :hook (((go-mode go-ts-mode) . eglot-ensure)
+         ((go-mode go-ts-mode) . apheleia-mode)))
+
+(use-package typescript-ts-mode
+  :hook (((typescript-ts-mode tsx-ts-mode js-ts-mode) . eglot-ensure)
+         ((typescript-ts-mode tsx-ts-mode js-ts-mode) . apheleia-mode)))
 
 ;; Rust
 (use-package rustic

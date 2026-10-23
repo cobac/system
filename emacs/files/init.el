@@ -1638,8 +1638,9 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :straight t
   :custom
   (treesit-auto-install 'prompt)
+  (treesit-auto-langs '(typescript tsx javascript go gomod))
   :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
+  (treesit-auto-add-to-auto-mode-alist treesit-auto-langs)
   (global-treesit-auto-mode))
 
 (use-package go-mode

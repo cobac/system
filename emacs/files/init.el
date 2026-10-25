@@ -1970,8 +1970,9 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
          (interactive)
          (agent-shell-new-downloads-shell
           :config (agent-shell-openai-make-codex-config))))]
-     ["Resume"
-      ("a" "Any session"
+     ["Sessions"
+      ("l" "Active" agent-shell-switch-buffer)
+      ("a" "All"
        (lambda ()
          (interactive)
          (coba-agent-recall--resume)))]

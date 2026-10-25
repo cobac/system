@@ -1988,7 +1988,11 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
     "C-S-<return>" 'agent-shell-submit))
 
 (use-package agent-recall
-  :straight t
+  :straight (agent-recall
+             :type git
+             :host github
+             :repo "cobac/agent-recall"
+             :branch "coba/opencode")
   :after agent-shell
   :commands agent-recall-metadata-put
   :preface

@@ -1939,6 +1939,7 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
         transcript-dir))))
   (agent-shell-anthropic-default-model-id "claude-opus-5-5")
   (agent-shell-openai-default-model-id "gpt-6.1-sol")
+  (agent-shell-opencode-default-model-id "opencode-go/deepseek-v4-pro")
   :config
   (advice-add 'shell-maker-rename-buffer :around
               #'coba-agent-shell-rename-buffer-advice)

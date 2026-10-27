@@ -1943,6 +1943,29 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
   :config
   (advice-add 'shell-maker-rename-buffer :around
               #'coba-agent-shell-rename-buffer-advice)
+  ;; consult source for agent-shell-switch-buffer
+  (defvar coba-consult-source-agent-shell-buffer
+    `(:name "Agent Shell"
+            :narrow ?a
+            :category buffer
+            :face consult-buffer
+            :history buffer-name-history
+            :state ,#'consult--buffer-state
+            :items
+            ,(lambda ()
+               (consult--buffer-query
+                :sort 'visibility
+                :as #'buffer-name
+                :predicate (lambda (buf)
+                             (with-current-buffer buf
+                               (derived-mode-p 'agent-shell-mode))))))
+    "Consult source for active agent-shell buffers.")
+  (add-to-list 'consult-buffer-sources
+               'coba-consult-source-agent-shell-buffer 'append)
+  (defun coba-agent-shell-buffers ()
+    "List active agent-shell buffers and switch to one (embark-able)."
+    (interactive)
+    (consult-buffer (list coba-consult-source-agent-shell-buffer)))
   (transient-define-prefix coba-agent-shell-menu ()
     "Start or resume agent-shell sessions."
     [["Current buffer"
@@ -1971,7 +1994,7 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
          (agent-shell-new-downloads-shell
           :config (agent-shell-openai-make-codex-config))))]
      ["Sessions"
-      ("l" "Active" agent-shell-switch-buffer)
+      ("l" "Active" coba-agent-shell-buffers)
       ("a" "All"
        (lambda ()
          (interactive)

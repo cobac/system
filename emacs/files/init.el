@@ -1939,7 +1939,7 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
         transcript-dir))))
   (agent-shell-anthropic-default-model-id "claude-opus-5-5")
   (agent-shell-openai-default-model-id "gpt-6.1-sol")
-  (agent-shell-opencode-default-model-id "opencode-go/deepseek-v4-pro")
+  (agent-shell-opencode-default-model-id "opencode-go/deepseek-v4.1-flash")
   :config
   (advice-add 'shell-maker-rename-buffer :around
               #'coba-agent-shell-rename-buffer-advice)
@@ -1973,16 +1973,21 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
       ("S" "Codex" agent-shell-openai-start-codex)
       ("u" "OpenCode" agent-shell-opencode-start-agent)]
      ["Other directories"
-      ("t" "Claude in /tmp"
+      ("t" "Opencode in /tmp"
        (lambda ()
          (interactive)
          (agent-shell-new-temp-shell
-          :config (agent-shell-anthropic-make-claude-code-config))))
+          :config (agent-shell-opencode-start-agent))))
       ("T" "Codex in /tmp"
        (lambda ()
          (interactive)
          (agent-shell-new-temp-shell
           :config (agent-shell-openai-make-codex-config))))
+      ("C-t" "Claude in /tmp"
+       (lambda ()
+         (interactive)
+         (agent-shell-new-temp-shell
+          :config (agent-shell-anthropic-make-claude-code-config))))
       ("d" "Claude in Downloads"
        (lambda ()
          (interactive)

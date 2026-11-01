@@ -1928,7 +1928,8 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
   :custom
   (agent-shell-agent-configs
    (list #'agent-shell-anthropic-make-claude-code-config
-         #'agent-shell-openai-make-codex-config))
+         #'agent-shell-openai-make-codex-config
+         #'agent-shell-opencode-make-agent-config))
   (agent-shell-header-style 'text)
   (agent-shell-chat-mode-enabled nil)
   (agent-shell-busy-submit-default-function

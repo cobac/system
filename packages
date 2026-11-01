@@ -9,12 +9,11 @@ breeze-gtk
 breeze-icons
 calibre
 capitaine-cursors
+chipass
 chromium
 docker
 docker-compose
-feh
 firefox
-flameshot
 gimp
 gnu-free-fonts
 grep
@@ -22,7 +21,6 @@ htop
 ipython
 isync
 jupyter-notebook
-keepassxc
 ledger
 less
 noto-fonts-emoji
@@ -44,9 +42,7 @@ unzip
 uv
 v4l2loopback-dkms
 vlc
-xclip
 xournalpp
-xss-lock
 zathura
 zathura-pdf-poppler
 zip

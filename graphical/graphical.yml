@@ -3,24 +3,6 @@
     name: "{{ lookup('file', 'graphical_packages').splitlines() }}"
     state: latest
 
-- name: copy xorg files
-  ansible.builtin.copy:
-    src: files/{{ item }}
-    dest: /home/coba/
-  with_items:
-    - .xinitrc
-    - .xserverrc
-    - .Xkeymap-laptop
-
-- name: copy i3 files
-  ansible.builtin.copy:
-    src: files/{{ item }}
-    dest: /home/coba/.config/
-  with_items:
-    - i3
-    - i3blocks
-    - i3status
-
 - name: copy swaylock and swayidle configs
   ansible.builtin.copy:
     src: files/{{ item }}
@@ -64,31 +46,40 @@
     groups: video
     append: yes
 
-- name: Configure trackpad
-  # also install libinput gestures
-  ansible.builtin.blockinfile:
-    path: /etc/X11/xorg.conf.d/30-touchpad.conf
+- name: Ensure the Default Applications section exists
+  ansible.builtin.lineinfile:
+    path: /home/coba/.config/mimeapps.list
+    regexp: '^\[Default Applications\]$'
+    line: "[Default Applications]"
+    insertbefore: BOF
     create: true
-    block: |
-      Section "InputClass"
-        Identifier "Touchpad"
-        MatchIsTouchpad "on"
-        Driver "libinput"
-        Option "ClickMethod" "clickfinger"
-        Option "Tapping" "on"
-        Option "Accel Profile Enabled" "1 0 0"
-        Option "Accel Speed" "1"
-      EndSection
+    mode: "0644"
+  become: yes
+  become_user: coba
+  become_method: su
 
-- name: Configure trackball
-  ansible.builtin.blockinfile:
-    path: /etc/X11/xorg.conf.d/41-trackball.conf
-    create: true
-    block: |
-      Section "InputClass"
-        Identifier "Logitech ERGO M575"
-        MatchDriver "libinput"
-        MatchProduct "Logitech USB Receiver Mouse"
-        Option "Accel Profile Enabled" "1 0 0"
-        Option "Accel Speed" "1"
-      EndSection
+- name: Set default browser MIME handlers
+  ansible.builtin.lineinfile:
+    path: /home/coba/.config/mimeapps.list
+    regexp: '^{{ item }}='
+    line: "{{ item }}=firefox.desktop"
+    insertafter: '^\[Default Applications\]'
+  loop:
+    - text/html
+    - x-scheme-handler/http
+    - x-scheme-handler/https
+    - x-scheme-handler/about
+    - x-scheme-handler/unknown
+  become: yes
+  become_user: coba
+  become_method: su
+
+- name: Set default PDF handler
+  ansible.builtin.lineinfile:
+    path: /home/coba/.config/mimeapps.list
+    regexp: '^application/pdf='
+    line: "application/pdf=org.pwmt.zathura.desktop"
+    insertafter: '^\[Default Applications\]'
+  become: yes
+  become_user: coba
+  become_method: su

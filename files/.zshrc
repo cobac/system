@@ -1,7 +1,3 @@
-if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-  exec startx
-fi
-
 export TERM=xterm-256color
 export KEYTIMEOUT=1
 export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-linux:/home/coba/.nix-profile/bin:/home/coba/.local/bin

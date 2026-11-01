@@ -19,7 +19,6 @@ It's designed to be called via [[https://docs.ansible.com/ansible/latest/cli/ans
 * Manual prerequisites
 - Archlinux installed and booting
   - kernel, swap, locale, fstab, toda la pesca
-- Configure suspend/hibernation at the kernel level
 - User created and /wheeled/
 - installed
   - sudo
@@ -40,5 +39,4 @@ It's designed to be called via [[https://docs.ansible.com/ansible/latest/cli/ans
   - personal email passwords
   - github/gitlab apis for forge
 - Clone this repo
-- Run =run_once=, optionally disabling some commands
 - Config Syncthing

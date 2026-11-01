@@ -1,0 +1,53 @@
+# Background
+color=#1d2021
+
+# Font
+font=IBM Plex Mono
+font-size=16
+
+# Indicator
+indicator-radius=100
+indicator-thickness=8
+indicator-idle-visible
+
+# Normal state
+inside-color=#282828ee
+ring-color=#458588
+line-color=#3c3836
+separator-color=#3c3836
+text-color=#00000000
+
+# Key press highlights
+key-hl-color=#ebdbb2
+bs-hl-color=#cc241d
+
+# Cleared / waiting state
+inside-clear-color=#282828ee
+ring-clear-color=#d79921
+line-clear-color=#3c3836
+text-clear-color=#00000000
+
+# Verifying
+inside-ver-color=#282828ee
+ring-ver-color=#98971a
+line-ver-color=#3c3836
+text-ver-color=#00000000
+
+# Wrong password
+inside-wrong-color=#282828ee
+ring-wrong-color=#cc241d
+line-wrong-color=#3c3836
+text-wrong-color=#00000000
+
+# Caps Lock
+inside-caps-lock-color=#282828ee
+ring-caps-lock-color=#d79921
+line-caps-lock-color=#3c3836
+text-caps-lock-color=#00000000
+caps-lock-key-hl-color=#d79921
+caps-lock-bs-hl-color=#cc241d
+
+# Behaviour
+show-failed-attempts
+ignore-empty-password
+# show-keyboard-layout

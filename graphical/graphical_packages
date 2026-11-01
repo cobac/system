@@ -16,6 +16,8 @@ pipewire-jack
 pipewire-pulse
 qjackctl
 rofi
+swayidle
+swaylock
 vulkan-intel
 wireplumber
 xcompmgr

@@ -21,6 +21,14 @@
     - i3blocks
     - i3status
 
+- name: copy swaylock and swayidle configs
+  ansible.builtin.copy:
+    src: files/{{ item }}
+    dest: /home/coba/.config/
+  with_items:
+    - swaylock
+    - swayidle
+
 - name: set es keyboard
   ansible.builtin.command: localectl set-x11-keymap es
 

@@ -1703,6 +1703,9 @@ https://blog.jmthornton.net/p/emacs-project-override"
   :config
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
 
+(use-package kdl-mode
+  :straight t)
+
 ;; Make
 (add-hook
  'makefile-mode-hook

@@ -158,11 +158,14 @@
           ansible.builtin.blockinfile:
             path: /home/coba/.config/gtk-3.0/settings.ini
             create: true
+            owner: coba
+            group: wheel
+            mode: "0644"
             block: |
               [Settings]
               gtk-theme-name=Breeze-Dark
               gtk-icon-theme-name=Papirus
-              gtk-font-name=Cantarell 11
+              gtk-font-name=IBM Plex Sans 11
               gtk-cursor-theme-name=capitaine-cursors
               gtk-cursor-theme-size=0
               gtk-toolbar-style=GTK_TOOLBAR_BOTH
@@ -175,6 +178,30 @@
               gtk-xft-hinting=1
               gtk-xft-hintstyle=hintfull
               gtk-xft-rgba=rgb
+        - name: fontconfig
+          ansible.builtin.copy:
+            src: files/fontconfig
+            dest: /home/coba/.config/
+        - name: Set IBM Plex UI fonts
+          ansible.builtin.command:
+            argv:
+              - gsettings
+              - set
+              - org.gnome.desktop.interface
+              - "{{ item.key }}"
+              - "{{ item.value }}"
+          loop:
+            - { key: font-name, value: "IBM Plex Sans 11" }
+            - { key: monospace-font-name, value: "BlexMono Nerd Font Mono Medium 11" }
+            - { key: document-font-name, value: "IBM Plex Sans 11" }
+          become: yes
+          become_user: coba
+          become_method: su
+          environment:
+            HOME: /home/coba
+            XDG_RUNTIME_DIR: /run/user/1000
+            DBUS_SESSION_BUS_ADDRESS: unix:path=/run/user/1000/bus
+          changed_when: false
 
     - name: gtk bookmarks
       ansible.builtin.blockinfile:

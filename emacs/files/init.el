@@ -54,7 +54,7 @@
 
 ;; Font
 (setq default-frame-alist
-      (add-to-list 'default-frame-alist '(font . "ibm plex mono-14")))
+      (add-to-list 'default-frame-alist '(font . "BlexMono Nerd Font Mono-14:weight=medium")))
 
 (setq-default line-spacing 0.15)
 
@@ -69,7 +69,9 @@
 
 (setq shr-use-fonts nil)
 
-(set-face-attribute 'fixed-pitch nil :family "IBM Plex Mono")
+(set-face-attribute 'fixed-pitch nil
+                    :family "BlexMono Nerd Font Mono"
+                    :weight 'medium)
 
 (load custom-file 'noerror)
 

@@ -137,3 +137,37 @@ tooltip {
 tooltip label {
     color: @fg1;
 }
+
+menu,
+.menu {
+    background: @bg0_h;
+    color: @fg0;
+    border: 1px solid @bg1;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 14px;
+}
+
+menu *,
+.menu * {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 14px;
+}
+
+menu menuitem,
+.menu menuitem {
+    background: transparent;
+    color: @fg0;
+    padding: 4px 8px;
+}
+
+menu menuitem:hover,
+.menu menuitem:hover {
+    background: @bg1;
+    color: @fg0;
+}
+
+menu separator,
+.menu separator {
+    background: @bg1;
+    min-height: 1px;
+}

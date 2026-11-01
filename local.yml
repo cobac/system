@@ -195,3 +195,9 @@
       ansible.builtin.copy:
         src: files/.mbsyncrc
         dest: /home/coba/
+
+  handlers:
+    - name: Rebuild hardware database
+      ansible.builtin.command: systemd-hwdb update
+    - name: Reapply input device configuration
+      ansible.builtin.command: udevadm trigger --subsystem-match=input --action=change

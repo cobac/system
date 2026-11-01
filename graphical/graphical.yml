@@ -24,6 +24,17 @@
 - name: set es keyboard
   ansible.builtin.command: localectl set-x11-keymap es
 
+- name: Swap Caps Lock and Escape on the internal keyboard
+  ansible.builtin.copy:
+    src: files/90-thinkpad-keyboard.hwdb
+    dest: /etc/udev/hwdb.d/90-thinkpad-keyboard.hwdb
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Rebuild hardware database
+    - Reapply input device configuration
+
 - name: add user to video group
   ansible.builtin.user:
     name: coba

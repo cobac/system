@@ -29,6 +29,21 @@
     - swaylock
     - swayidle
 
+- name: Copy niri config
+  ansible.builtin.copy:
+    src: files/niri
+    dest: /home/coba/.config/
+
+- name: Make display-profile executable
+  ansible.builtin.file:
+    path: /home/coba/.config/niri/scripts/display-profile
+    mode: "0755"
+
+- name: Copy waybar config
+  ansible.builtin.copy:
+    src: files/waybar
+    dest: /home/coba/.config/
+
 - name: set es keyboard
   ansible.builtin.command: localectl set-x11-keymap es
 

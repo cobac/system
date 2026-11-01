@@ -49,6 +49,10 @@
         ansible.builtin.copy:
           src: files/.zshrc
           dest: /home/coba/
+      - name: Copy .zprofile
+        ansible.builtin.copy:
+          src: files/.zprofile
+          dest: /home/coba/
       - name: Copy zsh .config
         ansible.builtin.copy:
           src: files/zsh

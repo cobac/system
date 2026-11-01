@@ -142,6 +142,13 @@
   (shell-command
    "cp -r $HOME/.emacs.d/snippets $HOME/docs/repos/system/emacs/files/"))
 
+(defun coba-sync-niri ()
+  (interactive)
+  (shell-command "cp ~/docs/repos/system/graphical/files/niri/config.kdl ~/.config/niri")
+  (shell-command
+   "cp ~/docs/repos/system/graphical/files/waybar/config.jsonc ~/.config/waybar")
+  (shell-command "pkill -SIGUSR2 waybar"))
+
                                         ; Packages
 
 ;; Get correct path

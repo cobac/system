@@ -1,11 +1,11 @@
 - name: Install emacs
   community.general.pacman:
     name:
-      - emacs
+      - emacs-wayland
     state: latest
 
 - name: Config emacs
-  ansible.builtin.copy: 
+  ansible.builtin.copy:
     src: files/
     dest: /home/coba/.emacs.d
 

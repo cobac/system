@@ -1,0 +1,72 @@
+#!/bin/sh
+
+niri_out() {
+    niri msg output "$@" >/dev/null 2>&1 || true
+}
+
+on() {
+    output=$1
+    mode=$2
+    scale=$3
+    x=$4
+    y=$5
+
+    niri_out "$output" on
+    niri_out "$output" mode "$mode"
+    niri_out "$output" scale "$scale"
+    niri_out "$output" position set "$x" "$y"
+}
+
+off() {
+    niri_out "$1" off
+}
+
+apply_profile() {
+    case "$1" in
+        home)
+            off "eDP-1"
+            on "DP-1" 1920x1080@60.000 1.0 0 0
+            on "HDMI-A-1" 1920x1080@60.000 1.0 1920 0
+            ;;
+        dual)
+            on "DP-1" 1920x1080@60.000 1.0 0 0
+            on "eDP-1" 1920x1200 1.25 0 1080
+            off "HDMI-A-1"
+            ;;
+        one)
+            on "eDP-1" 1920x1200 1.25 0 0
+            off "DP-1"
+            off "HDMI-A-1"
+            ;;
+        *)
+            exit 1
+            ;;
+    esac
+}
+
+# lolllll
+profiles=$(
+    sed -n '/^apply_profile()/,/^}/p' "$0" |
+        sed -n 's/^[[:space:]]*\([^()]*\))[[:space:]]*$/\1/p' |
+        tr '|' '\n' |
+        sed 's/[[:space:]]//g' |
+        grep -v '^\*$'
+)
+
+[ -n "$profiles" ] || exit 1
+
+if [ "$1" = "--list" ]; then
+    printf '%s\n' "$profiles"
+    exit 0
+fi
+
+if [ -n "$1" ]; then
+    apply_profile "$1"
+    exit
+fi
+
+selected=$(printf '%s\n' "$profiles" | rofi -dmenu -i -no-custom -p "display" \
+    -theme gruvbox-dark-hard)
+[ -n "$selected" ] || exit 0
+
+apply_profile "$selected"

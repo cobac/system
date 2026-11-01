@@ -1242,7 +1242,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package company
   :straight t
   :config (global-company-mode)
-  (setq company-idle-delay 0
+  (setq company-idle-delay 0.05
         company-minimum-prefix-length 2
         company-selection-wrap-around t)
   (setq default-company-backends
@@ -1263,7 +1263,16 @@ https://blog.jmthornton.net/p/emacs-project-override"
     "C-k"
     'company-select-previous
     "C-s"
-    'company-search-candidates))
+    'company-search-candidates
+    "TAB"
+    'company-complete-selection
+    "<tab>"
+    'company-complete-selection
+    "C-l"
+    'company-complete-selection)
+  (general-unbind 'company-active-map
+    "RET"
+    "<return>"))
 
 (use-package company-quickhelp
   :straight t

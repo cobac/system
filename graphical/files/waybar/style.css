@@ -85,8 +85,7 @@ window#waybar {
 }
 
 #clock {
-    color: @fg1;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 #pulseaudio.muted {

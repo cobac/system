@@ -1486,6 +1486,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 ;; Libvterm
 (use-package vterm
+  :init (setq vterm-always-compile-module t)
   :straight (:type git
                    :host github
                    :repo "akermu/emacs-libvterm"))

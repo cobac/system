@@ -52,9 +52,11 @@
 ;; Remove trailing whitespace
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
-;; Font
-(setq default-frame-alist
-      (add-to-list 'default-frame-alist '(font . "BlexMono Nerd Font Mono-14:weight=medium")))
+(when-let* ((family (seq-find (lambda (f)
+                                (find-font (font-spec :family f)))
+                              '("BlexMono Nerd Font Mono" "Monospace"))))
+  (add-to-list 'default-frame-alist
+               (cons 'font (format "%s-14:weight=regular" family))))
 
 (setq-default line-spacing 0.15)
 

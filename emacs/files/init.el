@@ -667,12 +667,13 @@ targets."
   :after (evil transient)
   :config
   (defun coba-magit-remote-ssh-url (read-url prompt &optional suggested-url)
-    (when (and (equal prompt "Remote url")
-               (stringp suggested-url)  ; can be nil if no origin
-               (or (string-prefix-p "https://github.com/cobac/"
-                                    suggested-url)
-                   (string-prefix-p "https://github.com/motherduckdb/"
-                                    suggested-url)))
+    (when
+        (and (equal prompt "Remote url")
+             (stringp suggested-url)    ; can be nil if no origin
+             (or (string-prefix-p "https://github.com/cobac/"
+                                  suggested-url)
+                 (string-prefix-p "https://github.com/motherduckdb/"
+                                  suggested-url)))
       (setq suggested-url
             (concat "git@github.com:"
                     (substring suggested-url (length "https://github.com/")))))
@@ -919,7 +920,8 @@ https://blog.jmthornton.net/p/emacs-project-override"
   (coba-leader-def
     "c" 'org-capture
     "a" '(:ignore t
-                  :which-key "Org-Agenda") "aa"
+                  :which-key "Org-Agenda")
+    "aa"
     '(lambda ()
        (interactive)
        (coba-org-agenda-weekly))
@@ -1546,10 +1548,11 @@ https://blog.jmthornton.net/p/emacs-project-override"
              (not (functionp 'json-rpc-connection)) ;; native json-rpc
              (executable-find "emacs-lsp-booster"))
         (progn
-          (when-let ((command-from-exec-path
-                      (executable-find
-                       (car
-                        orig-result)))) ;; resolve command from exec-path (in case not found in $PATH)
+          (when-let
+              ((command-from-exec-path
+                (executable-find
+                 (car
+                  orig-result)))) ;; resolve command from exec-path (in case not found in $PATH)
             (setcar orig-result command-from-exec-path))
           (message "Using emacs-lsp-booster for %s!" orig-result)
           (cons "emacs-lsp-booster" orig-result))
@@ -1599,8 +1602,9 @@ https://blog.jmthornton.net/p/emacs-project-override"
          (lambda ()
            (dolist (variable '(aggressive-indent--idle-timer
                                adict-timer))
-             (when (and (boundp variable)
-                        (timerp (symbol-value variable)))
+             (when
+                 (and (boundp variable)
+                      (timerp (symbol-value variable)))
                (cancel-timer (symbol-value variable))
                (set variable nil))))))
     (add-hook 'change-major-mode-hook cancel-buffer-local-timers)

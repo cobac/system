@@ -2018,7 +2018,7 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
        (lambda ()
          (interactive)
          (agent-shell-new-temp-shell
-          :config (agent-shell-opencode-start-agent))))
+          :config (agent-shell-opencode-make-agent-config))))
       ("T" "Codex in /tmp"
        (lambda ()
          (interactive)

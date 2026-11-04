@@ -1968,6 +1968,14 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
   :config
   (advice-add 'shell-maker-rename-buffer :around
               #'coba-agent-shell-rename-buffer-advice)
+  ;; hide marginalia's modified/read-only flags for agent-shell buffers
+  (advice-add 'marginalia--buffer-status :around
+              (lambda (orig buffer)
+                (let ((status (funcall orig buffer)))
+                  (if (with-current-buffer buffer
+                        (derived-mode-p 'agent-shell-mode))
+                      (concat "   " (substring status 3))
+                    status))))
   ;; consult source for agent-shell-switch-buffer
   (defvar coba-consult-source-agent-shell-buffer
     `(:name "Agent Shell"
@@ -1980,7 +1988,11 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
             ,(lambda ()
                (consult--buffer-query
                 :sort 'visibility
-                :as #'buffer-name
+                :as (lambda (buf)
+                      (propertize (buffer-name buf) 'face
+                                  (pcase (agent-shell-status :shell-buffer buf)
+                                    ('blocked 'error)
+                                    ('busy 'font-lock-comment-face))))
                 :predicate (lambda (buf)
                              (with-current-buffer buf
                                (derived-mode-p 'agent-shell-mode))))))

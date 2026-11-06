@@ -1939,6 +1939,16 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
     (when-let ((label (alist-get 'label metadata)))
       (with-current-buffer shell-buffer
         (shell-maker-set-buffer-name shell-buffer label))))
+  (defun coba-agent-shell-copy-as-markdown-advice (original start end &optional delete)
+    "Make copies from agent-shell buffers yield the original markdown.
+ORIGINAL is `agent-shell--filter-buffer-substring', which backs every
+copy command there (`kill-ring-save', evil yanks, ...).  Deletions
+keep the plain text so editing the prompt behaves as usual."
+    (if delete
+        (funcall original start end delete)
+      (substring-no-properties
+       (agent-shell--buffer-markdown-substring (min start end)
+                                               (max start end)))))
   :init
   (setq agent-shell-markdown-table-zebra-stripe nil)
   :custom
@@ -1972,6 +1982,8 @@ ORIGINAL and ARGUMENTS are the advised `shell-maker-rename-buffer' call."
   :config
   (advice-add 'shell-maker-rename-buffer :around
               #'coba-agent-shell-rename-buffer-advice)
+  (advice-add 'agent-shell--filter-buffer-substring :around
+              #'coba-agent-shell-copy-as-markdown-advice)
   ;; hide marginalia's modified/read-only flags for agent-shell buffers
   (advice-add 'marginalia--buffer-status :around
               (lambda (orig buffer)

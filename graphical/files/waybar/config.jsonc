@@ -31,6 +31,7 @@
     ],
     "niri/workspaces": {
         "format": "{icon}",
+        "hide-empty": true,
         "format-window-separator": " ",
         "window-rewrite-default": "",
         "window-rewrite": {
@@ -41,11 +42,11 @@
             "app_id<foot>": ""
         },
         "format-icons": {
-            "w_1": "1.",
-            "w_2": "2.",
-            "w_3": "3.",
-            "w_4": "4.",
-            "w_5": "5.",
+            "w_1": "1",
+            "w_2": "2",
+            "w_3": "3",
+            "w_4": "4",
+            "w_5": "5",
             "w_w": "W",
             "w_e": "E",
             "w_r": "R",

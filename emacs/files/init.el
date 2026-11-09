@@ -1978,7 +1978,10 @@ keep the plain text so editing the prompt behaves as usual."
         transcript-dir))))
   (agent-shell-anthropic-default-model-id "claude-opus-5-5")
   (agent-shell-openai-default-model-id "gpt-6.1-sol")
-  (agent-shell-opencode-default-model-id "opencode-go/deepseek-v4.1-flash")
+  (agent-shell-opencode-default-config-options
+   '(("model" . "opencode-go/deepseek-v4.1-flash")
+     ("effort" . "high")
+     ("mode" . "build")))
   :config
   (advice-add 'shell-maker-rename-buffer :around
               #'coba-agent-shell-rename-buffer-advice)

@@ -2055,7 +2055,7 @@ keep the plain text so editing the prompt behaves as usual."
          (agent-shell-new-downloads-shell
           :config (agent-shell-openai-make-codex-config))))]
      ["Sessions"
-      ("l" "Active" coba-agent-shell-buffers)
+      ("SPC" "Active" coba-agent-shell-buffers)
       ("a" "All"
        (lambda ()
          (interactive)

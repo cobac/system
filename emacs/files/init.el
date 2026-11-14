@@ -19,6 +19,15 @@
 
 (straight-use-package 'use-package)
 
+(defun coba-update-package (package)
+  ;;breaks if packages and libs don't have the same name
+  (interactive
+   (list (straight--select-package "Update and reload package"
+                                   #'straight--installed-and-buildable-p)))
+  (straight-pull-package package)
+  (straight-rebuild-package package)
+  (load-library package))
+
 (setq native-comp-async-report-warnings-errors 'silent)
 
 ;; Remove scroll, tool and menu bars

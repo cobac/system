@@ -630,6 +630,17 @@ targets."
   "br"
   'rename-buffer)
 
+;; when the emacs server starts before the graphical session (systemd service)
+;; it doesn't have graphical env vars
+;; this hook copies them to the server from graphical clients when initialized
+(add-hook 'server-after-make-frame-hook
+          (lambda ()
+            (when (display-graphic-p)
+              (dolist (name '("WAYLAND_DISPLAY" "DISPLAY" "NIRI_SOCKET"
+                              "XDG_SESSION_TYPE" "XDG_CURRENT_DESKTOP"))
+                (when-let* ((value (getenv name (selected-frame))))
+                  (setenv name value))))))
+
 (use-package openwith
   :straight (:type git
                    :host github

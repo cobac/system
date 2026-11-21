@@ -1275,7 +1275,7 @@ https://blog.jmthornton.net/p/emacs-project-override"
 (use-package company
   :straight t
   :config (global-company-mode)
-  (setq company-idle-delay 0.05
+  (setq company-idle-delay 0.2
         company-minimum-prefix-length 2
         company-selection-wrap-around t)
   (setq default-company-backends

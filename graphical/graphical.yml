@@ -10,6 +10,7 @@
   with_items:
     - swaylock
     - swayidle
+    - kanshi
 
 - name: Copy niri config
   ansible.builtin.copy:

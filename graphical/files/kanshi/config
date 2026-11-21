@@ -1,0 +1,14 @@
+profile home {
+    output eDP-1 disable
+    output DP-1 enable mode 1920x1080@60.000 scale 1.0 position 0,0
+    output HDMI-A-1 enable mode 1920x1080@60.000 scale 1.0 position 1920,0
+}
+
+profile dual {
+    output DP-1 enable mode 1920x1080@60.000 scale 1.0 position 0,0
+    output eDP-1 enable mode 1920x1200 scale 1.25 position 0,1080
+}
+
+profile one {
+    output eDP-1 enable mode 1920x1200 scale 1.25 position 0,0
+}

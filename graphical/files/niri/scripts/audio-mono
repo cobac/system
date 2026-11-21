@@ -1,0 +1,80 @@
+#!/bin/sh
+# Toggle a system-wide mono downmix.
+#
+# "on" puts a 1-channel remap sink in front of the current default output and
+# makes it the default, so every stream gets downmixed to mono and played on
+# both channels. "off" removes it and restores the original output.
+# The remap sink lives in pipewire-pulse, so it does not survive a restart of
+# the audio services (you are back to stereo after a reboot).
+#
+# Usage: audio-mono [toggle|on|off|status|waybar]
+
+MONO=mono_downmix
+
+# "<module id> <master sink>" of the loaded remap sink, if any.
+module_info() {
+    pactl list short modules | awk -v s="sink_name=$MONO" '
+        $2 == "module-remap-sink" && index($0, s) {
+            for (i = 3; i <= NF; i++) if ($i ~ /^master=/) { sub(/^master=/, "", $i); print $1, $i }
+        }'
+}
+
+is_on() {
+    [ "$(pactl get-default-sink)" = "$MONO" ]
+}
+
+refresh_waybar() {
+    pkill -RTMIN+8 -x waybar 2>/dev/null
+}
+
+unload() {
+    module_info | while read -r id _; do pactl unload-module "$id"; done
+}
+
+on() {
+    is_on && return
+    master=$(pactl get-default-sink)
+    # A leftover module would point at an old output; start fresh.
+    unload
+    pactl load-module module-remap-sink \
+        sink_name="$MONO" master="$master" channels=1 channel_map=mono \
+        sink_properties=device.description=Mono >/dev/null || exit 1
+    # WirePlumber restores the last volume of a sink with this name; start
+    # neutral so the real output's volume stays the only one that matters.
+    pactl set-sink-volume "$MONO" 100%
+    pactl set-sink-mute "$MONO" 0
+    pactl set-default-sink "$MONO"
+    refresh_waybar
+}
+
+percent() {
+    pactl get-sink-volume "$1" 2>/dev/null | awk -F/ 'NR == 1 { gsub(/[ %]/, "", $2); print $2 }'
+}
+
+off() {
+    master=$(module_info | awk 'NR == 1 { print $2 }')
+    # Volume keys act on the mono sink while it is the default. Fold its
+    # volume and mute into the real output so turning mono off never jumps
+    # back to a louder level.
+    if [ -n "$master" ]; then
+        mono_vol=$(percent "$MONO")
+        master_vol=$(percent "$master")
+        if [ -n "$mono_vol" ] && [ -n "$master_vol" ] && [ "$mono_vol" -ne 100 ]; then
+            pactl set-sink-volume "$master" "$((master_vol * mono_vol / 100))%"
+        fi
+        pactl get-sink-mute "$MONO" 2>/dev/null | grep -q yes && pactl set-sink-mute "$master" 1
+    fi
+    unload
+    [ -n "$master" ] && pactl set-default-sink "$master" 2>/dev/null
+    refresh_waybar
+}
+
+case "${1:-toggle}" in
+    toggle) if is_on; then off; else on; fi ;;
+    on) on ;;
+    off) off ;;
+    status) if is_on; then echo mono; else echo stereo; fi ;;
+    # Empty text hides the waybar module while in stereo.
+    waybar) if is_on; then echo '{"text": "mono", "class": "on"}'; else echo '{"text": ""}'; fi ;;
+    *) echo "usage: ${0##*/} [toggle|on|off|status|waybar]" >&2; exit 2 ;;
+esac

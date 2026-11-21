@@ -377,6 +377,7 @@ binds {
   Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
   Mod+F hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun" "-theme" "gruvbox-dark-hard"; }
   Mod+M hotkey-overlay-title="Select display profile" { spawn "/home/coba/.config/niri/scripts/display-profile"; }
+  Mod+Shift+M allow-when-locked=true hotkey-overlay-title="Toggle mono audio" { spawn "/home/coba/.config/niri/scripts/audio-mono"; }
   Mod+Space {spawn "emacsclient" "-nc";}
   Super+X hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 

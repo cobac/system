@@ -16,6 +16,7 @@
         "tray",
         // "mpd",
         "idle_inhibitor",
+        "custom/mono",
         "pulseaudio",
         // "network",
         // "bluetooth",
@@ -196,7 +197,17 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "on-click-right": "$HOME/.config/niri/scripts/audio-mono"
+    },
+    // Only visible while mono audio is on; audio-mono sends SIGRTMIN+8 on toggle.
+    "custom/mono": {
+        "exec": "$HOME/.config/niri/scripts/audio-mono waybar",
+        "return-type": "json",
+        "interval": 10,
+        "signal": 8,
+        "tooltip": false,
+        "on-click": "$HOME/.config/niri/scripts/audio-mono off"
     },
     "custom/media": {
         "format": "{icon} {text}",

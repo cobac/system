@@ -17,10 +17,13 @@
     src: files/niri
     dest: /home/coba/.config/
 
-- name: Make display-profile executable
+- name: Make niri scripts executable
   ansible.builtin.file:
-    path: /home/coba/.config/niri/scripts/display-profile
+    path: /home/coba/.config/niri/scripts/{{ item }}
     mode: "0755"
+  loop:
+    - display-profile
+    - audio-mono
 
 - name: Copy waybar config
   ansible.builtin.copy:

@@ -2,6 +2,7 @@
 
 
 
+
 ;; mu4e
 (use-package mu4e
   :straight t
@@ -11,15 +12,14 @@
         mu4e-change-filenames-when-moving t
         mu4e-get-mail-command "/usr/bin/mbsync -a"
         mu4e-update-interval 120
-        ;;mu4e-html2text-command "html2text --unicode-snob"
-        ;;shr-color-visible-luminance-min 80
         message-kill-buffer-on-exit t
         mu4e-index-update-error-warning nil
         mu4e-attachment-dir "/home/coba/Downloads"
         send-mail-function 'smtpmail-send-it
         message-send-mail-function 'smtpmail-send-it
         mu4e-context-policy 'pick-first
-        mu4e-compose-context-policy 'ask)
+        mu4e-compose-context-policy 'ask
+        mu4e-view-prefer-plain-text t)
   (add-to-list
    'mu4e-bookmarks
    '(:name "Coba Inbox"

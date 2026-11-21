@@ -29,7 +29,7 @@
 - name: set es keyboard
   ansible.builtin.command: localectl set-x11-keymap es
 
-- name: Swap Caps Lock and Escape on the internal keyboard
+- name: Remap keys on the internal keyboard
   ansible.builtin.copy:
     src: files/90-thinkpad-keyboard.hwdb
     dest: /etc/udev/hwdb.d/90-thinkpad-keyboard.hwdb

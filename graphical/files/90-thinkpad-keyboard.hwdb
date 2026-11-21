@@ -1,3 +1,7 @@
 evdev:atkbd:dmi:*
- KEYBOARD_KEY_01=capslock
+# Swap left Ctrl and Alt
+ KEYBOARD_KEY_1d=leftalt
+ KEYBOARD_KEY_38=leftctrl
+# Esc emits <>; Caps Lock emits Esc
+ KEYBOARD_KEY_01=102nd
  KEYBOARD_KEY_3a=esc

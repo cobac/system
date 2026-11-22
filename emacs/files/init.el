@@ -2084,7 +2084,9 @@ keep the plain text so editing the prompt behaves as usual."
          (coba-agent-recall--resume)))]
      ["Interact"
       ("p" "Send region" agent-shell-send-region-to)]])
-  (coba-leader-def "U" #'coba-agent-shell-menu)
+  (coba-leader-def
+    "u" #'coba-agent-shell-menu
+    "U" #'coba-agent-shell-buffers)
   (general-def 'agent-shell-ui-mode-map
     "<tab>" 'agent-shell-ui-toggle-fragment)
   (general-def

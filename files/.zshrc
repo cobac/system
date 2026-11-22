@@ -20,13 +20,9 @@ zstyle :compinstall filename '/home/coba/.zshrc'
 
 export BROWSER="firefox"
 
-autoload -Uz promptinit
-promptinit
-
-#Powerline10k
-source ~/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
-source ~/.config/zsh/prompt.zsh
-#source ~/.config/zsh/p10k.zsh
+# Prompt
+PROMPT='%B%F{yellow}%~ $%f%b '
+RPROMPT=
 	
 # fzf
 source /usr/share/fzf/key-bindings.zsh

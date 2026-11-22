@@ -1976,6 +1976,8 @@ keep the plain text so editing the prompt behaves as usual."
    (list #'agent-shell-anthropic-make-claude-code-config
          #'agent-shell-openai-make-codex-config
          #'agent-shell-opencode-make-agent-config))
+  ;; don't prefill new shells with any file/buffer context
+  (agent-shell-context-sources nil)
   (agent-shell-header-style 'text)
   (agent-shell-chat-mode-enabled nil)
   (agent-shell-busy-submit-default-function

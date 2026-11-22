@@ -68,7 +68,7 @@ window#waybar {
 
 /* Plain modules: text only, no coloured boxes */
 #tray,
-#idle_inhibitor,
+#inhibitor,
 #pulseaudio,
 #battery,
 #clock,
@@ -98,7 +98,7 @@ window#waybar {
     color: @gray;
 }
 
-#idle_inhibitor.deactivated {
+#inhibitor.deactivated {
     color: @gray;
 }
 

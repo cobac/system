@@ -98,6 +98,14 @@ in
     dataDir = volumeSyncthing;
   };
 
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  # Trust the tailnet as a whole instead of opening ports one by one.
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

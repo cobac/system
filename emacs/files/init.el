@@ -2113,8 +2113,13 @@ keep the plain text so editing the prompt behaves as usual."
   :straight (agent-recall
              :type git
              :host github
-             :repo "cobac/agent-recall"
-             :branch "coba/opencode")
+             :repo "mrx-xo/agent-recall"
+             :remote "origin"
+             :branch "main"
+             :fork (:host github
+                          :repo "cobac/agent-recall"
+                          :remote "cobac"
+                          :branch "coba/yaml-frontmatter"))
   :after agent-shell
   :commands agent-recall-metadata-put
   :preface

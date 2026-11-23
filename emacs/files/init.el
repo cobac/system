@@ -1517,7 +1517,20 @@ https://blog.jmthornton.net/p/emacs-project-override"
 
 (use-package multi-vterm
   :straight t
-  :general (coba-leader-def "RET" 'multi-vterm))
+  :general (coba-leader-def "RET" 'coba-multi-vterm-side)
+  :config
+  (add-to-list 'display-buffer-alist
+               '("\\*vterminal<"
+                 (display-buffer-in-side-window)
+                 (side . right)
+                 (window-width . 0.5)
+                 (window-parameters . ((no-delete-other-windows . t)))))
+  ;; `multi-vterm' uses `switch-to-buffer', which ignores
+  ;; `display-buffer-alist' unless told otherwise
+  (defun coba-multi-vterm-side ()
+    (interactive)
+    (let ((switch-to-buffer-obey-display-actions t))
+      (multi-vterm))))
 
 (use-package lsp-mode
   :straight t

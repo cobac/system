@@ -100,8 +100,8 @@
         "tooltip-format": "MPD (connected)",
         "tooltip-format-disconnected": "MPD (disconnected)"
     },
-    // Logind sleep inhibitor: survives the lock screen hiding waybar, so
-    // suspend is refused while it is active.
+    // Block sleep and automatic locking; already locked displays may turn off.
+    // This survives manual screen locking; lid-close sleep stays independent.
     "inhibitor": {
         "what": "sleep",
         "format": "{icon}",

@@ -24,6 +24,7 @@
   loop:
     - display-profile
     - audio-mono
+    - idle-lock
 
 - name: Copy waybar config
   ansible.builtin.copy:

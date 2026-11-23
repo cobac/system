@@ -1,22 +1,9 @@
-Files and logic that deploy my personal system config.
+Files and logic that deploy my personal systems config.
+
+** Main machine
 
 It's designed to be called via [[https://docs.ansible.com/ansible/latest/cli/ansible-pull.html][ansible-pull]] from the local machine.
-
-* Why
-- I want to be able to deploy my config as quickly and painlessly as possible on new machines.
-- I want to configure my system in a declarative way, like NixOS or Guix.
-- But I want to use Archlinux
-  - I've been using it for years
-  - I want rolling releases
-  - I like pacman
-  - I like how they approach packaging
-  - I like the AUR
-  - I want to compile myself as few packages as possible
-    - And when I have to I want to do it with a PKGBUILD
-  - Documentation is great
-- ... actually I think I'd like to switch over to NixOS, but haven't bothered to do so yet
-
-* Manual prerequisites
+*** Manual prerequisites
 - Archlinux installed and booting
   - kernel, swap, locale, fstab, toda la pesca
 - User created and /wheeled/
@@ -28,11 +15,12 @@ It's designed to be called via [[https://docs.ansible.com/ansible/latest/cli/ans
   - Make sure that if you use =iwd= during install, either the service is not enabled or you are using it as the backend of =NetworkManager=
   - Otherwise, kernel panicking
 
-* How to run
-- ~sudo ansible-pull -U https://github.com/cobac/system.git --ask-become-pass~
-  - aliased to ~ansiblep~ with zsh
+*** How to run
+- ~sudo ansible-pull -U https://github.com/cobac/system.git --ask-become-pass computer/local.yml~
+  - aliased to ~ansiblep~ with zsh, see [[file:computer/files/.zshrc::51][computer/files/.zshrc]]
+  - the playbook path (=computer/local.yml=) is required, ~ansible-pull~ only looks for =local.yml= at the repo root by default
 
-* TO-DO manually after installation
+*** TO-DO manually after installation
 - Generate ssh keys and edit =~/.ssh/config=
 - Generate and populate =~/.authinfo.gpg=
   - root pass for tramp

@@ -157,9 +157,9 @@
 
 (defun coba-sync-niri ()
   (interactive)
-  (shell-command "cp ~/docs/repos/system/graphical/files/niri/config.kdl ~/.config/niri")
+  (shell-command "cp ~/docs/repos/system/computer/graphical/files/niri/config.kdl ~/.config/niri")
   (shell-command
-   "cp -r ~/docs/repos/system/graphical/files/waybar/. ~/.config/waybar")
+   "cp -r ~/docs/repos/system/computer/graphical/files/waybar/. ~/.config/waybar")
   (shell-command "pkill -SIGUSR2 waybar"))
 
                                         ; Packages

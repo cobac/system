@@ -48,7 +48,7 @@ alias gg="gotop"
 alias pydataenv="source ~/.pyenvs/datastuff/bin/activate"
 alias pylocalenv="source .venv/bin/activate"
 alias pyinit="python -m venv .venv"
-alias ansiblep="ansible-pull -U https://github.com/cobac/system.git --ask-become-pass -vv"
+alias ansiblep="ansible-pull -U https://github.com/cobac/system.git --ask-become-pass -vv computer/local.yml"
 alias tarz="tar --zstd -cf"
 alias tf="opentofu"
 

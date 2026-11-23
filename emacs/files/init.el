@@ -2012,7 +2012,7 @@ keep the plain text so editing the prompt behaves as usual."
         (format-time-string "%F-%H-%M-%S-%6N.md")
         transcript-dir))))
   (agent-shell-anthropic-default-model-id "claude-opus-5-5")
-  (agent-shell-openai-default-model-id "gpt-6.1-sol")
+  (agent-shell-openai-default-model-id "gpt-6.2-sol")
   (agent-shell-opencode-default-config-options
    '(("model" . "opencode-go/deepseek-v4.1-flash")
      ("effort" . "high")

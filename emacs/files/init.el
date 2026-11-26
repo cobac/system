@@ -157,7 +157,8 @@
 
 (defun coba-sync-niri ()
   (interactive)
-  (shell-command "cp ~/docs/repos/system/computer/graphical/files/niri/config.kdl ~/.config/niri")
+  (shell-command
+   "cp ~/docs/repos/system/computer/graphical/files/niri/config.kdl ~/.config/niri")
   (shell-command
    "cp -r ~/docs/repos/system/computer/graphical/files/waybar/. ~/.config/waybar")
   (shell-command "pkill -SIGUSR2 waybar"))
@@ -2115,11 +2116,7 @@ keep the plain text so editing the prompt behaves as usual."
              :host github
              :repo "mrx-xo/agent-recall"
              :remote "origin"
-             :branch "main"
-             :fork (:host github
-                          :repo "cobac/agent-recall"
-                          :remote "cobac"
-                          :branch "coba/yaml-frontmatter"))
+             :branch "main")
   :after agent-shell
   :commands agent-recall-metadata-put
   :preface

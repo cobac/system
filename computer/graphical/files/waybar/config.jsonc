@@ -15,7 +15,6 @@
     "modules-right": [
         "tray",
         // "mpd",
-        "inhibitor",
         "custom/mono",
         "pulseaudio",
         // "network",
@@ -99,16 +98,6 @@
         },
         "tooltip-format": "MPD (connected)",
         "tooltip-format-disconnected": "MPD (disconnected)"
-    },
-    // Block sleep and automatic locking; already locked displays may turn off.
-    // This survives manual screen locking; lid-close sleep stays independent.
-    "inhibitor": {
-        "what": "sleep",
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
     },
     "tray": {
         // "icon-size": 21,

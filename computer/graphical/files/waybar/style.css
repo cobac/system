@@ -68,7 +68,6 @@ window#waybar {
 
 /* Plain modules: text only, no coloured boxes */
 #tray,
-#inhibitor,
 #pulseaudio,
 #battery,
 #clock,
@@ -95,10 +94,6 @@ window#waybar {
 }
 
 #pulseaudio.muted {
-    color: @gray;
-}
-
-#inhibitor.deactivated {
     color: @gray;
 }
 
